@@ -1,7 +1,0 @@
-instance/*
-instance
-node_modules
-.env
-.venv
-dev.db
-.gitignore
