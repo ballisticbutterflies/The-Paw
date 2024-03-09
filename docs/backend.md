@@ -333,7 +333,16 @@ Returns all the businesses.
                 },
             ],
           },
-          "":"",
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
         }
       ]
     }
@@ -362,20 +371,60 @@ Returns all the businesses owned (created) by the current user.
       "businesses": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "address": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
           "name": "App Academy",
+          "zipcode":"00001",
           "description": "Place where web developers are created",
-          "price": 123,
+          "price": "$",
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
           "avg_rating": 4.5,
-          "previewImage": "image url"
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
+          "email":"biz@gmail.com",
+          "website":"biz.biz",
+          "phone":"1234567890",
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                    "id":1,
+                    "name":"Exotic Vet",
+                }, 
+                {
+                    "id":2,
+                    "name":"General Vet",
+                },
+            ],
+          },
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
         }
       ]
     }
