@@ -450,38 +450,71 @@ Returns the details of a business specified by its id.
 
     ```json
     {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "created_at": "2021-11-19 20:39:36",
-      "updated_at": "2021-11-19 20:39:36",
-      "numReviews": 5,
-      "avg_rating": 4.5,
-      "business_images": [
+      "businesses": [
         {
           "id": 1,
-          "url": "image url",
-          "preview": true
-        },
-        {
-          "id": 2,
-          "url": "image url",
-          "preview": false
+          "owner_id": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "name": "App Academy",
+          "zipcode":"00001",
+          "description": "Place where web developers are created",
+          "price": "$",
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "avg_rating": 4.5,
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
+          "email":"biz@gmail.com",
+          "website":"biz.biz",
+          "phone":"1234567890",
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                    "id":1,
+                    "name":"Exotic Vet",
+                }, 
+                {
+                    "id":2,
+                    "name":"General Vet",
+                },
+            ],
+          },
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
+          "business_images":[
+            {
+                "id":1,
+                "url":"www.google.com",
+            },
+          ],
         }
-      ],
-      "Owner": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith"
-      }
+      ]
     }
     ```
 
@@ -494,7 +527,7 @@ Returns the details of a business specified by its id.
 
     ```json
     {
-      "message": "business couldn't be found"
+      "message": "Business couldn't be found"
     }
     ```
 
@@ -513,15 +546,70 @@ Creates and returns a new business.
 
     ```json
     {
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123
+      "businesses": [
+        {
+          "owner_id": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "name": "App Academy",
+          "zipcode":"00001",
+          "description": "Place where web developers are created",
+          "price": "$",
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "avg_rating": 4.5,
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
+          "email":"biz@gmail.com",
+          "website":"biz.biz",
+          "phone":"1234567890",
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                    "id":1,
+                    "name":"Exotic Vet",
+                }, 
+                {
+                    "id":2,
+                    "name":"General Vet",
+                },
+            ],
+          },
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
+          "business_images":[
+            {
+                "id":1,
+                "url":"www.google.com",
+            },
+          ],
+        }
+      ]
     }
     ```
 
@@ -534,19 +622,71 @@ Creates and returns a new business.
 
     ```json
     {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "created_at": "2021-11-19 20:39:36",
-      "updated_at": "2021-11-19 20:39:36"
+      "businesses": [
+        {
+          "id": 1,
+          "owner_id": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "name": "App Academy",
+          "zipcode":"00001",
+          "description": "Place where web developers are created",
+          "price": "$",
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "avg_rating": 4.5,
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
+          "email":"biz@gmail.com",
+          "website":"biz.biz",
+          "phone":"1234567890",
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                    "id":1,
+                    "name":"Exotic Vet",
+                }, 
+                {
+                    "id":2,
+                    "name":"General Vet",
+                },
+            ],
+          },
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
+          "business_images":[
+            {
+                "id":1,
+                "url":"www.google.com",
+            },
+          ],
+        }
+      ]
     }
     ```
 
