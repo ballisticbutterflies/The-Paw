@@ -104,7 +104,7 @@ Returns the information about a user by ID.
     ```
 
 
-- Error Response: Couldn't find a User with specified ID 
+- Error Response: Couldn't find a User with specified ID
 
   - Status Code: 404
   - Headers:
@@ -253,7 +253,7 @@ user's information.
 
     ```json
     {
-      "message": "Bad Request", 
+      "message": "Bad Request",
       "errors": {
         "email": "Invalid email",
         "first_name": "First Name is required",
@@ -326,7 +326,7 @@ Returns all the businesses.
                 {
                     "id":1,
                     "name":"Exotic Vet",
-                }, 
+                },
                 {
                     "id":2,
                     "name":"General Vet",
@@ -408,7 +408,7 @@ Returns all the businesses owned (created) by the current user.
                 {
                     "id":1,
                     "name":"Exotic Vet",
-                }, 
+                },
                 {
                     "id":2,
                     "name":"General Vet",
@@ -490,7 +490,7 @@ Returns the details of a business specified by its id.
                 {
                     "id":1,
                     "name":"Exotic Vet",
-                }, 
+                },
                 {
                     "id":2,
                     "name":"General Vet",
@@ -558,7 +558,6 @@ Creates and returns a new business.
           "price": "$",
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
-          "avg_rating": 4.5,
           "hours":{
             "monday_open":"0900",
             "monday_close":"1700",
@@ -585,7 +584,7 @@ Creates and returns a new business.
                 {
                     "id":1,
                     "name":"Exotic Vet",
-                }, 
+                },
                 {
                     "id":2,
                     "name":"General Vet",
@@ -635,7 +634,6 @@ Creates and returns a new business.
           "price": "$",
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
-          "avg_rating": 4.5,
           "hours":{
             "monday_open":"0900",
             "monday_close":"1700",
@@ -662,7 +660,7 @@ Creates and returns a new business.
                 {
                     "id":1,
                     "name":"Exotic Vet",
-                }, 
+                },
                 {
                     "id":2,
                     "name":"General Vet",
@@ -704,12 +702,15 @@ Creates and returns a new business.
         "address": "Street address is required",
         "city": "City is required",
         "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude is not valid",
-        "lng": "Longitude is not valid",
+        "zip_code": "Zip Code is required",
         "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day is required"
+        "description": "Description is required and must be between 30-255 chars",
+        "hours": "hours are required",
+        "email": "Email is required",
+        "website": "Website is required",
+        "phone": "Phone Number is required",
+        "category": "Category is required",
+        "business_image": "Business image is required"
       }
     }
     ```
@@ -730,8 +731,7 @@ Create and return a new image for a business specified by id.
 
     ```json
     {
-      "url": "image url",
-      "preview": true
+      "url": "image url"
     }
     ```
 
@@ -745,8 +745,7 @@ Create and return a new image for a business specified by id.
     ```json
     {
       "id": 1,
-      "url": "image url",
-      "preview": true
+      "url": "image url"
     }
     ```
 
@@ -772,22 +771,76 @@ Updates and returns an existing business.
 - Request
 
   - Method: POST
-  - URL: /api/businesses/:business_id
+   - URL: /api/businesses/:business_id
   - Headers:
     - Content-Type: application/json
   - Body:
 
     ```json
     {
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123
+      "businesses": [
+        {
+          "owner_id": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "name": "App Academy",
+          "zipcode":"00001",
+          "description": "Place where web developers are created",
+          "price": "$",
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
+          "email":"biz@gmail.com",
+          "website":"biz.biz",
+          "phone":"1234567890",
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                    "id":1,
+                    "name":"Exotic Vet",
+                },
+                {
+                    "id":2,
+                    "name":"General Vet",
+                },
+            ],
+          },
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
+          "business_images":[
+            {
+                "id":1,
+                "url":"www.google.com",
+            },
+          ],
+        }
+      ]
     }
     ```
 
@@ -800,19 +853,70 @@ Updates and returns an existing business.
 
     ```json
     {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "created_at": "2021-11-19 20:39:36",
-      "updated_at": "2021-11-20 10:06:40"
+      "businesses": [
+        {
+          "id": 1,
+          "owner_id": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "name": "App Academy",
+          "zipcode":"00001",
+          "description": "Place where web developers are created",
+          "price": "$",
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
+          "email":"biz@gmail.com",
+          "website":"biz.biz",
+          "phone":"1234567890",
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                    "id":1,
+                    "name":"Exotic Vet",
+                },
+                {
+                    "id":2,
+                    "name":"General Vet",
+                },
+            ],
+          },
+          "attributes":[
+            {
+                "id":1,
+                "name":"Free Wi-Fi",
+            },
+            {
+                "id":2,
+                "name":"Dental Cleaning",
+            },
+          ],
+          "business_images":[
+            {
+                "id":1,
+                "url":"www.google.com",
+            },
+          ],
+        }
+      ]
     }
     ```
 
@@ -830,12 +934,15 @@ Updates and returns an existing business.
         "address": "Street address is required",
         "city": "City is required",
         "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude is not valid",
-        "lng": "Longitude is not valid",
+        "zip_code": "Zip Code is required",
         "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day is required"
+        "description": "Description is required and must be between 30-255 chars",
+        "hours": "hours are required",
+        "email": "Email is required",
+        "website": "Website is required",
+        "phone": "Phone Number is required",
+        "category": "Category is required",
+        "business_image": "Business image is required"
       }
     }
     ```
@@ -849,7 +956,7 @@ Updates and returns an existing business.
 
     ```json
     {
-      "message": "business couldn't be found"
+      "message": "Business couldn't be found"
     }
     ```
 
@@ -887,7 +994,7 @@ Deletes an existing business.
 
     ```json
     {
-      "message": "business couldn't be found"
+      "message": "Business couldn't be found"
     }
     ```
 
@@ -916,7 +1023,7 @@ Returns all the reviews written by the current user.
       "Reviews": [
         {
           "id": 1,
-          "userId": 1,
+          "user_id": 1,
           "business_id": 1,
           "review": "This was an awesome business!",
           "stars": 5,
@@ -929,16 +1036,14 @@ Returns all the reviews written by the current user.
           },
           "business": {
             "id": 1,
-            "ownerId": 1,
-            "address": "123 Disney Lane",
+            "owner_id": 1,
             "city": "San Francisco",
             "state": "California",
-            "country": "United States of America",
-            "lat": 37.7645358,
-            "lng": -122.4730327,
             "name": "App Academy",
-            "price": 123,
-            "previewImage": "image url"
+            "category":{
+                "id":1,
+                "name":"Veterinarian"
+            }
           },
           "ReviewImages": [
             {
@@ -949,6 +1054,7 @@ Returns all the reviews written by the current user.
         }
       ]
     }
+
     ```
 
 ### Get all Reviews by a business's id
@@ -983,9 +1089,11 @@ Returns all the reviews that belong to a business specified by id.
           "User": {
             "id": 1,
             "first_name": "John",
-            "last_name": "Smith"
+            "last_name": "Smith",
+            "num_images": 12,
+            "num_reviews": 5,
           },
-          "ReviewImages": [
+          "Review_images": [
             {
               "id": 1,
               "url": "image url"
@@ -1025,6 +1133,7 @@ Create and return a new review for a business specified by id.
     ```json
     {
       "review": "This was an awesome business!",
+      "url": "url",
       "stars": 5
     }
     ```
@@ -1043,6 +1152,7 @@ Create and return a new review for a business specified by id.
       "business_id": 1,
       "review": "This was an awesome business!",
       "stars": 5,
+      "url": "url",
       "created_at": "2021-11-19 20:39:36",
       "updated_at": "2021-11-19 20:39:36"
     }
@@ -1059,7 +1169,7 @@ Create and return a new review for a business specified by id.
     {
       "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
       "errors": {
-        "review": "Review text is required",
+        "review": "Review text is required and must be between 85-2000 chars",
         "stars": "Stars must be an integer from 1 to 5"
       }
     }
@@ -1100,7 +1210,7 @@ Create and return a new image for a review specified by id.
 - Request
 
   - Method: POST
-  - URL: /api/reviews/:reviewId/images
+  - URL: /api/reviews/:review_id/images
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1161,7 +1271,7 @@ Update and return an existing review.
 - Request
 
   - Method: PUT
-  - URL: /api/reviews/:reviewId/
+  - URL: /api/reviews/:review_id/
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1169,7 +1279,8 @@ Update and return an existing review.
     ```json
     {
       "review": "This was an awesome business!",
-      "stars": 5
+      "stars": 5,
+      "url": "url",
     }
     ```
 
@@ -1231,7 +1342,7 @@ Delete an existing review.
 - Request
 
   - Method: DELETE
-  - URL: /api/reviews/:reviewId/
+  - URL: /api/reviews/:review_id/
   - Body: none
 
 - Successful Response
@@ -1260,361 +1371,6 @@ Delete an existing review.
     }
     ```
 
-## BOOKINGS
-
-### Get all of the Current User's Bookings
-
-Return all the bookings that the current user has made.
-
-- Require Authentication: true
-- Request
-
-  - Method: GET
-  - URL: /api/bookings/current
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "id": 1,
-          "business_id": 1,
-          "business": {
-            "id": 1,
-            "ownerId": 1,
-            "address": "123 Disney Lane",
-            "city": "San Francisco",
-            "state": "California",
-            "country": "United States of America",
-            "lat": 37.7645358,
-            "lng": -122.4730327,
-            "name": "App Academy",
-            "price": 123,
-            "previewImage": "image url"
-          },
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20",
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
-### Get all Bookings for a business based on the business's id
-
-Return all the bookings for a business specified by id.
-
-- Require Authentication: true
-- Request
-
-  - Method: GET
-  - URL: /api/businesses/:business_id/bookings
-  - Body: none
-
-- Successful Response: If you ARE NOT the owner of the business.
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "business_id": 1,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20"
-        }
-      ]
-    }
-    ```
-
-- Successful Response: If you ARE the owner of the business.
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "User": {
-            "id": 2,
-            "first_name": "John",
-            "last_name": "Smith"
-          },
-          "id": 1,
-          "business_id": 1,
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20",
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
-- Error response: Couldn't find a business with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "business couldn't be found"
-    }
-    ```
-
-### Create a Booking from a business based on the business's id
-
-Create and return a new booking from a business specified by id.
-
-- Require Authentication: true
-- Require proper authorization: business must NOT belong to the current user
-- Request
-
-  - Method: POST
-  - URL: /api/businesses/:business_id/bookings
-  - Body:
-
-    ```json
-    {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20"
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "business_id": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
-      "created_at": "2021-11-19 20:39:36",
-      "updated_at": "2021-11-19 20:39:36"
-    }
-    ```
-
-- Error response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "endDate": "endDate cannot be on or before startDate"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a business with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "business couldn't be found"
-    }
-    ```
-
-- Error response: Booking conflict
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Sorry, this business is already booked for the specified dates",
-      "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    }
-    ```
-
-### Edit a Booking
-
-Update and return an existing booking.
-
-- Require Authentication: true
-- Require proper authorization: Booking must belong to the current user
-- Request
-
-  - Method: PUT
-  - URL: /api/bookings/:bookingId
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20"
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "business_id": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
-      "created_at": "2021-11-19 20:39:36",
-      "updated_at": "2021-11-20 10:06:40"
-    }
-    ```
-
-- Error response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "endDate": "endDate cannot come before startDate"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a Booking with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found"
-    }
-    ```
-
-- Error response: Can't edit a booking that's past the end date
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Past bookings can't be modified"
-    }
-    ```
-
-- Error response: Booking conflict
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Sorry, this business is already booked for the specified dates",
-      "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    }
-    ```
-
-### Delete a Booking
-
-Delete an existing booking.
-
-- Require Authentication: true
-- Require proper authorization: Booking must belong to the current user or the
-  business must belong to the current user
-- Request
-
-  - Method: DELETE
-  - URL: /api/bookings/:bookingId
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Successfully deleted"
-    }
-    ```
-
-- Error response: Couldn't find a Booking with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found"
-    }
-    ```
-
-- Error response: Bookings that have been started can't be deleted
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Bookings that have been started can't be deleted"
-    }
-    ```
-
 ## IMAGES
 
 ### Delete a business Image
@@ -1626,7 +1382,7 @@ Delete an existing image for a business.
 - Request
 
   - Method: DELETE
-  - URL: /api/businesses/:business_id/images/:imageId
+  - URL: /api/businesses/:business_id/images/:image_id
   - Body: none
 
 - Successful Response
@@ -1651,7 +1407,7 @@ Delete an existing image for a business.
 
     ```json
     {
-      "message": "business Image couldn't be found"
+      "message": "Business Image couldn't be found"
     }
     ```
 
@@ -1664,7 +1420,7 @@ Delete an existing image for a Review.
 - Request
 
   - Method: DELETE
-  - URL: /api/reviews/:reviewId/images/:imageId
+  - URL: /api/reviews/:review_id/images/:image_id
   - Body: none
 
 - Successful Response
@@ -1701,16 +1457,15 @@ Return businesses filtered by query parameters.
 - Request
 
   - Method: GET
-  - URL: /api/businesses/ ((felt like I was either way overthinking this one or way under))
+  - URL: /api/businesses
   - Query Parameters
     - page: integer, minimum: 1, maximum: 10, default: 1
-    - size: integer, minimum: 1, maximum: 20, default: 20
-    - minLat: decimal, optional
-    - maxLat: decimal, optional
-    - minLng: decimal, optional
-    - maxLng: decimal, optional
-    - minPrice: decimal, optional, minimum: 0
-    - maxPrice: decimal, optional, minimum: 0
+    - size: integer, minimum: 1, maximum: 10, default: 10
+    - avg_rating: integer, optional
+    - price: integer, optional
+    - open: boolean, optional
+    - subcategory: string, optional
+    - features: string, optional
   - Body: none
 
 - Successful Response
@@ -1725,24 +1480,51 @@ Return businesses filtered by query parameters.
       "businesses": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "address": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "price": 123,
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
           "avg_rating": 4.5,
-          "previewImage": "image url"
+          "num_ratings": 12,
+          "category":{
+            "id":1,
+            "name":"Veterinarian",
+            "Subcategories": [
+                {
+                  "id":1,
+                  "name":"Exotic Vet",
+                },
+                {
+                  "id":2,
+                  "name":"General Vet",
+                },
+              ],
+            },
+          "hours":{
+            "monday_open":"0900",
+            "monday_close":"1700",
+            "tuesday_open":"0900",
+            "tuesday_close":"1630",
+            "wednesday_open":"0900",
+            "wednesday_close":"1700",
+            "thursday_open":"0915",
+            "thursday_close":"1700",
+            "friday_open":"0900",
+            "friday_close":"1745",
+            "saturday_open":"1000",
+            "saturday_close":"1600",
+            "sunday_open":null,
+            "sunday_close":null,
+          },
         }
       ],
-      "page": 2,
-      "size": 25
+      "page": 1,
+      "size": 5
     }
     ```
 
@@ -1758,13 +1540,7 @@ Return businesses filtered by query parameters.
       "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
       "errors": {
         "page": "Page must be greater than or equal to 1",
-        "size": "Size must be greater than or equal to 1",
-        "maxLat": "Maximum latitude is invalid",
-        "minLat": "Minimum latitude is invalid",
-        "minLng": "Maximum longitude is invalid",
-        "maxLng": "Minimum longitude is invalid",
-        "minPrice": "Minimum price must be greater than or equal to 0",
-        "maxPrice": "Maximum price must be greater than or equal to 0"
+        "size": "Size must be greater than or equal to 1"
       }
     }
     ```
