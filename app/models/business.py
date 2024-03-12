@@ -37,22 +37,22 @@ class Business(db.Model):
 
     owner = db.relationship('User',
                             back_populates='businesses')
-    category = db.relationship('Category',
-                              back_populates='businesses')
-    subcategories = db.relationship('Subcategory',
-                              back_populates='business')
-    reviews = db.relationship('Review',
-                              back_populates='business',
-                              cascade='all, delete-orphan')
-    images = db.relationship('Image',
-                              back_populates='business',
-                              cascade='all, delete-orphan')
+    # category = db.relationship('Category',
+    #                           back_populates='businesses')
+    # subcategories = db.relationship('Subcategory',
+    #                           back_populates='business')
+    # reviews = db.relationship('Review',
+    #                           back_populates='business',
+    #                           cascade='all, delete-orphan')
+    # images = db.relationship('Image',
+    #                           back_populates='business',
+    #                           cascade='all, delete-orphan')
     attributes = db.relationship('Attribute',
                                  secondary='business_attributes',
                                  back_populates='businesses')
-    hours = db.relationship('Hour',
-                            back_populates='business',
-                            cascade='all, delete-orphan')
+    # hours = db.relationship('Hour',
+    #                         back_populates='business',
+    #                         cascade='all, delete-orphan')
 
 
 class Attribute(db.Model):
