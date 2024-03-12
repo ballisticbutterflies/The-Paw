@@ -7,16 +7,22 @@ def seed_users():
     demo = User(
         first_name='Demo',
         last_name='User',
+        city='San Francisco',
+        state='CA',
         email='demo@aa.io',
         password='password')
     marnie = User(
         first_name='marnie',
         last_name='barnie',
+        city='Pittsburg',
+        state='PA',
         email='marnie@aa.io',
         password='password')
     bobbie = User(
         first_name='bobbie',
         last_name='robbie',
+        city='New York',
+        state='NY',
         email='bobbie@aa.io',
         password='password')
 
@@ -37,5 +43,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()
