@@ -8,8 +8,8 @@ class Review(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user_id'))
-    business_id = db.Column(db.Integer, db.ForeignKey('business_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
     review = db.Column(db.String(2000), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
 

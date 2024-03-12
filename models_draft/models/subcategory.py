@@ -8,8 +8,8 @@ class Subcategory(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    category_id = db.Column(db.Integer, db.ForeignKey('category_id'))
-    business_id = db.Column(db.Integer, db.ForeignKey('business_id'), nullable=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=True)
     name = db.Column(db.String(30), nullable=False)
 
 

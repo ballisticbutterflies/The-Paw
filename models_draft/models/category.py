@@ -13,5 +13,5 @@ class Category(db.Model):
 
     subcategories = db.relationship('Subcategory',
                                     back_populates='category')
-    business = db.relationship('Business',
+    businesses = db.relationship('Business',
                                back_populates='category')

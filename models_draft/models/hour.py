@@ -8,7 +8,7 @@ class Hour(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    business_id = db.Column(db.Integer, db.ForeignKey('business_id'))
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
     m_open = db.Column(db.String(4), nullable=True)
     m_close = db.Column(db.String(4), nullable=True)
     tu_open = db.Column(db.String(4), nullable=True)
