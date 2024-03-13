@@ -15,7 +15,7 @@ Session = sessionmaker()
 revision = '3d54fc52c9f9'
 down_revision = 'f20eec27a8da'
 branch_labels = None
-depends_on = None
+depends_on = 'f20eec27a8da'
 
 
 def upgrade():
