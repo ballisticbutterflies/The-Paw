@@ -41,9 +41,9 @@ class Business(db.Model):
     #                           back_populates='businesses')
     # subcategories = relationship('Subcategory',
     #                           back_populates='business')
-    # reviews = relationship('Review',
-    #                           back_populates='business',
-    #                           cascade='all, delete-orphan')
+    reviews = relationship('Review',
+                              back_populates='business',
+                              cascade='all, delete-orphan')
     # images = relationship('Image',
     #                           back_populates='business',
     #                           cascade='all, delete-orphan')
