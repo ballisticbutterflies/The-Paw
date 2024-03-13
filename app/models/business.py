@@ -21,7 +21,7 @@ class Business(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = Column(Integer, primary_key=True)
-    owner_id = Column(Integer, ForeignKey('users.id'))
+    owner_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')))
     # category_id = Column(Integer, ForeignKey('categories.id'))
     address = Column(String(255), nullable=False)
     city = Column(String(255), nullable=False)
@@ -37,10 +37,10 @@ class Business(db.Model):
 
     owner = relationship('User',
                             back_populates='businesses')
-    # category = relationship('Category',
-    #                           back_populates='businesses')
-    # subcategories = relationship('Subcategory',
-    #                           back_populates='business')
+    # # category = relationship('Category',
+    # #                           back_populates='businesses')
+    # # subcategories = relationship('Subcategory',
+    # #                           back_populates='business')
     reviews = relationship('Review',
                               back_populates='business',
                               cascade='all, delete-orphan')
