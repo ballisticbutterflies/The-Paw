@@ -18,6 +18,7 @@ class Review(db.Model):
                             back_populates='reviews')
     business = db.relationship('Business',
                               back_populates='reviews')
-    # images = db.relationship('Image',
-    #                           back_populates='review',
-    #                           cascade='all, delete-orphan')
+    images = db.relationship('Image',
+                                primaryjoin="and_(Image.imageable_type=='review', foreign(Image.imageable_id)==Review.id)",
+                                lazy="dynamic",
+                                cascade='all, delete-orphan')

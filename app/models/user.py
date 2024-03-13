@@ -24,9 +24,10 @@ class User(db.Model, UserMixin):
     reviews = db.relationship('Review',
                                back_populates='user',
                                cascade='all, delete-orphan')
-    # profile_image = db.relationship('Image',
-    #                         back_populates='user',
-    #                         cascade='all, delete-orphan')
+    images = db.relationship('Image',
+                                primaryjoin="and_(Image.imageable_type=='user', foreign(Image.imageable_id)==User.id)",
+                                lazy="dynamic",
+                                cascade='all, delete-orphan')
 
 
     @property

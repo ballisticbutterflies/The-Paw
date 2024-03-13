@@ -44,9 +44,11 @@ class Business(db.Model):
     reviews = relationship('Review',
                               back_populates='business',
                               cascade='all, delete-orphan')
-    # images = relationship('Image',
-    #                           back_populates='business',
-    #                           cascade='all, delete-orphan')
+    images = db.relationship('Image',
+                                primaryjoin="and_(Image.imageable_type=='business', foreign(Image.imageable_id)==Business.id)",
+                                lazy="dynamic",
+                                cascade='all, delete-orphan')
+
     # attributes = relationship('Attribute',
     #                              secondary=business_attributes,
     #                              back_populates='businesses')
