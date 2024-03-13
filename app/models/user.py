@@ -10,9 +10,25 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    first_name = db.Column(db.String(255), nullable=False)
+    last_name = db.Column(db.String(255), nullable=False)
+    city = db.Column(db.String(255), nullable=False)
+    state = db.Column(db.String(2), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+
+    businesses = db.relationship('Business',
+                               back_populates='owner',
+                               cascade='all, delete-orphan')
+    reviews = db.relationship('Review',
+                               back_populates='user',
+                               cascade='all, delete-orphan')
+    images = db.relationship('Image',
+                                primaryjoin="and_(Image.imageable_type=='user', foreign(Image.imageable_id)==User.id)",
+                                lazy="dynamic",
+                                cascade='all, delete-orphan')
+
 
     @property
     def password(self):
@@ -28,6 +44,9 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'city': self.city,
+            'state': self.state,
             'email': self.email
         }
