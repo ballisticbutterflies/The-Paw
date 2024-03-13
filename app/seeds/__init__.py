@@ -24,10 +24,14 @@ def seed():
         undo_reviews()
         undo_businesses()
         undo_users()
+    print('######### users 1')
     seed_users()
-    seed_businesses()
-    seed_reviews()
-    seed_images()
+    # print('######### businesses 2')
+    # seed_businesses()
+    # print('######### reviews 3')
+    # seed_reviews()
+    # print('######### images 4')
+    # seed_images()
 
     # Add other seed functions here
 
