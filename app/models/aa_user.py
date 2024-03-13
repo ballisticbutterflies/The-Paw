@@ -18,16 +18,15 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
 
-    # businesses = db.relationship('Business',
-    #                            back_populates='owner',
-    #                            cascade='all, delete-orphan')
-    # reviews = db.relationship('Review',
-    #                            back_populates='user',
-    #                            cascade='all, delete-orphan')
-    # images = db.relationship('Image',
-    #                             primaryjoin="and_(Image.imageable_type=='user', foreign(Image.imageable_id)==User.id)",
-    #                             lazy="dynamic",
-    #                             cascade='all, delete-orphan')
+    businesses = db.relationship('Business',
+                               cascade='all, delete-orphan')
+    reviews = db.relationship('Review',
+                               back_populates='user',
+                               cascade='all, delete-orphan')
+    images = db.relationship('Image',
+                                primaryjoin="and_(Image.imageable_type=='user', foreign(Image.imageable_id)==User.id)",
+                                lazy="dynamic",
+                                cascade='all, delete-orphan')
 
 
     @property
