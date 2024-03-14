@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
@@ -140,6 +142,12 @@ function SignupFormModal() {
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit" >Sign Up</button>
       </form>
+      <span>
+      <OpenModalMenuItem
+        itemText="Already a user? Log In"
+        modalComponent={<LoginFormModal />}
+        />
+      </span>
     </>
   );
 }
