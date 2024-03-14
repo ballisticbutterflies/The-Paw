@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -47,6 +47,21 @@ function SignupFormModal() {
       closeModal();
     }
   };
+
+  useEffect(() => {
+    let errObj = {}
+    if (password.length < 6) {
+      errObj.password = "Password must be more than 6 characters."
+    }
+    if(password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
+    if (!first_name) errObj.first_name = "First name is required."
+    if (!last_name) errObj.last_name = "Last name is required."
+    if (!email) errObj.email= "Email is required."
+    if (!city) errObj.last_name = "City is required."
+    if (!state) errObj.last_name = "State is required."
+
+    setErrors(errObj)
+  }, [password, first_name, last_name, email, city, state])
 
 
   const states = [{value: '--'},
@@ -140,10 +155,10 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit" >Sign Up</button>
+        <button type="submit" disabled={!!Object.values(errors).length}>Sign Up</button>
       </form>
       <span>
-      <OpenModalMenuItem
+        <OpenModalMenuItem
         itemText="Already a user? Log In"
         modalComponent={<LoginFormModal />}
         />
