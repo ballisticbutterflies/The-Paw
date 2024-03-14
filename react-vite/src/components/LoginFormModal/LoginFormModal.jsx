@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -8,8 +8,18 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disableCheck, setDisableCheck] = useState({});
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  useEffect(() => {
+    const check = {}
+    if (!emailRegex.test(email)) check.email = 'Invalid email'
+    if (password.length < 6) check.password = 'Invalid password length'
+    setDisableCheck(check)
+  }, [email, password])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +72,9 @@ function LoginFormModal() {
           />
         </div>
         <div>
-          <button type="submit">Log In</button>
+          <button
+            disabled={Object.values(disableCheck).length}
+            type="submit">Log In</button>
         </div>
       </form>
     </>
