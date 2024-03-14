@@ -44,6 +44,21 @@ function SignupFormModal() {
     }
   };
 
+  console.log(errors)
+  const states = [
+    {value:'AL'}, {value:'AK'}, {value:'AZ'}, {value:'AR'}, {value:'CA'},
+    {value:'CO'}, {value:'CT'}, {value:'DE'}, {value:'DC'}, {value:'FL'},
+    {value:'GA'}, {value:'HI'}, {value:'ID'}, {value:'IL'}, {value:'IN'},
+    {value:'IA'}, {value:'KS'}, {value:'KY'}, {value:'LA'}, {value:'ME'},
+    {value:'MD'}, {value:'MA'}, {value:'MI'}, {value:'MN'}, {value:'MS'},
+    {value:'MO'}, {value:'MT'}, {value:'NE'}, {value:'NV'}, {value:'NH'},
+    {value:'NJ'}, {value:'NM'}, {value:'NY'}, {value:'NC'}, {value:'ND'},
+    {value:'OH'}, {value:'OK'}, {value:'OR'}, {value:'PA'}, {value:'RI'},
+    {value:'SC'}, {value:'SD'}, {value:'TN'}, {value:'TX'}, {value:'UT'},
+    {value:'VT'}, {value:'VI'}, {value:'VA'}, {value:'WA'}, {value:'WV'},
+    {value:'WI'}, {value:'WY'}
+  ]
+
   return (
     <>
       <h1>Sign Up</h1>
@@ -81,12 +96,14 @@ function SignupFormModal() {
         {errors.city && <p>{errors.city}</p>}
         <label>
           State
-          <select
-            type="text"
-            value={state}
+          <select value={state}
             onChange={(e) => setState(e.target.value)}
             required
-          />
+          >
+            {states && states.map((ele) => (
+              <option key={ele.id}>{ele['value']}</option>
+            ))}
+          </select>
         </label>
         {errors.state && <p>{errors.state}</p>}
         <label>
@@ -119,7 +136,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={!!Object.values(errors).length}>Sign Up</button>
       </form>
     </>
   );
