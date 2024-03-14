@@ -102,8 +102,8 @@ function SignupFormModal() {
             onChange={(e) => setState(e.target.value)}
             required
           >
-            {states && states.map((ele) => (
-              <option key={ele.id}>{ele['value']}</option>
+            {states && states.map((ele, index) => (
+              <option key={index}>{ele['value']}</option>
             ))}
           </select>
         </label>
