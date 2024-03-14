@@ -19,6 +19,8 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrors({})
+
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
@@ -44,7 +46,7 @@ function SignupFormModal() {
     }
   };
 
-  console.log(errors)
+
   const states = [
     {value:'AL'}, {value:'AK'}, {value:'AZ'}, {value:'AR'}, {value:'CA'},
     {value:'CO'}, {value:'CT'}, {value:'DE'}, {value:'DC'}, {value:'FL'},
@@ -136,7 +138,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit" disabled={!!Object.values(errors).length}>Sign Up</button>
+        <button type="submit" >Sign Up</button>
       </form>
     </>
   );

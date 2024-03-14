@@ -11,6 +11,11 @@ def user_exists(form, field):
     if user:
         raise ValidationError('Email address is already in use.')
 
+def longer_password(form, field):
+    password = field.data
+    if len(password) < 6:
+        raise ValidationError('Password must be more than 6 characters.')
+
 states = [('AL','AL'),('AK','AK'),('AZ','AZ'),('AR','AR'),('CA','CA'),('CO','CO'),('CT','CT'),('DE','DE'),('DC','DC'),('FL','FL'),('GA','GA'),('HI','HI'),
 ('ID','ID'),('IL','IL'),('IN','IN'),('IA','IA'),('KS','KS'),('KY','KY'),('LA','LA'),('ME','ME'),('MD','MD'),('MA','MA'),('MI','MI'),('MN','MN'),('MS','MS'),
 ('MO','MO'),('MT','MT'),('NE','NE'),('NV','NV'),('NH','NH'),('NJ','NJ'),('NM','NM'),('NY','NY'),('NC','NC'),('ND','ND'),('OH','OH'),('OK','OK'),('OR','OR'),
@@ -22,4 +27,4 @@ class SignUpForm(FlaskForm):
     city = StringField('city', validators=[DataRequired()])
     state = SelectField('state', choices=states, validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired(), Email(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired(), longer_password])
