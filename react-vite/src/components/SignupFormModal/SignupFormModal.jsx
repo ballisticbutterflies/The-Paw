@@ -50,10 +50,8 @@ function SignupFormModal() {
 
   useEffect(() => {
     let errObj = {}
-    if (password.length < 6) {
-      errObj.password = "Password must be more than 6 characters."
-    }
-    if(password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
+    if (password.length < 6) errObj.password = "Password must be more than 6 characters."
+    if (password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
     if (!first_name) errObj.first_name = "First name is required."
     if (!last_name) errObj.last_name = "Last name is required."
     if (!email) errObj.email= "Email is required."
