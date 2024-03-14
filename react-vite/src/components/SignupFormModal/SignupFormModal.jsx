@@ -47,7 +47,7 @@ function SignupFormModal() {
   };
 
 
-  const states = [
+  const states = [{value: '--'},
     {value:'AL'}, {value:'AK'}, {value:'AZ'}, {value:'AR'}, {value:'CA'},
     {value:'CO'}, {value:'CT'}, {value:'DE'}, {value:'DC'}, {value:'FL'},
     {value:'GA'}, {value:'HI'}, {value:'ID'}, {value:'IL'}, {value:'IN'},
