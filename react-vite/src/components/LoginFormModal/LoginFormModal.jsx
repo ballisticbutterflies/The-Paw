@@ -3,6 +3,8 @@ import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import SignupFormModal from "../SignupFormModal";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -12,10 +14,10 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
   useEffect(() => {
     const check = {}
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
     if (!emailRegex.test(email)) check.email = 'Invalid email'
     if (password.length < 6) check.password = 'Invalid password length'
     setDisableCheck(check)
@@ -35,6 +37,23 @@ function LoginFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
+    }
+  };
+
+  const demoUser = async (e) => {
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: 'demo@aa.io',
+        password: 'password'
+      })
+    );
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal()
     }
   };
 
@@ -77,6 +96,13 @@ function LoginFormModal() {
             type="submit">Log In</button>
         </div>
       </form>
+      <p>New to The Paw? <>
+        <OpenModalMenuItem
+          itemText="Sign Up"
+          modalComponent={<SignupFormModal />}
+        />
+      </></p>
+      <div><span onClick={demoUser}>Login as Demo User</span></div>
     </>
   );
 }
