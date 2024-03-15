@@ -48,9 +48,9 @@ function SignupFormModal() {
     }
   };
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let errObj = {}
     if (password.length < 6) errObj.password = "Password must be at least 6 characters."
     if (password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
@@ -62,7 +62,7 @@ function SignupFormModal() {
     if (!state) errObj.last_name = "State is required."
 
     setErrors(errObj)
-  }, [password, confirmPassword, first_name, last_name, email, city, state])
+  }, [password, confirmPassword, first_name, last_name, email, emailRegex, city, state])
 
 
   const states = [{value: '--'},
