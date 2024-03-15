@@ -9,7 +9,8 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
-        raise ValidationError('Email address is already in use.'), 500
+        raise ValidationError('Email address is already in use.')
+
 
 def longer_password(form, field):
     password = field.data
