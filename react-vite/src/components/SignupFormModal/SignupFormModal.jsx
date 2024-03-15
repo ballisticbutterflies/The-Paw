@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -15,6 +20,8 @@ function SignupFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setErrors({})
 
     if (password !== confirmPassword) {
       return setErrors({
@@ -25,8 +32,11 @@ function SignupFormModal() {
 
     const serverResponse = await dispatch(
       thunkSignup({
+        first_name,
+        last_name,
+        city,
+        state,
         email,
-        username,
         password,
       })
     );
@@ -38,31 +48,94 @@ function SignupFormModal() {
     }
   };
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  useEffect(() => {
+    let errObj = {}
+    if (password.length < 6) errObj.password = "Password must be at least 6 characters."
+    if (password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
+    if (!first_name) errObj.first_name = "First name is required."
+    if (!last_name) errObj.last_name = "Last name is required."
+    if (!email) errObj.email= "Email is required."
+    if (!emailRegex.test(email)) errObj.email = "Email is invalid."
+    if (!city) errObj.last_name = "City is required."
+    if (!state) errObj.last_name = "State is required."
+
+    setErrors(errObj)
+  }, [password, confirmPassword, first_name, last_name, email, city, state])
+
+
+  const states = [{value: '--'},
+    {value:'AL'}, {value:'AK'}, {value:'AZ'}, {value:'AR'}, {value:'CA'},
+    {value:'CO'}, {value:'CT'}, {value:'DE'}, {value:'DC'}, {value:'FL'},
+    {value:'GA'}, {value:'HI'}, {value:'ID'}, {value:'IL'}, {value:'IN'},
+    {value:'IA'}, {value:'KS'}, {value:'KY'}, {value:'LA'}, {value:'ME'},
+    {value:'MD'}, {value:'MA'}, {value:'MI'}, {value:'MN'}, {value:'MS'},
+    {value:'MO'}, {value:'MT'}, {value:'NE'}, {value:'NV'}, {value:'NH'},
+    {value:'NJ'}, {value:'NM'}, {value:'NY'}, {value:'NC'}, {value:'ND'},
+    {value:'OH'}, {value:'OK'}, {value:'OR'}, {value:'PA'}, {value:'RI'},
+    {value:'SC'}, {value:'SD'}, {value:'TN'}, {value:'TX'}, {value:'UT'},
+    {value:'VT'}, {value:'VI'}, {value:'VA'}, {value:'WA'}, {value:'WV'},
+    {value:'WI'}, {value:'WY'}
+  ]
+
   return (
     <>
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
+      <label>
+          First Name
+          <input
+            type="text"
+            value={first_name}
+            onChange={(e) => setFirst_name(e.target.value)}
+            required
+          />
+        </label>
+        {errors.first_name && <p>{errors.first_name}</p>}
+        <label>
+          Last Name
+          <input
+            type="text"
+            value={last_name}
+            onChange={(e) => setLast_name(e.target.value)}
+            required
+          />
+        </label>
+        {errors.last_name && <p>{errors.last_name}</p>}
+        <label>
+          City
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+        </label>
+        {errors.city && <p>{errors.city}</p>}
+        <label>
+          State
+          <select value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+          >
+            {states && states.map((ele, index) => (
+              <option key={index}>{ele['value']}</option>
+            ))}
+          </select>
+        </label>
+        {errors.state && <p>{errors.state}</p>}
         <label>
           Email
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
         <label>
           Password
           <input
@@ -83,8 +156,14 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={!!Object.values(errors).length}>Sign Up</button>
       </form>
+      <span>
+        <OpenModalMenuItem
+        itemText="Already a user? Log In"
+        modalComponent={<LoginFormModal />}
+        />
+      </span>
     </>
   );
 }
