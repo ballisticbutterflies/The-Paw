@@ -48,6 +48,8 @@ function SignupFormModal() {
     }
   };
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   useEffect(() => {
     let errObj = {}
     if (password.length < 6) errObj.password = "Password must be at least 6 characters."
@@ -55,6 +57,7 @@ function SignupFormModal() {
     if (!first_name) errObj.first_name = "First name is required."
     if (!last_name) errObj.last_name = "Last name is required."
     if (!email) errObj.email= "Email is required."
+    if (!emailRegex.test(email)) errObj.email = "Email is invalid."
     if (!city) errObj.last_name = "City is required."
     if (!state) errObj.last_name = "State is required."
 
@@ -127,7 +130,7 @@ function SignupFormModal() {
           Email
           <input
             type="email"
-            pattern='^\S+@\S+$'
+            pattern={emailRegex}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
