@@ -44,7 +44,7 @@ function Navigation() {
         </form>
       </div>
       <div className="add">
-        Add a Business
+        For Business
       </div>
       <div className="write">
         Write a Review
