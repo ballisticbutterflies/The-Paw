@@ -46,10 +46,9 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <div>About Me</div>
-              <div>
-                <button onClick={logout}>Log Out</button>
-              </div>
+              <div className="profiledropdownoptions"><FaUserCircle />&nbsp; About Me</div>
+              <hr />
+              <div className="profiledropdownoptions" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket" />&nbsp; Log Out </div>
             </>
           ) : (
             <>

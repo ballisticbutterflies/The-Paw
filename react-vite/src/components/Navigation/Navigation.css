@@ -43,4 +43,23 @@
 
 .profile-dropdown {
   position: absolute;
+  padding: 20px;
+  width: fit-content;
+  background-color: #FFFBF6;
+  right: 0;
+  left: inherit;
+  margin-top: 5px;
+  margin-right: 50px;
+  border-radius: 5px;
+}
+
+.profiledropdownoptions {
+  padding: 10px;
+  display: flex;
+}
+
+.profiledropdownoptions:hover {
+  background-color: #c3cddf;
+  padding: 10px;
+  border-radius: 5px;
 }
