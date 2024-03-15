@@ -43,34 +43,36 @@ function Navigation() {
           <button id="search" type="submit"><FaSearch /></button>
         </form>
       </div>
-      <div className="add">
+      <div>
         For Business
-      </div>
-      <div className="write">
+        &nbsp;&nbsp;&nbsp;
         Write a Review
+        &nbsp;&nbsp;&nbsp;
       </div>
-
-      {user ? (
-        <>
-          <ProfileButton />
-        </>
-      ) : (
-        <>
-          <div>
-            <OpenModalButton
-              buttonText="Log In"
-              modalComponent={<LoginFormModal />}
-            />
-            &nbsp;&nbsp;&nbsp;
-            <OpenModalButton
-              buttonText="Sign Up"
-              modalComponent={<SignupFormModal />}
-            />
-          </div>
-        </>
-      )
-
-      }
+      <div className="leftnav">
+        {user ? (
+          <>
+            <div>
+              <ProfileButton />
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              <OpenModalButton
+                buttonText="Log In"
+                modalComponent={<LoginFormModal />}
+              />
+              &nbsp;&nbsp;&nbsp;
+              <OpenModalButton
+                buttonText="Sign Up"
+                modalComponent={<SignupFormModal />}
+              />
+            </div>
+          </>
+        )
+        }
+      </div>
     </div>
   )
 }

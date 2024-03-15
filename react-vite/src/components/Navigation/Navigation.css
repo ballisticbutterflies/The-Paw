@@ -1,6 +1,6 @@
 .nav {
   display: grid;
-  grid-template-columns: 10% 50% 18% 10% 12%;
+  grid-template-columns: 10% 50% 30% 10%;
   justify-items: end;
   align-items: center;
   background-color: #ffbe6e;
@@ -34,6 +34,11 @@
 
 .logo {
   width: 75%;
+}
+
+.leftnav {
+  display: grid;
+  justify-self: center;
 }
 
 .profile-dropdown {
