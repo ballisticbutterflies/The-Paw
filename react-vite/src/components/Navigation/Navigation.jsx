@@ -7,59 +7,70 @@ import { getAllBusinesses, businessesArr } from "../../redux/businesses";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import ProfileButton from './ProfileButton'
 
 function Navigation() {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
-  // const allBusinesses = useSelector(businessesArr);
+  const user = useSelector((store) => store.session.user);
+  const allBusinesses = useSelector(businessesArr);
 
-  // useEffect(() => {
-  //   dispatch(getAllBusinesses())
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(getAllBusinesses())
+  }, [dispatch])
 
   return (
-    <div>
-      <NavLink to="/"><img src='../../../images/logos/the_paw_in_black.png' style={{
-        width: '10%'
-      }} /></NavLink>
-
-      <form>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <input
-          list="data"
-        />
-        <datalist>
-          <option></option>
-        </datalist>
-        <button type="submit"><FaSearch /></button>
-      </form>
-
+    <div className="nav">
+      <NavLink to="/"><img className="logo" src='../../../images/logos/the_paw_in_black.png' /></NavLink>
       <div>
+        <form className="formNav">
+          <input
+            id="searchQuery"
+            type="text"
+            value={searchQuery}
+            placeholder="things to do, groomers, restaurants"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <input
+            id="location"
+            list="data"
+            placeholder="San Francisco, CA"
+          />
+          <datalist>
+            <option></option>
+          </datalist>
+          <button id="search" type="submit"><FaSearch /></button>
+        </form>
+      </div>
+      <div className="add">
         Add a Business
       </div>
-
-      <div>
+      <div className="write">
         Write a Review
       </div>
 
-      <div>
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-      </div>
+      {user ? (
+        <>
+          <ProfileButton />
+        </>
+      ) : (
+        <>
+          <div>
+            <OpenModalButton
+              buttonText="Log In"
+              modalComponent={<LoginFormModal />}
+            />
+            &nbsp;&nbsp;&nbsp;
+            <OpenModalButton
+              buttonText="Sign Up"
+              modalComponent={<SignupFormModal />}
+            />
+          </div>
+        </>
+      )
 
-      <div>
-        <OpenModalButton
-          buttonText="Sign Up"
-          modalComponent={<SignupFormModal />}
-        />
-      </div>
+      }
     </div>
   )
 }
