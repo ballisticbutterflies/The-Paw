@@ -130,7 +130,6 @@ function SignupFormModal() {
           Email
           <input
             type="email"
-            pattern={emailRegex}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
