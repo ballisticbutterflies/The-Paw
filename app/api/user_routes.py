@@ -22,4 +22,7 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
+    # add the query for user profile image
+    # add the aggregate  query for the number of reviews with the user_id matching the current user
+    # add the aggregate query for the number of reviews with the user_id matchign the current user
     return user.to_dict()

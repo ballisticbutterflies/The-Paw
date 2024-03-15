@@ -9,6 +9,7 @@ class Image(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    uploader_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     imageable_id = db.Column(db.Integer, nullable=False)
     imageable_type = db.Column(ENUM('business', 'review', 'user', name='imageable_types'), nullable=False)
     url = db.Column(db.String, nullable=False)
@@ -32,7 +33,8 @@ class Image(db.Model):
         "parent": self.parent()
         }
 
-
+    uploader = db.relationship('User',
+                            back_populates='images')
     user = db.relationship('User',
                           primaryjoin="and_(Image.imageable_type=='user', foreign(Image.imageable_id)==User.id)",
                           uselist=False)
