@@ -13,8 +13,8 @@ def user_exists(form, field):
 
 def longer_password(form, field):
     password = field.data
-    if len(password) < 6:
-        raise ValidationError('Password must be 6 characters or more.')
+    if len(password) <= 6:
+        raise ValidationError("Password must be at least 6 characters.")
 
 states = [('-','-'),('AL','AL'),('AK','AK'),('AZ','AZ'),('AR','AR'),
           ('CA','CA'),('CO','CO'),('CT','CT'),('DE','DE'),('DC','DC'),

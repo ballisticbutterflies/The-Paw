@@ -59,7 +59,7 @@ function SignupFormModal() {
     if (!state) errObj.last_name = "State is required."
 
     setErrors(errObj)
-  }, [password, first_name, last_name, email, city, state])
+  }, [password, confirmPassword, first_name, last_name, email, city, state])
 
 
   const states = [{value: '--'},
@@ -126,7 +126,8 @@ function SignupFormModal() {
         <label>
           Email
           <input
-            type="text"
+            type="email"
+            pattern='^\S+@\S+$'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
