@@ -14,11 +14,11 @@ function Navigation() {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
-  const allBusinesses = useSelector(businessesArr);
+  // const allBusinesses = useSelector(businessesArr);
 
-  useEffect(() => {
-    dispatch(getAllBusinesses())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getAllBusinesses())
+  // }, [dispatch])
 
   return (
     <div className="nav">
