@@ -1,7 +1,7 @@
 .nav {
   display: grid;
-  grid-template-columns: 10% 50% 30% 10%;
-  justify-items: end;
+  grid-template-columns: 15% 45% 25% 10%;
+  gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
   margin: 0px;
@@ -11,13 +11,13 @@
   background-color: #FFFBF6;
   padding: 8px 0px 8px 8px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .formNav {
   display: grid;
-  grid-template-columns: 50% 40% 10%;
+  grid-template-columns: 50% 40% 5%;
   justify-content: space-around;
-  width: 600px;
 }
 
 .formNav input:focus {
@@ -46,12 +46,17 @@
 }
 
 .logo {
-  width: 75%;
+  width: 100px;
+}
+
+.forBiz_review {
+  display: flex;
+  justify-content: end;
 }
 
 .leftnav {
-  display: grid;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
 }
 
 .profile-dropdown {
@@ -69,6 +74,7 @@
 .profiledropdownoptions {
   padding: 10px;
   display: flex;
+  align-items: center;
 }
 
 .profiledropdownoptions:hover {

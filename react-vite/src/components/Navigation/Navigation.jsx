@@ -9,7 +9,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 
-function Navigation() {
+function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
@@ -29,6 +29,7 @@ function Navigation() {
   return (
     <div className="nav">
       <NavLink to="/"><img className="logo" src='../../../images/logos/the_paw_in_black.png' /></NavLink>
+
       <div className="searchForm">
         <form className="formNav">
           <input
@@ -44,7 +45,7 @@ function Navigation() {
             id="location"
             list="locations"
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="San Francisco, CA"
+            placeholder="city, state"
           />
           <datalist id="locations">
             {locations.map(op => (
@@ -55,7 +56,7 @@ function Navigation() {
           <button id="search" type="submit"><FaSearch /></button>
         </form>
       </div>
-      <div>
+      <div className="forBiz_review">
         For Business
         &nbsp;&nbsp;&nbsp;
         Write a Review
