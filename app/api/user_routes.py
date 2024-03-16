@@ -25,8 +25,8 @@ def user(id):
     user = User.query.get(id)
     dict_user = user.to_dict()
     # add the query for user profile image
-    user_image = Image.query.filter(Image.imageable_type == 'user').filter(Image.imageable_id == id).first()
-    dict_user['user_pfp'] = user_image
+    # user_image = Image.query.filter(Image.imageable_type == 'user').filter(Image.imageable_id == id).first()
+    # dict_user['user_pfp'] = user_image
     # add the aggregate  query for the number of reviews with the user_id matching the current user
     review_count = Review.query.filter(Review.user_id).count()
     dict_user['num_reviews'] = review_count
