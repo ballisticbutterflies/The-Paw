@@ -48,9 +48,9 @@ function SignupFormModal() {
     }
   };
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let errObj = {}
     if (password.length < 6) errObj.password = "Password must be at least 6 characters."
     if (password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
