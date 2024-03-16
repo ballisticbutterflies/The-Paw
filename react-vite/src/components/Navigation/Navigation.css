@@ -1,6 +1,6 @@
 .nav {
   display: grid;
-  grid-template-columns: 15% 45% 25% 10%;
+  grid-template-columns: 15% 45% 17% 8% 10%;
   gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
@@ -49,9 +49,20 @@
   width: 100px;
 }
 
-.forBiz_review {
+.forBiz {
   display: flex;
   justify-content: end;
+  align-items: center;
+}
+
+.writeReview {
+  display: flex;
+  justify-content: end;
+}
+
+#caret {
+  font-size: 12px;
+  margin-top: 3px;
 }
 
 .leftnav {

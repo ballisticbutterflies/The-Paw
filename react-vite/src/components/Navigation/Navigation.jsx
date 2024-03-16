@@ -56,11 +56,11 @@ function Navigation({ isLoaded }) {
           <button id="search" type="submit"><FaSearch /></button>
         </form>
       </div>
-      <div className="forBiz_review">
-        For Business
-        &nbsp;&nbsp;&nbsp;
+      <div className="forBiz">
+        For Business&nbsp;&nbsp;<i className="fa-solid fa-angle-down" id="caret"></i>
+      </div>
+      <div className="writeReview">
         Write a Review
-        &nbsp;&nbsp;&nbsp;
       </div>
       <div className="leftnav">
         {user ? (
