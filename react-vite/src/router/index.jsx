@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import SearchFormPage from '../components/SearchFormPage';
 import Layout from './Layout';
 
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
