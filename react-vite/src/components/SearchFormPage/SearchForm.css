@@ -1,0 +1,28 @@
+.businessCards {
+  display: flex;
+  width: 700px;
+  border: 1px solid black;
+  justify-content: space-around;
+  padding: 15px 10px 10px 10px;
+}
+
+.businessCards:hover {
+  box-shadow: 3px 7px 35px 3px;
+}
+
+
+.businessesImage {
+  height: 200px;
+  width: 300px;
+  padding: 10px;
+
+}
+
+.businessDeets {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  text-wrap: wrap;
+  padding: 40px 0;
+
+}

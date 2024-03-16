@@ -55,7 +55,21 @@ class Business(db.Model):
     # hours = relationship('Hour',
     #                         back_populates='business',
     #                         cascade='all, delete-orphan')
-
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zip_code': self.zip_code,
+            'name': self.name,
+            'description': self.description,
+            'website': self.website,
+            'email': self.email,
+            'phone': self.phone,
+            'price': self.price
+        }
 
 # class Attribute(db.Model):
 #     __tablename__ = 'attributes'
