@@ -27,6 +27,7 @@ class Image(db.Model):
     def to_dict(self):
         return {
         "id": self.id,
+        "uploader_id": self.uploader_id,
         "url": self.url,
         "imageable_id": self.imageable_id,
         "imageable_type": self.imageable_type,
