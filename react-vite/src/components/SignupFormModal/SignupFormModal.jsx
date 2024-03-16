@@ -62,7 +62,7 @@ function SignupFormModal() {
     if (!state) errObj.last_name = "State is required."
 
     setErrors(errObj)
-  }, [password, confirmPassword, first_name, last_name, email, emailRegex, city, state])
+  }, [password, confirmPassword, first_name, last_name, email, city, state])
 
 
   const states = [{value: '--'},
