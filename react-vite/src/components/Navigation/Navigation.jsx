@@ -9,7 +9,8 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 
-function Navigation({ isLoaded }) {
+// function Navigation({ isLoaded }) {
+function Navigation( ) {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
@@ -44,6 +45,7 @@ function Navigation({ isLoaded }) {
           <input
             id="location"
             list="locations"
+            value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="city, state"
           />
