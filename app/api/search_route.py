@@ -18,6 +18,7 @@ def search():
     avg_stars = Review.query.filter_by(business_id=business.id).with_entities(func.avg(Review.stars)).scalar()
     #and num reviews
     num_reviews = Review.query.filter_by(business_id=business.id).count()
+    num_reviews_null = num_reviews if num_reviews >= 1 else None
     #and bring over review text too
     recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
     recent_review_text = recent_review.review if recent_review else None
@@ -28,7 +29,7 @@ def search():
 
     business_dict = business.to_dict()
     business_dict['avg_stars'] = avg_stars
-    business_dict['num_reviews'] = num_reviews
+    business_dict['num_reviews'] = num_reviews_null
     business_dict['recent_review_text'] = recent_review_text
     business_dict['images'] = image_urls
 

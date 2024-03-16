@@ -33,6 +33,22 @@ function SearchFormPage() {
     }
   }
 
+  const starsToFixed = (avgstars) => {
+    if (avgstars) {
+      return avgstars.toFixed(1) + ' ' + ' · '
+    } else {
+      return null
+    }
+  }
+
+  const numReviewsExists = (review) => {
+    if (review >= 1) {
+      return '(' + review  + ' ' + 'reviews' + ')'
+    } else {
+      return null
+    }
+  }
+
   useEffect(() => {
     dispatch(fetchBusinesses())
   }, [dispatch])
@@ -54,15 +70,17 @@ function SearchFormPage() {
                   <span>{business.name}</span>
                   <span>{business.avg_stars &&
                           starReviews(business.avg_stars)}&nbsp;
-                          {business.avg_stars && business.avg_stars.toFixed(1)} &nbsp;
-                          {business.num_reviews && (business.num_reviews )} reviews </span>
+                          {business.avg_stars && starsToFixed(business.avg_stars)} &nbsp;
+                          {business.num_reviews && numReviewsExists(business.num_reviews )} </span>
                   <span>CATEGORIES PLACEHOLDER · {business.price}</span>
                   <span>HOURS PLACEHOLDER</span>
                   <span>
-                    <i className="fa-regular fa-message fa-flip-horizontal" />
-                    &nbsp;
+
                     {business.recent_review_text &&
-                      reviewTextSubstr(business.recent_review_text)
+                      <span>
+                      <i className="fa-regular fa-message fa-flip-horizontal" />&nbsp;
+                      {reviewTextSubstr(business.recent_review_text)}
+                      </span>
                     }
                   </span>
                 </span>
