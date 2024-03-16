@@ -1,0 +1,78 @@
+.businessPhotoHeader {
+    max-width: 100%;
+    height: 425px;
+}
+
+
+.businessPhotoHeader img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.businessPhotoHeader::before {
+    content: '';
+    z-index: 10;
+    width: 100%;
+    height: 425px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    position: absolute;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.businessHeader {
+    position: relative;
+    left: 16%;
+    bottom: 50%;
+    z-index: 1000;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.businessHeader h1 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.seeAllPhotos {
+    position: relative;
+    left: 76%;
+    bottom: 60%;
+    z-index: 1000;
+    padding: 5px;
+}
+
+.seeAllPhotos button {
+    padding: 12px 35px 12px 35px;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* .paws-filled {
+    -webkit-text-stroke: .5px;
+    -webkit-text-stroke-color: white;
+} */
+
+.pawBlock {
+    background-color: #FFFFFF;
+    width: fit-content;
+    padding: 3px 5px 3px 5px;
+    border-radius: 5px;
+}
+
+.businessReviews span {
+    background-color: none;
+}
+
+.priceSubcat {
+    margin-top: 5px;
+}
