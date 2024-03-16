@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Image, Review
+from sqlalchemy import func 
+
 
 user_routes = Blueprint('users', __name__)
 
@@ -16,10 +18,22 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-@login_required
 def user(id):
     """
-    Query for a user by id and returns that user in a dictionary
+    Query for a user by id and returns that user in a dictionary with the user data, user's pfp, and users aggregates for reviews and uploaded images
     """
+    response = { }
     user = User.query.get(id)
-    return user.to_dict()
+    dict_user = user.to_dict()
+    # add the query for user profile image
+    user_image = Image.query.filter(Image.imageable_type == 'user' and Image.imageable_id == id).first()
+    user_pfp = {'id': user_image.id, 'image_url': user_image.url}
+    dict_user['user_pfp'] = user_pfp
+    # add the aggregate  query for the number of reviews with the user_id matching the current user
+    review_count = Review.query.filter(Review.user_id == id).count()
+    dict_user['num_reviews'] = review_count
+    # add the aggregate query for the number of photos with the uploader_id matching the current user
+    image_count = Image.query.filter(Image.uploader_id == id).count()
+    dict_user['num_images'] = image_count    
+    # !Need to actually check uploader id functionality when reseeding
+    return dict_user 
