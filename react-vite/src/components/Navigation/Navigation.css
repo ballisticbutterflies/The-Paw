@@ -7,6 +7,12 @@
   margin: 0px;
 }
 
+.searchForm {
+  background-color: #FFFBF6;
+  padding: 8px 0px 8px 8px;
+  border-radius: 5px;
+}
+
 .formNav {
   display: grid;
   grid-template-columns: 50% 40% 10%;
@@ -14,15 +20,22 @@
   width: 600px;
 }
 
+.formNav input:focus {
+  outline: none;
+}
+
 #searchQuery {
   padding: 5px;
   border-top: none;
   border-bottom: none;
   border-left: none;
+  border-right: #c3cddf 2px solid;
+  padding-right: 10px;
 }
 
 #location {
   border: none;
+  margin-left: 10px;
 }
 
 #search {

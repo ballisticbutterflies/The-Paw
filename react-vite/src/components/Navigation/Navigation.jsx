@@ -3,7 +3,7 @@ import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { getAllBusinesses, businessesArr } from "../../redux/businesses";
+import { fetchBusinesses } from "../../redux/search";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -14,16 +14,22 @@ function Navigation() {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
-  // const allBusinesses = useSelector(businessesArr);
+  const businesses = Object.values(useSelector((state) => state.search))
+  const locations = businesses.map(business => {
+    let city = business.city
+    let state = business.state
+    return city.concat(', ', state)
+  })
 
-  // useEffect(() => {
-  //   dispatch(getAllBusinesses())
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchBusinesses())
+  }, [dispatch])
+
 
   return (
     <div className="nav">
       <NavLink to="/"><img className="logo" src='../../../images/logos/the_paw_in_black.png' /></NavLink>
-      <div>
+      <div className="searchForm">
         <form className="formNav">
           <input
             id="searchQuery"
@@ -32,13 +38,19 @@ function Navigation() {
             placeholder="things to do, groomers, restaurants"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+
+
           <input
             id="location"
-            list="data"
+            list="locations"
+            onChange={(e) => setLocation(e.target.value)}
             placeholder="San Francisco, CA"
           />
-          <datalist>
-            <option></option>
+          <datalist id="locations">
+            {locations.map(op => (
+              <option value={op}>{op}</option>
+            ))
+            }
           </datalist>
           <button id="search" type="submit"><FaSearch /></button>
         </form>
