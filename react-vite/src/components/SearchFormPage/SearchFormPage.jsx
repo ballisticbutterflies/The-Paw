@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
+import FilterComponent from "./FilterComponent";
 
 
 function SearchFormPage() {
@@ -41,13 +42,9 @@ function SearchFormPage() {
     <>
       <h1>Paw-Recommended Results:</h1>
       {businesses && businesses.map((business) => (
-        <ol
-          key={business.id}
-        >
+        <ol key={business.id}>
           <Link className="businessCards" style={{ textDecoration: 'none' }} to={`/businesses/${business.id}`}>
-            <span >
-              <img className="businessesImage" src='https://i.imgur.com/9bEZuYg.png' alt={business.images} />
-            </span>
+            <img className="businessesImage" src='https://i.imgur.com/9bEZuYg.png' alt={business.images} />
             <ol >
               <li>
                 <span className="businessDeets">
@@ -69,7 +66,7 @@ function SearchFormPage() {
 
         </ol>
       ))}
-
+      <FilterComponent />
     </>
   );
 }
