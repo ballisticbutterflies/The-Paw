@@ -17,7 +17,22 @@ def seed_businesses():
         price='$$$'
     )
 
+    mishka = Business(
+        owner_id=2,
+        # category_id=4,
+        address='2124 Union St Ste A',
+        city='San Francisco',
+        state='CA',
+        zip_code='94123',
+        name='Mishka Dog Boutique',
+        description='Mishka dog cakes made with no artificial colors, no preservatives! You can also find our full line of hand crafted, luxury dog clothing and accessories.',
+        website='https://mishkacakes.com/',
+        phone='6289000923',
+        price='$$$$'
+    )
+
     db.session.add(petagogy)
+    db.session.add(mishka)
     db.session.commit()
 
 
