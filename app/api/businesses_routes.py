@@ -14,9 +14,7 @@ def get_business(id):
     business = Business.query.get(id)
     reviews = Review.query.filter(Review.business_id == id).all()
     business_images = Image.query.filter(Image.imageable_id == id and Image.imageable_type == 'business').all()
-
-    for business_image in business_images:
-        business_image_url = business_image.url
+    business_image_urls = [{'id': image.id, 'image_url': image.url} for image in business_images]
 
     total_stars = 0
     num_reviews = len(reviews)
@@ -24,9 +22,7 @@ def get_business(id):
     for review in reviews:
         total_stars += review.stars
         review_images = Image.query.filter(Image.imageable_id == review.id).all()
-        for image in review_images:
-            image_id = image.id
-            image_url = image.url
+        review_image_urls = [{'id': image.id, 'image_url': image.url} for image in review_images]
     
     avg_stars = total_stars / num_reviews
 
@@ -36,12 +32,8 @@ def get_business(id):
         'num_reviews': num_reviews,
         'avg_stars': avg_stars,
     }
-    business_dict['review_images'] = {
-        'image_id': image_id,
-        'image_url': image_url
-    }
-    # review_images['review_images'] = image_url
-    business_dict['business_images'] = business_image_url
+    business_dict['review_images'] = review_image_urls
+    business_dict['business_images'] = business_image_urls
     
     
     business_data.append(business_dict)
