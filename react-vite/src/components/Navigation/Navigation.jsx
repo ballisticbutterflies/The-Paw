@@ -48,7 +48,7 @@ function Navigation() {
           />
           <datalist id="locations">
             {locations.map(op => (
-              <option value={op}>{op}</option>
+              <option key={op} value={op}>{op}</option>
             ))
             }
           </datalist>
