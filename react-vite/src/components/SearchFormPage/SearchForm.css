@@ -6,6 +6,10 @@
   padding: 15px 10px 10px 10px;
 }
 
+.businessCards:hover {
+  box-shadow: 3px 7px 35px 3px;
+}
+
 
 .businessesImage {
   height: 200px;
