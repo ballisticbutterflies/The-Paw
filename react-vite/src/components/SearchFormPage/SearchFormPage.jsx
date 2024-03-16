@@ -25,6 +25,14 @@ function SearchFormPage() {
     return [filledStars, emptyStars]
   }
 
+  const reviewTextSubstr = (text) => {
+    if (text.length > 85) {
+      return text.substring(0, 85) + "..."
+    } else {
+      return text
+    }
+  }
+
   useEffect(() => {
     dispatch(fetchBusinesses())
   }, [dispatch])
@@ -34,17 +42,31 @@ function SearchFormPage() {
       <h1>Paw-Recommended Results:</h1>
       {businesses && businesses.map((business) => (
         <ol
-          className="businessCards"
           key={business.id}
         >
-          <Link style={{ textDecoration: 'none' }}to={`/businesses/${business.id}`}>
-            <span><img src='https://i.imgur.com/9bEZuYg.png' alt={business.images} /></span>
-            <div>{business.name}</div>
-            <div>{business.avg_stars && starReviews(business.avg_stars)} · {business.avg_stars.toFixed(1)} ({business.num_reviews} reviews)</div>
-            <div>CATEGORIES PLACEHOLDER · {business.price}</div>
-            <div>HOURS PLACEHOLDER</div>
-            <div><i className="fa-regular fa-message fa-flip-horizontal" />&nbsp;{business.recent_review_text}</div>
+          <Link className="businessCards" style={{ textDecoration: 'none' }} to={`/businesses/${business.id}`}>
+            <span >
+              <img className="businessesImage" src='https://i.imgur.com/9bEZuYg.png' alt={business.images} />
+            </span>
+            <ol >
+              <li>
+                <span className="businessDeets">
+                  <span>{business.name}</span>
+                  <span>{business.avg_stars && starReviews(business.avg_stars)} · {business.avg_stars.toFixed(1)} ({business.num_reviews} reviews)</span>
+                  <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                  <span>HOURS PLACEHOLDER</span>
+                  <span>
+                    <i className="fa-regular fa-message fa-flip-horizontal" />
+                    &nbsp;
+                    {business.recent_review_text &&
+                      reviewTextSubstr(business.recent_review_text)
+                    }
+                  </span>
+                </span>
+              </li>
+            </ol>
           </Link>
+
         </ol>
       ))}
 
