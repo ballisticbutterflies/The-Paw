@@ -52,7 +52,10 @@ function SearchFormPage() {
               <li>
                 <span className="businessDeets">
                   <span>{business.name}</span>
-                  <span>{business.avg_stars && starReviews(business.avg_stars)} · {business.avg_stars.toFixed(1)} ({business.num_reviews} reviews)</span>
+                  <span>{business.avg_stars &&
+                          starReviews(business.avg_stars)}&nbsp;
+                          {business.avg_stars && business.avg_stars.toFixed(1)} &nbsp;
+                          {business.num_reviews && (business.num_reviews )} reviews </span>
                   <span>CATEGORIES PLACEHOLDER · {business.price}</span>
                   <span>HOURS PLACEHOLDER</span>
                   <span>
