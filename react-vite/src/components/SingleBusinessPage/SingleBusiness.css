@@ -26,29 +26,44 @@
 .businessHeader {
     position: relative;
     left: 16%;
-    bottom: 50%;
+    bottom: 58%;
     z-index: 1000;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
+    width: fit-content;
 }
 
 .businessHeader h1 {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: -8px;
     font-size: 40px;
+}
+
+.currHours {
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.seeHours {
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 3px 8px 3px 8px;
+    border-radius: 3px;
 }
 
 .seeAllPhotos {
     position: relative;
     left: 76%;
-    bottom: 60%;
+    bottom: 71%;
     z-index: 1000;
     padding: 5px;
+    width: fit-content;
 }
 
 .seeAllPhotos button {
-    padding: 12px 35px 12px 35px;
+    padding: 13px 30px 13px 30px;
     background: none;
     border: 1px solid white;
     color: white;
@@ -57,15 +72,15 @@
     font-weight: 600;
 }
 
-/* .paws-filled {
-    -webkit-text-stroke: .5px;
-    -webkit-text-stroke-color: white;
-} */
+.paws-filled,
+.paws-unfilled {
+    font-size: x-large;
+}
 
 .pawBlock {
     background-color: #FFFFFF;
     width: fit-content;
-    padding: 3px 5px 3px 5px;
+    padding: 8px 6px 3px 6px;
     border-radius: 5px;
 }
 
@@ -74,5 +89,5 @@
 }
 
 .priceSubcat {
-    margin-top: 5px;
+    margin-top: -3px;
 }

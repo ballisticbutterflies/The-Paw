@@ -33,6 +33,10 @@ function SingleBusinessPage() {
         return [filled_paws, unfilled_paws]
     }
 
+    const totalImages = (businessImages, reviewImages) => {
+        return businessImages.length + reviewImages.length
+    }
+
     const reviewAvg = (avg) => {
         if (avg !== 'New') {
             return avg.toFixed(1);
@@ -48,18 +52,19 @@ function SingleBusinessPage() {
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
-                    <div className="businessReviews">
+                    <p className="businessReviews">
                         <span className="pawBlock">{business.reviews.avg_stars &&
                             reviewStars(business.reviews.avg_stars)}</span>
-                        &nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)} ({business.reviews.num_reviews} reviews)
-                    </div>
-                    <div className="priceSubcat">{business.price} &#183; [SUBCATEGORIES]</div>
-                    <div>
-                        [CLOSED 8AM - 6PM]&nbsp;&nbsp; See hours
+                        &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)} ({business.reviews.num_reviews} reviews)
+                    </p>
+                    <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; [SUBCATEGORIES]</p>
+                    <div className="currHours">
+                        [CLOSED 8AM - 6PM]&nbsp;&nbsp;
+                        <span className="seeHours">See hours</span>
                     </div>
                 </div>
                 <div className="seeAllPhotos">
-                    <button>See all photos</button>
+                    <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
                 </div>
             </div>
         </>
