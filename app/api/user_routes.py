@@ -22,7 +22,6 @@ def user(id):
     """
     Query for a user by id and returns that user in a dictionary with the user data, user's pfp, and users aggregates for reviews and uploaded images
     """
-    response = { }
     user = User.query.get(id)
     dict_user = user.to_dict()
     # add the query for user profile image
@@ -33,7 +32,7 @@ def user(id):
     review_count = Review.query.filter(Review.user_id == id).count()
     dict_user['num_reviews'] = review_count
     # add the aggregate query for the number of photos with the uploader_id matching the current user
-    image_count = Image.query.filter(Image.uploader_id == id).count()
+    image_count = Image.query.filter(Image.uploader_id == id).filter(Image.imageable_type != 'user').count()
     dict_user['num_images'] = image_count    
-    # !Need to actually check uploader id functionality when reseeding
-    return dict_user 
+    # return modified dictionary
+    return dict_user
