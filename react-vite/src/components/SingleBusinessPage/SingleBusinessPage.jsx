@@ -4,6 +4,7 @@ import { fetchSingleBusiness } from "../../redux/businesses";
 import { useEffect } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
+import BusinessContactCard from "./BusinessContactCard";
 
 function SingleBusinessPage() {
     const { businessId } = useParams();
@@ -68,8 +69,10 @@ function SingleBusinessPage() {
                     <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
                 </div>
             </div>
-
-            <BusinessDetails business={business} />
+            <div className="businessContainer">
+                <BusinessDetails business={business} />
+                <BusinessContactCard business={business} />
+            </div>
         </>
     )
 }
