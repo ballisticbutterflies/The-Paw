@@ -25,3 +25,28 @@
   padding: 20px 20px 0 0;
 
 }
+
+.pawRatingInputFilter > h4 {
+  margin: 2px 0;
+}
+
+.pawRatingInputFilter {
+  border-bottom: 1px solid rgb(195, 194, 196);
+}
+
+.price-filled {
+  color: #5f5ba8;
+}
+
+.price-unfilled {
+  color: #c3cddf;
+}
+
+.priceInputFilter > h4 {
+  margin: 2px 0;
+}
+
+.priceInputFilter {
+  padding: 15px 0;
+  border-bottom: 1px solid rgb(195, 194, 196);
+}

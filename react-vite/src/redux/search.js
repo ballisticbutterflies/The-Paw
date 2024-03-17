@@ -9,8 +9,24 @@ export const loadBusinesses = (businesses) => ({
 
 // THUNK
 
-export const fetchBusinesses = () => async (dispatch) => {
-    const response = await fetch('/api/search/')
+export const fetchBusinesses = (filters = {}) => async (dispatch) => {
+
+    let url = '/api/search/';
+    const queryParams = [];
+    for (let key in filters.businesses) {
+        if (filters.businesses[key]) {
+            queryParams.push(`${key}=${filters.businesses[key]}`);
+        }
+    }
+    if (queryParams.length > 0) {
+        url += `?${queryParams.join('&')}`;
+    }
+
+    console.log(url, "THUNK")
+
+    const response = await fetch(url)
+
+
 
     if (response.ok) {
         const businesses = await response.json();
@@ -23,15 +39,15 @@ export const fetchBusinesses = () => async (dispatch) => {
 const searchReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_BUSINESSES: {
-            const businessesState = {}
-            action.businesses.businesses.map((business) => {
-                businessesState[business.id] = business;
-            })
-            return businessesState;
+            const newState = { ...state };
+            action.businesses.businesses.forEach((business) => {
+                newState[business.id] = business;
+            });
+            return newState;
         }
         default:
-            return state
+            return state;
     }
-}
+};
 
 export default searchReducer;
