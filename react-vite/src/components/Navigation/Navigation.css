@@ -1,3 +1,95 @@
+.nav {
+  display: grid;
+  grid-template-columns: 15% 45% 17% 8% 10%;
+  gap: 20px;
+  align-items: center;
+  background-color: #ffbe6e;
+  margin: 0px;
+}
+
+.searchForm {
+  background-color: #FFFBF6;
+  padding: 8px 0px 8px 8px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.formNav {
+  display: grid;
+  grid-template-columns: 50% 40% 5%;
+  justify-content: space-around;
+}
+
+.formNav input:focus {
+  outline: none;
+}
+
+#searchQuery {
+  padding: 5px;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: #c3cddf 2px solid;
+  padding-right: 10px;
+}
+
+#location {
+  border: none;
+  margin-left: 10px;
+}
+
+#search {
+  border: none;
+  background-color: transparent;
+  width: fit-content;
+  margin-left: 5px;
+}
+
+.logo {
+  width: 100px;
+}
+
+.forBiz {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.writeReview {
+  display: flex;
+  justify-content: end;
+}
+
+#caret {
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.leftnav {
+  display: flex;
+  justify-content: center;
+}
+
 .profile-dropdown {
   position: absolute;
+  padding: 20px;
+  width: fit-content;
+  background-color: #FFFBF6;
+  right: 0;
+  left: inherit;
+  margin-top: 5px;
+  margin-right: 50px;
+  border-radius: 5px;
+}
+
+.profiledropdownoptions {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.profiledropdownoptions:hover {
+  background-color: #c3cddf;
+  padding: 10px;
+  border-radius: 5px;
 }

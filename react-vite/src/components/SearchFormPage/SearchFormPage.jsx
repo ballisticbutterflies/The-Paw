@@ -26,6 +26,20 @@ function SearchFormPage() {
     return [filledStars, emptyStars]
   }
 
+  const starsToFixed = (stars) => {
+    if (stars >= 1) {
+      return stars + '.0'
+    } else {
+      return null
+    }
+  }
+
+  const reviewsExists = (review) => {
+    if (review >= 1) {
+      return '(' + review + ' ' + 'reviews' + ')'
+    }
+  }
+
   const reviewTextSubstr = (text) => {
     if (text.length > 85) {
       return text.substring(0, 85) + "..."
@@ -41,30 +55,35 @@ function SearchFormPage() {
   return (
     <>
       <h1>Paw-Recommended Results:</h1>
-      {businesses && businesses.map((business) => (
-        <ol key={business.id}>
+      {businesses && businesses.map((business, index) => (
+        <span
+          key={business.id}>
           <Link className="businessCards" style={{ textDecoration: 'none' }} to={`/businesses/${business.id}`}>
-            <img className="businessesImage" src='https://i.imgur.com/9bEZuYg.png' alt={business.images} />
-            <ol >
-              <li>
-                <span className="businessDeets">
-                  <span>{business.name}</span>
-                  <span>{business.avg_stars && starReviews(business.avg_stars)} · {business.avg_stars.toFixed(1)} ({business.num_reviews} reviews)</span>
-                  <span>CATEGORIES PLACEHOLDER · {business.price}</span>
-                  <span>HOURS PLACEHOLDER</span>
-                  <span>
-                    <i className="fa-regular fa-message fa-flip-horizontal" />
-                    &nbsp;
-                    {business.recent_review_text &&
-                      reviewTextSubstr(business.recent_review_text)
-                    }
-                  </span>
+            <span >
+              <img className="businessesImage" src='https://i.imgur.com/9bEZuYg.png' alt={business.images} />
+            </span>
+            <>
+              <span key={`bizDeets-${business.id}`} className="businessDeets">
+                <span>{index + 1}.&nbsp;{business.name}</span>
+                <span>{business.avg_stars && starReviews(business.avg_stars)}
+                  &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
+                  &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                <span>HOURS PLACEHOLDER</span>
+                <span>
+                  {business.recent_review_text &&
+                    <>
+                      <i className="fa-regular fa-message fa-flip-horizontal" />
+                    </>
+                  }&nbsp;
+                  {business.recent_review_text &&
+                    reviewTextSubstr(business.recent_review_text)
+                  }
                 </span>
-              </li>
-            </ol>
+              </span>
+            </>
           </Link>
-
-        </ol>
+        </span>
       ))}
       <FilterComponent />
     </>
