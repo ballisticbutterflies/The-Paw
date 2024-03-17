@@ -29,7 +29,7 @@ function Navigation( ) {
 
   return (
     <div className="nav">
-      <NavLink to="/"><img className="logo" src='../../../dist/images/the_paw_in_black.png'/></NavLink>
+      <NavLink to="/"><img className="logo" src='../../dist/images/the_paw_in_black.png'/></NavLink>
 
       <div className="searchForm">
         <form className="formNav">
