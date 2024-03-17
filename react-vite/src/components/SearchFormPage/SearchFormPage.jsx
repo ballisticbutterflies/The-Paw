@@ -27,7 +27,7 @@ function SearchFormPage() {
 
   const starsToFixed = (stars) => {
     if (stars >= 1) {
-      return stars.toFixed(1)
+      return stars + '.0'
     } else {
       return null
     }
