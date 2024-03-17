@@ -92,10 +92,16 @@
     margin-top: -3px;
 }
 
-.businessDetails {
-    width: 65%;
-    padding: 45px;
+.businessContainer {
+    max-width: 1125px;
+    padding-top: 45px;
     margin: auto;
+    display: flex;
+}
+
+.businessDetails {
+    width: 80%;
+    padding-right: 35px;
 }
 
 .businessDetails button {
@@ -122,4 +128,36 @@
 .locationHours {
     display: flex;
     gap: 30px;
+}
+
+.businessContact {
+    position: sticky;
+    top: 20px;
+    width: 365px;
+    height: fit-content;
+    border: #c3cddf 1px solid;
+    padding: 20px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.businessWebsiteContainer,
+.businessPhoneContainer,
+.businessAddressContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.businessContact hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.businessContactIcon {
+    padding-left: 30px;
+}
+
+.businessContactIcon a {
+    color: #1f2f44
 }
