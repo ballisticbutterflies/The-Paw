@@ -90,11 +90,11 @@ def seed_images():
         url="https://live.staticflickr.com/7629/16941122432_0fad613854_h.jpg"
     )
 
-    vet_biz = Image(
-        imageable_id=7,
-        imageable_type="business",
-        url="https://cdcssl.ibsrv.net/ibimg/smb/1000x550_80/webmgr/1x/o/q/646790d9b6a4a_building.jpg.webp?ac4952a28db4c9514cf1afd871712b05"
-    )
+    # vet_biz = Image(
+    #     imageable_id=7,
+    #     imageable_type="business",
+    #     url="https://cdcssl.ibsrv.net/ibimg/smb/1000x550_80/webmgr/1x/o/q/646790d9b6a4a_building.jpg.webp?ac4952a28db4c9514cf1afd871712b05"
+    # )
 
     db.session.add(petagogy_biz)
     db.session.add(petagogy_review1)
@@ -110,7 +110,7 @@ def seed_images():
     db.session.add(bakery_biz)
     db.session.add(bakery_rev)
     db.session.add(photog_biz)
-    db.session.add(vet_biz)
+    # db.session.add(vet_biz)
     db.session.commit()
 
 
