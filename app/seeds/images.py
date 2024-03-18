@@ -79,7 +79,7 @@ def seed_images():
     )
 
     bakery_rev = Image(
-        imageable_id=5,
+        imageable_id=7,
         imageable_type="review",
         url="https://s3-media0.fl.yelpcdn.com/bphoto/gXHsRuUjx7tlen565_I6SQ/o.jpg"
     )
