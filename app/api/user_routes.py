@@ -16,6 +16,15 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route("/<int:id>/images/all")
+def user_images_all(id):
+    """
+    Query to fetch all images uploaded by a specific user, this will not include their profile image. It will include the business name with the fetch as well for the transparent label on the image.
+    """
+    user_images_all = Image.query.filter(Image.uploader_id == id)
+    return {'user_images_all': [user_image.to_dict() for user_image in user_images_all]}
+
+
 
 @user_routes.route('/<int:id>')
 def user(id):
