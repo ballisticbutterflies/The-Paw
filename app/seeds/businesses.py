@@ -44,19 +44,19 @@ def seed_businesses():
         phone='6502863380',
     )
 
-    # dumpling_home = Business(
-    #     owner_id=3,
-    #     # category_id=1,
-    #     address='298 Gough St',
-    #     city='San Francisco, CA',
-    #     state='CA',
-    #     zip_code='94102',
-    #     name='Dumpling Home',
-    #     description='Casual, colorful eatery dishing up fried, steamed, or boiled dumplings, plus noodles and small plates, with a dog-friendly patio!',
-    #     website='https://www.dumplinghome.com/',
-    #     phone='4155031666',
-	#     price='$$'
-    # )
+    dumpling_home = Business(
+        owner_id=3,
+        # category_id=1,
+        address='298 Gough St',
+        city='San Francisco',
+        state='CA',
+        zip_code='94102',
+        name='Dumpling Home',
+        description='Casual, colorful eatery dishing up fried, steamed, or boiled dumplings, plus noodles and small plates, with a dog-friendly patio!',
+        website='https://www.dumplinghome.com/',
+        phone='4155031666',
+	    price='$$'
+    )
 
     # bakery = Business(
     #     owner_id=1,
@@ -105,7 +105,7 @@ def seed_businesses():
     db.session.add(petagogy)
     db.session.add(mishka)
     db.session.add(leo_j_ryan)
-    # db.session.add(dumpling_home)
+    db.session.add(dumpling_home)
     # db.session.add(bakery)
     # db.session.add(caroline)
     # db.session.add(exotic_vet)
