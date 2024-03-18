@@ -1,0 +1,163 @@
+.businessPhotoHeader {
+    max-width: 100%;
+    height: 425px;
+}
+
+
+.businessPhotoHeader img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.businessPhotoHeader::before {
+    content: '';
+    z-index: 10;
+    width: 100%;
+    height: 425px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    position: absolute;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.businessHeader {
+    position: relative;
+    left: 16%;
+    bottom: 58%;
+    z-index: 1000;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: 500;
+    width: fit-content;
+}
+
+.businessHeader h1 {
+    font-weight: bold;
+    margin-bottom: -8px;
+    font-size: 40px;
+}
+
+.currHours {
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.seeHours {
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 3px 8px 3px 8px;
+    border-radius: 3px;
+}
+
+.seeAllPhotos {
+    position: relative;
+    left: 76%;
+    bottom: 71%;
+    z-index: 1000;
+    padding: 5px;
+    width: fit-content;
+}
+
+.seeAllPhotos button {
+    padding: 13px 30px 13px 30px;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.paws-filled,
+.paws-unfilled {
+    font-size: x-large;
+}
+
+.pawBlock {
+    background-color: #FFFFFF;
+    width: fit-content;
+    padding: 8px 6px 3px 6px;
+    border-radius: 5px;
+}
+
+.businessReviews span {
+    background-color: none;
+}
+
+.priceSubcat {
+    margin-top: -3px;
+}
+
+.businessContainer {
+    max-width: 1125px;
+    padding-top: 45px;
+    margin: auto;
+    display: flex;
+}
+
+.businessDetails {
+    width: 80%;
+    padding-right: 35px;
+}
+
+.businessDetails button {
+    border-radius: 3px;
+    padding: 12px 16px 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: #c3cddf 1px solid;
+    background-color: transparent;
+}
+
+.businessDetails_writeAReview {
+    color: white;
+    border: #5f5ba8 1px solid !important;
+    background-color: #5f5ba8 !important;
+}
+
+
+.businessDetails hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.locationHours {
+    display: flex;
+    gap: 30px;
+}
+
+.businessContact {
+    position: sticky;
+    top: 20px;
+    width: 365px;
+    height: fit-content;
+    border: #c3cddf 1px solid;
+    padding: 20px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.businessWebsiteContainer,
+.businessPhoneContainer,
+.businessAddressContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.businessContact hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.businessContactIcon {
+    padding-left: 30px;
+}
+
+.businessContactIcon a {
+    color: #1f2f44
+}
