@@ -1,6 +1,6 @@
 function BusinessDetails({ business }) {
     return (
-        <div class="businessDetails">
+        <div className="businessDetails">
             <div className="businessDetailsButtons">
                 <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
                 <button><i className="fa-solid fa-camera" /> Add photo</button>&nbsp;&nbsp;
