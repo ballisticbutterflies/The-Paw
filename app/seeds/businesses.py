@@ -93,21 +93,21 @@ def seed_businesses():
         price='$$'
     )
 
-    # exotic_vet= Business(
-    # # id 7
-    #     owner_id= 5,
-    #     # category_id=2,
-    #     address='10501 Aurora Ave North',
-    #     city='Seattle',
-    #     state='WA',
-    #     zip_code='98133',
-    #     name='Bird and Exotic Clinic of Seattle',
-    #     description='Established in 1997 Bird & Exotic Clinic of Seattle is a full-service specialty exotic animal hospital and welcomes patients in need of routine and advanced medical, surgical, and dental care.',
-    #     website='https://www.birdandexotic.com/',
-    #     email= "birdandexoticclinicofseattle@gmail.com",
-    #     phone='2067834538',
-    #     price='$$'
-    # )
+    exotic_vet= Business(
+    # id 7
+        owner_id= 5,
+        # category_id=2,
+        address='10501 Aurora Ave North',
+        city='Seattle',
+        state='WA',
+        zip_code='98133',
+        name='Bird and Exotic Clinic of Seattle',
+        description='Established in 1997 Bird & Exotic Clinic of Seattle is a full-service specialty exotic animal hospital and welcomes patients in need of routine and advanced medical, surgical, and dental care.',
+        website='https://www.birdandexotic.com/',
+        email= "birdandexoticclinicofseattle@gmail.com",
+        phone='2067834538',
+        price='$$'
+    )
 
     db.session.add(petagogy)
     db.session.add(mishka)
@@ -115,7 +115,7 @@ def seed_businesses():
     db.session.add(dumpling_home)
     db.session.add(bakery)
     db.session.add(caroline)
-    # db.session.add(exotic_vet)
+    db.session.add(exotic_vet)
     db.session.commit()
 
 
