@@ -1,5 +1,5 @@
 from flask import Blueprint;
-from app.models import Business, Review, Image;
+from app.models import Business, Review, Image, User;
 
 businesses_route = Blueprint('businesses', __name__)
 
@@ -43,4 +43,24 @@ def get_business(id):
 @businesses_route.route('/<int:id>/reviews')
 def get_reviews_by_business_id(id):
     reviews = Review.query.filter(Review.business_id == id).all()
-    print(reviews)
+    users = User.query.filter(User.id == Review.user_id).all
+
+    user_data = [{
+            'id': user.id,
+            'first_name': user.first_name,
+            'last_name': user.last_name
+            }
+            for user in users]
+    
+    reviews_list = [{
+        'id': review.id,
+        'user_id': review.user_id,
+        'business_id': review.business_id,
+        'review': review.review,
+        'stars': review.stars,
+        'User': user_data
+        } 
+        for review in reviews]
+    
+
+    return { 'reviews': reviews_list }
