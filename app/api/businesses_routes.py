@@ -53,7 +53,7 @@ def create_business():
 
     if form.validate_on_submit():
         business = Business(
-            owner_id = current_user['id'],
+            owner_id = current_user.id,
             address=form.data['address'],
             city=form.data['city'],
             state=form.data['state'],
@@ -67,6 +67,6 @@ def create_business():
         )
         db.session.add(business)
         db.session.commit()
-        get_business(business.id)
+        
         return business.to_dict()
     return form.errors, 401
