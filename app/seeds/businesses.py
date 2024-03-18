@@ -94,7 +94,7 @@ def seed_businesses():
     )
 
     exotic_vet= Business(
-    id 7
+    # id 7
         owner_id= 5,
         # category_id=2,
         address='10501 Aurora Ave North',
