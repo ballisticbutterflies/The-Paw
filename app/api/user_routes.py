@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import User, Image, Review
+from .businesses_routes import businesses_route, get_business
 from sqlalchemy import func 
 
 
@@ -21,8 +22,35 @@ def user_images_all(id):
     """
     Query to fetch all images uploaded by a specific user, this will not include their profile image. It will include the business name with the fetch as well for the transparent label on the image.
     """
-    user_images_all = Image.query.filter(Image.uploader_id == id)
-    return {'user_images_all': [user_image.to_dict() for user_image in user_images_all]}
+    response_dict = { }
+
+    user_images_all = Image.query.filter(Image.uploader_id == id).filter(Image.imageable_type != 'user').all()
+
+    user_images_all_list = []
+
+    for user_image in user_images_all:
+        user_image_dict = {}
+        user_image_dict['id'] = user_image.id
+        user_image_dict['image_url'] = user_image.url
+        user_image_dict['type'] = user_image.imageable_type
+        user_image_dict['type_id'] = user_image.imageable_id 
+
+        if user_image_dict['type'] == 'business':
+            get_business_res =  get_business(user_image_dict['type_id'])
+            business_name = get_business_res['business'][0]['name']
+            user_image_dict['business_name'] = business_name
+        # ! need review route lol
+        # if user_image_dict['type'] == 'business':
+        #     get_business_res =  get_business(user_image_dict['type_id'])
+        #     business_name = get_business_res['business'][0]['name']
+        #     user_image_dict['business_name'] = business_name
+        # user_image_dict['business_name'] = user
+        user_images_all_list.append(user_image_dict)
+
+        
+    response_dict['user_images'] = user_images_all_list
+
+    return response_dict
 
 
 
