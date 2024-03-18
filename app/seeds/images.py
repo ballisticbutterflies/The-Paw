@@ -66,11 +66,11 @@ def seed_images():
         url='https://s3-media0.fl.yelpcdn.com/bphoto/ygIKD2VohfJHnpA_SRVYXA/o.jpg'
     )
 
-    # dumpling_home_biz = Image(
-    #     imageable_id=4,
-    #     imageable_type='business',
-    #     url='https://s3-media0.fl.yelpcdn.com/bphoto/Utdv29yFK-sfp9D1Tg-Bwg/o.jpg'
-    # )
+    dumpling_home_biz = Image(
+        imageable_id=4,
+        imageable_type='business',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/Utdv29yFK-sfp9D1Tg-Bwg/o.jpg'
+    )
 
     # bakery_biz = Image(
     #     imageable_id=5,
@@ -106,7 +106,7 @@ def seed_images():
     db.session.add(leo_j_ryan_biz2)
     db.session.add(leo_j_ryan_review1)
     db.session.add(leo_j_ryan_review2)
-    # db.session.add(dumpling_home_biz)
+    db.session.add(dumpling_home_biz)
     # db.session.add(bakery_biz)
     # db.session.add(bakery_rev)
     # db.session.add(photog_biz)

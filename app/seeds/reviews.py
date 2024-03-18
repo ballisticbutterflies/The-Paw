@@ -37,12 +37,12 @@ def seed_reviews():
         stars=5
     )
 
-    # misty_dumpling = Review(
-    #     user_id=4,
-    #     business_id=4,
-    #     review='This place was superb! The workers were so friendly to my pup, Ellie. Can\'t wait to go back!',
-    #     stars=5
-    # )
+    misty_dumpling = Review(
+        user_id=4,
+        business_id=4,
+        review='This place was superb! The workers were so friendly to my pup, Ellie. Can\'t wait to go back!',
+        stars=5
+    )
 
     # bakery_review = Review(
     #     user_id=3,
@@ -54,7 +54,7 @@ def seed_reviews():
     db.session.add(demo_leo)
     db.session.add(marnie_leo)
     db.session.add(misty_leo)
-    # db.session.add(misty_dumpling)
+    db.session.add(misty_dumpling)
     db.session.add(marnie)
     db.session.add(bobbie)
     # db.session.add(bakery_review)
