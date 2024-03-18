@@ -1,6 +1,7 @@
-from flask import Blueprint;
-from app.models import Business, Review, Image;
-from app.forms import 
+from flask import Blueprint, request
+from flask_login import login_required, current_user
+from app.models import Business, Review, Image, db;
+from app.forms import CreateBusinessForm
 
 businesses_route = Blueprint('businesses', __name__)
 
@@ -42,8 +43,30 @@ def get_business(id):
 
 
 @businesses_route.route('/', methods=['POST'])
+@login_required
 def create_business():
     '''
-    Creates a new biz and adds it to db
+    Creates a new biz and adds it to db redirects to its biz page?
     '''
-    form = CreateBusinessForm
+    form = CreateBusinessForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        business = Business(
+            owner_id = current_user['id'],
+            address=form.data['address'],
+            city=form.data['city'],
+            state=form.data['state'],
+            zip_code=form.data['zip_code'],
+            name=form.data['name'],
+            description=form.data['description'],
+            website=form.data['website'],
+            email=form.data['email'],
+            phone=form.data['phone'],
+            price=form.data['price']
+        )
+        db.session.add(business)
+        db.session.commit()
+        get_business(business.id)
+        return business.to_dict()
+    return form.errors, 401
