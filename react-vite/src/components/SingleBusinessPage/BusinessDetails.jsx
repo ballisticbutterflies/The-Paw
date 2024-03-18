@@ -2,9 +2,9 @@ function BusinessDetails({ business }) {
     return (
         <div class="businessDetails">
             <div className="businessDetailsButtons">
-                <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw"></i> &nbsp;Write a review</button>&nbsp;&nbsp;
-                <button><i className="fa-solid fa-camera"></i> Add photo</button>&nbsp;&nbsp;
-                <button><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
+                <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
+                <button><i className="fa-solid fa-camera" /> Add photo</button>&nbsp;&nbsp;
+                <button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button>
             </div>
             <hr />
             <div>
