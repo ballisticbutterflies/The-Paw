@@ -1,5 +1,6 @@
 from flask import Blueprint;
 from app.models import Business, Review, Image;
+from app.forms import 
 
 businesses_route = Blueprint('businesses', __name__)
 
@@ -45,3 +46,4 @@ def create_business():
     '''
     Creates a new biz and adds it to db
     '''
+    form = CreateBusinessForm
