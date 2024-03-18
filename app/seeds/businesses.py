@@ -39,7 +39,7 @@ def seed_businesses():
         state='CA',
         zip_code='94404',
         name='Leo J Ryan Memorial Park',
-        description='Leo J. Ryan Memorial Park is a dog-friendly park that offers 20 acres of lawn areas, lagoon access, a gazebo on the lagoon, and restroom facilities. The picnic rental space is located at the hilltop above the amphitheater and includes uncovered picnic tables on the hilltop.',
+        description='Leo J. Ryan Memorial Park is a dog-friendly park that offers 20 acres of lawn areas, lagoon access, a gazebo on the lagoon, and restroom facilities.',
         website='https://www.fostercity.org/parksrec/page/leo-j-ryan-park',
         phone='6502863380',
     )
@@ -66,7 +66,7 @@ def seed_businesses():
         state= "TX",
         zip_code= "77005",
         name= "Three Dog Bakery Houston",
-        description= "Three Dog Bakery is an unforgettable experience for dogs (and their two-legged parents). You will find a selection of treats that can only be found at Three Dog bakeries. You will find exclusive seasonal treats, gourmet dog pastries, including Pupcakes®, and one-of-a-kind canine cakes you can have personalized for your pup’s special occasion. With Three Dog Bakery, you can make their birthday, adoption day, training graduation day or any day special.",
+        description= "Three Dog Bakery is an unforgettable experience for dogs (and their two-legged parents). You will find a selection of treats that can only be found at Three Dog bakeries.",
         website= "https=//www.threedogbakeryhtx.com/",
         email= "baker@threedogbakeryhtx.com",
         phone= "7135339933",
