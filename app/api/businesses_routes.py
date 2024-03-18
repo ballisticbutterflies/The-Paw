@@ -23,7 +23,7 @@ def get_business(id):
         total_stars += review.stars
         review_images = Image.query.filter(Image.imageable_id == review.id).all()
         review_image_urls = [{'id': image.id, 'image_url': image.url} for image in review_images]
-    
+
     avg_stars = total_stars / num_reviews
 
     business_dict = business.to_dict()
@@ -34,7 +34,14 @@ def get_business(id):
     }
     business_dict['review_images'] = review_image_urls
     business_dict['business_images'] = business_image_urls
-    
-    
+
+
     business_data.append(business_dict)
     return { 'business': business_data }
+
+
+@businesses_route.route('/', methods=['POST'])
+def create_business():
+    '''
+    Creates a new biz and adds it to db
+    '''
