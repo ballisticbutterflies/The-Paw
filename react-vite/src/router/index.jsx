@@ -5,6 +5,7 @@ import SearchFormPage from '../components/SearchFormPage';
 import SingleBusinessPage from '../components/SingleBusinessPage';
 import Layout from './Layout';
 
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,

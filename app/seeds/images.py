@@ -5,25 +5,41 @@ def seed_images():
     petagogy_biz = Image(
         imageable_id=1,
         imageable_type='business',
-        url='https://imgur.com/9bEZuYg'
+        url='https://i.imgur.com/9bEZuYg.png',
+        uploader_id=1
     )
 
     petagogy_review1 = Image(
         imageable_id=2,
         imageable_type='review',
-        url='https://s3-media0.fl.yelpcdn.com/bphoto/aj7a9TE15nvEiKXWfO-UJg/o.jpg'
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/aj7a9TE15nvEiKXWfO-UJg/o.jpg',
+        uploader_id=3
     )
 
     petagogy_review2 = Image(
         imageable_id=2,
         imageable_type='review',
-        url='https://www.smallbusinessbrain.com/wp-content/uploads/2020/04/opening-a-pet-store.jpg'
+        url='https://www.smallbusinessbrain.com/wp-content/uploads/2020/04/opening-a-pet-store.jpg',
+        uploader_id=3
     )
 
     marnie = Image(
         imageable_id=2,
         imageable_type='user',
-        url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq-hTj5hlzHRRhpw_Icd3QjBcQD0ADo3AbTg&usqp=CAU'
+        url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq-hTj5hlzHRRhpw_Icd3QjBcQD0ADo3AbTg&usqp=CAU',
+        uploader_id=2
+    )
+    mishka_biz = Image(
+        imageable_id=2,
+        imageable_type='business',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/ZBSvPCaQ9XQALkYU8MXQjA/o.jpg',
+        uploader_id=2
+    )
+    petagogy_review3 = Image(
+        imageable_id=1,
+        imageable_type='review',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/6iIqAfuC81vz0RSUpmGunQ/1000s.jpg',
+        uploader_id=3
     )
 
 
@@ -32,6 +48,8 @@ def seed_images():
     db.session.add(petagogy_review1)
     db.session.add(petagogy_review2)
     db.session.add(marnie)
+    db.session.add(mishka_biz)
+    db.session.add(petagogy_review3)
     db.session.commit()
 
 
