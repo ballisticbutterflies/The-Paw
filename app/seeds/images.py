@@ -42,7 +42,59 @@ def seed_images():
         uploader_id=3
     )
 
+    leo_j_ryan_biz1 = Image(
+        imageable_id=4,
+        imageable_type='business',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/9NDbCeS6lhny-qTul5sNOg/o.jpg'
+    )
 
+    leo_j_ryan_biz2 = Image(
+        imageable_id=4,
+        imageable_type='business',
+        url='https://www.fostercity.org/sites/default/files/styles/full_node_primary_extra_wide/public/imageattachments/parksrec/page/6881/leo_ryan_aug_25_008.jpg'
+    )
+
+    leo_j_ryan_review1 = Image(
+        imageable_id=2,
+        imageable_type='review',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/XfLKnWDFN2_YKcNEdjmQjA/o.jpg'
+    )
+
+    leo_j_ryan_review2 = Image(
+        imageable_id=2,
+        imageable_type='review',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/ygIKD2VohfJHnpA_SRVYXA/o.jpg'
+    )
+
+    dumpling_home_biz = Image(
+        imageable_id=4,
+        imageable_type='business',
+        url='https://s3-media0.fl.yelpcdn.com/bphoto/Utdv29yFK-sfp9D1Tg-Bwg/o.jpg'
+    )
+
+    bakery_biz = Image(
+        imageable_id=5,
+        imageable_type="business",
+        url="https://static.wixstatic.com/media/ced99c_f14b2a7d079f4c2ab0f7e59b6cdca807~mv2_d_3024_4032_s_4_2.jpg/v1/fill/w_288,h_384,fp_0.50_0.50,q_90,enc_auto/ced99c_f14b2a7d079f4c2ab0f7e59b6cdca807~mv2_d_3024_4032_s_4_2.jpg"
+    )
+
+    bakery_rev = Image(
+        imageable_id=5,
+        imageable_type="review",
+        url="https://s3-media0.fl.yelpcdn.com/bphoto/gXHsRuUjx7tlen565_I6SQ/o.jpg"
+    )
+
+    photog_biz = Image(
+        imageable_id=6,
+        imageable_type="business",
+        url="https://live.staticflickr.com/7629/16941122432_0fad613854_h.jpg"
+    )
+
+    vet_biz = Image(
+        imageable_id=7,
+        imageable_type="business",
+        url="https://cdcssl.ibsrv.net/ibimg/smb/1000x550_80/webmgr/1x/o/q/646790d9b6a4a_building.jpg.webp?ac4952a28db4c9514cf1afd871712b05"
+    )
 
     db.session.add(petagogy_biz)
     db.session.add(petagogy_review1)
@@ -50,6 +102,15 @@ def seed_images():
     db.session.add(marnie)
     db.session.add(mishka_biz)
     db.session.add(petagogy_review3)
+    db.session.add(leo_j_ryan_biz1)
+    db.session.add(leo_j_ryan_biz2)
+    db.session.add(leo_j_ryan_review1)
+    db.session.add(leo_j_ryan_review2)
+    db.session.add(dumpling_home_biz)
+    db.session.add(bakery_biz)
+    db.session.add(bakery_rev)
+    db.session.add(photog_biz)
+    db.session.add(vet_biz)
     db.session.commit()
 
 

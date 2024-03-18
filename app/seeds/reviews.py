@@ -16,8 +16,48 @@ def seed_reviews():
         stars=1
     )
 
+    demo_leo = Review(
+        user_id=1,
+        business_id=4,
+        review='Ugh, people suck. They need to learn how to pick up after their dogs here :/ Otherwise, the park is beautiful.',
+        stars=2
+    )
+
+    marnie_leo = Review(
+        user_id=2,
+        business_id=4,
+        review='This was so-so. I wish they had bowls out for the dogs. Some of the dog owners were kind enough to share their bowls though.',
+        stars=3
+    )
+
+    misty_leo = Review(
+        user_id=4,
+        business_id=4,
+        review='Amazing! Such a beautiful view and my doggo loves coming out here. She\'s made so many doggo-friends!',
+        stars=5
+    )
+
+    misty_dumpling = Review(
+        user_id=4,
+        business_id=5,
+        review='This place was superb! The workers were so friendly to my pup, Ellie. Can\'t wait to go back!',
+        stars=5
+    )
+
+    bakery_review = Review(
+        user_id=3,
+        business_id=5,
+        review="We got a pup-kin bar and a frozen bone marrow treat.",
+        stars=4
+    )
+
+    db.session.add(demo_leo)
+    db.session.add(marnie_leo)
+    db.session.add(misty_leo)
+    db.session.add(misty_dumpling)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(bakery_review)
     db.session.commit()
 
 

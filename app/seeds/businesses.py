@@ -31,8 +31,84 @@ def seed_businesses():
         price='$$$$'
     )
 
+    leo_j_ryan = Business(
+        owner_id=3,
+        # category_id=6,
+        address='650 Shell Blvd',
+        city='Foster City',
+        state='CA',
+        zip_code='94404',
+        name='Leo J Ryan Memorial Park',
+        description='Leo J. Ryan Memorial Park is a dog-friendly park that offers 20 acres of lawn areas, lagoon access, a gazebo on the lagoon, and restroom facilities. The picnic rental space is located at the hilltop above the amphitheater and includes uncovered picnic tables on the hilltop.',
+        website='https://www.fostercity.org/parksrec/page/leo-j-ryan-park',
+        phone='6502863380',
+    )
+
+    dumpling_home = Business(
+        owner_id=3,
+        # category_id=1,
+        address='298 Gough St',
+        city='San Francisco, CA',
+        state='CA',
+        zip_code='94102',
+        name='Dumpling Home',
+        description='Casual, colorful eatery dishing up fried, steamed, or boiled dumplings, plus noodles and small plates, with a dog-friendly patio!',
+        website='https://www.dumplinghome.com/',
+        phone='4155031666',
+	    price='$$'
+    )
+
+    bakery = Business(
+        owner_id=1,
+        # category_id=1,
+        address= "2402 Rice Blvd",
+        city= "Houston",
+        state= "TX",
+        zip_code= "77005",
+        name= "Three Dog Bakery Houston",
+        description= "Three Dog Bakery is an unforgettable experience for dogs (and their two-legged parents). You will find a selection of treats that can only be found at Three Dog bakeries. You will find exclusive seasonal treats, gourmet dog pastries, including Pupcakes®, and one-of-a-kind canine cakes you can have personalized for your pup’s special occasion. With Three Dog Bakery, you can make their birthday, adoption day, training graduation day or any day special.",
+        website= "https=//www.threedogbakeryhtx.com/",
+        email= "baker@threedogbakeryhtx.com",
+        phone= "7135339933",
+        price= "$$"
+    )
+
+    caroline = Business(
+        owner_id= 4,
+        # category_id=8,
+        address='3301 NE 1st Ave',
+        city='Miami',
+        state='FL',
+        zip_code='33137',
+        name='Caroline Twohill Photography',
+        description='Caroline longs and strides to discovering and telling your dog’s unique story with beautiful, natural fine art images just begging to be displayed in your home and shared with family, friends and loved ones.',
+        website='https://www.carolinetwohillphotography.com//',
+        phone='6094252118',
+        price='$$'
+    )
+
+    exotic_vet= Business(
+        owner_id= 5,
+        # category_id=2,
+        address='10501 Aurora Ave North',
+        city='Seattle',
+        state='WA',
+        zip_code='98133',
+        name='Bird and Exotic Clinic of Seattle',
+        description='Established in 1997 Bird & Exotic Clinic of Seattle is a full-service specialty exotic animal hospital and welcomes patients in need of routine and advanced medical, surgical, and dental care.',
+        website='https://www.birdandexotic.com/',
+        email= "birdandexoticclinicofseattle@gmail.com",
+        phone='2067834538',
+        price='$$'
+    )
+
     db.session.add(petagogy)
     db.session.add(mishka)
+    db.session.add(leo_j_ryan)
+    db.session.add(dumpling_home)
+    db.session.add(bakery)
+    db.session.add(caroline)
+    db.session.add(exotic_vet)
     db.session.commit()
 
 
