@@ -6,14 +6,13 @@ function BusinessContactCard({ business }) {
 
         return `(${areaCode}) ${firstThree}-${lastFour}`
     }
-
     return (
         <div className="businessContact">
             {business.website &&
                 <>
                     <div className="businessWebsiteContainer">
-                        <div><a href={business.website} target="_blank">{business.website}</a></div>
-                        <div className="businessContactIcon"><a href={business.website} target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+                        <div><a href={business.website} target="_blank" rel="noopener noreferrer">{business.website}</a></div>
+                        <div className="businessContactIcon"><a href={business.website} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-arrow-up-right-from-square"></i></a></div>
                     </div>
                     <hr />
                 </>
@@ -36,7 +35,7 @@ function BusinessContactCard({ business }) {
                             </div>
                             <div>{business.address} {business.city}, {business.state} {business.zip_code}</div>
                         </div>
-                        <div className="businessContactIcon"><i class="fa-solid fa-diamond-turn-right"></i></div>
+                        <div className="businessContactIcon"><i className="fa-solid fa-diamond-turn-right"></i></div>
                     </div>
                 </>
             }
