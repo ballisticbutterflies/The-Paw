@@ -22,13 +22,14 @@ export const fetchSingleBusiness = (businessId) => async (dispatch) => {
 
 const businessesReducer = (state = {}, action) => {
     switch (action.type) {
-        case LOAD_SINGLE_BUSINESS:
+        case LOAD_SINGLE_BUSINESS: {
             const businessState = {}
 
             action.business.business.forEach(business => {
                 businessState[business.id] = business
             })
             return businessState
+        }
         default:
             return { ...state }
     }
