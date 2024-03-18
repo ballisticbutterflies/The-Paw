@@ -38,3 +38,9 @@ def get_business(id):
     
     business_data.append(business_dict)
     return { 'business': business_data }
+
+
+@businesses_route.route('/<int:id>/reviews')
+def get_reviews_by_business_id(id):
+    reviews = Review.query.filter(Review.business_id == id).all()
+    print(reviews)
