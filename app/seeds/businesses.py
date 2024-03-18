@@ -67,40 +67,40 @@ def seed_businesses():
         zip_code= "77005",
         name= "Three Dog Bakery Houston",
         description= "Three Dog Bakery is an unforgettable experience for dogs (and their two-legged parents). You will find a selection of treats that can only be found at Three Dog bakeries.",
-        website= "https=//www.threedogbakeryhtx.com/",
+        website= "https://www.threedogbakeryhtx.com/",
         email= "baker@threedogbakeryhtx.com",
         phone= "7135339933",
         price= "$$"
     )
 
-    caroline = Business(
-        owner_id= 4,
-        # category_id=8,
-        address='3301 NE 1st Ave',
-        city='Miami',
-        state='FL',
-        zip_code='33137',
-        name='Caroline Twohill Photography',
-        description='Caroline longs and strides to discovering and telling your dog’s unique story with beautiful, natural fine art images just begging to be displayed in your home and shared with family, friends and loved ones.',
-        website='https://www.carolinetwohillphotography.com//',
-        phone='6094252118',
-        price='$$'
-    )
+    # caroline = Business(
+    #     owner_id= 4,
+    #     # category_id=8,
+    #     address='3301 NE 1st Ave',
+    #     city='Miami',
+    #     state='FL',
+    #     zip_code='33137',
+    #     name='Caroline Twohill Photography',
+    #     description='Caroline longs and strides to discovering and telling your dog’s unique story with beautiful, natural fine art images just begging to be displayed in your home and shared with family, friends and loved ones.',
+    #     website='https://www.carolinetwohillphotography.com/',
+    #     phone='6094252118',
+    #     price='$$'
+    # )
 
-    exotic_vet= Business(
-        owner_id= 5,
-        # category_id=2,
-        address='10501 Aurora Ave North',
-        city='Seattle',
-        state='WA',
-        zip_code='98133',
-        name='Bird and Exotic Clinic of Seattle',
-        description='Established in 1997 Bird & Exotic Clinic of Seattle is a full-service specialty exotic animal hospital and welcomes patients in need of routine and advanced medical, surgical, and dental care.',
-        website='https://www.birdandexotic.com/',
-        email= "birdandexoticclinicofseattle@gmail.com",
-        phone='2067834538',
-        price='$$'
-    )
+    # exotic_vet= Business(
+    #     owner_id= 5,
+    #     # category_id=2,
+    #     address='10501 Aurora Ave North',
+    #     city='Seattle',
+    #     state='WA',
+    #     zip_code='98133',
+    #     name='Bird and Exotic Clinic of Seattle',
+    #     description='Established in 1997 Bird & Exotic Clinic of Seattle is a full-service specialty exotic animal hospital and welcomes patients in need of routine and advanced medical, surgical, and dental care.',
+    #     website='https://www.birdandexotic.com/',
+    #     email= "birdandexoticclinicofseattle@gmail.com",
+    #     phone='2067834538',
+    #     price='$$'
+    # )
 
     db.session.add(petagogy)
     db.session.add(mishka)
