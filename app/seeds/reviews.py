@@ -44,12 +44,12 @@ def seed_reviews():
         stars=5
     )
 
-    # bakery_review = Review(
-    #     user_id=3,
-    #     business_id=5,
-    #     review="We got a pup-kin bar and a frozen bone marrow treat. She loved it so much! Thank you to the kind worker!",
-    #     stars=4
-    # )
+    bakery_review = Review(
+        user_id=3,
+        business_id=5,
+        review="We got a pup-kin bar and a frozen bone marrow treat. She loved it so much! Thank you to the kind worker!",
+        stars=4
+    )
 
     db.session.add(demo_leo)
     db.session.add(marnie_leo)
@@ -57,7 +57,7 @@ def seed_reviews():
     db.session.add(misty_dumpling)
     db.session.add(marnie)
     db.session.add(bobbie)
-    # db.session.add(bakery_review)
+    db.session.add(bakery_review)
     db.session.commit()
 
 
