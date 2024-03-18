@@ -47,7 +47,7 @@ def seed_reviews():
     bakery_review = Review(
         user_id=3,
         business_id=5,
-        review="We got a pup-kin bar and a frozen bone marrow treat.",
+        review="We got a pup-kin bar and a frozen bone marrow treat. She loved it so much! Thank you to the kind worker!",
         stars=4
     )
 
