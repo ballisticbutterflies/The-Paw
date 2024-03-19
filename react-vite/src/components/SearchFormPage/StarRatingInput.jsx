@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const StarRatingInput = ({ stars, onChange }) => {
 
-  const [activeRating, setActiveRating] = useState(stars)
+  const [ activeRating, setActiveRating ] = useState(stars)
 
   useEffect(() => {
     setActiveRating(stars)
