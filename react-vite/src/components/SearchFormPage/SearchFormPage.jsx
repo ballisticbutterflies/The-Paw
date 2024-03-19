@@ -38,6 +38,7 @@ function SearchFormPage() {
     if (review >= 1) {
       return '(' + review + ' ' + 'reviews' + ')'
     }
+    return false
   }
 
   const reviewTextSubstr = (text) => {
@@ -68,24 +69,28 @@ function SearchFormPage() {
             <span>
               <img className="businessesImage" src="https://i.imgur.com/9bEZuYg.png" alt={business.images} />
             </span>
-            <span className="businessDeets" key={`bizDeets-${business.id}`}>
-              <span>{index + 1}.&nbsp;{business.name}</span>
-              <span>{business.avg_stars && starReviews(business.avg_stars)}
-                &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
-                &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-              <span>CATEGORIES PLACEHOLDER · {business.price}</span>
-              <span>HOURS PLACEHOLDER</span>
-              <span>
-                {business.recent_review_text &&
-                  <>
-                    <i className="fa-regular fa-message fa-flip-horizontal" />
-                  </>
-                }&nbsp;
-                {business.recent_review_text &&
-                  reviewTextSubstr(business.recent_review_text)
+            <>
+              <span key={`bizDeets-${business.id}`} className="businessDeets">
+                <span>{index + 1}.&nbsp;{business.name}</span>
+                { reviewsExists(business.num_reviews) &&
+                  <span>{business.avg_stars && starReviews(business.avg_stars)}
+                    &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
+                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
                 }
+                <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                <span>HOURS PLACEHOLDER</span>
+                <span>
+                  {business.recent_review_text &&
+                    <>
+                      <i className="fa-regular fa-message fa-flip-horizontal" />
+                    </>
+                  }&nbsp;
+                  {business.recent_review_text &&
+                    reviewTextSubstr(business.recent_review_text)
+                  }
+                </span>
               </span>
-            </span>
+            </>
           </Link>
         </span>
       ))}
