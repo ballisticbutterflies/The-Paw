@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.nav img {
+  margin-left: 10px;
+}
+
 .searchForm {
   background-color: #FFFBF6;
   padding: 8px 0px 8px 8px;
@@ -17,7 +21,7 @@
 
 .formNav {
   display: grid;
-  grid-template-columns: 50% 40% 10%;
+  grid-template-columns: 55% 35% 10%;
   justify-content: space-around;
 }
 
@@ -44,6 +48,7 @@
   background-color: transparent;
   width: fit-content;
   justify-self: center;
+  color: #1f2f44;
 }
 
 .logo {
