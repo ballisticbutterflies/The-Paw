@@ -1,8 +1,5 @@
 import { useState } from "react";
-
 import StarRatingInput from "./StarRatingInput";
-
-
 
 
 const FilterComponent = ({ onFilterChange }) => {
@@ -22,8 +19,8 @@ const FilterComponent = ({ onFilterChange }) => {
     if (stars !== "") {
       queryParams.append("rating", stars);
     }
-    if (price.checked !== false) {
 
+    if (price.checked !== false) {
       let priceObj = [...price]
       let searchingPrice = priceObj.filter((char) => char.checked === true);
       let result = searchingPrice.map(ele => ele.name)
@@ -32,8 +29,6 @@ const FilterComponent = ({ onFilterChange }) => {
       queryParams.append("price", string);
 
     }
-
-
 
     const queryString = queryParams.toString();
 

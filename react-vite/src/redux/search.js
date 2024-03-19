@@ -1,15 +1,11 @@
-
 const LOAD_BUSINESSES = 'search/LOAD_BUSINESSES'
-
 
 export const loadBusinesses = (businesses) => ({
     type: LOAD_BUSINESSES,
     businesses
 })
 
-
 // THUNKS
-
 export const fetchBusinesses = (filters = {}) => async (dispatch) => {
 
     let url ='/api/search/';
@@ -34,7 +30,6 @@ export const fetchBusinesses = (filters = {}) => async (dispatch) => {
 }
 
 // REDUCER
-
 const searchReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_BUSINESSES: {

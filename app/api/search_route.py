@@ -26,9 +26,7 @@ def search():
     query = query.join(Review).group_by(Business.id).having(func.avg(Review.stars) >= float(rating))
 
   if prices:
-
     query = query.filter(Business.price.in_(prices))
-
 
   if city:
     query = query.filter(Business.city == city)

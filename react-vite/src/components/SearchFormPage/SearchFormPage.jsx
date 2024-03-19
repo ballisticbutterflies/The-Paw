@@ -28,7 +28,6 @@ function SearchFormPage() {
   }
 
 
-
   const reviewsExists = (review) => {
     if (review >= 1) {
       return '(' + review + ' ' + 'reviews' + ')'
@@ -46,7 +45,6 @@ function SearchFormPage() {
 
 
   useEffect(() => {
-
     dispatch(fetchBusinesses())
   }, [dispatch])
 
@@ -59,7 +57,7 @@ function SearchFormPage() {
     <>
       <h1>Paw-Recommended Results:</h1>
       <div className="searchPage">
-      <FilterComponent onFilterChange={handleFilterChange} />
+        <FilterComponent onFilterChange={handleFilterChange} />
         {businesses && businesses.map((business, index) => (
           <span key={business.id}>
             <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
