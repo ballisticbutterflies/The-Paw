@@ -21,7 +21,16 @@ const StarRatingInput = ({ stars, onChange }) => {
           >
             <i className="fa-solid fa-paw"/>&nbsp;
           </span>
-        ))}Paws
+        ))}
+          {activeRating && activeRating > 1 && activeRating < 5 &&
+            <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
+          }
+          { activeRating && activeRating === 1 &&
+            <span>{activeRating}&nbsp;Paw&nbsp;&&nbsp;Up!</span>
+          }
+          { activeRating && activeRating === 5 &&
+            <span>{activeRating}&nbsp;Paws!</span>
+          }
       </div>
     </>
   )

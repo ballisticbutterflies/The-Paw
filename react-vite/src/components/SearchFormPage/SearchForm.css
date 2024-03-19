@@ -4,7 +4,7 @@
   border: 1px solid black;
   align-content: center;
   padding: 15px 10px 10px 10px;
-  margin-left: 250px;
+  margin-left: 300px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -35,6 +35,7 @@
 
 .pawRatingInputFilter {
   border-bottom: 1px solid rgb(195, 194, 196);
+  padding-bottom: 20px;
 }
 
 .price-filled {
@@ -57,7 +58,7 @@
 
 .filterComponent {
   display: flex;
-  width: 200px;
+  width: 180px;
   flex-direction: column;
   position: absolute;
 }
