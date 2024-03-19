@@ -28,10 +28,30 @@ def seed_users():
         state='NY',
         email='bobbie@aa.io',
         password='password')
+    
+    misty = User(
+        id=4,
+        first_name='Misty',
+        last_name='Waterflower',
+        city='San Mateo',
+        state='CA',
+        email='misty@aa.io',
+        password='password')
+    
+    simon = User(
+        id=5,
+        first_name='Simon',
+        last_name='Krawa',
+        city='Uniontown',
+        state='PA',
+        email='bssammel@gmail.com',
+        password='password')
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(misty)
+    db.session.add(simon)
     db.session.commit()
 
 
