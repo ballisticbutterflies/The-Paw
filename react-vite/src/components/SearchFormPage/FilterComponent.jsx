@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+
 import StarRatingInput from "./StarRatingInput";
 
 
 
 const FilterComponent = ({ onFilterChange }) => {
 
-
   const [stars, setStars] = useState("")
-
-
 
   const handleFilterChange = (e) => {
     // Construct URL with filter parameters

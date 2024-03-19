@@ -20,14 +20,11 @@ export const fetchBusinesses = (filters = {}) => async (dispatch) => {
         queryParams.push(filtered.join(''))
     }
 
-
     if (queryParams.length > 0) {
         url += `?${queryParams.join('&')}`;
     }
 
-
     const response = await fetch(url)
-    console.log(response)
 
     if (response.ok) {
         const businesses = await response.json();

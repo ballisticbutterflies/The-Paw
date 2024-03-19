@@ -11,10 +11,7 @@ function SearchFormPage() {
 
   const dispatch = useDispatch();
 
-
   const businesses = Object.values(useSelector((state) => state.search))
-  const filteredBiz = (useSelector(action => action.businesses))
-  console.log(filteredBiz)
 
   const starReviews = (numStars) => {
     let filledStars = []
