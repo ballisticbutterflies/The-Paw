@@ -16,15 +16,19 @@ function Navigation() {
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
   const businesses = Object.values(useSelector((state) => state.search))
-  const locations = businesses.map(business => {
-    let location_list = []
+  const locations_list = []
+
+  businesses.map(business => {
     let city = business.city
     let state = business.state
     let cityState = city.concat(', ', state)
 
-    if (!location_list.includes(cityState)) location_list.push(cityState)
-    return location_list
+    locations_list.push(cityState)
+
+    return locations_list
   })
+
+  const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
 
   useEffect(() => {
     dispatch(fetchBusinesses())
@@ -54,7 +58,7 @@ function Navigation() {
             placeholder="city, state"
           />
           <datalist id="locations">
-            {locations.map(op => (
+            {uniqueLocations.map(op => (
               <option key={op} value={op}>{op}</option>
             ))
             }
