@@ -4,6 +4,7 @@ body {
     font-weight: 300;
     font-style: normal;
     color: #1f2f44;
+    font-size: 14px;
     background-color: #fff2eb;
     margin-top: 0px;
     margin-left: 0px;
@@ -12,7 +13,7 @@ body {
 
 h1 {
     font-family: "Prata", serif;
-    font-weight: 400;
+    font-weight: 700;
     font-style: normal;
     color: #1f2f44;
 }
