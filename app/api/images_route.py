@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, redirect
 from app.models import db, Image
 from app.forms import ImageForm
 from flask_login import current_user, login_required
-from app.api.utils.aws import (
+from app.utils.aws import (
     upload_file_to_s3, get_unique_filename)
 
 image_routes = Blueprint("images", __name__)
