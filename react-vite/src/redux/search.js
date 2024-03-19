@@ -41,7 +41,7 @@ export const fetchBusinesses = (filters = {}) => async (dispatch) => {
 const searchReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_BUSINESSES: {
-            const newState = { ...state };
+            const newState = {};
             action.businesses.businesses.forEach((business) => {
                 newState[business.id] = business;
             });

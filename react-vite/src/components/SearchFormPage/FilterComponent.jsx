@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import StarRatingInput from "./StarRatingInput";
 
 
@@ -8,8 +9,11 @@ const FilterComponent = ({ onFilterChange }) => {
 
   const [stars, setStars] = useState("")
 
-  const handleFilterChange = () => {
+
+
+  const handleFilterChange = (e) => {
     // Construct URL with filter parameters
+    e.preventDefault();
     const queryParams = new URLSearchParams();
     if (stars !== "") {
       queryParams.append("rating", stars);
@@ -20,8 +24,6 @@ const FilterComponent = ({ onFilterChange }) => {
     const url = `${queryString}`;
 
     onFilterChange(url)
-    // Fetch businesses with filter criteria from backend
-
   }
 
   const onChangeStars = (number) => {

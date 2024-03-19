@@ -13,6 +13,8 @@ function SearchFormPage() {
 
 
   const businesses = Object.values(useSelector((state) => state.search))
+  const filteredBiz = (useSelector(action => action.businesses))
+  console.log(filteredBiz)
 
   const starReviews = (numStars) => {
     let filledStars = []
@@ -53,6 +55,7 @@ function SearchFormPage() {
 
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
+
   }
 
   return (
