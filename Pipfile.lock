@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "25b678741af51905a7e3b6512f653a0ab8255325340a992b9cfd5d4dc2462e75"
+            "sha256": "5dfd5c28f9ca69af3ae568041750804a4dfb892be27838fd43c5600cca71201e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,21 +33,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==8.1.3"
-        },
-        "dnspython": {
-            "hashes": [
-                "sha256:5ef3b9680161f6fa89daf8ad451b5f1a33b18ae8a1c6778cdf4b43f08c0a6e50",
-                "sha256:e8f0f9c23a7b7cb99ded64e6c3a6f3e701d78f50c55e002b839dea7225cff7cc"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==2.6.1"
-        },
-        "email-validator": {
-            "hashes": [
-                "sha256:200a70680ba08904be6d1eef729205cc0d687634399a5924d842533efb824b84",
-                "sha256:97d882d174e2a65732fb43bfce81a3a834cbc1bde8bf419e30ef5ea976370a05"
-            ],
-            "version": "==2.1.1"
         },
         "flask": {
             "hashes": [
@@ -174,14 +159,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.5'",
             "version": "==20.1.0"
-        },
-        "idna": {
-            "hashes": [
-                "sha256:9ecdbbd083b06798ae1e86adcbfe8ab1479cf864e4ee30fe4e46a003d12491ca",
-                "sha256:c05567e9c24a6b9faaa835c4821bad0590fbb9d5779e7caa6e1cc4978e7eb24f"
-            ],
-            "markers": "python_version >= '3.5'",
-            "version": "==3.6"
         },
         "importlib-metadata": {
             "hashes": [
@@ -387,6 +364,7 @@
                 "sha256:bf831c042829c8cdbad74c27575098d541d039b1faa74c771545ecac916f2c07",
                 "sha256:f8d76180d7239c94c6322f7990ae1216dae3659b7aa1cee94b6318bdffb474b9"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==3.1.2"
         },
