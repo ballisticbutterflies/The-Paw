@@ -31,19 +31,21 @@ const FilterComponent = ({ onFilterChange }) => {
 
   return (
     <>
-      <h3>Filters</h3>
-      <div className="pawRatingInputFilter">
-        <h4>Paw Rating</h4>
-        <StarRatingInput
-          onChange={onChangeStars}
-          stars={stars}
-        />
-      </div>
-      <div className="priceInputFilter">
-        <h4>Price</h4>
+      <div className="filterComponent" >
+        <h3>Filters</h3>
+        <div className="pawRatingInputFilter">
+          <h4>Paw Rating</h4>
+          <StarRatingInput
+            onChange={onChangeStars}
+            stars={stars}
+          />
+        </div>
+        <div className="priceInputFilter">
+          <h4>Price</h4>
 
+        </div>
+        <button onClick={handleFilterChange}>Apply Filters</button>
       </div>
-      <button onClick={handleFilterChange}>Apply Filters</button>
     </>
   )
 }

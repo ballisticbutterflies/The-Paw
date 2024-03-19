@@ -58,38 +58,41 @@ function SearchFormPage() {
   return (
     <>
       <h1>Paw-Recommended Results:</h1>
-      {businesses && businesses.map((business, index) => (
-        <span key={business.id}>
-          <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
-            <span>
-              <img className="businessesImage" src="https://i.imgur.com/9bEZuYg.png" alt={business.images} />
-            </span>
-            <>
-              <span key={`bizDeets-${business.id}`} className="businessDeets">
-                <span>{index + 1}.&nbsp;{business.name}</span>
-                {reviewsExists(business.num_reviews) &&
-                  <span>{business.avg_stars && starReviews(business.avg_stars)}
-                    &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
-                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-                }
-                <span>CATEGORIES PLACEHOLDER · {business.price}</span>
-                <span>HOURS PLACEHOLDER</span>
-                <span>
-                  {business.recent_review_text &&
-                    <>
-                      <i className="fa-regular fa-message fa-flip-horizontal" />
-                    </>
-                  }&nbsp;
-                  {business.recent_review_text &&
-                    reviewTextSubstr(business.recent_review_text)
-                  }
-                </span>
-              </span>
-            </>
-          </Link>
-        </span>
-      ))}
+      <div className="searchPage">
       <FilterComponent onFilterChange={handleFilterChange} />
+        {businesses && businesses.map((business, index) => (
+          <span key={business.id}>
+            <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
+              <span>
+                <img className="businessesImage" src={business.images} alt={business.name} />
+              </span>
+              <>
+                <span key={`bizDeets-${business.id}`} className="businessDeets">
+                  <span>{index + 1}.&nbsp;{business.name}</span>
+                  {reviewsExists(business.num_reviews) &&
+                    <span>{business.avg_stars && starReviews(business.avg_stars)}
+                      &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
+                      &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                  }
+                  <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                  <span>HOURS PLACEHOLDER</span>
+                  <span>
+                    {business.recent_review_text &&
+                      <>
+                        <i className="fa-regular fa-message fa-flip-horizontal" />
+                      </>
+                    }&nbsp;
+                    {business.recent_review_text &&
+                      reviewTextSubstr(business.recent_review_text)
+                    }
+                  </span>
+                </span>
+              </>
+            </Link>
+          </span>
+        ))}
+
+      </div>
     </>
   );
 }
