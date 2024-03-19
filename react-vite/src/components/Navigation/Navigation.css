@@ -6,10 +6,11 @@
   background-color: #ffbe6e;
   margin: 0px;
   width: 100%;
+  padding-top: 10px;
 }
 
 .nav img {
-  margin-left: 10px;
+  margin-left: 25px;
 }
 
 .searchForm {
