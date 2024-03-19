@@ -1,3 +1,4 @@
+
 const LOAD_BUSINESSES = 'search/LOAD_BUSINESSES'
 
 
@@ -7,30 +8,31 @@ export const loadBusinesses = (businesses) => ({
 })
 
 
-// THUNK
+// THUNKS
 
 export const fetchBusinesses = (filters = {}) => async (dispatch) => {
 
-    let url = '/api/search/';
+    let url ='/api/search/';
     const queryParams = [];
-    for (let key in filters.businesses) {
-        if (filters.businesses[key]) {
-            queryParams.push(`${key}=${filters.businesses[key]}`);
-        }
+
+    if (filters) {
+        let filtered = Object.values(filters)
+        queryParams.push(filtered.join(''))
     }
+
+
     if (queryParams.length > 0) {
         url += `?${queryParams.join('&')}`;
     }
 
-    console.log(url, "THUNK")
 
     const response = await fetch(url)
-
-
+    console.log(response)
 
     if (response.ok) {
         const businesses = await response.json();
         dispatch(loadBusinesses(businesses))
+
     }
 }
 

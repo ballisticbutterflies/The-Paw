@@ -4,11 +4,13 @@ import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
+import { starsToFixed } from ".";
 
 
 function SearchFormPage() {
 
   const dispatch = useDispatch();
+
 
   const businesses = Object.values(useSelector((state) => state.search))
 
@@ -26,13 +28,7 @@ function SearchFormPage() {
     return [filledStars, emptyStars]
   }
 
-  const starsToFixed = (stars) => {
-    if (stars >= 1) {
-      return stars + '.0'
-    } else {
-      return null
-    }
-  }
+
 
   const reviewsExists = (review) => {
     if (review >= 1) {
@@ -49,15 +45,14 @@ function SearchFormPage() {
     }
   }
 
+
   useEffect(() => {
 
     dispatch(fetchBusinesses())
   }, [dispatch])
 
-
   const handleFilterChange = (filters) => {
-
-    dispatch(fetchBusinesses(filters));
+    dispatch(fetchBusinesses(filters))
   }
 
   return (
@@ -72,7 +67,7 @@ function SearchFormPage() {
             <>
               <span key={`bizDeets-${business.id}`} className="businessDeets">
                 <span>{index + 1}.&nbsp;{business.name}</span>
-                { reviewsExists(business.num_reviews) &&
+                {reviewsExists(business.num_reviews) &&
                   <span>{business.avg_stars && starReviews(business.avg_stars)}
                     &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
                     &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
