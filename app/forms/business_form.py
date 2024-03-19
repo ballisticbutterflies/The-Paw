@@ -25,5 +25,5 @@ class CreateBusinessForm(FlaskForm):
   description = StringField('description', validators=[DataRequired()])
   website = StringField('website', validators=[DataRequired()])
   email = StringField('email', validators=[DataRequired()])
-  phone = StringField('phone', validators=[DataRequired()])
+  phone = StringField('phone')
   price = StringField('price')
