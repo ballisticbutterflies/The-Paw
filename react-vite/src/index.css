@@ -5,20 +5,31 @@ body {
     font-style: normal;
     color: #1f2f44;
     background-color: #fff2eb;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 h1 {
     font-family: "Prata", serif;
     font-weight: 400;
     font-style: normal;
+    color: #1f2f44;
 }
 
 button {
     background-color: #f78a63;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    color: #1f2f44;
 }
 
 input {
     background-color: #FFFBF6;
+    font-family: "Poppins", sans-serif;
+    color: #1f2f44;
 }
 
 .paws-filled {
@@ -31,8 +42,16 @@ input {
 
 a {
     color: #2f7a5a;
+    text-decoration: none;
+    font-weight: 500px;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    background-color: #c3cddf;
 }
