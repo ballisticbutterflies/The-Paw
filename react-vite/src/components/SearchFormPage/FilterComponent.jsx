@@ -24,7 +24,7 @@ const FilterComponent = ({ onFilterChange }) => {
       let priceObj = [...price]
       let searchingPrice = priceObj.filter((char) => char.checked === true);
       let result = searchingPrice.map(ele => ele.name)
-      console.log(result)
+      
       let string = result.toString()
       queryParams.append("price", string);
 
@@ -34,7 +34,6 @@ const FilterComponent = ({ onFilterChange }) => {
 
     const url = `${queryString}`;
 
-    console.log(url)
     onFilterChange(url)
   }
 
