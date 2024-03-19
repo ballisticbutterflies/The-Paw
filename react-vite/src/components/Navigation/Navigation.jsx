@@ -72,7 +72,7 @@ function Navigation() {
       <div className="writeReview">
         Write a Review
       </div>
-      <div className="leftnav">
+      <div className="leftNav">
         {user ? (
           <>
             <div>
@@ -81,22 +81,24 @@ function Navigation() {
           </>
         ) : (
           <>
-            <div>
-              <OpenModalButton
-                buttonText="Log In"
-                modalComponent={<LoginFormModal />}
-              />
-              &nbsp;&nbsp;&nbsp;
-              <OpenModalButton
-                buttonText="Sign Up"
-                modalComponent={<SignupFormModal />}
-              />
+            <div className="leftNav">
+              <div>
+                <OpenModalButton
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
+                />
+                &nbsp;&nbsp;&nbsp;
+                <OpenModalButton
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
+                />
+              </div>
             </div>
           </>
         )
         }
       </div>
-    </div>
+    </div >
   )
 }
 
