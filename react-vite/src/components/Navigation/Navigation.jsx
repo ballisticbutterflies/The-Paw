@@ -10,16 +10,20 @@ import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 
 // function Navigation({ isLoaded }) {
-function Navigation( ) {
+function Navigation() {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
   const businesses = Object.values(useSelector((state) => state.search))
   const locations = businesses.map(business => {
+    let location_list = []
     let city = business.city
     let state = business.state
-    return city.concat(', ', state)
+    let cityState = city.concat(', ', state)
+
+    if (!location_list.includes(cityState)) location_list.push(cityState)
+    return location_list
   })
 
   useEffect(() => {
@@ -29,7 +33,7 @@ function Navigation( ) {
 
   return (
     <div className="nav">
-      <NavLink to="/"><img className="logo" src='../../images/the_paw_in_black.png'/></NavLink>
+      <NavLink to="/"><img className="logo" src='../../images/the_paw_in_black.png' /></NavLink>
 
       <div className="searchForm">
         <form className="formNav">
