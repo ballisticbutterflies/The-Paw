@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User, Image, Review
+from app.models import User, Image, Review, Business
+from .businesses_routes import businesses_route, get_business
 from sqlalchemy import func 
 
 
@@ -15,6 +16,50 @@ def users():
     """
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route("/<int:id>/images/all")
+def user_images_all(id):
+    """
+    Query to fetch all images uploaded by a specific user, this will not include their profile image. It will include the business name with the fetch as well for the transparent label on the image.
+    """
+    # response_dict = { } # initializing response dictionary to append to
+
+    user_images_all = Image.query.filter(Image.uploader_id == id).filter(Image.imageable_type != 'user').all() # fetching all images uploaded by user and all associated data
+
+    user_images_all_list = []  # initializing what will become the 
+
+    for user_image in user_images_all: #  begin to structure and refine data collected from db query
+        user_image_dict = {}
+        user_image_dict['id'] = user_image.id
+        user_image_dict['image_url'] = user_image.url
+        user_image_dict['type'] = user_image.imageable_type
+        user_image_dict['type_id'] = user_image.imageable_id 
+
+        business_id: int # initialize business id to be defined dynamically based on imageable type
+
+        # assign business_id when imageable type is business
+        if user_image_dict['type'] == 'business':
+            business_id = user_image_dict['type_id']
+            
+        # assign business_id when imageable type is review
+        # ! refactor to use get review by id request instead
+        if user_image_dict['type'] == 'review':
+            get_review_res = Review.query.filter(Review.id == user_image_dict['type_id']).first()
+            business_id = get_review_res.business_id
+
+        # regardless of imageable type, now that we have the appropriate business_id, fetch the business name
+        get_business_res =  get_business(business_id)
+        business_name = get_business_res['business'][0]['name']
+        user_image_dict['business_name'] = business_name
+            
+        # append the created image dict to the response list
+        user_images_all_list.append(user_image_dict)
+
+        
+    # response_dict['user_images'] = user_images_all_list #retaining in case we want to reformat the response body to be within a dict
+
+    return user_images_all_list
+
 
 
 @user_routes.route('/<int:id>')

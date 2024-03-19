@@ -26,15 +26,19 @@ def get_business(id):
         review_images = Image.query.filter(Image.imageable_id == review.id).all()
         review_image_urls = [{'id': image.id, 'image_url': image.url} for image in review_images]
 
-    avg_stars = total_stars / num_reviews
 
     business_dict = business.to_dict()
     print(review_images)
     business_dict['reviews'] = {
         'num_reviews': num_reviews,
-        'avg_stars': avg_stars,
+        'avg_stars': None,
     }
-    business_dict['review_images'] = review_image_urls
+
+    if num_reviews > 0:
+        avg_stars = total_stars / num_reviews
+        business_dict['reviews']['avg_stars'] = avg_stars
+        business_dict['review_images'] = review_image_urls
+    
     business_dict['business_images'] = business_image_urls
 
 
