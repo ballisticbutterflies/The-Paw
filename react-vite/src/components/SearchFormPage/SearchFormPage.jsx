@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
+import FilterComponent from "./FilterComponent";
+import { starsToFixed } from ".";
 
 
 function SearchFormPage() {
@@ -25,13 +27,6 @@ function SearchFormPage() {
     return [filledStars, emptyStars]
   }
 
-  const starsToFixed = (stars) => {
-    if (stars >= 1) {
-      return stars + '.0'
-    } else {
-      return null
-    }
-  }
 
   const reviewsExists = (review) => {
     if (review >= 1) {
@@ -48,46 +43,54 @@ function SearchFormPage() {
     }
   }
 
+
   useEffect(() => {
     dispatch(fetchBusinesses())
   }, [dispatch])
 
+  const handleFilterChange = (filters) => {
+    dispatch(fetchBusinesses(filters))
+
+  }
+
   return (
     <>
       <h1>Paw-Recommended Results:</h1>
-      {businesses && businesses.map((business, index) => (
-        <span
-          key={business.id}>
-          <Link className="businessCards" style={{ textDecoration: 'none' }} to={`/businesses/${business.id}`}>
-            <span >
-              <img className="businessesImage" src='https://i.imgur.com/9bEZuYg.png' alt={business.images} />
-            </span>
-            <>
-              <span key={`bizDeets-${business.id}`} className="businessDeets">
-                <span>{index + 1}.&nbsp;{business.name}</span>
-                { reviewsExists(business.num_reviews) && 
-                  <span>{business.avg_stars && starReviews(business.avg_stars)}
-                    &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
-                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-                }
-                <span>CATEGORIES PLACEHOLDER · {business.price}</span>
-                <span>HOURS PLACEHOLDER</span>
-                <span>
-                  {business.recent_review_text &&
-                    <>
-                      <i className="fa-regular fa-message fa-flip-horizontal" />
-                    </>
-                  }&nbsp;
-                  {business.recent_review_text &&
-                    reviewTextSubstr(business.recent_review_text)
-                  }
-                </span>
+      <div className="searchPage">
+        <FilterComponent onFilterChange={handleFilterChange} />
+        {businesses && businesses.map((business, index) => (
+          <span key={business.id}>
+            <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
+              <span>
+                <img className="businessesImage" src={business.images} alt={business.name} />
               </span>
-            </>
-          </Link>
-        </span>
-      ))}
+              <>
+                <span key={`bizDeets-${business.id}`} className="businessDeets">
+                  <span>{index + 1}.&nbsp;{business.name}</span>
+                  {reviewsExists(business.num_reviews) &&
+                    <span>{business.avg_stars && starReviews(business.avg_stars)}
+                      &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
+                      &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                  }
+                  <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                  <span>HOURS PLACEHOLDER</span>
+                  <span>
+                    {business.recent_review_text &&
+                      <>
+                        <i className="fa-regular fa-message fa-flip-horizontal" />
+                      </>
+                    }&nbsp;
+                    {business.recent_review_text &&
+                      reviewTextSubstr(business.recent_review_text)
+                    }
+                  </span>
+                </span>
+              </>
+            </Link>
+          </span>
+        ))}
 
+      </div>
     </>
   );
 }
