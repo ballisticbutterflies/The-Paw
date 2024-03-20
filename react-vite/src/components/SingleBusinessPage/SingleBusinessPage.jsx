@@ -64,14 +64,13 @@ function SingleBusinessPage() {
                     <h1>{business.name}</h1>
                     {business.reviews &&
                         <p className="businessReviews">
-                            <span className="pawBlock">{business.reviews.avg_stars &&
-                                reviewStars(business.reviews.avg_stars)}</span> 
-
-                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)} ({business.reviews.num_reviews} reviews)
-
-
+                            <span className="pawBlock">
+                                {business.reviews.avg_stars &&
+                                    reviewStars(business.reviews.avg_stars)}</span>
+                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
+                            ({business.reviews.num_reviews} reviews)
                         </p>
-                        }
+                    }
                     <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; [SUBCATEGORIES]</p>
                     <div className="currHours">
                         [CLOSED 8AM - 6PM]&nbsp;&nbsp;
