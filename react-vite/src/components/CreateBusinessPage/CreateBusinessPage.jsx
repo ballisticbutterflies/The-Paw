@@ -105,12 +105,14 @@ function CreateBusinessPage() {
     if (!state) errObj.state = "State is required"
     if (!zip_code) errObj.zip_code = "ZIP Code is required"
     if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid"
-    if (!name || name.length > 100) errObj.name = "Name must be less than 100 characters"
-    if (!description || description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters"
+    if (!name) errObj.name = "Name is required"
+    if (name.length > 100) errObj.name = "Name must be less than 100 characters"
+    if (!description) errObj.description = "Description is required"
+    if (description.length >= 1 && description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters"
     if (website && !isValidUrl(website)) errObj.website = "Website is not valid"
     if (email && !emailRegex.test(email)) errObj.email = "Email is invalid."
-    if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Please enter a phone number using only numerical digits (no special characters or spaces)."
-    if (phone && phone.length < 10) errObj.phone = "Phone numbers must be 10 digits."
+    if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Please enter a valid phone number using only numerical digits (no special characters or spaces)."
+    if (phone.length >= 1 && phone.length > 10) errObj.phone = "Phone numbers must be 10 digits."
     setErrors(errObj)
   }, [address, city, state, zip_code, name, description, website, email, phone])
 
@@ -178,7 +180,7 @@ function CreateBusinessPage() {
             {activePrice.map((option) =>
               <label key={option.name}>
                 <input
-                  type="checkbox"
+                  type="radio"
                   value={option.name}
                   checked={option.checked}
                   onChange={updatePrice}
