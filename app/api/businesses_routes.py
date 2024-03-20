@@ -71,6 +71,6 @@ def create_business():
         )
         db.session.add(business)
         db.session.commit()
-        get_business(business.id)
+        
         return business.to_dict()
     return form.errors, 401
