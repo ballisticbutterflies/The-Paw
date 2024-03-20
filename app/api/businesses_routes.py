@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-from flask import Blueprint;
-from app.models import Business, Review, Image, User;
-=======
-from flask import Blueprint, request
+from flask import Blueprint, request;
 from flask_login import login_required, current_user
-from app.models import Business, Review, Image, db;
+from app.models import Business, Review, Image, User, db;
 from app.forms import CreateBusinessForm
->>>>>>> e90847907b9801aebe0165ea528bbc1f09766dbb
 
 businesses_route = Blueprint('businesses', __name__)
 
@@ -51,32 +46,36 @@ def get_business(id):
     return { 'business': business_data }
 
 
-<<<<<<< HEAD
 @businesses_route.route('/<int:id>/reviews')
 def get_reviews_by_business_id(id):
     reviews = Review.query.filter(Review.business_id == id).all()
-    users = User.query.filter(User.id == Review.user_id).all
+    user_ids = [review.user_id for review in reviews]
+    users = User.query.filter(User.id.in_(user_ids)).all()
 
-    user_data = [{
-            'id': user.id,
-            'first_name': user.first_name,
-            'last_name': user.last_name
-            }
-            for user in users]
+    users_dict = { user.id: {
+                'id': user.id,
+                'first_name': user.first_name,
+                'last_name': user.last_name
+                } for user in users}
     
-    reviews_list = [{
-        'id': review.id,
-        'user_id': review.user_id,
-        'business_id': review.business_id,
-        'review': review.review,
-        'stars': review.stars,
-        'User': user_data
-        } 
-        for review in reviews]
-    
+    reviews_list = []
+
+    for review in reviews:
+        user_data = users_dict.get(review.user_id)
+        review_data = {
+                'id': review.id,
+                'user_id': review.user_id,
+                'business_id': review.business_id,
+                'review': review.review,
+                'stars': review.stars,
+                'User': user_data
+        }
+
+        reviews_list.append(review_data)
 
     return { 'reviews': reviews_list }
-=======
+
+
 @businesses_route.route('/', methods=['POST'])
 @login_required
 def create_business():
@@ -105,4 +104,3 @@ def create_business():
         
         return business.to_dict()
     return form.errors, 401
->>>>>>> e90847907b9801aebe0165ea528bbc1f09766dbb
