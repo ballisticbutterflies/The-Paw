@@ -8,7 +8,7 @@ from app.utils.aws import (
 image_routes = Blueprint("images", __name__)
 
 
-@image_routes.route("", methods=["POST"])
+@image_routes.route("/", methods=["POST"])
 @login_required
 def upload_image():
     form = ImageForm()
@@ -30,7 +30,7 @@ def upload_image():
         new_image = Image(image= url)
         db.session.add(new_image)
         db.session.commit()
-        return redirect("/posts/all")
+        return redirect("/businesses")
 
     if form.errors:
         print(form.errors)

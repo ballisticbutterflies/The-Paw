@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { createBusiness, fetchSingleBusiness } from "../../redux/businesses"
 import "./CreateBusiness.css"
+import UploadPicture from "./CreateImage"
 
 
 function CreateBusinessPage() {
@@ -31,8 +32,6 @@ function CreateBusinessPage() {
   const [phone, setPhone] = useState('');
   // const [category, setCategory] = useState('');
   const [errors, setErrors] = useState({});
-  const [image, setImage] = useState(null);
-  const [imageLoading, setImageLoading] = useState(false);
 
   const updatePrice = (e) => {
     const selectedPrice = e.target.value; // Get the selected price
@@ -60,18 +59,14 @@ function CreateBusinessPage() {
       price,
       email,
       website,
-      phone,
-      image
+      phone
     }
-
-    setImageLoading(true);
 
     await dispatch(createBusiness(newBusiness))
       .then((business) => {
         dispatch(fetchSingleBusiness(business.id))
           .then(navigate(`/businesses/${business.id}`))
       })
-      // .then(history.push("/images"))
       .catch(async (response) => {
         const data = await response.json();
         if (data && data.errors) {
@@ -220,15 +215,12 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
           <button type="submit" disabled={!!Object.values(errors).length}>Create Business</button>
-          {(imageLoading) && <p>Loading...</p>}
         </form>
       }
+      <div>
+        <UploadPicture />
+      </div>
     </>
   )
 }

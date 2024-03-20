@@ -13,7 +13,7 @@ export const receiveBusiness = (business) => ({
     business
 })
 
-export const createBusinessImages = (post) => ({
+export const createBusinessImages = (post) => (console.log("$$$$$$", post), {
     type: CREATE_BUSINESS_IMAGES,
     post
 })
@@ -49,14 +49,16 @@ export const createBusiness = (business) => async (dispatch) => {
 }
 
 export const createImage = (post) => async (dispatch) => {
-    const response = await fetch(`/images/new`, {
+    const response = await fetch(`/api/images/`, {
         method: "POST",
         body: post
     });
+    console.log("XXXXX", response);
 
     if (response.ok) {
         const { resPost } = await response.json();
         dispatch(createBusinessImages(resPost));
+        console.log(resPost, "there was no error");
     } else {
         console.log("There was an error making your post!")
     }
@@ -77,6 +79,12 @@ const businessesReducer = (state = {}, action) => {
             const businessState = {}
             businessState[action.business.id] = action.business
             return businessState
+        }
+        case CREATE_BUSINESS_IMAGES: {
+            const imageState = { ...state }
+            imageState[action.post.image.name] = action.post.image
+            console.log("IMAGE STSTE!!!", imageState)
+            return imageState
         }
         default:
             return { ...state }
