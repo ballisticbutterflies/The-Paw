@@ -34,7 +34,7 @@
 }
 
 .pawRatingInputFilter {
-  border-bottom: 1px solid rgb(195, 194, 196);
+  border-bottom: 1px solid #c3cddf;
   padding-bottom: 20px;
 }
 
@@ -52,7 +52,8 @@
 
 .priceInputFilter {
   padding: 15px 0;
-  border-bottom: 1px solid rgb(195, 194, 196);
+  border-bottom: 1px solid #c3cddf;
+  margin-bottom: 10px;
 }
 
 
@@ -61,4 +62,9 @@
   width: 180px;
   flex-direction: column;
   position: absolute;
+  margin-top: -19px;
+}
+
+.searchPage {
+  padding-left: 25px;
 }
