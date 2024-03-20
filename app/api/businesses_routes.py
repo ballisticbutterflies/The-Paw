@@ -51,13 +51,15 @@ def get_reviews_by_business_id(id):
     reviews = Review.query.filter(Review.business_id == id).all()
     user_ids = [review.user_id for review in reviews]
     users = User.query.filter(User.id.in_(user_ids)).all()
+    review_ids = [review.id for review in reviews]
+    review_images = Image.query.filter(Image.imageable_id.in_(review_ids)).all()
 
     users_dict = { user.id: {
-                'id': user.id,
-                'first_name': user.first_name,
-                'last_name': user.last_name
-                } for user in users}
-    
+        'id': user.id,
+        'first_name': user.first_name,
+        'last_name': user.last_name
+        } for user in users }
+
     reviews_list = []
 
     for review in reviews:
@@ -68,7 +70,12 @@ def get_reviews_by_business_id(id):
                 'business_id': review.business_id,
                 'review': review.review,
                 'stars': review.stars,
-                'User': user_data
+                'user': user_data,
+                'review_images':  [{
+                    'id': image.id,
+                    'url': image.url,
+                    'uploader_id': image.uploader_id
+                    } for image in review_images if image.uploader_id == review.user_id]
         }
 
         reviews_list.append(review_data)
