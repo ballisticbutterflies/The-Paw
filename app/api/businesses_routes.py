@@ -38,7 +38,7 @@ def get_business(id):
         avg_stars = total_stars / num_reviews
         business_dict['reviews']['avg_stars'] = avg_stars
         business_dict['review_images'] = review_image_urls
-    
+
     business_dict['business_images'] = business_image_urls
 
 
@@ -71,6 +71,6 @@ def create_business():
         )
         db.session.add(business)
         db.session.commit()
-        
+        get_business(business.id)
         return business.to_dict()
     return form.errors, 401

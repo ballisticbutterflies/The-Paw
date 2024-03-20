@@ -36,13 +36,13 @@ function SingleBusinessPage() {
     }
 
     const totalImages = (businessImages, reviewImages) => {
-        if (businessImages && reviewImages){
+        if (businessImages && reviewImages) {
             return businessImages.length + reviewImages.length;
         }
         else if (businessImages && !reviewImages) {
             return businessImages.length;
         }
-        else if (reviewImages && !businessImages){
+        else if (reviewImages && !businessImages) {
             return reviewImages;
         }
     }
@@ -62,11 +62,16 @@ function SingleBusinessPage() {
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
-                    <p className="businessReviews">
-                        <span className="pawBlock">{business.reviews.avg_stars &&
-                            reviewStars(business.reviews.avg_stars)}</span>
-                        &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)} ({business.reviews.num_reviews} reviews)
-                    </p>
+                    {business.reviews &&
+                        <p className="businessReviews">
+                            <span className="pawBlock">{business.reviews.avg_stars &&
+                                reviewStars(business.reviews.avg_stars)}</span> 
+
+                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)} ({business.reviews.num_reviews} reviews)
+
+
+                        </p>
+                        }
                     <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; [SUBCATEGORIES]</p>
                     <div className="currHours">
                         [CLOSED 8AM - 6PM]&nbsp;&nbsp;
