@@ -9,6 +9,7 @@ function CreateBusinessPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -30,6 +31,8 @@ function CreateBusinessPage() {
   const [phone, setPhone] = useState('');
   // const [category, setCategory] = useState('');
   const [errors, setErrors] = useState({});
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
 
   const updatePrice = (e) => {
     const selectedPrice = e.target.value; // Get the selected price
@@ -42,7 +45,7 @@ function CreateBusinessPage() {
     setPrice(selectedPrice); // Update the price state with the selected price
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setErrors({})
@@ -57,14 +60,18 @@ function CreateBusinessPage() {
       price,
       email,
       website,
-      phone
+      phone,
+      image
     }
 
-    dispatch(createBusiness(newBusiness))
+    setImageLoading(true);
+
+    await dispatch(createBusiness(newBusiness))
       .then((business) => {
         dispatch(fetchSingleBusiness(business.id))
           .then(navigate(`/businesses/${business.id}`))
       })
+      // .then(history.push("/images"))
       .catch(async (response) => {
         const data = await response.json();
         if (data && data.errors) {
@@ -85,17 +92,17 @@ function CreateBusinessPage() {
     return phonePattern.test(phoneNumber);
   };
 
-  const states = ['AL','AK','AZ','AR',
-  'CA','CO','CT','DE','DC',
-  'FL','GA','HI','ID','IL',
-  'IN','IA','KS','KY','LA',
-  'ME','MD','MA','MI','MN',
-  'MS','MO','MT','NE','NV',
-  'NH','NJ','NM','NY','NC',
-  'ND','OH','OK','OR','PA',
-  'RI','SC','SD','TN','TX',
-  'UT','VT','VI','VA','WA',
-  'WV','WI','WY']
+  const states = ['AL', 'AK', 'AZ', 'AR',
+    'CA', 'CO', 'CT', 'DE', 'DC',
+    'FL', 'GA', 'HI', 'ID', 'IL',
+    'IN', 'IA', 'KS', 'KY', 'LA',
+    'ME', 'MD', 'MA', 'MI', 'MN',
+    'MS', 'MO', 'MT', 'NE', 'NV',
+    'NH', 'NJ', 'NM', 'NY', 'NC',
+    'ND', 'OH', 'OK', 'OR', 'PA',
+    'RI', 'SC', 'SD', 'TN', 'TX',
+    'UT', 'VT', 'VI', 'VA', 'WA',
+    'WV', 'WI', 'WY']
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -120,7 +127,7 @@ function CreateBusinessPage() {
   return (
     <>
       {sessionUser &&
-        <form className="createBizForm" onSubmit={handleSubmit}>
+        <form className="createBizForm" onSubmit={handleSubmit} encType="multipart/form-data">
           <h1>Add your business to The Paw!</h1>
           <input
             type="text"
@@ -213,7 +220,13 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
           <button type="submit" disabled={!!Object.values(errors).length}>Create Business</button>
+          {(imageLoading) && <p>Loading...</p>}
         </form>
       }
     </>
