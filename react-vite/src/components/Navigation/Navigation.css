@@ -1,10 +1,17 @@
 .nav {
   display: grid;
-  grid-template-columns: 15% 45% 17% 8% 10%;
+  grid-template-columns: 12% 45% 13% 11% 11%;
   gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
   margin: 0px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.nav img {
+  margin-left: 25px;
 }
 
 .searchForm {
@@ -16,7 +23,7 @@
 
 .formNav {
   display: grid;
-  grid-template-columns: 50% 40% 5%;
+  grid-template-columns: 55% 35% 10%;
   justify-content: space-around;
 }
 
@@ -42,7 +49,8 @@
   border: none;
   background-color: transparent;
   width: fit-content;
-  margin-left: 5px;
+  justify-self: center;
+  color: #1f2f44;
 }
 
 .logo {
@@ -65,9 +73,13 @@
   margin-top: 3px;
 }
 
-.leftnav {
-  display: flex;
-  justify-content: center;
+.leftNav {
+  display: grid;
+  justify-content: space-between;
+  justify-self: center;
+  align-items: center;
+  width: fit-content;
+  grid-column: 5 / 6;
 }
 
 .profile-dropdown {
