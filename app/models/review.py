@@ -22,3 +22,12 @@ class Review(db.Model):
                                 primaryjoin="and_(Image.imageable_type=='review', foreign(Image.imageable_id)==Review.id)",
                                 lazy="dynamic",
                                 cascade='all, delete-orphan')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'business_id': self.business_id,
+            'review': self.review,
+            'stars': self.stars
+        }
