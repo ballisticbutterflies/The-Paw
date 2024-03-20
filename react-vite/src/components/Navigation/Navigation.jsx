@@ -10,17 +10,25 @@ import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 
 // function Navigation({ isLoaded }) {
-function Navigation( ) {
+function Navigation() {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
   const businesses = Object.values(useSelector((state) => state.search))
-  const locations = businesses.map(business => {
+  const locations_list = []
+
+  businesses.map(business => {
     let city = business.city
     let state = business.state
-    return city.concat(', ', state)
+    let cityState = city.concat(', ', state)
+
+    locations_list.push(cityState)
+
+    return locations_list
   })
+
+  const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
 
   useEffect(() => {
     dispatch(fetchBusinesses())
@@ -29,7 +37,7 @@ function Navigation( ) {
 
   return (
     <div className="nav">
-      <NavLink to="/"><img className="logo" src='../../images/the_paw_in_black.png'/></NavLink>
+      <NavLink to="/"><img className="logo" src='../../images/the_paw_in_black.png' /></NavLink>
 
       <div className="searchForm">
         <form className="formNav">
@@ -50,7 +58,7 @@ function Navigation( ) {
             placeholder="city, state"
           />
           <datalist id="locations">
-            {locations.map(op => (
+            {uniqueLocations.map(op => (
               <option key={op} value={op}>{op}</option>
             ))
             }
@@ -64,7 +72,7 @@ function Navigation( ) {
       <div className="writeReview">
         Write a Review
       </div>
-      <div className="leftnav">
+      <div className="leftNav">
         {user ? (
           <>
             <div>
@@ -73,22 +81,24 @@ function Navigation( ) {
           </>
         ) : (
           <>
-            <div>
-              <OpenModalButton
-                buttonText="Log In"
-                modalComponent={<LoginFormModal />}
-              />
-              &nbsp;&nbsp;&nbsp;
-              <OpenModalButton
-                buttonText="Sign Up"
-                modalComponent={<SignupFormModal />}
-              />
+            <div className="leftNav">
+              <div>
+                <OpenModalButton
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
+                />
+                &nbsp;&nbsp;&nbsp;
+                <OpenModalButton
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
+                />
+              </div>
             </div>
           </>
         )
         }
       </div>
-    </div>
+    </div >
   )
 }
 
