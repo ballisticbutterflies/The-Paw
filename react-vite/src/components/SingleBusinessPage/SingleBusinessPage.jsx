@@ -36,7 +36,15 @@ function SingleBusinessPage() {
     }
 
     const totalImages = (businessImages, reviewImages) => {
-        return businessImages.length + reviewImages.length
+        if (businessImages && reviewImages){
+            return businessImages.length + reviewImages.length;
+        }
+        else if (businessImages && !reviewImages) {
+            return businessImages.length;
+        }
+        else if (reviewImages && !businessImages){
+            return reviewImages;
+        }
     }
 
     const reviewAvg = (avg) => {

@@ -3,6 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_businesses():
     petagogy = Business(
+        # id 1
         owner_id=1,
         # category_id=4,
         address='5880 Ellsworth Ave',
@@ -18,6 +19,7 @@ def seed_businesses():
     )
 
     mishka = Business(
+        # id 2
         owner_id=2,
         # category_id=4,
         address='2124 Union St Ste A',
@@ -31,8 +33,89 @@ def seed_businesses():
         price='$$$$'
     )
 
+    leo_j_ryan = Business(
+        # id 3
+        owner_id=3,
+        # category_id=6,
+        address='650 Shell Blvd',
+        city='Foster City',
+        state='CA',
+        zip_code='94404',
+        name='Leo J Ryan Memorial Park',
+        description='Leo J. Ryan Memorial Park is a dog-friendly park that offers 20 acres of lawn areas, lagoon access, a gazebo on the lagoon, and restroom facilities.',
+        website='https://www.fostercity.org/parksrec/page/leo-j-ryan-park',
+        phone='6502863380',
+    )
+
+    dumpling_home = Business(
+        # id 4
+        owner_id=3,
+        # category_id=1,
+        address='298 Gough St',
+        city='San Francisco',
+        state='CA',
+        zip_code='94102',
+        name='Dumpling Home',
+        description='Casual, colorful eatery dishing up fried, steamed, or boiled dumplings, plus noodles and small plates, with a dog-friendly patio!',
+        website='https://www.dumplinghome.com/',
+        phone='4155031666',
+	    price='$$'
+    )
+
+    bakery = Business(
+        # id 5
+        owner_id=1,
+        # category_id=1,
+        address= "2402 Rice Blvd",
+        city= "Houston",
+        state= "TX",
+        zip_code= "77005",
+        name= "Three Dog Bakery Houston",
+        description= "Three Dog Bakery is an unforgettable experience for dogs (and their two-legged parents). You will find a selection of treats that can only be found at Three Dog bakeries.",
+        website= "https://www.threedogbakeryhtx.com/",
+        email= "baker@threedogbakeryhtx.com",
+        phone= "7135339933",
+        price= "$$"
+    )
+
+    caroline = Business(
+    # id 6
+        owner_id= 4,
+        # category_id=8,
+        address='3301 NE 1st Ave',
+        city='Miami',
+        state='FL',
+        zip_code='33137',
+        name='Caroline Twohill Photography',
+        description='Caroline longs and strides to discovering and telling your dog’s unique story with beautiful, natural fine art images just begging to be displayed in your home and shared with family, friends and loved ones.',
+        website='https://www.carolinetwohillphotography.com/',
+        phone='6094252118',
+        price='$$'
+    )
+
+    exotic_vet= Business(
+    # id 7
+        owner_id= 5,
+        # category_id=2,
+        address='10501 Aurora Ave North',
+        city='Seattle',
+        state='WA',
+        zip_code='98133',
+        name='Bird and Exotic Clinic of Seattle',
+        description='Established in 1997 Bird & Exotic Clinic of Seattle is a full-service specialty exotic animal hospital and welcomes patients in need of routine and advanced medical, surgical, and dental care.',
+        website='https://www.birdandexotic.com/',
+        email= "birdandexoticclinicofseattle@gmail.com",
+        phone='2067834538',
+        price='$$'
+    )
+
     db.session.add(petagogy)
     db.session.add(mishka)
+    db.session.add(leo_j_ryan)
+    db.session.add(dumpling_home)
+    db.session.add(bakery)
+    db.session.add(caroline)
+    db.session.add(exotic_vet)
     db.session.commit()
 
 

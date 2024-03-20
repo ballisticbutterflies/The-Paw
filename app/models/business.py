@@ -27,7 +27,7 @@ class Business(db.Model):
     city = Column(String(255), nullable=False)
     state = Column(String(2), nullable=False)
     zip_code = Column(String(5), nullable=False)
-    name = Column(String(30), nullable=False)
+    name = Column(String(100), nullable=False)
     description = Column(String(255), nullable=False)
     website = Column(String(255), nullable=True)
     email = Column(String(255), nullable=True)
