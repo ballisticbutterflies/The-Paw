@@ -11,7 +11,7 @@ function BusinessContactCard({ business }) {
             {business.website &&
                 <>
                     <div className="businessWebsiteContainer">
-                        <div><a href={business.website} target="_blank" rel="noopener noreferrer">{business.website}</a></div>
+                        <div className="businessCardDetail"><a href={business.website} target="_blank" rel="noopener noreferrer">{business.website}</a></div>
                         <div className="businessContactIcon"><a href={business.website} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-arrow-up-right-from-square"></i></a></div>
                     </div>
                     <hr />
@@ -20,7 +20,7 @@ function BusinessContactCard({ business }) {
             {business.phone &&
                 <>
                     <div className="businessPhoneContainer">
-                        <div>{business.phone && phoneFormat(business.phone)}</div>
+                        <div className="businessCardDetail">{business.phone && phoneFormat(business.phone)}</div>
                         <div className="businessContactIcon"><i className="fa-solid fa-phone-volume"></i></div>
                     </div>
                     <hr />
@@ -29,7 +29,7 @@ function BusinessContactCard({ business }) {
             {business.address &&
                 <>
                     <div className="businessAddressContainer">
-                        <div className="businessAddress">
+                        <div className="businessCardDetail">
                             <div>
                                 Get Directions
                             </div>

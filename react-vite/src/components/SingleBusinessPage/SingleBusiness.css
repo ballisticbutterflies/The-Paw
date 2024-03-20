@@ -38,6 +38,7 @@
     font-weight: bold;
     margin-bottom: -8px;
     font-size: 40px;
+    color: #FFFFFF;
 }
 
 .currHours {
@@ -80,7 +81,7 @@
 .pawBlock {
     background-color: #FFFFFF;
     width: fit-content;
-    padding: 8px 6px 3px 6px;
+    padding: 10px 6px 3px 6px;
     border-radius: 5px;
 }
 
@@ -133,7 +134,7 @@
 .businessContact {
     position: sticky;
     top: 20px;
-    width: 365px;
+    width: 345px;
     height: fit-content;
     border: #c3cddf 1px solid;
     padding: 20px;
@@ -160,4 +161,9 @@
 
 .businessContactIcon a {
     color: #1f2f44
+}
+
+.businessCardDetail {
+    width: 255px;
+    word-wrap: break-word;
 }
