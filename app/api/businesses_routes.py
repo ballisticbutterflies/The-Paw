@@ -45,7 +45,7 @@ def get_business(id):
         business_dict['reviews']['avg_stars'] = avg_stars
         business_dict['review_images'] = review_image_data
         
-    business_images = Image.query.filter(Image.imageable_id == id and Image.imageable_type == 'business').all()
+    business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
     business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
 
     business_dict['business_images'] = business_image_urls
