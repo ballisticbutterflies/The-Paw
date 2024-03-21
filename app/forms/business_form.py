@@ -2,7 +2,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired
 
-
+categories = [('Restaurants','Restaurants'), ('Veterinarians','Veterinarians'),
+              ('Services','Services'), ('Shopping', 'Shopping'),
+              ('Travel','Travel'), ('Activities','Activities'),
+              ('Adoption','Adoption'), ('More...','More...')]
 
 states = [('-','-'),('AL','AL'),('AK','AK'),('AZ','AZ'),('AR','AR'),
           ('CA','CA'),('CO','CO'),('CT','CT'),('DE','DE'),('DC','DC'),
@@ -23,6 +26,7 @@ class CreateBusinessForm(FlaskForm):
   zip_code = StringField('zipcode', validators=[DataRequired()])
   name = StringField('name', validators=[DataRequired()])
   description = StringField('description', validators=[DataRequired()])
+  categories = SelectField('category', choices=categories, validators=[DataRequired()])
   website = StringField('website')
   email = StringField('email')
   phone = StringField('phone')
