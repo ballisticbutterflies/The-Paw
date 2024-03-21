@@ -15,9 +15,9 @@ const UploadPicture = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", image);
-        formData.append("uploader_id", 1);
-        formData.append("imageable_id", 1);
-        formData.append("imageable_type", 'business');
+        // formData.append("uploader_id", 1);
+        // formData.append("imageable_id", 1);
+        // formData.append("imageable_type", 'business');
 
         console.log(formData);
 
