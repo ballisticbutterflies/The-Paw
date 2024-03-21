@@ -65,7 +65,7 @@ function SingleBusinessPage() {
 
                     {business.reviews?.num_reviews === 0 &&
                         <p className="businessReviews_first">
-                            <i className="fa-solid fa-paw" />&nbsp; Be the first to review!
+                            <span className="paws-unfilled"><i className="fa-solid fa-paw" /></span>&nbsp; Be the first to review!
                         </p>
                     }
                     {business.reviews?.num_reviews > 0 &&
@@ -74,7 +74,7 @@ function SingleBusinessPage() {
                                 {business.reviews.avg_stars &&
                                     reviewStars(business.reviews.avg_stars)}</span>
                             &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
-                            ({business.reviews.num_reviews} reviews)
+                            &nbsp;({business.reviews.num_reviews} reviews)
                         </p>
                     }
 
