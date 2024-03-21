@@ -16,7 +16,7 @@ def get_review(id):
     review_dict = review.to_dict()
 
     #add the query for the images
-    review_images = Image.query.filter(Image.imageable_type == 'review').filter(Image.imageable_id != id).all() # fetching all images associated to the review
+    review_images = Image.query.filter(Image.imageable_type == 'review').filter(Image.imageable_id == id).all() # fetching all images associated to the review
     print("########################", review_images)
     review_dict['images'] = []
     
