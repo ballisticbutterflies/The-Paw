@@ -1,6 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.sql import func
+from sqlalchemy.types import DateTime
 
 
 class User(db.Model, UserMixin):
@@ -16,6 +18,8 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(2), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
 
     businesses = db.relationship('Business',

@@ -1,4 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.sql import func
+from sqlalchemy.types import DateTime
 
 
 class Review(db.Model):
@@ -12,6 +14,8 @@ class Review(db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('businesses.id')))
     review = db.Column(db.String(2000), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
 
     user = db.relationship('User',
@@ -21,6 +25,7 @@ class Review(db.Model):
     images = db.relationship('Image',
                                 primaryjoin="and_(Image.imageable_type=='review', foreign(Image.imageable_id)==Review.id)",
                                 lazy="dynamic",
+                                overlaps="business,images,images,review,user",
                                 cascade='all, delete-orphan')
 
     def to_dict(self):
