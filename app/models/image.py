@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.dialects.postgresql import ENUM
-
+from sqlalchemy.sql import func
+from sqlalchemy.types import DateTime
 
 class Image(db.Model):
     __tablename__ = 'images'
@@ -13,6 +14,9 @@ class Image(db.Model):
     imageable_id = db.Column(db.Integer, nullable=False)
     imageable_type = db.Column(ENUM('business', 'review', 'user', name='imageable_types'), nullable=False)
     url = db.Column(db.String, nullable=False)
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
+
 
     def parent(self):
       if self.imageable_type == 'business':
