@@ -18,4 +18,4 @@ class Category(db.Model):
   updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
 
-  business = relationship('Business', backpopulates='category')
+  # business = relationship('Business', backpopulates='category')
