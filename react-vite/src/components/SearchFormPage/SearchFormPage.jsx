@@ -67,11 +67,14 @@ function SearchFormPage() {
               <>
                 <span key={`bizDeets-${business.id}`} className="businessDeets">
                   <span>{index + 1}.&nbsp;{business.name}</span>
-                  {reviewsExists(business.num_reviews) &&
+
+
+                  {business.num_reviews && reviewsExists(business.num_reviews) &&
                     <span>{business.avg_stars && starReviews(business.avg_stars)}
                       &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
                       &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
                   }
+                  
                   <span>CATEGORIES PLACEHOLDER · {business.price}</span>
                   <span>HOURS PLACEHOLDER</span>
                   <span>
