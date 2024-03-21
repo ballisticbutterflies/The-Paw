@@ -4,7 +4,6 @@ import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
-import { starsToFixed } from ".";
 
 
 function SearchFormPage() {
@@ -25,6 +24,14 @@ function SearchFormPage() {
       emptyStars.push(<span className='paws-unfilled'><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
     return [filledStars, emptyStars]
+  }
+
+  const starsToFixed = (stars) => {
+    if (stars >= 1) {
+      return stars.toFixed(1)
+    } else {
+      return false
+    }
   }
 
 
@@ -67,13 +74,15 @@ function SearchFormPage() {
               <>
                 <span key={`bizDeets-${business.id}`} className="businessDeets">
                   <span>{index + 1}.&nbsp;{business.name}</span>
+                {
+                  business.avg_stars &&
 
-
-                  {business?.num_reviews && reviewsExists(business.num_reviews) &&
-                    <span>{business?.avg_stars && starReviews(business.avg_stars)}
-                      &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
-                      &nbsp;{business?.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-                  }
+                  business.num_reviews && reviewsExists(business.num_reviews) &&
+                    <span>{business.avg_stars && starReviews(business.avg_stars)}
+                    &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
+                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                  
+                }
 
                   <span>CATEGORIES PLACEHOLDER · {business.price}</span>
                   <span>HOURS PLACEHOLDER</span>
