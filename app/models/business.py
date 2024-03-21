@@ -3,6 +3,8 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import Integer, String
+from sqlalchemy.sql import func
+from sqlalchemy.types import DateTime
 
 # Base = declarative_base()
 
@@ -22,7 +24,7 @@ class Business(db.Model):
 
     id = Column(Integer, primary_key=True)
     owner_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')))
-    # category_id = Column(Integer, ForeignKey('categories.id'))
+    category_id = Column(Integer, ForeignKey(add_prefix_for_prod('categories.id')))
     address = Column(String(255), nullable=False)
     city = Column(String(255), nullable=False)
     state = Column(String(2), nullable=False)
@@ -33,12 +35,13 @@ class Business(db.Model):
     email = Column(String(255), nullable=True)
     phone = Column(String(10), nullable=True)
     price = Column(String(4), nullable=True)
-
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
     owner = relationship('User',
                             back_populates='businesses')
-    # # category = relationship('Category',
-    # #                           back_populates='businesses')
+    category = relationship('Category',
+                              back_populates='businesses')
     # # subcategories = relationship('Subcategory',
     # #                           back_populates='business')
     reviews = relationship('Review',
@@ -46,6 +49,7 @@ class Business(db.Model):
                               cascade='all, delete-orphan')
     images = db.relationship('Image',
                                 primaryjoin="and_(Image.imageable_type=='business', foreign(Image.imageable_id)==Business.id)",
+                                overlaps="images",
                                 lazy="dynamic",
                                 cascade='all, delete-orphan')
 
@@ -59,6 +63,7 @@ class Business(db.Model):
         return {
             'id': self.id,
             'owner_id': self.owner_id,
+            # 'category_id': self.category_id,
             'address': self.address,
             'city': self.city,
             'state': self.state,

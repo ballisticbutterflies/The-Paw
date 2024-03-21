@@ -2,24 +2,8 @@ from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_reviews():
-    marnie = Review(
-        # id 1
-        user_id=2,
-        business_id=1,
-        review='This store was amazing! They were so friendly to my dog, Lily.',
-        stars=5
-    )
-
-    bobbie = Review(
-        # id 2
-        user_id=3,
-        business_id=1,
-        review='Odin hated this place! There were no good toys for him, or good times had.',
-        stars=1
-    )
-
     demo_leo = Review(
-        # id 3
+        # id 1
         user_id=1,
         business_id=3,
         review='Ugh, people suck. They need to learn how to pick up after their dogs here :/ Otherwise, the park is beautiful.',
@@ -27,7 +11,7 @@ def seed_reviews():
     )
 
     marnie_leo = Review(
-        # id 4
+        # id 2
         user_id=2,
         business_id=3,
         review='This was so-so. I wish they had bowls out for the dogs. Some of the dog owners were kind enough to share their bowls though.',
@@ -35,7 +19,7 @@ def seed_reviews():
     )
 
     misty_leo = Review(
-        # id 5
+        # id 3
         user_id=4,
         business_id=3,
         review='Amazing! Such a beautiful view and my doggo loves coming out here. She\'s made so many doggo-friends!',
@@ -43,11 +27,27 @@ def seed_reviews():
     )
 
     misty_dumpling = Review(
-        # id 6
+        # id 4
         user_id=4,
         business_id=4,
         review='This place was superb! The workers were so friendly to my pup, Ellie. Can\'t wait to go back!',
         stars=5
+    )
+
+    marnie = Review(
+        # id 5
+        user_id=2,
+        business_id=1,
+        review='This store was amazing! They were so friendly to my dog, Lily.',
+        stars=5
+    )
+
+    bobbie = Review(
+        # id 6
+        user_id=3,
+        business_id=1,
+        review='Odin hated this place! There were no good toys for him, or good times had.',
+        stars=1
     )
 
     bakery_review = Review(

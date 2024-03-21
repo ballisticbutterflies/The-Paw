@@ -55,8 +55,8 @@ function SearchFormPage() {
 
   return (
     <>
-      <h1>Paw-Recommended Results:</h1>
       <div className="searchPage">
+      <h1>Paw-Recommended Results:</h1>
         <FilterComponent onFilterChange={handleFilterChange} />
         {businesses && businesses.map((business, index) => (
           <span key={business.id}>
