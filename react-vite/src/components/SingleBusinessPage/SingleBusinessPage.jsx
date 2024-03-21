@@ -58,7 +58,7 @@ function SingleBusinessPage() {
     return (business &&
         <>
             <div className="businessPhotoHeader">
-                <img src='https://www.tcpalm.com/gcdn/-mm-/48d84e13920016e775b5cfe7e87d6effad5b942a/c=0-297-1950-1399/local/-/media/2018/07/28/Brevard/Brevard/636684056790409090-shr-56297evoxfsg9k0umsn-original-1-.jpg' />
+                <img src={business.business_images[0].image_url} />
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
