@@ -5,17 +5,17 @@ from sqlalchemy.types import DateTime
 
 
 class Category(db.Model):
-  __tablename__ = 'categories'
+    __tablename__ = 'categories'
 
 
-  if environment == 'production':
-    __table_args__ = {'schema': SCHEMA}
+    if environment == 'production':
+      __table_args__ = {'schema': SCHEMA}
 
 
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(50), nullable=False)
-  created_at = db.Column(DateTime(timezone=True), server_default=func.now())
-  updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
 
-  # business = relationship('Business', backpopulates='category')
+    businesses = relationship('Business', back_populates='category')
