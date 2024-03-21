@@ -45,7 +45,7 @@ def seed_images():
     leo_j_ryan_biz1 = Image(
         imageable_id=3,
         imageable_type='business',
-        url='https://s3-media0.fl.yelpcdn.com/bphoto/9NDbCeS6lhny-qTul5sNOg/o.jpg',
+        url='https://birding.sequoia-audubon.org/photos/FosterCity-RyanPark.jpg',
         uploader_id=3
     )
 
