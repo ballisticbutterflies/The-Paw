@@ -1,6 +1,6 @@
 from flask import Blueprint, request;
 from flask_login import login_required, current_user
-from app.models import Business, Review, Image, User, db;
+from app.models import Business, Review, Image, User, Category, db;
 from app.forms import CreateBusinessForm
 
 businesses_route = Blueprint('businesses', __name__)
@@ -10,10 +10,11 @@ def get_business(id):
     """
     Query for a business by id and returns that business in a dictionary
     """
-    business_data = []
-    review_images = {}
-
     business = Business.query.get(id)
+
+    business_data = []
+    business_dict = business.to_dict()
+    review_images = {}
 
     if (business == None):
         return {'message': 'Buiness couldn\'t be found' }, 404
@@ -21,8 +22,6 @@ def get_business(id):
     reviews = Review.query.filter(Review.business_id == id).all()
     review_ids = [review.id for review in reviews]
     review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
-    business_images = Image.query.filter(Image.imageable_id == id and Image.imageable_type == 'business').all()
-    business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
 
     total_stars = 0
     num_reviews = len(reviews)
@@ -35,9 +34,7 @@ def get_business(id):
             'url': image.url,
             'uploader_id': image.uploader_id,
             } for image in review_images]
-
-    business_dict = business.to_dict()
-    
+        
     business_dict['reviews'] = {
         'num_reviews': num_reviews,
         'avg_stars': None,
@@ -47,9 +44,20 @@ def get_business(id):
         avg_stars = total_stars / num_reviews
         business_dict['reviews']['avg_stars'] = avg_stars
         business_dict['review_images'] = review_image_data
+        
+    business_images = Image.query.filter(Image.imageable_id == id and Image.imageable_type == 'business').all()
+    business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
 
     business_dict['business_images'] = business_image_urls
-
+    
+    categories = Category.query.filter(Category.id == business.category_id);
+    category_dict = { category.id: {
+        'id': category.id,
+        'name': category.name
+        } for category in categories }
+    category_data = category_dict.get(business.category_id)
+    
+    business_dict['category'] = category_data
 
     business_data.append(business_dict)
     return { 'business': business_data }
