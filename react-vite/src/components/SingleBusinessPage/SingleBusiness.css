@@ -38,7 +38,11 @@
     font-weight: bold;
     margin-bottom: -8px;
     font-size: 40px;
+<<<<<<< HEAD
     color: #FFFFFF;
+=======
+    color: #FFFFFF
+>>>>>>> d9ef9a5e11252138ba73e3ca0bffc29e0fb3523c
 }
 
 .currHours {
