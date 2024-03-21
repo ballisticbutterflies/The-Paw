@@ -24,7 +24,7 @@ class Business(db.Model):
 
     id = Column(Integer, primary_key=True)
     owner_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')))
-    # category_id = Column(Integer, ForeignKey('categories.id'))
+    category_id = Column(Integer, ForeignKey(add_prefix_for_prod('categories.id')))
     address = Column(String(255), nullable=False)
     city = Column(String(255), nullable=False)
     state = Column(String(2), nullable=False)
@@ -40,8 +40,8 @@ class Business(db.Model):
 
     owner = relationship('User',
                             back_populates='businesses')
-    # # category = relationship('Category',
-    # #                           back_populates='businesses')
+    category = relationship('Category',
+                              back_populates='businesses')
     # # subcategories = relationship('Subcategory',
     # #                           back_populates='business')
     reviews = relationship('Review',
@@ -49,6 +49,7 @@ class Business(db.Model):
                               cascade='all, delete-orphan')
     images = db.relationship('Image',
                                 primaryjoin="and_(Image.imageable_type=='business', foreign(Image.imageable_id)==Business.id)",
+                                overlaps="images",
                                 lazy="dynamic",
                                 cascade='all, delete-orphan')
 
@@ -62,6 +63,7 @@ class Business(db.Model):
         return {
             'id': self.id,
             'owner_id': self.owner_id,
+            # 'category_id': self.category_id,
             'address': self.address,
             'city': self.city,
             'state': self.state,
