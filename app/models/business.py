@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import Integer, String
 from sqlalchemy.sql import func
+from sqlalchemy.types import DateTime
 
 # Base = declarative_base()
 
@@ -34,7 +35,8 @@ class Business(db.Model):
     email = Column(String(255), nullable=True)
     phone = Column(String(10), nullable=True)
     price = Column(String(4), nullable=True)
-    
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
     owner = relationship('User',
                             back_populates='businesses')
