@@ -14,21 +14,30 @@ def get_business(id):
     review_images = {}
 
     business = Business.query.get(id)
+
+    if (business == None):
+        return {'message': 'Buiness couldn\'t be found' }, 404
+
     reviews = Review.query.filter(Review.business_id == id).all()
+    review_ids = [review.id for review in reviews]
+    review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
     business_images = Image.query.filter(Image.imageable_id == id and Image.imageable_type == 'business').all()
-    business_image_urls = [{'id': image.id, 'image_url': image.url} for image in business_images]
+    business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
 
     total_stars = 0
     num_reviews = len(reviews)
 
     for review in reviews:
         total_stars += review.stars
-        review_images = Image.query.filter(Image.imageable_id == review.id).all()
-        review_image_urls = [{'id': image.id, 'image_url': image.url} for image in review_images]
 
+        review_image_data = [{
+            'id': image.id,
+            'url': image.url,
+            'uploader_id': image.uploader_id,
+            } for image in review_images]
 
     business_dict = business.to_dict()
-    print(review_images)
+    
     business_dict['reviews'] = {
         'num_reviews': num_reviews,
         'avg_stars': None,
@@ -37,7 +46,7 @@ def get_business(id):
     if num_reviews > 0:
         avg_stars = total_stars / num_reviews
         business_dict['reviews']['avg_stars'] = avg_stars
-        business_dict['review_images'] = review_image_urls
+        business_dict['review_images'] = review_image_data
 
     business_dict['business_images'] = business_image_urls
 
