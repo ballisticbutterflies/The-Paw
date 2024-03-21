@@ -28,8 +28,8 @@ function SearchFormPage() {
 
   const starsToFixed = (stars) => {
     if (stars >= 1) {
-      console.log(stars)
-      return stars.toFixed(1)
+      let int = parseInt(stars)
+      return int.toFixed(1)
     } else {
       return false
     }
