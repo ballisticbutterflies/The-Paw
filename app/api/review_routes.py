@@ -11,7 +11,7 @@ def get_review(id):
     Query for a review by id and returns that review in a dictionary
     """
     review = Review.query.get(id)
-
+    
     review_dict = review.to_dict()
 
     #add the query for the images
@@ -82,3 +82,4 @@ def get_all_reviews():
     # review_dict['author'] = user_data
 
     return all_reviews_dict
+
