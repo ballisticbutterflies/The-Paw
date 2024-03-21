@@ -48,7 +48,13 @@ def get_business(id):
 
 @businesses_route.route('/<int:id>/reviews')
 def get_reviews_by_business_id(id):
+    business = Business.query.get(id)
+
+    if (business == None):
+        return {"message": "Business couldn\'t be found"}, 404
+    
     reviews = Review.query.filter(Review.business_id == id).all()
+
     user_ids = [review.user_id for review in reviews]
     users = User.query.filter(User.id.in_(user_ids)).all()
     review_ids = [review.id for review in reviews]
@@ -64,6 +70,15 @@ def get_reviews_by_business_id(id):
 
     for review in reviews:
         user_data = users_dict.get(review.user_id)
+        review_image_data =  [{
+                    'id': image.id,
+                    'url': image.url,
+                    'uploader_id': image.uploader_id
+                    } for image in review_images if image.uploader_id == review.user_id]
+        
+        if len(review_image_data) == 0:
+            review_image_data = "No review images found"
+            
         review_data = {
                 'id': review.id,
                 'user_id': review.user_id,
@@ -71,16 +86,15 @@ def get_reviews_by_business_id(id):
                 'review': review.review,
                 'stars': review.stars,
                 'user': user_data,
-                'review_images':  [{
-                    'id': image.id,
-                    'url': image.url,
-                    'uploader_id': image.uploader_id
-                    } for image in review_images if image.uploader_id == review.user_id]
+                'review_images': review_image_data
         }
 
         reviews_list.append(review_data)
 
-    return { 'reviews': reviews_list }
+    if len(reviews_list) == 0:
+        return { "reviews": "No reviews found" }
+    else:
+        return { 'reviews': reviews_list }
 
 
 @businesses_route.route('/', methods=['POST'])
