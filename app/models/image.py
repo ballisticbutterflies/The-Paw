@@ -42,10 +42,13 @@ class Image(db.Model):
                             back_populates='images')
     user = db.relationship('User',
                           primaryjoin="and_(Image.imageable_type=='user', foreign(Image.imageable_id)==User.id)",
+                          overlaps="images,images",
                           uselist=False)
     business = db.relationship('Business',
                               primaryjoin="and_(Image.imageable_type=='business', foreign(Image.imageable_id)==Business.id)",
+                              overlaps="images,images,user",
                               uselist=False)
     review = db.relationship('Review',
                               primaryjoin="and_(Image.imageable_type=='review', foreign(Image.imageable_id)==Review.id)",
+                              overlaps="business,images,images,user",
                               uselist=False)

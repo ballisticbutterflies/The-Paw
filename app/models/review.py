@@ -25,4 +25,5 @@ class Review(db.Model):
     images = db.relationship('Image',
                                 primaryjoin="and_(Image.imageable_type=='review', foreign(Image.imageable_id)==Review.id)",
                                 lazy="dynamic",
+                                overlaps="business,images,images,review,user",
                                 cascade='all, delete-orphan')

@@ -49,6 +49,7 @@ class Business(db.Model):
                               cascade='all, delete-orphan')
     images = db.relationship('Image',
                                 primaryjoin="and_(Image.imageable_type=='business', foreign(Image.imageable_id)==Business.id)",
+                                overlaps="images",
                                 lazy="dynamic",
                                 cascade='all, delete-orphan')
 
