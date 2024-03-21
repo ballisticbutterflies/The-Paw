@@ -13,7 +13,7 @@ export const receiveBusiness = (business) => ({
     business
 })
 
-export const createBusinessImages = (post) => (console.log("$$$$$$", post), {
+export const createBusinessImages = (post) => ({
     type: CREATE_BUSINESS_IMAGES,
     post
 })
@@ -53,10 +53,10 @@ export const createImage = (post) => async (dispatch) => {
         method: "POST",
         body: post
     });
-    console.log("XXXXX", response);
+
 
     if (response.ok) {
-        const { resPost } = await response.json();
+        const resPost = await response.json();
         dispatch(createBusinessImages(resPost));
         console.log(resPost, "there was no error");
     } else {
@@ -80,10 +80,10 @@ const businessesReducer = (state = {}, action) => {
             businessState[action.business.id] = action.business
             return businessState
         }
+
         case CREATE_BUSINESS_IMAGES: {
-            const imageState = { ...state }
-            imageState[action.post.image] = action.post.image
-            console.log("IMAGE STSTE!!!", imageState)
+            const imageState = { "images": [] }
+            imageState["images"] = [action.post.image]
             return imageState
         }
         default:

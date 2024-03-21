@@ -15,6 +15,7 @@ def upload_image():
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+
     if form.validate_on_submit():
 
         image = form.data["image"]
@@ -27,22 +28,28 @@ def upload_image():
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
             # return render_template("post_form.html", form=form, errors=[upload])
-            return {"message": "line 33 in images route"}
+             return {"error": "Error uploading image no url in upload"}
 
         url = upload["url"]
         new_image = Image(
             uploader_id=current_user.id,
-            imageable_id=1,
-            imageable_type="business",
+            imageable_id=request.form.get("imageable_id"),
+            imageable_type=request.form.get("imageable_type"),
             url=url)
         db.session.add(new_image)
         db.session.commit()
-        return redirect("/businesses")
 
+        return {"message": "Image uploaded successfully", "image": {
+            "id": new_image.id,
+            "uploader_id": new_image.uploader_id,
+            "imageable_id": new_image.imageable_id,
+            "imageable_type": new_image.imageable_type,
+            "url": new_image.url,
+        }}
     if form.errors:
         print(form.errors)
         # return render_template("post_form.html", form=form, errors=form.errors)
-        return {"message": "line 44 in images route"}
+        return {"error": "Form validation failed", "errors": form.errors}
 
     # return render_template("post_form.html", form=form, errors=None)
-    return {"message": "line 47 in images route"}
+    return {"error": "Unexpected error"}
