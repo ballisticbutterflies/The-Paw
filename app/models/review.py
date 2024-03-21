@@ -27,3 +27,12 @@ class Review(db.Model):
                                 lazy="dynamic",
                                 overlaps="business,images,images,review,user",
                                 cascade='all, delete-orphan')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'business_id': self.business_id,
+            'review': self.review,
+            'stars': self.stars
+        }
