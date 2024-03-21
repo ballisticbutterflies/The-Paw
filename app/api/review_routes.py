@@ -15,21 +15,22 @@ def get_review(id):
     # print('#########################################')
     review_dict = review.to_dict()
 
-
-    user_images_all = Image.query.filter(Image.uploader_id == id).filter(Image.imageable_type != 'user').all() # fetching all images uploaded by user and all associated data
-
-    user_images_all_list = []  # initializing what will become the 
-
-    for user_image in user_images_all: #  begin to structure and refine data collected from db query
-        user_image_dict = {}
-        user_image_dict['id'] = user_image.id
-        user_image_dict['image_url'] = user_image.url
-        user_image_dict['type'] = user_image.imageable_type
-        user_image_dict['type_id'] = user_image.imageable_id 
-
     #add the query for the images
     review_images = Image.query.filter(Image.imageable_type == 'review').filter(Image.imageable_id != id).all() # fetching all images associated to the review
-    review_dict['images'] = review_images # add the images to the review dictionary
+    print("########################", review_images)
+    review_dict['images'] = []
+    
+    for review_image in review_images: #  begin to structure and refine data collected from db query
+        review_image_dict = {}
+        review_image_dict['id'] = review_image.id
+        review_image_dict['image_url'] = review_image.url
+        review_image_dict['type'] = review_image.imageable_type
+        review_image_dict['type_id'] = review_image.imageable_id 
+            
+        # append the created image dict to the response list
+        review_dict['images'].append(review_image_dict)
+
+    # review_dict['images'] = review_images # add the images to the review dictionary
 
     # add the query for necessary user data
     user_data = user(review.user_id)
