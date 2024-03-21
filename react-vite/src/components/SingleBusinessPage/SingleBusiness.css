@@ -168,3 +168,8 @@
 .businessContactIcon a {
     color: #1f2f44
 }
+
+.businessCardDetail {
+    width: 255px;
+    word-wrap: break-word;
+}
