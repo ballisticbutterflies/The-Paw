@@ -82,6 +82,8 @@ const businessesReducer = (state = {}, action) => {
         }
         case CREATE_BUSINESS_IMAGES: {
             const imageState = { ...state }
+            console.log("action", action)
+            console.log("action.post", action.post)
             imageState[action.post.image] = action.post.image
             console.log("IMAGE STSTE!!!", imageState)
             return imageState

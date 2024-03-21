@@ -10,7 +10,7 @@ image_routes = Blueprint("images", __name__)
 
 
 @image_routes.route("/", methods=["POST"])
-@login_required
+# @login_required
 def upload_image():
     form = ImageForm()
     BUCKET_NAME = os.environ.get("S3_BUCKET")
@@ -21,6 +21,7 @@ def upload_image():
     if form.validate_on_submit():
           
         image = form.data["image"]
+        print("line 24 images route", form.data["image"])
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
         print(upload)
@@ -33,7 +34,7 @@ def upload_image():
             return {"message": "line 33 in images route"}
 
         url = upload["url"]
-        new_image = Image(image= url)
+        new_image = Image(image= url, uploader_id = 1, imageable_id = 1, imageable_type = 'business')
         db.session.add(new_image)
         db.session.commit()
         return redirect("/businesses")
