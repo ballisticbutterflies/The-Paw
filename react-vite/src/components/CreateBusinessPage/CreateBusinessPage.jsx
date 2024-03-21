@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { createBusiness, fetchSingleBusiness } from "../../redux/businesses"
+import { createBusiness, fetchSingleBusiness, createImage } from "../../redux/businesses"
 import "./CreateBusiness.css"
+// import UploadPicture from "./CreateImage"
 
 
 function CreateBusinessPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -29,6 +31,8 @@ function CreateBusinessPage() {
   const [website, setWebsite] = useState('');
   const [phone, setPhone] = useState('');
   // const [category, setCategory] = useState('');
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const updatePrice = (e) => {
@@ -42,7 +46,7 @@ function CreateBusinessPage() {
     setPrice(selectedPrice); // Update the price state with the selected price
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setErrors({})
@@ -59,18 +63,27 @@ function CreateBusinessPage() {
       website,
       phone
     }
+    // Dispatch createBusiness action
+    const businessResponse = await dispatch(createBusiness(newBusiness));
 
-    dispatch(createBusiness(newBusiness))
-      .then((business) => {
-        dispatch(fetchSingleBusiness(business.id))
-          .then(navigate(`/businesses/${business.id}`))
-      })
-      .catch(async (response) => {
-        const data = await response.json();
-        if (data && data.errors) {
-          setErrors(data.errors)
-        }
-      })
+
+    const businessId = businessResponse.id; // Extract business ID from response
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("uploader_id", sessionUser.id);
+    formData.append("imageable_id", businessId); // Pass business ID
+    formData.append("imageable_type", "business"); // Hardcoded for business type
+
+    setImageLoading(true);
+    // Dispatch createImage action with formData
+    dispatch(createImage(formData)).then(() => {
+        dispatch(fetchSingleBusiness(businessId))
+            .then(() => navigate(`/businesses/${businessId}`));
+    }).catch((error) => {
+        console.error("Error uploading image:", error);
+        setImageLoading(false);
+    });
   }
 
   const isValidUrl = (url) => {
@@ -85,17 +98,17 @@ function CreateBusinessPage() {
     return phonePattern.test(phoneNumber);
   };
 
-  const states = ['AL','AK','AZ','AR',
-  'CA','CO','CT','DE','DC',
-  'FL','GA','HI','ID','IL',
-  'IN','IA','KS','KY','LA',
-  'ME','MD','MA','MI','MN',
-  'MS','MO','MT','NE','NV',
-  'NH','NJ','NM','NY','NC',
-  'ND','OH','OK','OR','PA',
-  'RI','SC','SD','TN','TX',
-  'UT','VT','VI','VA','WA',
-  'WV','WI','WY']
+  const states = ['AL', 'AK', 'AZ', 'AR',
+    'CA', 'CO', 'CT', 'DE', 'DC',
+    'FL', 'GA', 'HI', 'ID', 'IL',
+    'IN', 'IA', 'KS', 'KY', 'LA',
+    'ME', 'MD', 'MA', 'MI', 'MN',
+    'MS', 'MO', 'MT', 'NE', 'NV',
+    'NH', 'NJ', 'NM', 'NY', 'NC',
+    'ND', 'OH', 'OK', 'OR', 'PA',
+    'RI', 'SC', 'SD', 'TN', 'TX',
+    'UT', 'VT', 'VI', 'VA', 'WA',
+    'WV', 'WI', 'WY']
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -120,7 +133,7 @@ function CreateBusinessPage() {
   return (
     <>
       {sessionUser &&
-        <form className="createBizForm" onSubmit={handleSubmit}>
+        <form className="createBizForm" onSubmit={handleSubmit} encType="multipart/form-data">
           <h1>Add your business to The Paw!</h1>
           <input
             type="text"
@@ -213,9 +226,18 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
+          <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+            />
+          {(imageLoading) && <p>Loading...</p>}
           <button type="submit" disabled={!!Object.values(errors).length}>Create Business</button>
         </form>
       }
+      {/* <div>
+        <UploadPicture />
+      </div> */}
     </>
   )
 }
