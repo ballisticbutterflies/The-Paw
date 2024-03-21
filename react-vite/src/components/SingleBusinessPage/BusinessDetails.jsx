@@ -1,4 +1,6 @@
-function BusinessDetails({ business }) {
+import SingleBusinessReviews from "./SingleBusinessReviews";
+
+function BusinessDetails({ business, businessId }) {
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
@@ -31,6 +33,7 @@ function BusinessDetails({ business }) {
                 <div>[Street Parking]</div>
             </div>
             <hr />
+            <SingleBusinessReviews business={business} businessId={businessId} />
         </div>
     )
 }
