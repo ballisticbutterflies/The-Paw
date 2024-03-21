@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createImage } from "../../redux/businesses";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 // import { useNavigate } from "react-router-dom";
 
 
@@ -10,21 +10,30 @@ const UploadPicture = () => {
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
 
+    // const images = useSelector(state => Object.values(state.image))
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", image);
-        formData.append("upload_id", 1);
-        formData.append("imageable_id", 1);
-        formData.append("imageable_type", 'business');
+        // formData.append("uploader_id", 1);
+        // formData.append("imageable_id", 1);
+        // formData.append("imageable_type", 'business');
 
-        console.log(formData);
+        const newImage = {
+            "image": image,
+            // "uploader_id": 1,
+            // "imageable_id": 1,
+            // "imageable_type": 'business'
+        }
 
+        console.log("NEW IMAGE", newImage);
+        console.log("FORMDATAAA", formData);
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        await dispatch(createImage(formData));
+        await dispatch(createImage(newImage));
         // history.push("/images");
     }
 
@@ -32,8 +41,8 @@ const UploadPicture = () => {
         <form
             onSubmit={handleSubmit}
             encType="multipart/form-data"
-            method="POST"
-            action="/images"
+        // method="POST"
+        // action="/images"
         >
             <input
                 type="file"
