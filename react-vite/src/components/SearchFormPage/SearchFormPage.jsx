@@ -28,6 +28,7 @@ function SearchFormPage() {
 
   const starsToFixed = (stars) => {
     if (stars >= 1) {
+      console.log(stars)
       return stars.toFixed(1)
     } else {
       return false
@@ -78,10 +79,10 @@ function SearchFormPage() {
                   business.avg_stars &&
 
                   business.num_reviews && reviewsExists(business.num_reviews) &&
-                    <span>{business.avg_stars && starReviews(business.avg_stars)}
-                    &nbsp;{business.avg_stars && starsToFixed(business.avg_stars)}
+                    <span>{business?.avg_stars && starReviews(business.avg_stars)}
+                    &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
                     &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-                  
+
                 }
 
                   <span>CATEGORIES PLACEHOLDER · {business.price}</span>
