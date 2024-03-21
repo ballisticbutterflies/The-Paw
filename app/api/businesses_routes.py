@@ -14,11 +14,15 @@ def get_business(id):
     review_images = {}
 
     business = Business.query.get(id)
+
+    if (business == None):
+        return {'message': 'Buiness couldn\'t be found' }, 404
+
     reviews = Review.query.filter(Review.business_id == id).all()
     review_ids = [review.id for review in reviews]
     review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
     business_images = Image.query.filter(Image.imageable_id == id and Image.imageable_type == 'business').all()
-    business_image_urls = [{'id': image.id, 'image_url': image.url} for image in business_images]
+    business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
 
     total_stars = 0
     num_reviews = len(reviews)
@@ -28,11 +32,8 @@ def get_business(id):
 
         review_image_data = [{
             'id': image.id,
-            'imageable_id': image.imageable_id,
-            'review_id': review.id,
             'url': image.url,
             'uploader_id': image.uploader_id,
-            'imageable_type': image.imageable_type
             } for image in review_images]
 
     business_dict = business.to_dict()
