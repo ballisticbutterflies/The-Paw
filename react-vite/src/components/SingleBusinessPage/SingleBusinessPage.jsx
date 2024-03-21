@@ -62,7 +62,13 @@ function SingleBusinessPage() {
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
-                    {business.reviews &&
+
+                    {business.reviews?.num_reviews === 0 &&
+                        <p className="businessReviews_first">
+                            <i className="fa-solid fa-paw" />&nbsp; Be the first to review!
+                        </p>
+                    }
+                    {business.reviews?.num_reviews > 0 &&
                         <p className="businessReviews">
                             <span className="pawBlock">
                                 {business.reviews.avg_stars &&
@@ -71,7 +77,18 @@ function SingleBusinessPage() {
                             ({business.reviews.num_reviews} reviews)
                         </p>
                     }
-                    <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; [SUBCATEGORIES]</p>
+
+
+                    {business.price !== null &&
+                        <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
+                        </p>
+                    }
+
+                    {business.price === null &&
+                        <p className="priceSubcat">{business.category?.name}
+                        </p>
+                    }
+
                     <div className="currHours">
                         [CLOSED 8AM - 6PM]&nbsp;&nbsp;
                         <span className="seeHours">See hours</span>
@@ -80,7 +97,7 @@ function SingleBusinessPage() {
                 <div className="seeAllPhotos">
                     <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
                 </div>
-            </div>
+            </div >
             <div className="businessContainer">
                 <BusinessDetails business={business} />
                 <BusinessContactCard business={business} />

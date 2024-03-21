@@ -38,6 +38,7 @@
     font-weight: bold;
     margin-bottom: -8px;
     font-size: 40px;
+    color: #FFFFFF;
 }
 
 .currHours {
@@ -80,12 +81,16 @@
 .pawBlock {
     background-color: #FFFFFF;
     width: fit-content;
-    padding: 8px 6px 3px 6px;
+    padding: 10px 6px 3px 6px;
     border-radius: 5px;
 }
 
 .businessReviews span {
     background-color: none;
+}
+
+.businessReviews_first {
+    font-size: 18px;
 }
 
 .priceSubcat {
