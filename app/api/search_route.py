@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image
 from sqlalchemy import func, desc
+from urllib.parse import unquote
 
 search_route = Blueprint('search', __name__)
 
@@ -8,9 +9,29 @@ search_route = Blueprint('search', __name__)
 @search_route.route('/')
 def search():
   """
-  Query for all businesses and returns them in a list of business dictionaries
+  Query for all businesses with optional filters and return them
+  in a list of business dictionaries
   """
-  businesses = Business.query.all()
+ # Fetch filter params from request
+  rating = request.args.get('rating')
+  price_string = request.args.get('price')
+  prices = price_string.split(',') if price_string else []
+  city = request.args.get('city')
+
+#base query to fetch businesses
+  query = Business.query
+
+#apply filters to the query
+  if rating:
+    query = query.join(Review).group_by(Business.id).having(func.avg(Review.stars) >= float(rating))
+
+  if prices:
+    query = query.filter(Business.price.in_(prices))
+
+  if city:
+    query = query.filter(Business.city == city)
+
+  businesses = query.all()
 
   business_data = []
   for business in businesses:

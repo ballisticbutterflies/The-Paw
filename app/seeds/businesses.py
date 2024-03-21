@@ -5,7 +5,7 @@ def seed_businesses():
     petagogy = Business(
         # id 1
         owner_id=1,
-        # category_id=4,
+        category_id=4,
         address='5880 Ellsworth Ave',
         city='Pittsburgh',
         state='PA',
@@ -21,7 +21,7 @@ def seed_businesses():
     mishka = Business(
         # id 2
         owner_id=2,
-        # category_id=4,
+        category_id=4,
         address='2124 Union St Ste A',
         city='San Francisco',
         state='CA',
@@ -36,7 +36,7 @@ def seed_businesses():
     leo_j_ryan = Business(
         # id 3
         owner_id=3,
-        # category_id=6,
+        category_id=6,
         address='650 Shell Blvd',
         city='Foster City',
         state='CA',
@@ -50,7 +50,7 @@ def seed_businesses():
     dumpling_home = Business(
         # id 4
         owner_id=3,
-        # category_id=1,
+        category_id=1,
         address='298 Gough St',
         city='San Francisco',
         state='CA',
@@ -65,7 +65,7 @@ def seed_businesses():
     bakery = Business(
         # id 5
         owner_id=1,
-        # category_id=1,
+        category_id=1,
         address= "2402 Rice Blvd",
         city= "Houston",
         state= "TX",
@@ -81,7 +81,7 @@ def seed_businesses():
     caroline = Business(
     # id 6
         owner_id= 4,
-        # category_id=8,
+        category_id=8,
         address='3301 NE 1st Ave',
         city='Miami',
         state='FL',
@@ -96,7 +96,7 @@ def seed_businesses():
     exotic_vet= Business(
     # id 7
         owner_id= 5,
-        # category_id=2,
+        category_id=2,
         address='10501 Aurora Ave North',
         city='Seattle',
         state='WA',

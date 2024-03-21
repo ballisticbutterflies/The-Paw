@@ -4,6 +4,9 @@
   border: 1px solid black;
   align-content: center;
   padding: 15px 10px 10px 10px;
+  margin-left: 300px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .businessCards:hover {
@@ -24,4 +27,44 @@
   text-wrap: wrap;
   padding: 20px 20px 0 0;
 
+}
+
+.pawRatingInputFilter > h4 {
+  margin: 2px 0;
+}
+
+.pawRatingInputFilter {
+  border-bottom: 1px solid #c3cddf;
+  padding-bottom: 20px;
+}
+
+.price-filled {
+  color: #5f5ba8;
+}
+
+.price-unfilled {
+  color: #c3cddf;
+}
+
+.priceInputFilter > h4 {
+  margin: 2px 0;
+}
+
+.priceInputFilter {
+  padding: 15px 0;
+  border-bottom: 1px solid #c3cddf;
+  margin-bottom: 10px;
+}
+
+
+.filterComponent {
+  display: flex;
+  width: 180px;
+  flex-direction: column;
+  position: absolute;
+  margin-top: -19px;
+}
+
+.searchPage {
+  padding-left: 25px;
 }

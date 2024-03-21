@@ -10,14 +10,14 @@ def seed_images():
     )
 
     petagogy_review1 = Image(
-        imageable_id=2,
+        imageable_id=6,
         imageable_type='review',
         url='https://s3-media0.fl.yelpcdn.com/bphoto/aj7a9TE15nvEiKXWfO-UJg/o.jpg',
         uploader_id=3
     )
 
     petagogy_review2 = Image(
-        imageable_id=2,
+        imageable_id=6,
         imageable_type='review',
         url='https://www.smallbusinessbrain.com/wp-content/uploads/2020/04/opening-a-pet-store.jpg',
         uploader_id=3
@@ -36,7 +36,7 @@ def seed_images():
         uploader_id=2
     )
     petagogy_review3 = Image(
-        imageable_id=1,
+        imageable_id=6,
         imageable_type='review',
         url='https://s3-media0.fl.yelpcdn.com/bphoto/6iIqAfuC81vz0RSUpmGunQ/1000s.jpg',
         uploader_id=3
@@ -45,7 +45,7 @@ def seed_images():
     leo_j_ryan_biz1 = Image(
         imageable_id=3,
         imageable_type='business',
-        url='https://s3-media0.fl.yelpcdn.com/bphoto/9NDbCeS6lhny-qTul5sNOg/o.jpg',
+        url='https://birding.sequoia-audubon.org/photos/FosterCity-RyanPark.jpg',
         uploader_id=3
     )
 
@@ -57,14 +57,14 @@ def seed_images():
     )
 
     leo_j_ryan_review1 = Image(
-        imageable_id=4,
+        imageable_id=2,
         imageable_type='review',
         url='https://s3-media0.fl.yelpcdn.com/bphoto/XfLKnWDFN2_YKcNEdjmQjA/o.jpg',
         uploader_id=2
     )
 
     leo_j_ryan_review2 = Image(
-        imageable_id=4,
+        imageable_id=2,
         imageable_type='review',
         url='https://s3-media0.fl.yelpcdn.com/bphoto/ygIKD2VohfJHnpA_SRVYXA/o.jpg',
         uploader_id=2

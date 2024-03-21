@@ -1,37 +1,47 @@
 const LOAD_BUSINESSES = 'search/LOAD_BUSINESSES'
 
-
 export const loadBusinesses = (businesses) => ({
     type: LOAD_BUSINESSES,
     businesses
 })
 
+// THUNKS
+export const fetchBusinesses = (filters = {}) => async (dispatch) => {
 
-// THUNK
+    let url ='/api/search/';
+    const queryParams = [];
 
-export const fetchBusinesses = () => async (dispatch) => {
-    const response = await fetch('/api/search/')
+    if (filters) {
+        let filtered = Object.values(filters)
+        queryParams.push(filtered.join(''))
+    }
+
+    if (queryParams.length > 0) {
+        url += `?${queryParams.join('&')}`;
+    }
+
+    const response = await fetch(url)
 
     if (response.ok) {
         const businesses = await response.json();
         dispatch(loadBusinesses(businesses))
+
     }
 }
 
 // REDUCER
-
 const searchReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_BUSINESSES: {
-            const businessesState = {}
-            action.businesses.businesses.map((business) => {
-                businessesState[business.id] = business;
-            })
-            return businessesState;
+            const newState = {};
+            action.businesses.businesses.forEach((business) => {
+                newState[business.id] = business;
+            });
+            return newState;
         }
         default:
-            return state
+            return state;
     }
-}
+};
 
 export default searchReducer;
