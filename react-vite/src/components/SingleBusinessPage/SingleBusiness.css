@@ -190,6 +190,15 @@
     grid-area: avatar;
     font-size: 60px;
     width: fit-content;
+    margin-top: 15px;
+}
+
+.avatarFormat {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    width: 60px;
+    height: 60px;
 }
 
 .userName {

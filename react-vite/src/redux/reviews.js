@@ -25,9 +25,11 @@ const reviewsReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_BUSINESS_REVIEWS: {
             const reviewState = {}
-            action.reviews.reviews.forEach(review => {
-                reviewState[review.id] = review
-            })
+            if (action.reviews.reviews !== "No reviews found") {
+                action.reviews.reviews.forEach(review => {
+                    reviewState[review.id] = review
+                })
+            }
             return reviewState
         }
         default:

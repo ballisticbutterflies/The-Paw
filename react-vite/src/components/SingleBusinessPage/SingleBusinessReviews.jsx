@@ -52,7 +52,11 @@ function SingleBusinessReviews({ businessId }) {
                 <div key={review.id}>
                     <div className="userInfo">
                         <div className="avatar">
-                            <i className="fa-solid fa-circle-user" />
+                            {review.user.user_image_url ? (
+                                <img class="avatarFormat" src={review.user.user_image_url} />
+                            ) : (
+                                <i className="fa-solid fa-circle-user" />
+                            )}
                         </div>
                         <div className="userName">{review.user.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
                         <div className="loc">{review.user.city}, {review.user.state}</div>
@@ -65,7 +69,8 @@ function SingleBusinessReviews({ businessId }) {
                     <p>{review.review}</p>
                     <br />
                 </div>
-            ))}
+            )
+            )}
         </>
     )
 }
