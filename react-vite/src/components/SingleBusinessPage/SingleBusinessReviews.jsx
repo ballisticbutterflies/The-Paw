@@ -38,18 +38,19 @@ function SingleBusinessReviews({ businessId }) {
     return (reviews &&
         <>
             <h3>Reviews</h3>
-            {reviews.map((review) => (
+            {reviews.map((review) => (review.user &&
                 <div key={review.id}>
                     <div className="userInfo">
-                        <div className="avatar"><i className="fa-solid fa-circle-user" />
+                        <div className="avatar">
+                            <i className="fa-solid fa-circle-user" />
                         </div>
-                        <div className="userName">{review.user?.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
-                        <div className="loc">City, State</div>
+                        <div className="userName">{review.user.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
+                        <div className="loc">{review.user.city}, {review.user.state}</div>
                         <div className="stats">
-                            <span className="paws-unfilled" style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> XX &nbsp;&nbsp;
-                            <span className="paws-unfilled" style={{ fontSize: "small" }}><i class="fa-regular fa-image" /></span> XX</div>
+                            <span className="paws-unfilled" style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> {review.user.user_num_reviews} &nbsp;&nbsp;
+                            <span className="paws-unfilled" style={{ fontSize: "small" }}><i class="fa-regular fa-image" /></span> {review.user.user_num_images}</div>
                     </div>
-                    <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;XX, XX, XXXX</p>
+                    <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;{review.created_at}</p>
 
                     <p>{review.review}</p>
                     <br />
