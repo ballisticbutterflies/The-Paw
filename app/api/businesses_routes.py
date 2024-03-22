@@ -161,6 +161,8 @@ def create_review(business_id):
 
     business_owner_id = get_business(business_id)['business'][0]['owner_id']
     current_user_id = current_user.id
+    print("######################, business owner id: ", business_owner_id, " current user id: ", current_user_id)
+
 
     forbidden_res = {'errors': {'message': 'Forbidden' }}, 403    
 
@@ -168,16 +170,27 @@ def create_review(business_id):
         existing_reviews = get_reviews_by_business_id(business_id)['reviews']
         exisiting_review_authors = []
         for review in existing_reviews:
+            print("review user id type", type(review['user_id']))
             exisiting_review_authors.append(review['user_id'])
-        if current_user_id in exisiting_review_authors:
-            return forbidden_res
-        else:
-            return True
+
+        print("############# existing review Authors", exisiting_review_authors)
+        print("current user id type", type(current_user_id))
+        # if current_user_id in exisiting_review_authors:
+        #     return forbidden_res
+        # else:
+        #     return True
+        for author in exisiting_review_authors:
+            print("author: ", author)
+            print("current user id: ", current_user_id)
+            if(author == current_user_id):
+                print 
+                return forbidden_res
 
     if current_user_id == business_owner_id:
         return forbidden_res
+    check_for_existing_review(business_id, current_user_id)
 
-    if form.validate_on_submit() and check_for_existing_review(business_id, current_user_id):
+    if form.validate_on_submit():
         review = Review(
             user_id = current_user_id,
             business_id = business_id,
