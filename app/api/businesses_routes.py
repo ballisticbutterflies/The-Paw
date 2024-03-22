@@ -158,41 +158,53 @@ def create_review(business_id):
     """
     form = CreateReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    
 
     business_owner_id = get_business(business_id)['business'][0]['owner_id']
-    current_user_id = current_user.id
+    # current_user_id = current_user.id
+    current_user_id = form['user_id']
     print("######################, business owner id: ", business_owner_id, " current user id: ", current_user_id)
 
 
-    forbidden_res = {'errors': {'message': 'Forbidden' }}, 403    
+    forbidden_res = {'errors': {'message': 'Forbidden' }}, 403  
+
+    def forbidden_res_func():
+        print("its aliiiiiive")
+        return {'errors': {'message': 'Forbidden' }}, 403 
+    
 
     def check_for_existing_review(business_id, current_user_id):
         existing_reviews = get_reviews_by_business_id(business_id)['reviews']
         exisiting_review_authors = []
         for review in existing_reviews:
             print("review user id type", type(review['user_id']))
+            
             exisiting_review_authors.append(review['user_id'])
 
         print("############# existing review Authors", exisiting_review_authors)
+        print("############# existing review Authors type ", type(exisiting_review_authors))
         print("current user id type", type(current_user_id))
-        # if current_user_id in exisiting_review_authors:
-        #     return forbidden_res
-        # else:
-        #     return True
-        for author in exisiting_review_authors:
-            print("author: ", author)
-            print("current user id: ", current_user_id)
-            if(author == current_user_id):
-                print 
-                return forbidden_res
+        if current_user_id in exisiting_review_authors:
+            return forbidden_res_func() 
+        
+
+        # for author in exisiting_review_authors:
+        #     print("author: ", author)
+        #     print("current user id: ", current_user.id)
+        #     if(author == current_user.id):
+        #         forbidden_res_func()   
 
     if current_user_id == business_owner_id:
-        return forbidden_res
+        return forbidden_res_func()
+    
     check_for_existing_review(business_id, current_user_id)
 
+    print("hello howdy")
+    
+    # if check_for_existing_review(business_id=business_id, current_user_id=current_user_id):
     if form.validate_on_submit():
         review = Review(
-            user_id = current_user_id,
+            user_id = current_user.id,
             business_id = business_id,
             review = form.data['review'],
             stars = form.data['stars']
