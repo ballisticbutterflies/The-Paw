@@ -161,8 +161,7 @@ def create_review(business_id):
     
 
     business_owner_id = get_business(business_id)['business'][0]['owner_id']
-    # current_user_id = current_user.id
-    current_user_id = current_user['id']
+    current_user_id = current_user.id
     print("######################, business owner id: ", business_owner_id, " current user id: ", current_user_id)
 
 
