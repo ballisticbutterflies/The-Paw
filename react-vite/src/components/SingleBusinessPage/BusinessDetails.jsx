@@ -1,4 +1,6 @@
-function BusinessDetails({ business }) {
+import SingleBusinessReviews from "./SingleBusinessReviews";
+
+function BusinessDetails({ business, businessId }) {
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
@@ -31,6 +33,13 @@ function BusinessDetails({ business }) {
                 <div>[Street Parking]</div>
             </div>
             <hr />
+            <h3>Reviews</h3>
+            {business.reviews.num_reviews == 0 ? (
+                <div>Be the first to review!</div>
+            ) : (
+                <SingleBusinessReviews business={business} businessId={businessId} />
+            )}
+            <br />
         </div>
     )
 }

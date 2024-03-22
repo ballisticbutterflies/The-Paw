@@ -95,11 +95,17 @@ function SingleBusinessPage() {
                     </div>
                 </div>
                 <div className="seeAllPhotos">
-                    <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
+                    {business.business_images && totalImages(business.business_images, business.review_images) === 1 &&
+                        <button>See {business.business_images && totalImages(business.business_images, business.review_images)} photo</button>
+                    }
+
+                    {business.business_images && totalImages(business.business_images, business.review_images) > 1 &&
+                        <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
+                    }
                 </div>
             </div >
             <div className="businessContainer">
-                <BusinessDetails business={business} />
+                <BusinessDetails business={business} businessId={businessId} />
                 <BusinessContactCard business={business} />
             </div>
         </>

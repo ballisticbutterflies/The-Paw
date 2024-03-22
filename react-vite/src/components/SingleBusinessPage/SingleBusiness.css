@@ -168,3 +168,49 @@
 .businessContactIcon a {
     color: #1f2f44
 }
+
+.businessCardDetail {
+    width: 290px;
+    word-wrap: break-word;
+}
+
+.userInfo {
+    display: grid;
+    width: fit-content;
+    column-gap: 20px;
+    grid-template-areas:
+        "avatar name"
+        "avatar loc"
+        "avatar stats";
+    align-items: center;
+    grid-auto-rows: 22px;
+}
+
+.avatar {
+    grid-area: avatar;
+    font-size: 60px;
+    width: fit-content;
+    margin-top: 15px;
+}
+
+.avatarFormat {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    width: 60px;
+    height: 60px;
+}
+
+.userName {
+    grid-area: name;
+    font-weight: 600;
+}
+
+.loc {
+    grid-area: loc;
+}
+
+.stats {
+    grid-area: stats;
+    font-weight: 500;
+}
