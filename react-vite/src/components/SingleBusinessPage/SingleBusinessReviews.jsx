@@ -35,6 +35,16 @@ function SingleBusinessReviews({ businessId }) {
         return [filled_paws, unfilled_paws]
     }
 
+    const dateFormat = (date) => {
+        let newDate = new Date(date)
+        const enUSFormatter = new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+        return enUSFormatter.format(newDate)
+    }
+
     return (reviews &&
         <>
             <h3>Reviews</h3>
@@ -47,10 +57,10 @@ function SingleBusinessReviews({ businessId }) {
                         <div className="userName">{review.user.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
                         <div className="loc">{review.user.city}, {review.user.state}</div>
                         <div className="stats">
-                            <span className="paws-unfilled" style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> {review.user.user_num_reviews} &nbsp;&nbsp;
-                            <span className="paws-unfilled" style={{ fontSize: "small" }}><i class="fa-regular fa-image" /></span> {review.user.user_num_images}</div>
+                            <span className="paws-filled" style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> &nbsp;{review.user.user_num_reviews} &nbsp;&nbsp;&nbsp;
+                            <span className="paws-filled" style={{ fontSize: "small" }}><i class="fa-regular fa-image" /></span> &nbsp;{review.user.user_num_images}</div>
                     </div>
-                    <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;{review.created_at}</p>
+                    <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;{review.created_at && (dateFormat(review.created_at))}</p>
 
                     <p>{review.review}</p>
                     <br />

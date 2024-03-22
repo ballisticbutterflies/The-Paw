@@ -203,4 +203,6 @@
 
 .stats {
     grid-area: stats;
+    font-weight: 500;
+    color: #5f5ba8;
 }
