@@ -126,7 +126,7 @@ def create_business():
     if form.validate_on_submit():
         business = Business(
             owner_id = current_user.id,
-            category_id = form.data['category'],
+            category_id = form.data['category_id'],
             address=form.data['address'],
             city=form.data['city'],
             state=form.data['state'],

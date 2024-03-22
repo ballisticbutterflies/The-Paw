@@ -63,7 +63,7 @@ class Business(db.Model):
         return {
             'id': self.id,
             'owner_id': self.owner_id,
-            # 'category_id': self.category_id,
+            'category_id': self.category_id,
             'address': self.address,
             'city': self.city,
             'state': self.state,
