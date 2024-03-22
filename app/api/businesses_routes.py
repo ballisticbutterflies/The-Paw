@@ -52,7 +52,7 @@ def get_business(id):
 
     business_dict['business_images'] = business_image_urls
 
-    categories = Category.query.filter(Category.id == business.category_id);
+    categories = Category.query.filter(Category.id == business.category_id)
     category_dict = { category.id: {
         'id': category.id,
         'name': category.name
