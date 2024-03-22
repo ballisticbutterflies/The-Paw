@@ -103,7 +103,7 @@ function CreateBusinessPage() {
     'WV', 'WI', 'WY']
 
   const categories = ['Restaurants', 'Veterinarians', 'Services', 'Shopping',
-    'Travel', 'Activities', 'Adoption', 'More...']
+    'Travel', 'Activities', 'Adoption', 'Other']
 
 
   useEffect(() => {
