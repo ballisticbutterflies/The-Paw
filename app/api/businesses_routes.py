@@ -70,18 +70,50 @@ def get_reviews_by_business_id(id):
     if (business == None):
         return {"message": "Business couldn\'t be found"}, 404
     
-    reviews = Review.query.filter(Review.business_id == id).all()
+    reviews = Review.query.filter(Review.business_id == id).order_by(Review.created_at.desc()).all()
 
     user_ids = [review.user_id for review in reviews]
     users = User.query.filter(User.id.in_(user_ids)).all()
     review_ids = [review.id for review in reviews]
-    review_images = Image.query.filter(Image.imageable_id.in_(review_ids)).all()
+    review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
+
+    user_images = Image.query.filter(Image.imageable_type == 'user').filter(User.id.in_(user_ids)).all()
+
+    user_image_dict = {image.imageable_id: image.url for image in user_images}
+
+    all_reviews = Review.query.all()
+
+    user_num_reviews = {}
+
+    for review in all_reviews:
+        user_id = review.user_id
+        if user_id in user_num_reviews:
+            user_num_reviews[user_id] += 1
+        else:
+            user_num_reviews[user_id] = 1
+    
+    all_business_review_images = Image.query.filter(Image.imageable_type != 'user').all()
+
+    user_num_images = {}
+    
+    for image in all_business_review_images:
+        user_id = image.uploader_id
+        if user_id in user_num_images:
+            user_num_images[user_id] += 1
+        else:
+            user_num_images[user_id] = 1
 
     users_dict = { user.id: {
         'id': user.id,
         'first_name': user.first_name,
-        'last_name': user.last_name
+        'last_name': user.last_name,
+        'city': user.city,
+        'state': user.state,
+        'user_image_url': user_image_dict.get(user.id),
+        'user_num_reviews': user_num_reviews.get(user.id, 0),
+        'user_num_images': user_num_images.get(user.id, 0)
         } for user in users }
+
 
     reviews_list = []
 
@@ -102,6 +134,8 @@ def get_reviews_by_business_id(id):
                 'business_id': review.business_id,
                 'review': review.review,
                 'stars': review.stars,
+                'created_at': review.created_at,
+                'updated_at': review.updated_at,
                 'user': user_data,
                 'review_images': review_image_data
         }
