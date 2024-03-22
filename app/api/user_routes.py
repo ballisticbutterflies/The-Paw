@@ -66,7 +66,7 @@ def user_reviews(id):
     """
     Query to fetch all reviews written by a specific user and returns them in a list of dictionaries
     """
-    from .review_routes import reviews_route, get_review
+    from .review_routes import reviews_route, get_review # importing here to resolve circular import error
     user_reviews = Review.query.filter(Review.user_id == id).all()
     # all_user_reviews = {'reviews': []} # create dict to hold list of all reviews
 
