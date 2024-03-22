@@ -162,7 +162,7 @@ def create_review(business_id):
 
     business_owner_id = get_business(business_id)['business'][0]['owner_id']
     # current_user_id = current_user.id
-    current_user_id = form['user_id']
+    current_user_id = current_user['id']
     print("######################, business owner id: ", business_owner_id, " current user id: ", current_user_id)
 
 
@@ -204,7 +204,7 @@ def create_review(business_id):
     # if check_for_existing_review(business_id=business_id, current_user_id=current_user_id):
     if form.validate_on_submit():
         review = Review(
-            user_id = current_user.id,
+            user_id = current_user_id,
             business_id = business_id,
             review = form.data['review'],
             stars = form.data['stars']
