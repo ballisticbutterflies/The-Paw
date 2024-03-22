@@ -1,7 +1,7 @@
 from flask import Blueprint, request;
 from flask_login import login_required, current_user
 from app.models import Business, Review, Image, User, Category, db;
-from app.forms import CreateBusinessForm
+from app.forms import CreateBusinessForm, CreateReviewForm
 
 businesses_route = Blueprint('businesses', __name__)
 
@@ -150,6 +150,49 @@ def get_reviews_by_business_id(id):
     else:
         return { 'reviews': reviews_list }
 
+@businesses_route.route('/<int:business_id>/reviews', methods=['POST'])
+@login_required
+def create_review(business_id):
+    """
+    Creates a new review and adds to db based on business id and returns the new review
+    """
+    form = CreateReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+
+    business_owner_id = get_business(business_id)['business'][0]['owner_id']
+    current_user_id = current_user.id
+    print("######################, business owner id: ", business_owner_id, " current user id: ", current_user_id)
+
+
+    forbidden_res = {'errors': {'message': 'Forbidden' }}, 403  
+
+    def forbidden_res_func():
+        print("its aliiiiiive")
+        return {'errors': {'message': 'Forbidden' }}, 403 
+
+    existing_review = Review.query.filter(Review.user_id == current_user_id, Review.business_id== business_id).first()
+    if existing_review:
+        return forbidden_res_func()  
+
+    if current_user_id == business_owner_id:
+        return forbidden_res_func()
+
+    print("hello howdy")
+    
+    if not existing_review:
+        if form.validate_on_submit():
+            review = Review(
+                user_id = current_user_id,
+                business_id = business_id,
+                review = form.data['review'],
+                stars = form.data['stars']
+            )
+            db.session.add(review)
+            db.session.commit()
+
+            return review.to_dict()
+    return form.errors, 401
 
 @businesses_route.route('/', methods=['POST'])
 @login_required
