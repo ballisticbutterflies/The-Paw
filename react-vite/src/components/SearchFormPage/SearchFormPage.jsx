@@ -27,8 +27,8 @@ function SearchFormPage() {
   }
 
   const starsToFixed = (stars) => {
-    if (stars >= 1) {
-      let int = parseInt(stars)
+    let int = parseInt(stars)
+    if (int >= 1) {
       return int.toFixed(1)
     } else {
       return false
@@ -70,7 +70,7 @@ function SearchFormPage() {
           <span key={business.id}>
             <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
               <span>
-                <img className="businessesImage" src={business.images} alt={business.name} />
+                <img className="businessesImage" src={business.images[0]} alt={business.name} />
               </span>
               <>
                 <span key={`bizDeets-${business.id}`} className="businessDeets">
