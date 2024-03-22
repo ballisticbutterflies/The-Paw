@@ -8,7 +8,7 @@ function BusinessDetails({ business }) {
             </div>
             <hr />
             <div>
-                <h3>About This Business</h3>
+                <h3>About this Business</h3>
                 {business.description}
             </div>
             <hr />
