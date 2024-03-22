@@ -113,19 +113,37 @@ def get_reviews_by_business_id(id):
     else:
         return { 'reviews': reviews_list }
 
-@businesses_route.route('/<int:id>/reviews', methods=['POST'])
+@businesses_route.route('/<int:business_id>/reviews', methods=['POST'])
 @login_required
-def create_review(id):
+def create_review(business_id):
     """
     Creates a new review and adds to db based on business id and returns the new review
     """
     form = CreateReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
+    business_owner_id = get_business(business_id)['business'][0]['owner_id']
+    current_user_id = current_user.id
+
+    forbidden_res = {'errors': {'message': 'Forbidden' }}, 403    
+
+    def check_for_existing_review(business_id, current_user_id):
+        existing_reviews = get_reviews_by_business_id(business_id)['reviews']
+        exisiting_review_authors = []
+        for review in existing_reviews:
+            exisiting_review_authors.append(review['user_id'])
+        if current_user_id in exisiting_review_authors:
+            return forbidden_res
+        else:
+            return True
+
+    if current_user_id == business_owner_id:
+        return forbidden_res
+
+    if form.validate_on_submit() and check_for_existing_review(business_id, current_user_id):
         review = Review(
-            user_id = current_user.id,
-            business_id = id,
+            user_id = current_user_id,
+            business_id = business_id,
             review = form.data['review'],
             stars = form.data['stars']
         )
