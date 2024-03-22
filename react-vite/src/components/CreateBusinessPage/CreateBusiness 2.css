@@ -1,0 +1,6 @@
+.createBizForm {
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  margin-left: 25px;
+}

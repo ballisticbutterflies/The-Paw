@@ -173,3 +173,34 @@
     width: 255px;
     word-wrap: break-word;
 }
+
+.userInfo {
+    display: grid;
+    width: fit-content;
+    column-gap: 20px;
+    grid-template-areas:
+        "avatar name"
+        "avatar loc"
+        "avatar stats";
+    align-items: center;
+    grid-auto-rows: 22px;
+}
+
+.avatar {
+    grid-area: avatar;
+    font-size: 60px;
+    width: fit-content;
+}
+
+.userName {
+    grid-area: name;
+    font-weight: 600;
+}
+
+.loc {
+    grid-area: loc;
+}
+
+.stats {
+    grid-area: stats;
+}
