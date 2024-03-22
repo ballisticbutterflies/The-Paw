@@ -17,6 +17,7 @@ def search():
   price_string = request.args.get('price')
   prices = price_string.split(',') if price_string else []
   city = request.args.get('city')
+  category = request.args.get('category')
 
 #base query to fetch businesses
   query = Business.query
@@ -30,6 +31,9 @@ def search():
 
   if city:
     query = query.filter(Business.city == city)
+
+  if category:
+    query = query.filter(Business.category_id == category)
 
   businesses = query.all()
 
