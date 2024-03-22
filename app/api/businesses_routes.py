@@ -70,7 +70,7 @@ def get_reviews_by_business_id(id):
     if (business == None):
         return {"message": "Business couldn\'t be found"}, 404
     
-    reviews = Review.query.filter(Review.business_id == id).all()
+    reviews = Review.query.filter(Review.business_id == id).order_by(Review.created_at.desc()).all()
 
     user_ids = [review.user_id for review in reviews]
     users = User.query.filter(User.id.in_(user_ids)).all()
@@ -80,7 +80,9 @@ def get_reviews_by_business_id(id):
     users_dict = { user.id: {
         'id': user.id,
         'first_name': user.first_name,
-        'last_name': user.last_name
+        'last_name': user.last_name,
+        'city': user.city,
+        'state': user.state,
         } for user in users }
 
     reviews_list = []
@@ -102,6 +104,8 @@ def get_reviews_by_business_id(id):
                 'business_id': review.business_id,
                 'review': review.review,
                 'stars': review.stars,
+                'created_at': review.created_at,
+                'updated_at': review.updated_at,
                 'user': user_data,
                 'review_images': review_image_data
         }
