@@ -11,6 +11,7 @@ const FilterComponent = ({ onFilterChange }) => {
     { name: "$$$", checked: false },
     { name: "$$$$", checked: false },
   ])
+  const [category, setCategory] = useState('')
 
   const handleFilterChange = (e) => {
     // Construct URL with filter parameters
@@ -24,7 +25,7 @@ const FilterComponent = ({ onFilterChange }) => {
       let priceObj = [...price]
       let searchingPrice = priceObj.filter((char) => char.checked === true);
       let result = searchingPrice.map(ele => ele.name)
-      
+
       let string = result.toString()
       queryParams.append("price", string);
 
@@ -46,6 +47,11 @@ const FilterComponent = ({ onFilterChange }) => {
     updatedPrice[i].checked = isChecked
     setPrice(updatedPrice)
   }
+
+  const categories = ['Restaurants', 'Veterinarians',
+              'Services', 'Shopping',
+              'Travel', 'Activities',
+              'Adoption', 'More...']
 
 
   return (
@@ -72,6 +78,20 @@ const FilterComponent = ({ onFilterChange }) => {
                 {char.name}
             </label>
           )}
+        </div>
+        <div>
+        <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            name="state"
+          >
+            <option value="">Select Category</option>
+            {categories.map((category, index) => (
+              <option key={category} value={index + 1}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
         <button onClick={handleFilterChange}>Apply Filters</button>
       </div>
