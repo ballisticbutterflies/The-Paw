@@ -170,48 +170,28 @@ def create_review(business_id):
     def forbidden_res_func():
         print("its aliiiiiive")
         return {'errors': {'message': 'Forbidden' }}, 403 
-    
 
-    def check_for_existing_review(business_id, current_user_id):
-        existing_reviews = get_reviews_by_business_id(business_id)['reviews']
-        exisiting_review_authors = []
-        for review in existing_reviews:
-            print("review user id type", type(review['user_id']))
-            
-            exisiting_review_authors.append(review['user_id'])
-
-        print("############# existing review Authors", exisiting_review_authors)
-        print("############# existing review Authors type ", type(exisiting_review_authors))
-        print("current user id type", type(current_user_id))
-        if current_user_id in exisiting_review_authors:
-            return forbidden_res_func() 
-        
-
-        # for author in exisiting_review_authors:
-        #     print("author: ", author)
-        #     print("current user id: ", current_user.id)
-        #     if(author == current_user.id):
-        #         forbidden_res_func()   
+    existing_review = Review.query.filter(Review.user_id == current_user_id, Review.business_id== business_id).first()
+    if existing_review:
+        return forbidden_res_func()  
 
     if current_user_id == business_owner_id:
         return forbidden_res_func()
-    
-    check_for_existing_review(business_id, current_user_id)
 
     print("hello howdy")
     
-    # if check_for_existing_review(business_id=business_id, current_user_id=current_user_id):
-    if form.validate_on_submit():
-        review = Review(
-            user_id = current_user_id,
-            business_id = business_id,
-            review = form.data['review'],
-            stars = form.data['stars']
-        )
-        db.session.add(review)
-        db.session.commit()
+    if not existing_review:
+        if form.validate_on_submit():
+            review = Review(
+                user_id = current_user_id,
+                business_id = business_id,
+                review = form.data['review'],
+                stars = form.data['stars']
+            )
+            db.session.add(review)
+            db.session.commit()
 
-        return review.to_dict()
+            return review.to_dict()
     return form.errors, 401
 
 @businesses_route.route('/', methods=['POST'])
