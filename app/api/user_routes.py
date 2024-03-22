@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import User, Image, Review, Business
 from .businesses_routes import businesses_route, get_business
+# from .review_routes import reviews_route, get_review
 from sqlalchemy import func 
 
 
@@ -60,7 +61,24 @@ def user_images_all(id):
 
     return user_images_all_list
 
+@user_routes.route('/<int:id>/reviews')
+def user_reviews(id):
+    """
+    Query to fetch all reviews written by a specific user and returns them in a list of dictionaries
+    """
+    from .review_routes import reviews_route, get_review # importing here to resolve circular import error
+    user_reviews = Review.query.filter(Review.user_id == id).all()
+    # all_user_reviews = {'reviews': []} # create dict to hold list of all reviews
 
+    def format_reviews(review):
+        review_id = review.to_dict()['id'] # extract review id
+        review_dict_indiv = get_review(review_id) # use get review by id route to simplify this route
+
+        return { review_id: review_dict_indiv } # create a final dict to hold each review with the key as the id for easier routing
+
+
+    all_reviews_dict = {'reviews': [format_reviews(user_review) for user_review in user_reviews]} # structure final response dict by calling the above helper function to 
+    return all_reviews_dict
 
 @user_routes.route('/<int:id>')
 def user(id):
