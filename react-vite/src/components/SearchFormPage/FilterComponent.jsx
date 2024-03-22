@@ -51,7 +51,7 @@ const FilterComponent = ({ onFilterChange }) => {
   const categories = ['Restaurants', 'Veterinarians',
               'Services', 'Shopping',
               'Travel', 'Activities',
-              'Adoption', 'More...']
+              'Adoption', 'Other']
 
 
   return (
