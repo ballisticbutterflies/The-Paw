@@ -33,7 +33,13 @@ function BusinessDetails({ business, businessId }) {
                 <div>[Street Parking]</div>
             </div>
             <hr />
-            <SingleBusinessReviews business={business} businessId={businessId} />
+            <h3>Reviews</h3>
+            {business.reviews.num_reviews == 0 ? (
+                <div>Be the first to review!</div>
+            ) : (
+                <SingleBusinessReviews business={business} businessId={businessId} />
+            )}
+            <br />
         </div>
     )
 }

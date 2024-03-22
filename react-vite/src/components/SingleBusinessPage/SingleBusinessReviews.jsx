@@ -47,7 +47,6 @@ function SingleBusinessReviews({ businessId }) {
 
     return (reviews &&
         <>
-            <h3>Reviews</h3>
             {reviews.map((review) => (review.user &&
                 <div key={review.id}>
                     <div className="userInfo">
@@ -55,14 +54,14 @@ function SingleBusinessReviews({ businessId }) {
                             {review.user.user_image_url ? (
                                 <img class="avatarFormat" src={review.user.user_image_url} />
                             ) : (
-                                <i className="fa-solid fa-circle-user" />
+                                <img class="avatarFormat" src='../../images/defaultAvatar.png' />
                             )}
                         </div>
                         <div className="userName">{review.user.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
                         <div className="loc">{review.user.city}, {review.user.state}</div>
                         <div className="stats">
-                            <span className="paws-filled" style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> &nbsp;{review.user.user_num_reviews} &nbsp;&nbsp;&nbsp;
-                            <span className="paws-filled" style={{ fontSize: "small" }}><i class="fa-regular fa-image" /></span> &nbsp;{review.user.user_num_images}</div>
+                            <span style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> &nbsp;{review.user.user_num_reviews} &nbsp;&nbsp;&nbsp;
+                            <span style={{ fontSize: "small" }}><i class="fa-regular fa-image" /></span> &nbsp;{review.user.user_num_images}</div>
                     </div>
                     <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;{review.created_at && (dateFormat(review.created_at))}</p>
 
