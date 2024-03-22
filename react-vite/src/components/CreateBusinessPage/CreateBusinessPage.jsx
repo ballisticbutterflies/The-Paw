@@ -19,12 +19,6 @@ function CreateBusinessPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('')
-  const [activePrice, setActivePrice] = useState([
-    { name: "$", checked: false },
-    { name: "$$", checked: false },
-    { name: "$$$", checked: false },
-    { name: "$$$$", checked: false },
-  ]);
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
   const [phone, setPhone] = useState('');
@@ -33,16 +27,16 @@ function CreateBusinessPage() {
   const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const updatePrice = (e) => {
-    const selectedPrice = e.target.value; // Get the selected price
-    setActivePrice(
-      activePrice.map((option) => ({
-        ...option,
-        checked: option.name === selectedPrice, // Set checked to true only for the selected price
-      }))
-    );
-    setPrice(selectedPrice); // Update the price state with the selected price
-  }
+  const updatePrice = (selectedPrice) => {
+    if (price === selectedPrice) {
+      // If the same price is already selected, deselect it
+      setPrice('');
+    } else {
+      // Otherwise, update the selected price
+      setPrice(selectedPrice);
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -194,17 +188,18 @@ function CreateBusinessPage() {
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
           <div>
             Price (Optional):&nbsp;
-            {activePrice.map((option) =>
-              <label key={option.name}>
+            {["$","$$","$$$","$$$$"].map((option) => (
+              <label key={option}>
                 <input
                   type="radio"
-                  value={option.name}
-                  checked={option.checked}
-                  onChange={updatePrice}
+                  value={option}
+                  checked={price == option}
+                  onClick={() => updatePrice(option)}
+                  onChange={()=> {}}
                 />
-                {option.name}
+                {option}
               </label>
-            )}
+            ))}
           </div>
           <select
             value={category_id}
