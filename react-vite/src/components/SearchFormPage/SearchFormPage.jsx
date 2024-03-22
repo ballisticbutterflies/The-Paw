@@ -64,7 +64,7 @@ function SearchFormPage() {
   return (
     <>
       <div className="searchPage">
-      <h1>Paw-Recommended Results:</h1>
+        <h1>Paw-Recommended Results:</h1>
         <FilterComponent onFilterChange={handleFilterChange} />
         {businesses && businesses.map((business, index) => (
           <span key={business.id}>
@@ -75,17 +75,25 @@ function SearchFormPage() {
               <>
                 <span key={`bizDeets-${business.id}`} className="businessDeets">
                   <span>{index + 1}.&nbsp;{business.name}</span>
-                {
-                  business.avg_stars &&
+                  {
+                    business.avg_stars &&
 
-                  business.num_reviews && reviewsExists(business.num_reviews) &&
+                    business.num_reviews && reviewsExists(business.num_reviews) &&
                     <span>{business?.avg_stars && starReviews(business.avg_stars)}
-                    &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
-                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                      &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
+                      &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
 
-                }
+                  }
 
-                  <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                  {business.price !== null &&
+                    <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}  
+                    </span>
+                  }
+
+                  {business.price === null &&
+                    <span className="priceSubcat">{business.category?.name}
+                    </span>
+                  }
                   <span>HOURS PLACEHOLDER</span>
                   <span>
                     {business.recent_review_text &&
