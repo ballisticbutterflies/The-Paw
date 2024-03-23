@@ -5,6 +5,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import SearchFormPage from '../components/SearchFormPage';
 import SingleBusinessPage from '../components/SingleBusinessPage';
 import CreateBusinessPage from '../components/CreateBusinessPage';
+import CreateReviewPage from '../components/CreateReviewPage';
 
 
 export const router = createBrowserRouter([
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <CreateBusinessPage />,
+      },
+      {
+        path: "reviews/new",
+        element: <CreateReviewPage/>,
       },
     ],
   },
