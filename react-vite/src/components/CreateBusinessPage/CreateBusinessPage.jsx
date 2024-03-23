@@ -69,7 +69,7 @@ function CreateBusinessPage() {
 
     setImageLoading(true);
     // Dispatch createImage action with formData
-    dispatch(createImage(formData)).then(() => {
+    await dispatch(createImage(formData)).then(() => {
         dispatch(fetchSingleBusiness(businessId))
             .then(() => navigate(`/businesses/${businessId}`));
     }).catch((error) => {
@@ -124,6 +124,8 @@ function CreateBusinessPage() {
     if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Please enter a valid phone number using only numerical digits (no special characters or spaces)."
     if (phone.length >= 1 && phone.length > 10) errObj.phone = "Phone numbers must be 10 digits."
     if (!image) errObj.image = "Image is required."
+    if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
+    
     setErrors(errObj)
   }, [address, city, state, zip_code, name, description, website, email, phone, category_id, image])
 
