@@ -234,7 +234,7 @@ def update_business(id):
     business = Business.query.get(id)
 
     if business is None:
-        return {'message': 'Buiness couldn\'t be found' }, 404
+        return {'message': 'Business couldn\'t be found' }, 404
 
     if business.owner_id != current_user.id:
         return {'message': 'YOU DONT OWN THIS BUSINESS! GET OUTTA HERE!'}, 401
