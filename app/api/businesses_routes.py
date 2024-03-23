@@ -273,9 +273,8 @@ def get_images_by_business_id(id):
         'updated_at': image.updated_at
         } for image in business_images]
     
-    images_dict['id'] = id
+    images_dict['business_id'] = id
     images_dict['review_images'] = review_image_data
     images_dict['business_images'] = business_image_data
 
-    # images_data.append(review_image_data)
-    return { 'business': images_dict }
+    return { 'images': images_dict }
