@@ -57,8 +57,8 @@ function ManageBusinessPage() {
     <div className="manBizPage">
       <h1>Manage Businesses</h1>
       {businesses && businesses.map((business, index) => (
-        <>
-          <Link key={business.id} className="manBizCards" to={`/businesses/${business.id}`}>
+        <div key={business.id} className="bizandbutton">
+          <Link key={business.name} style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
             <img className="manBizImage" src={business.image} alt={business.name} />
             <span className="manBizDeets">
               {index + 1}.&nbsp;{business.name}
@@ -85,8 +85,10 @@ function ManageBusinessPage() {
               }
             </span>
           </Link>
-          <ManageBizButton business={business} />
-        </>
+          <div key={"BUTTON"} className="manbutton">
+            <ManageBizButton business={business} />
+          </div>
+        </div>
       ))}
 
     </div>

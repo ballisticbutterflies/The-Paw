@@ -73,6 +73,7 @@ a {
 
 a:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 hr {
@@ -80,3 +81,8 @@ hr {
     border: none;
     background-color: #c3cddf;
 }
+
+
+button:hover {
+    cursor: pointer;
+  }

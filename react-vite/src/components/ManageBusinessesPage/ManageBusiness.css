@@ -22,4 +22,40 @@
   flex-direction: column;
   text-wrap: wrap;
   padding-left: 20px;
+  width: 300px;
 }
+
+.bizandbutton {
+  display: flex;
+}
+
+.manage-dropdown {
+  background-color: #f78a63;
+  width: fit-content;
+  height: 100px;
+  display: grid;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.manbutton {
+  margin: 0 15px;
+
+}
+
+.manageMenu {
+  border: 1px solid #1f2f44;
+  border-radius: 50%;
+  color: #1f2f44;
+  background-color: transparent;
+}
+
+.updateBiz {
+  margin: auto;
+  /* border-bottom: #d8c3c3 1px solid; */
+}
+
+.deleteBiz {
+  margin: auto;
+}
+

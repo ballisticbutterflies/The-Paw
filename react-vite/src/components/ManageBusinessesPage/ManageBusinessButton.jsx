@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
-// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import "./ManageBusiness.css"
 
 
 function ManageBizButton({ business }) {
-
-  const navigate = useNavigate()
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -31,23 +29,24 @@ function ManageBizButton({ business }) {
 
   const closeMenu = () => setShowMenu(false);
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "manage-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      <button className='menu' onClick={toggleMenu}>
+      <button className='manageMenu' onClick={toggleMenu}>
         <i className="fa-solid fa-ellipsis" />
       </button>
       {showMenu &&
         <>
-          <ul className={ulClassName} ref={ulRef}></ul>
-          <ul>
+          <ul className={ulClassName} ref={ulRef}>
+            <p className="updateBiz">
             <Link to={`/businesses/${business.id}/edit`}
               onClick={closeMenu}
             >Update Business</Link>
-          </ul>
-          <ul>
-            Delete
+
+            </p>
+
+            <button onClick={() => window.alert("Feature Coming Soon...")}>Delete</button>
           {/* <OpenModalMenuItem
                 itemText="Delete Business"
                 onItemClick={closeMenu}
