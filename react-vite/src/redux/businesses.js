@@ -70,7 +70,7 @@ export const createImage = (post) => async (dispatch) => {
     }
 };
 
-export const loadImagesByBusiness = (businessId) => async dispatch => {
+export const getImagesByBusiness = (businessId) => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId}/images`)
 
     if (response.ok) {
@@ -96,11 +96,13 @@ const businessesReducer = (state = {}, action) => {
             businessState[action.business.id] = action.business
             return businessState
         }
-
         case CREATE_BUSINESS_IMAGES: {
             const imageState = { "images": [] }
             imageState["images"] = [action.post.image]
             return imageState
+        }
+        case LOAD_IMAGES: {
+            return { ...state, }
         }
         default:
             return { ...state }
