@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const StarRatingInput = ({ stars, onChange }) => {
 
-  const [ activeRating, setActiveRating ] = useState(stars)
+  const [activeRating, setActiveRating] = useState(stars)
 
-  useEffect(() => {
-    setActiveRating(stars)
-  }, [stars])
+  const handleStarClick = (starOrder) => {
+    const newRating = starOrder === activeRating ? null : starOrder;
+    setActiveRating(newRating);
+    onChange(newRating);
+  };
 
   return (
     <>
@@ -16,21 +18,26 @@ const StarRatingInput = ({ stars, onChange }) => {
             key={starOrder}
             className={activeRating >= starOrder ? "paws-filled" : "paws-unfilled"}
             onMouseEnter={() => setActiveRating(starOrder)}
-            onMouseLeave={() => setActiveRating(activeRating)}
-            onClick={() => onChange(starOrder)}
+            onMouseLeave={() => { if (activeRating !== stars) setActiveRating(null)}}
+            onClick={() => handleStarClick(starOrder)}
           >
-            <i className="fa-solid fa-paw"/>&nbsp;
+            <i className="fa-solid fa-paw" />&nbsp;
           </span>
         ))}
-          {activeRating && activeRating > 1 && activeRating < 5 &&
-            <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
-          }
-          { activeRating && activeRating === 1 &&
-            <span>{activeRating}&nbsp;Paw&nbsp;&&nbsp;Up!</span>
-          }
-          { activeRating && activeRating === 5 &&
-            <span>{activeRating}&nbsp;Paws!</span>
-          }
+        {activeRating !== 0 && (
+
+          <span>
+            {activeRating && activeRating > 1 && activeRating < 5 &&
+              <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
+            }
+            {activeRating && activeRating === 1 &&
+              <span>{activeRating}&nbsp;Paw&nbsp;&&nbsp;Up!</span>
+            }
+            {activeRating && activeRating === 5 &&
+              <span>{activeRating}&nbsp;Paws!</span>
+            }
+          </span>
+        )}
       </div>
     </>
   )

@@ -44,7 +44,11 @@ const FilterComponent = ({ onFilterChange }) => {
   }
 
   const onChangeStars = (number) => {
-    setStars(parseInt(number))
+    if (number) {
+      setStars(parseInt(number))
+    }else {
+      setStars("")
+    }
   }
 
   const updatePrice = (i, isChecked) => {
