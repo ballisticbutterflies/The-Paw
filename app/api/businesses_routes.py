@@ -325,10 +325,8 @@ def get_user_businesses():
     businesses = Business.query.filter(Business.owner_id == userId)
 
 
-
     if businesses is None:
         return {'message': 'Business couldn\'t be found' }, 404
-
 
     business_data = []
     for business in businesses:
