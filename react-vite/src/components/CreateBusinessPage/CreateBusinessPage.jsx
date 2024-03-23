@@ -70,11 +70,11 @@ function CreateBusinessPage() {
     setImageLoading(true);
     // Dispatch createImage action with formData
     await dispatch(createImage(formData)).then(() => {
-        dispatch(fetchSingleBusiness(businessId))
-            .then(() => navigate(`/businesses/${businessId}`));
+      dispatch(fetchSingleBusiness(businessId))
+        .then(() => navigate(`/businesses/${businessId}`));
     }).catch((error) => {
-        console.error("Error uploading image:", error);
-        setImageLoading(false);
+      console.error("Error uploading image:", error);
+      setImageLoading(false);
     });
   }
 
@@ -190,14 +190,14 @@ function CreateBusinessPage() {
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
           <div className="inputFields">
             Price (Optional):&nbsp;
-            {["$","$$","$$$","$$$$"].map((option) => (
+            {["$", "$$", "$$$", "$$$$"].map((option) => (
               <label key={option}>
                 <input
                   type="radio"
                   value={option}
                   checked={price == option}
                   onClick={() => updatePrice(option)}
-                  onChange={()=> {}}
+                  onChange={() => { }}
                 />
                 {option}
               </label>
@@ -241,18 +241,15 @@ function CreateBusinessPage() {
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
           <input className="inputFields"
-                type="file"
-                accept="image/*"
-                onChange={(e) => setImage(e.target.files[0])}
-                />
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
           {errors.image && <span className="errors">&nbsp;{errors.image}</span>}
           {(imageLoading) && <p>Loading...</p>}
           <button type="submit" className="inputFields" disabled={!!Object.values(errors).length}>Create Business</button>
         </form>
       }
-      {/* <div>
-        <UploadPicture />
-      </div> */}
     </>
   )
 }
