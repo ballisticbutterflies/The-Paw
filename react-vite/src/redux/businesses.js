@@ -1,6 +1,7 @@
 const LOAD_SINGLE_BUSINESS = 'businesses/LOAD_SINGLE_BUSINESS'
-const CREATE_BUSINESS = 'business/CREATE_BUSINESS'
-const CREATE_BUSINESS_IMAGES = 'business/CREATE_BUSINESS_IMAGES'
+const CREATE_BUSINESS = 'businesses/CREATE_BUSINESS'
+const CREATE_BUSINESS_IMAGES = 'businesses/CREATE_BUSINESS_IMAGES'
+const UPDATE_BUSINESS = 'businesses/UPDATE_BUSINESS'
 
 
 export const loadSingleBusiness = (business) => ({
@@ -16,6 +17,11 @@ export const receiveBusiness = (business) => ({
 export const createBusinessImages = (post) => ({
     type: CREATE_BUSINESS_IMAGES,
     post
+})
+
+export const editBusiness = (business) => ({
+    type: UPDATE_BUSINESS,
+    business
 })
 
 
@@ -63,6 +69,22 @@ export const createImage = (post) => async (dispatch) => {
         console.log("There was an error making your post!")
     }
 };
+
+export const updateBusiness = (business) => async (dispatch) => {
+    const response = await fetch(`/api/businesses/${business.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(business)
+    });
+    if (response.ok) {
+        const updatedBiz = await response.json();
+        dispatch(editBusiness(updatedBiz));
+        return updatedBiz;
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+}
 
 // REDUCER
 
