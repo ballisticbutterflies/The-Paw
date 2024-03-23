@@ -256,6 +256,6 @@ def update_business(id):
         business.price = form.data['price']
 
         db.session.commit()
-        return {'message': 'Business updated successfully'}
+        return business.to_dict()
 
     return {"errors": form.errors}, 400
