@@ -125,7 +125,7 @@ function CreateBusinessPage() {
     if (phone.length >= 1 && phone.length > 10) errObj.phone = "Phone numbers must be 10 digits."
     if (!image) errObj.image = "Image is required."
     if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
-    
+
     setErrors(errObj)
   }, [address, city, state, zip_code, name, description, website, email, phone, category_id, image])
 
@@ -135,7 +135,7 @@ function CreateBusinessPage() {
       {sessionUser &&
         <form className="createBizForm" onSubmit={handleSubmit} encType="multipart/form-data">
           <h1>Add your business to The Paw!</h1>
-          <input
+          <input className="inputFields"
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -143,7 +143,7 @@ function CreateBusinessPage() {
             name="address"
           />
           {errors.address && <span className="errors">&nbsp;{errors.address}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -151,7 +151,7 @@ function CreateBusinessPage() {
             name="city"
           />
           {errors.city && <span className="errors">&nbsp;{errors.city}</span>}
-          <select
+          <select className="inputFields"
             value={state}
             onChange={(e) => setState(e.target.value)}
             name="state"
@@ -164,7 +164,7 @@ function CreateBusinessPage() {
             ))}
           </select>
           {errors.state && <span className="errors">&nbsp;{errors.state}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={zip_code}
             onChange={(e) => setZip_code(e.target.value)}
@@ -172,7 +172,7 @@ function CreateBusinessPage() {
             name="zip_code"
           />
           {errors.zip_code && <span className="errors">&nbsp;{errors.zip_code}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -180,7 +180,7 @@ function CreateBusinessPage() {
             name="name"
           />
           {errors.name && <span className="errors">&nbsp;{errors.name}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -188,7 +188,7 @@ function CreateBusinessPage() {
             name="description"
           />
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
-          <div>
+          <div className="inputFields">
             Price (Optional):&nbsp;
             {["$","$$","$$$","$$$$"].map((option) => (
               <label key={option}>
@@ -203,7 +203,7 @@ function CreateBusinessPage() {
               </label>
             ))}
           </div>
-          <select
+          <select className="inputFields"
             value={category_id}
             onChange={(e) => setCategory_id(e.target.value)}
             name="category"
@@ -216,7 +216,7 @@ function CreateBusinessPage() {
             ))}
           </select>
           {errors.category_id && <span className="errors">&nbsp;{errors.category_id}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={website}
             onChange={(e) => setWebsite(e.target.value)}
@@ -224,7 +224,7 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.website && <span className="errors">&nbsp;{errors.website}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -232,7 +232,7 @@ function CreateBusinessPage() {
             name="email"
           />
           {errors.email && <span className="errors">&nbsp;{errors.email}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -240,14 +240,14 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
-          <input
+          <input className="inputFields"
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
                 />
-                {errors.image && <span className="errors">&nbsp;{errors.image}</span>}
+          {errors.image && <span className="errors">&nbsp;{errors.image}</span>}
           {(imageLoading) && <p>Loading...</p>}
-          <button type="submit" disabled={!!Object.values(errors).length}>Create Business</button>
+          <button type="submit" className="inputFields" disabled={!!Object.values(errors).length}>Create Business</button>
         </form>
       }
       {/* <div>
