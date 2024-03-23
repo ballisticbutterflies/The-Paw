@@ -1,4 +1,5 @@
 import { useModal } from "../../context/Modal"
+
 function AllPhotosModal() {
 
 }
