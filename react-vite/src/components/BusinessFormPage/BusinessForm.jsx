@@ -132,7 +132,7 @@ function CreateBusinessPage({ business, formType }) {
     // if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
 
     setErrors(errObj)
-  }, [address, city, state, zip_code, name, description, website, email, phone, category_id, image])
+  }, [address, formType, city, state, zip_code, name, description, website, email, phone, category_id, image])
 
 
   return (

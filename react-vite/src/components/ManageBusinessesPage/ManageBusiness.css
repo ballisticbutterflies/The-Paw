@@ -1,0 +1,25 @@
+.manBizCards {
+  display: flex;
+  border: 1px solid black;
+  padding: 15px 10px 10px 10px;
+  margin-bottom: 20px;
+  width: 600px
+}
+
+.manBizImage {
+  height: 150px;
+  width: 250px;
+  padding: 10px;
+}
+
+.manBizPage {
+  margin: auto;
+  max-width: 800px;
+}
+
+.manBizDeets {
+  display: flex;
+  flex-direction: column;
+  text-wrap: wrap;
+  padding-left: 20px;
+}
