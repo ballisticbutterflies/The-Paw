@@ -225,6 +225,61 @@ def create_business():
     return form.errors, 401
 
 
+
+@businesses_route.route('/<int:id>/images')
+def get_images_by_business_id(id):
+    business = Business.query.get(id)
+
+    if (business == None):
+        return {"message": "Business couldn't be found" }, 404
+    
+    reviews = Review.query.filter(Review.business_id == id).all()
+    review_ids = [review.id for review in reviews]
+    review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
+
+    images_dict = {}
+
+    user_ids = [review.user_id for review in reviews]
+    users = User.query.filter(User.id.in_(user_ids)).all()
+
+    users_dict = { user.id: {
+        'id': user.id,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        } for user in users }
+    
+    for review in reviews:
+        user_data = users_dict.get(review.user_id)
+
+        review_image_data = [{
+            'id': image.id,
+            'url': image.url,
+            'uploader_id': image.uploader_id,
+            'user': user_data,
+            'imageable_id': image.imageable_id,
+            'imageable_type': image.imageable_type,
+            'created_at': image.created_at,
+            'updated_at': image.updated_at
+            } for image in review_images]
+    
+    business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
+
+    business_image_data = [{
+        'id': image.id,
+        'url': image.url,
+        'uploader_id': image.uploader_id,           
+        'imageable_id': image.imageable_id,
+        'imageable_type': image.imageable_type,
+        'created_at': image.created_at,
+        'updated_at': image.updated_at
+        } for image in business_images]
+    
+    images_dict['business_id'] = id
+    images_dict['review_images'] = review_image_data
+    images_dict['business_images'] = business_image_data
+
+    return { 'images': images_dict }
+
 @businesses_route.route('/<int:id>', methods=["PUT"])
 @login_required
 def update_business(id):
@@ -259,3 +314,4 @@ def update_business(id):
         return business.to_dict()
 
     return {"errors": form.errors}, 400
+
