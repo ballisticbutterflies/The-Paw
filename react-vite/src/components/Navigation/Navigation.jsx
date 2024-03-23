@@ -76,7 +76,7 @@ function Navigation() {
         {user ? (
           <>
             <div>
-              <ProfileButton />
+              <ProfileButton user={user} />
             </div>
           </>
         ) : (

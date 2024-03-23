@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
-function ProfileButton() {
+function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  console.log(user);
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -39,9 +39,16 @@ function ProfileButton() {
     closeMenu();
   };
 
+  const lastInitial = (lastName) => {
+    let last = lastName.charAt(0)
+    return last + "."
+  }
+
   return (
     <>
-      <div onClick={toggleMenu}><FaUserCircle /></div>
+      <div onClick={toggleMenu}>
+        <span className='toolTip'>{user && user.first_name} {user.last_name && lastInitial(user.last_name)}</span>
+        <img className="avatar" src='../../images/defaultAvatar.png' /></div>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
