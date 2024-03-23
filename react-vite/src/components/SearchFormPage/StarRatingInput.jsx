@@ -15,12 +15,10 @@ const StarRatingInput = ({ stars, onChange }) => {
       <div className="rating-input">
         {[1, 2, 3, 4, 5].map((starOrder) => (
           <span
-            key={starOrder}
-            className={activeRating >= starOrder ? "paws-filled" : "paws-unfilled"}
-            onMouseEnter={() => setActiveRating(starOrder)}
-            onMouseLeave={() => { if (activeRating !== stars) setActiveRating(null)}}
-            onClick={() => handleStarClick(starOrder)}
-          >
+          key={starOrder}
+          className={activeRating >= starOrder ? "paws-filled" : "paws-unfilled"}
+          onClick={() => handleStarClick(starOrder)}
+        >
             <i className="fa-solid fa-paw" />&nbsp;
           </span>
         ))}

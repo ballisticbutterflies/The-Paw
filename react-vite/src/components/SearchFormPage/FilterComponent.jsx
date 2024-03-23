@@ -88,7 +88,7 @@ const FilterComponent = ({ onFilterChange }) => {
             </label>
           )}
         </div>
-        <div>
+        <div className="categoryFilter">
           <h4>Category</h4>
           <select
             value={category_id}

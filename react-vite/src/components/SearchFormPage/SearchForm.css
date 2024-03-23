@@ -68,3 +68,9 @@
 .searchPage {
   padding-left: 25px;
 }
+
+.categoryFilter {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #c3cddf;
+  margin-bottom: 10px;
+}
