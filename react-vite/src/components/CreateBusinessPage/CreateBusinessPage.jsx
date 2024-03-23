@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { createBusiness, fetchSingleBusiness, createImage } from "../../redux/businesses"
 import "./CreateBusiness.css"
-// import UploadPicture from "./CreateImage"
 
 
 function CreateBusinessPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -21,30 +19,24 @@ function CreateBusinessPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('')
-  const [activePrice, setActivePrice] = useState([
-    { name: "$", checked: false },
-    { name: "$$", checked: false },
-    { name: "$$$", checked: false },
-    { name: "$$$$", checked: false },
-  ]);
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
   const [phone, setPhone] = useState('');
-  // const [category, setCategory] = useState('');
+  const [category_id, setCategory_id] = useState('');
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const updatePrice = (e) => {
-    const selectedPrice = e.target.value; // Get the selected price
-    setActivePrice(
-      activePrice.map((option) => ({
-        ...option,
-        checked: option.name === selectedPrice, // Set checked to true only for the selected price
-      }))
-    );
-    setPrice(selectedPrice); // Update the price state with the selected price
-  }
+  const updatePrice = (selectedPrice) => {
+    if (price === selectedPrice) {
+      // If the same price is already selected, deselect it
+      setPrice('');
+    } else {
+      // Otherwise, update the selected price
+      setPrice(selectedPrice);
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,11 +53,11 @@ function CreateBusinessPage() {
       price,
       email,
       website,
-      phone
+      phone,
+      category_id
     }
     // Dispatch createBusiness action
     const businessResponse = await dispatch(createBusiness(newBusiness));
-
 
     const businessId = businessResponse.id; // Extract business ID from response
 
@@ -77,7 +69,7 @@ function CreateBusinessPage() {
 
     setImageLoading(true);
     // Dispatch createImage action with formData
-    dispatch(createImage(formData)).then(() => {
+    await dispatch(createImage(formData)).then(() => {
         dispatch(fetchSingleBusiness(businessId))
             .then(() => navigate(`/businesses/${businessId}`));
     }).catch((error) => {
@@ -110,24 +102,32 @@ function CreateBusinessPage() {
     'UT', 'VT', 'VI', 'VA', 'WA',
     'WV', 'WI', 'WY']
 
+  const categories = ['Restaurants', 'Veterinarians', 'Services', 'Shopping',
+    'Travel', 'Activities', 'Adoption', 'Other']
+
+
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let errObj = {}
-    if (!address) errObj.address = "Address is required"
-    if (!city) errObj.city = "City is required"
-    if (!state) errObj.state = "State is required"
-    if (!zip_code) errObj.zip_code = "ZIP Code is required"
-    if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid"
-    if (!name) errObj.name = "Name is required"
-    if (name.length > 100) errObj.name = "Name must be less than 100 characters"
-    if (!description) errObj.description = "Description is required"
-    if (description.length >= 1 && description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters"
-    if (website && !isValidUrl(website)) errObj.website = "Website is not valid"
+    if (!address) errObj.address = "Address is required."
+    if (!city) errObj.city = "City is required."
+    if (!state) errObj.state = "State is required."
+    if (!zip_code) errObj.zip_code = "ZIP Code is required."
+    if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid."
+    if (!name) errObj.name = "Name is required."
+    if (name.length > 100) errObj.name = "Name must be less than 100 characters."
+    if (!description) errObj.description = "Description is required."
+    if (!category_id) errObj.category_id = "Category is required."
+    if (description.length >= 1 && description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters."
+    if (website && !isValidUrl(website)) errObj.website = "Website is not valid."
     if (email && !emailRegex.test(email)) errObj.email = "Email is invalid."
     if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Please enter a valid phone number using only numerical digits (no special characters or spaces)."
     if (phone.length >= 1 && phone.length > 10) errObj.phone = "Phone numbers must be 10 digits."
+    if (!image) errObj.image = "Image is required."
+    if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
+    
     setErrors(errObj)
-  }, [address, city, state, zip_code, name, description, website, email, phone])
+  }, [address, city, state, zip_code, name, description, website, email, phone, category_id, image])
 
 
   return (
@@ -189,19 +189,33 @@ function CreateBusinessPage() {
           />
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
           <div>
-            Price:&nbsp;
-            {activePrice.map((option) =>
-              <label key={option.name}>
+            Price (Optional):&nbsp;
+            {["$","$$","$$$","$$$$"].map((option) => (
+              <label key={option}>
                 <input
                   type="radio"
-                  value={option.name}
-                  checked={option.checked}
-                  onChange={updatePrice}
+                  value={option}
+                  checked={price == option}
+                  onClick={() => updatePrice(option)}
+                  onChange={()=> {}}
                 />
-                {option.name}
+                {option}
               </label>
-            )}
+            ))}
           </div>
+          <select
+            value={category_id}
+            onChange={(e) => setCategory_id(e.target.value)}
+            name="category"
+          >
+            <option value="">Select Category</option>
+            {categories.map((category, index) => (
+              <option key={category} value={index + 1}>
+                {category}
+              </option>
+            ))}
+          </select>
+          {errors.category_id && <span className="errors">&nbsp;{errors.category_id}</span>}
           <input
             type="text"
             value={website}
@@ -230,7 +244,8 @@ function CreateBusinessPage() {
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
-            />
+                />
+                {errors.image && <span className="errors">&nbsp;{errors.image}</span>}
           {(imageLoading) && <p>Loading...</p>}
           <button type="submit" disabled={!!Object.values(errors).length}>Create Business</button>
         </form>
