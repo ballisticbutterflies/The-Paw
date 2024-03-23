@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
+import { useModal } from "../../context/Modal";
 
 function SingleBusinessReviews({ businessId }) {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function SingleBusinessReviews({ businessId }) {
         if (a.createdAt < b.createdAt) return 1;
         return 0;
     });
+
     useEffect(() => {
         dispatch(getBusinessReviews(businessId))
     }, [dispatch, businessId])
@@ -64,8 +66,22 @@ function SingleBusinessReviews({ businessId }) {
                             <span style={{ fontSize: "small" }}><i className="fa-regular fa-image" /></span> &nbsp;{review.user.user_num_images}</div>
                     </div>
                     <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;{review.created_at && (dateFormat(review.created_at))}</p>
-
                     <p>{review.review}</p>
+                    <div>
+                        <div className="reviewImagesWrapper">{review.review_images !== 'No review images found' &&
+                            review.review_images.map(image =>
+                            (<>
+                                <span className="reviewImagesContainer">
+                                    <img key={image.id}
+                                        className="reviewImages"
+                                        src={image.url} /></span>
+                            </>
+
+                            )
+                            )
+                        } </div>
+                    </div>
+                    <br />
                     <br />
                 </div>
             )
