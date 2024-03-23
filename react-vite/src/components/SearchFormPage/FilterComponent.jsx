@@ -89,6 +89,7 @@ const FilterComponent = ({ onFilterChange }) => {
           )}
         </div>
         <div>
+          <h4>Category</h4>
           <select
             value={category_id}
             onChange={(e) => setCategory_id(e.target.value)}
