@@ -12,13 +12,13 @@ def get_business(id):
     Query for a business by id and returns that business in a dictionary
     """
     business = Business.query.get(id)
+    if (business is None):
+        return {'message': 'Buiness couldn\'t be found' }, 404
 
     business_data = []
     business_dict = business.to_dict()
     review_images = {}
 
-    if (business == None):
-        return {'message': 'Buiness couldn\'t be found' }, 404
 
     reviews = Review.query.filter(Review.business_id == id).all()
     review_ids = [review.id for review in reviews]
@@ -254,11 +254,11 @@ def get_images_by_business_id(id):
         'created_at': image.created_at,
         'updated_at': image.updated_at
         } for image in review_images]
-        
+
     images_dict['review_images'] = review_images_data
-    
+
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
-    
+
     business_images_data = [{
         'id': image.id,
         'url': image.url,
@@ -273,13 +273,13 @@ def get_images_by_business_id(id):
         'created_at': image.created_at,
         'updated_at': image.updated_at
         } for image in business_images]
-    
+
     images_dict['business_images'] = business_images_data
     images_dict['business_id'] = id
 
     return { 'images': images_dict }
 
-@businesses_route.route('/<int:id>', methods=["PUT"])
+@businesses_route.route('/<int:id>/edit', methods=["PUT"])
 @login_required
 def update_business(id):
     """
@@ -309,8 +309,14 @@ def update_business(id):
         business.phone = form.data['phone']
         business.price = form.data['price']
 
-        db.session.commit()
-        return business.to_dict()
+        try:
+            # Commit transaction
+            db.session.commit()
+            return business.to_dict()
+        except Exception as e:
+            # Handle database errors
+            db.session.rollback()
+            return {'message': 'An error occurred while updating the business.'}, 500
 
     return {"errors": form.errors}, 400
 
@@ -350,3 +356,27 @@ def get_user_businesses():
         business_data.append(business_dict)
 
     return { 'businesses': business_data }
+
+
+@businesses_route.route('/<int:id>', methods=["DELETE"])
+@login_required
+def delete_business(id):
+    """
+    Deletes an existing business based on business id
+    """
+    business = Business.query.get(id)
+
+    if business is None:
+        return {'message': 'Business couldn\'t be found' }, 404
+
+    if business.owner_id != current_user.id:
+        return {'messsage': 'YOU DONT OWN THIS BUSINESS! GET OUTTA HERE!'}, 401
+
+
+    try:
+        db.session.delete(business)
+        db.session.commit()
+        return { 'message' : 'Successfully Deleted' }, 200
+    except Exception as e:
+        db.session.rollback()
+        return {'message': 'An error occurred while deleting the business.'}, 500
