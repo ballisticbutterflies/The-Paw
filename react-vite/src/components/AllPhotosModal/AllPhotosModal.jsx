@@ -6,7 +6,12 @@ import "./AllPhotos.css"
 function AllPhotosModal({ businessId, business }) {
     const dispatch = useDispatch();
 
-    const images = useSelector(state => state.images[businessId])
+    const images = useSelector(state => {
+        state.images[businessId]
+    });
+
+    console.log("IMAGESSELECTOR", images);
+
 
     useEffect(() => {
         dispatch(getImagesByBusiness(businessId))
@@ -16,22 +21,13 @@ function AllPhotosModal({ businessId, business }) {
         <div className="modal">
             <h1>Photos for {business.name}</h1>
             <div className="allPhotosContainer">
-                {images.images.business_images &&
-                    images.images.business_images.map(business_image => (
-                        <span key={business_image.id} className="allPhotosWrapper">
-                            <img className="images"
-                                src={business_image.url} />
-                        </span>
-                    )
-                    )}
-                {images.images.review_images &&
-                    images.images.review_images.map(review_image => (
-                        <span key={review_image.id} className="allPhotosWrapper">
-                            <img className="images"
-                                src={review_image.url} />
-                        </span>
-                    )
-                    )}
+                {images.map(image => (
+                    <span key={image.id} className="allPhotosWrapper">
+                        <img className="images"
+                            src={image.url} />
+                    </span>
+                )
+                )}
             </div>
         </div>
     )

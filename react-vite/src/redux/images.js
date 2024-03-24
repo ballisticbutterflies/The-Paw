@@ -1,8 +1,8 @@
 const LOAD_IMAGES = 'images/LOAD_IMAGES'
 
-export const loadImages = (image) => (console.log("TEST", image), {
+export const loadImages = (images) => (console.log("Images data:", images), {
     type: LOAD_IMAGES,
-    image
+    images
 })
 
 export const getImagesByBusiness = (businessId) => async dispatch => {
@@ -15,21 +15,17 @@ export const getImagesByBusiness = (businessId) => async dispatch => {
     }
 }
 
+
 const imagesReducer = (state = {}, action) => {
     switch (action.type) {
-        case LOAD_IMAGES: {
-            const imageState = {}
-            // if (action.image.images.business_images)
-            //     imageState[action.image.business_id] = action.image.images.business_images
-            // if (action.image.images.review)
-            //     imageState[action.image.business_id] = action.image.images.review
-
-            // console.log("ACTION", imageState);
-            // return imageState
-            return { ...state, [action.image.images.business_id]: action.image }
-        }
+        case LOAD_IMAGES:
+            console.log("Action payload:", action.images)
+            return {
+                ...state,
+                [action.images.business_id]: action.images.images_list
+            };
         default:
-            return { ...state }
+            return state;
     }
 }
 

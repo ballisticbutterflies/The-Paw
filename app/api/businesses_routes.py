@@ -260,7 +260,7 @@ def get_images_by_business_id(id):
             'imageable_type': image.imageable_type,
             'created_at': image.created_at,
             'updated_at': image.updated_at
-            } for image in review_images]
+            } for image in review_images if image.imageable_id == review.id]
         
         images_list.extend(review_images_data)
     
