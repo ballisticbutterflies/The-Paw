@@ -1,22 +1,41 @@
-<<<<<<< HEAD
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useModal } from "../../context/Modal"
 import { useEffect } from "react";
-import { getImagesByBusiness } from "../../redux/businesses";
+import { getImagesByBusiness } from "../../redux/images";
+import "./AllPhotos.css"
 
-function AllPhotosModal({ businessId }) {
+function AllPhotosModal({ businessId, business }) {
     const dispatch = useDispatch();
+
+    const images = useSelector(state => state.images[businessId])
 
     useEffect(() => {
         dispatch(getImagesByBusiness(businessId))
     }, [dispatch, businessId])
 
-    return <h1>Images</h1>
-=======
-import { useModal } from "../../context/Modal"
-function AllPhotosModal() {
-
->>>>>>> 9ec5df60f193681a864d09ed22d3e355c042db06
+    return (images && business &&
+        <div className="modal">
+            <h1>Photos for {business.name}</h1>
+            <div className="allPhotosContainer">
+                {images.images.business_images &&
+                    images.images.business_images.map(business_image => (
+                        <span key={business_image.id} className="allPhotosWrapper">
+                            <img className="images"
+                                src={business_image.url} />
+                        </span>
+                    )
+                    )}
+                {images.images.review_images &&
+                    images.images.review_images.map(review_image => (
+                        <span key={review_image.id} className="allPhotosWrapper">
+                            <img className="images"
+                                src={review_image.url} />
+                        </span>
+                    )
+                    )}
+            </div>
+        </div>
+    )
 }
 
 export default AllPhotosModal

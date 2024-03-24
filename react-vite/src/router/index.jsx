@@ -6,6 +6,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import SearchFormPage from '../components/SearchFormPage';
 import SingleBusinessPage from '../components/SingleBusinessPage';
 import CreateBusinessPage from '../components/CreateBusinessPage';
+import AllPhotosModal from '../components/AllPhotosModal/AllPhotosModal';
 
 
 export const router = createBrowserRouter([
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <CreateBusinessPage />,
+      },
+      {
+        path: "/businesses/:businessId/images",
+        element: <AllPhotosModal />,
       },
     ],
   },

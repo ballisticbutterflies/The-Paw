@@ -27,7 +27,7 @@
     position: relative;
     left: 16%;
     bottom: 58%;
-    z-index: 1000;
+    z-index: 11;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
@@ -58,7 +58,7 @@
     position: relative;
     left: 76%;
     bottom: 71%;
-    z-index: 1000;
+    z-index: 11;
     padding: 5px;
     width: fit-content;
 }
@@ -71,6 +71,7 @@
     border-radius: 5px;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .paws-filled,

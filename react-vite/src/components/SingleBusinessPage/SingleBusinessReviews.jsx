@@ -70,12 +70,12 @@ function SingleBusinessReviews({ businessId }) {
                     <div>
                         <div className="reviewImagesWrapper">{review.review_images !== 'No review images found' &&
                             review.review_images.map(image =>
-                            (<>
-                                <span className="reviewImagesContainer">
-                                    <img key={image.id}
+                            (
+                                <span key={image.id} className="reviewImagesContainer">
+                                    <img
                                         className="reviewImages"
                                         src={image.url} /></span>
-                            </>
+
 
                             )
                             )

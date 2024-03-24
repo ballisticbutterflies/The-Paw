@@ -251,7 +251,7 @@ def get_images_by_business_id(id):
     for review in reviews:
         user_data = users_dict.get(review.user_id)
 
-        review_image_data = [{
+        review_images_data = [{
             'id': image.id,
             'url': image.url,
             'uploader_id': image.uploader_id,
@@ -261,6 +261,8 @@ def get_images_by_business_id(id):
             'created_at': image.created_at,
             'updated_at': image.updated_at
             } for image in review_images]
+        
+        images_dict['review_images'] = review_images_data
     
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
 
@@ -275,7 +277,6 @@ def get_images_by_business_id(id):
         } for image in business_images]
     
     images_dict['business_id'] = id
-    images_dict['review_images'] = review_image_data
     images_dict['business_images'] = business_image_data
 
     return { 'images': images_dict }
@@ -314,4 +315,3 @@ def update_business(id):
         return business.to_dict()
 
     return {"errors": form.errors}, 400
-

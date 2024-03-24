@@ -1,7 +1,6 @@
 const LOAD_SINGLE_BUSINESS = 'businesses/LOAD_SINGLE_BUSINESS'
 const CREATE_BUSINESS = 'business/CREATE_BUSINESS'
 const CREATE_BUSINESS_IMAGES = 'business/CREATE_BUSINESS_IMAGES'
-const LOAD_IMAGES = 'business/LOAD_IMAGES'
 
 
 export const loadSingleBusiness = (business) => ({
@@ -17,11 +16,6 @@ export const receiveBusiness = (business) => ({
 export const createBusinessImages = (post) => ({
     type: CREATE_BUSINESS_IMAGES,
     post
-})
-
-export const loadImages = (image) => ({
-    type: LOAD_IMAGES,
-    image
 })
 
 
@@ -70,15 +64,6 @@ export const createImage = (post) => async (dispatch) => {
     }
 };
 
-export const getImagesByBusiness = (businessId) => async dispatch => {
-    const response = await fetch(`/api/businesses/${businessId}/images`)
-
-    if (response.ok) {
-        const images = await response.json();
-        dispatch(loadImages(images))
-        return images
-    }
-}
 
 // REDUCER
 
@@ -100,9 +85,6 @@ const businessesReducer = (state = {}, action) => {
             const imageState = { "images": [] }
             imageState["images"] = [action.post.image]
             return imageState
-        }
-        case LOAD_IMAGES: {
-            return { ...state, }
         }
         default:
             return { ...state }
