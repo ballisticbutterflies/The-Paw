@@ -57,7 +57,7 @@ function SingleBusinessPage() {
         }
     }
 
-    return (business &&
+    return (business && business.business_images &&
         <>
             <div className="businessPhotoHeader">
                 <img src={business.business_images[0].image_url} />
