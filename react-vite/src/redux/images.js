@@ -18,7 +18,7 @@ export const getImagesByBusiness = (businessId) => async dispatch => {
 const imagesReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_IMAGES: {
-            const imageState = {}
+            // const imageState = {}
             // if (action.image.images.business_images)
             //     imageState[action.image.business_id] = action.image.images.business_images
             // if (action.image.images.review)
