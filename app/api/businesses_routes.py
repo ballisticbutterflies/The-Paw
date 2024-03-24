@@ -238,40 +238,36 @@ def get_images_by_business_id(id):
     review_ids = [review.id for review in reviews]
     review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
 
-    # images_list = []
     images_dict = {}
 
-    user_ids = [review.user_id for review in reviews]
-    users = User.query.filter(User.id.in_(user_ids)).all()
-
-    users_dict = { user.id: {
-        'id': user.id,
-        'first_name': user.first_name,
-        'last_name': user.last_name,
-        } for user in users }
-
-    for review in reviews:
-        user_data = users_dict.get(review.user_id)
-
-        review_images_data = [{
-            'id': image.id,
-            'url': image.url,
-            'uploader_id': image.uploader_id,
-            'user': user_data,
-            'imageable_id': image.imageable_id,
-            'imageable_type': image.imageable_type,
-            'created_at': image.created_at,
-            'updated_at': image.updated_at
-            } for image in review_images]
+    review_images_data = [{
+        'id': image.id,
+        'url': image.url,
+        'uploader_id': image.uploader_id,
+        'user': {
+            'id': image.uploader.id,
+            'first_name': image.uploader.first_name,
+            'last_name': image.uploader.last_name
+            },
+        'imageable_id': image.imageable_id,
+        'imageable_type': image.imageable_type,
+        'created_at': image.created_at,
+        'updated_at': image.updated_at
+        } for image in review_images]
         
-        images_dict['review_images'] = review_images_data
+    images_dict['review_images'] = review_images_data
     
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
-
+    
     business_images_data = [{
         'id': image.id,
         'url': image.url,
         'uploader_id': image.uploader_id,
+        'user': {
+            'id': image.uploader.id,
+            'first_name': image.uploader.first_name,
+            'last_name': image.uploader.last_name
+            },
         'imageable_id': image.imageable_id,
         'imageable_type': image.imageable_type,
         'created_at': image.created_at,
