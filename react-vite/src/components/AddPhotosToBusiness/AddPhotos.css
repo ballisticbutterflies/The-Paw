@@ -1,0 +1,41 @@
+.addPhoto {
+    width: 100%;
+}
+
+.addPhoto button {
+    margin-top: 20px;
+    width: 287px;
+}
+
+.addPhoto form {
+    display: grid;
+    justify-items: center;
+    width: 287px;
+    margin: auto;
+    border: 1px dotted black;
+    padding: 40px 125px 40px 125px;
+    border-radius: 3px;
+}
+
+.icon {
+    font-size: xxx-large;
+    margin: auto;
+    color: #5f5ba8;
+}
+
+.tipSection {
+    display: grid;
+    justify-content: center;
+    margin: auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: start;
+    width: 400px !important;
+}
+
+.tip {
+    display: grid;
+    width: 200px;
+    justify-content: center;
+    text-align: center;
+}
