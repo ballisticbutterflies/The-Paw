@@ -27,7 +27,7 @@ function AllPhotosModal({ businessId, business }) {
                             <span key={business_image.id} className="allPhotosWrapper">
                                 <img className="images"
                                     src={business_image.url} />
-                                <div className="photoCredit">&nbsp;&nbsp;From {business.name}</div>
+                                <div className="photoCredit">&nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}</div>
                             </span>
                         </>
                     )

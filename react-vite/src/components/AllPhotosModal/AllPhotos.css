@@ -14,6 +14,7 @@
     width: 100%;
     padding-bottom: 10px;
     background-color: #fff2eb;
+    z-index: 1;
 }
 
 .allPhotosContainer {
@@ -45,6 +46,6 @@
     background-color: rgba(0, 0, 0, .3);
     padding: 3px;
     color: #FFFFFF;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
-
-.photoCredit text {}
