@@ -19,7 +19,9 @@ function AllPhotosModal({ businessId, business }) {
 
     return (images && business &&
         <div className="modal">
-            <h1>Photos for {business.name}</h1>
+            <div className="allPhotosHeader"><div><h1>Photos for {business.name}</h1></div>
+                <button><i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</button>
+            </div>
             <div className="allPhotosContainer">
                 {images.images.business_images &&
                     images.images.business_images.map(business_image => (
