@@ -1,10 +1,10 @@
 .modal {
     max-height: calc(100vh - 200px) !important;
     overflow-y: auto !important;
-    margin-top: 10px;
+    /* margin-top: 10px;
     margin-left: 30px;
     margin-right: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 30px; */
     width: 75vw !important;
 }
 
