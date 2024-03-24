@@ -44,7 +44,11 @@ const FilterComponent = ({ onFilterChange }) => {
   }
 
   const onChangeStars = (number) => {
-    setStars(parseInt(number))
+    if (number) {
+      setStars(parseInt(number))
+    }else {
+      setStars("")
+    }
   }
 
   const updatePrice = (i, isChecked) => {
@@ -84,7 +88,8 @@ const FilterComponent = ({ onFilterChange }) => {
             </label>
           )}
         </div>
-        <div>
+        <div className="categoryFilter">
+          <h4>Category</h4>
           <select
             value={category_id}
             onChange={(e) => setCategory_id(e.target.value)}

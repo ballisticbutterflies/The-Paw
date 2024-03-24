@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
 
 function SingleBusinessReviews({ businessId }) {
     const dispatch = useDispatch();

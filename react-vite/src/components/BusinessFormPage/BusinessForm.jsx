@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { createBusiness, fetchSingleBusiness, createImage } from "../../redux/businesses"
+import { createBusiness, fetchSingleBusiness, createImage, updateBusiness } from "../../redux/businesses"
 import "./CreateBusiness.css"
 
 
-function CreateBusinessPage() {
+function CreateBusinessPage({ business, formType }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const sessionUser = useSelector(state => state.session.user)
 
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip_code, setZip_code] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('')
-  const [email, setEmail] = useState('');
-  const [website, setWebsite] = useState('');
-  const [phone, setPhone] = useState('');
-  const [category_id, setCategory_id] = useState('');
+  const [address, setAddress] = useState(business?.address);
+  const [city, setCity] = useState(business?.city);
+  const [state, setState] = useState(business?.state);
+  const [zip_code, setZip_code] = useState(business?.zip_code);
+  const [name, setName] = useState(business?.name);
+  const [description, setDescription] = useState(business?.description);
+  const [price, setPrice] = useState(business?.price)
+  const [email, setEmail] = useState(business?.email);
+  const [website, setWebsite] = useState(business?.website);
+  const [phone, setPhone] = useState(business?.phone);
+  const [category_id, setCategory_id] = useState(business?.category_id);
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -42,24 +42,28 @@ function CreateBusinessPage() {
     e.preventDefault();
 
     setErrors({})
+    business = {
+      ...business, address, city, state, zip_code, name, description,
+      price, email, website, phone, category_id
+    };
 
-    const newBusiness = {
-      address,
-      city,
-      state,
-      zip_code,
-      name,
-      description,
-      price,
-      email,
-      website,
-      phone,
-      category_id
+    if (formType === "Update Business") {
+      const editedBusiness = await dispatch(updateBusiness(business));
+      business = editedBusiness;
+
+    } else if (formType === 'Create Business') {
+      const newBusiness = await dispatch(createBusiness(business));
+      business = newBusiness;
+
+    }
+
+    if (business.errors) {
+      setErrors(business.errors);
+    } else {
+      navigate(`/businesses/${business.id}`)
     }
     // Dispatch createBusiness action
-    const businessResponse = await dispatch(createBusiness(newBusiness));
-
-    const businessId = businessResponse.id; // Extract business ID from response
+    const businessId = business.id; // Extract business ID from response
 
     const formData = new FormData();
     formData.append("image", image);
@@ -70,12 +74,13 @@ function CreateBusinessPage() {
     setImageLoading(true);
     // Dispatch createImage action with formData
     await dispatch(createImage(formData)).then(() => {
-        dispatch(fetchSingleBusiness(businessId))
-            .then(() => navigate(`/businesses/${businessId}`));
+      dispatch(fetchSingleBusiness(businessId))
+        .then(() => navigate(`/businesses/${businessId}`));
     }).catch((error) => {
-        console.error("Error uploading image:", error);
-        setImageLoading(false);
+      console.error("Error uploading image:", error);
+      setImageLoading(false);
     });
+
   }
 
   const isValidUrl = (url) => {
@@ -123,19 +128,20 @@ function CreateBusinessPage() {
     if (email && !emailRegex.test(email)) errObj.email = "Email is invalid."
     if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Please enter a valid phone number using only numerical digits (no special characters or spaces)."
     if (phone.length >= 1 && phone.length > 10) errObj.phone = "Phone numbers must be 10 digits."
-    if (!image) errObj.image = "Image is required."
-    if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
-    
+    if (!image && formType === 'Create Business') errObj.image = "Image is required."
+    // if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
+
     setErrors(errObj)
-  }, [address, city, state, zip_code, name, description, website, email, phone, category_id, image])
+  }, [address, formType, city, state, zip_code, name, description, website, email, phone, category_id, image])
 
 
   return (
     <>
       {sessionUser &&
         <form className="createBizForm" onSubmit={handleSubmit} encType="multipart/form-data">
-          <h1>Add your business to The Paw!</h1>
-          <input
+          {formType && formType === "Update Business" && <h1>Update your business details!</h1>}
+          {formType && formType === "Create Business" && <h1>Add your business to The Paw!</h1>}
+          <input className="inputFields"
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -143,7 +149,7 @@ function CreateBusinessPage() {
             name="address"
           />
           {errors.address && <span className="errors">&nbsp;{errors.address}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -151,7 +157,7 @@ function CreateBusinessPage() {
             name="city"
           />
           {errors.city && <span className="errors">&nbsp;{errors.city}</span>}
-          <select
+          <select className="inputFields"
             value={state}
             onChange={(e) => setState(e.target.value)}
             name="state"
@@ -164,7 +170,7 @@ function CreateBusinessPage() {
             ))}
           </select>
           {errors.state && <span className="errors">&nbsp;{errors.state}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={zip_code}
             onChange={(e) => setZip_code(e.target.value)}
@@ -172,7 +178,7 @@ function CreateBusinessPage() {
             name="zip_code"
           />
           {errors.zip_code && <span className="errors">&nbsp;{errors.zip_code}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -180,30 +186,30 @@ function CreateBusinessPage() {
             name="name"
           />
           {errors.name && <span className="errors">&nbsp;{errors.name}</span>}
-          <input
-            type="text"
+          <textarea className="inputFields"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
             name="description"
+            rows="5"
           />
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
-          <div>
+          <div className="inputFields">
             Price (Optional):&nbsp;
-            {["$","$$","$$$","$$$$"].map((option) => (
+            {["$", "$$", "$$$", "$$$$"].map((option) => (
               <label key={option}>
                 <input
                   type="radio"
                   value={option}
                   checked={price == option}
                   onClick={() => updatePrice(option)}
-                  onChange={()=> {}}
+                  onChange={() => { }}
                 />
                 {option}
               </label>
             ))}
           </div>
-          <select
+          <select className="inputFields"
             value={category_id}
             onChange={(e) => setCategory_id(e.target.value)}
             name="category"
@@ -216,7 +222,7 @@ function CreateBusinessPage() {
             ))}
           </select>
           {errors.category_id && <span className="errors">&nbsp;{errors.category_id}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={website}
             onChange={(e) => setWebsite(e.target.value)}
@@ -224,7 +230,7 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.website && <span className="errors">&nbsp;{errors.website}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -232,7 +238,7 @@ function CreateBusinessPage() {
             name="email"
           />
           {errors.email && <span className="errors">&nbsp;{errors.email}</span>}
-          <input
+          <input className="inputFields"
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -240,19 +246,20 @@ function CreateBusinessPage() {
             name="website"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
-          <input
+          {formType && formType === 'Create Business' &&
+            <span className="inputFields" >
+              <input  className="imageInput"
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
-                />
-                {errors.image && <span className="errors">&nbsp;{errors.image}</span>}
-          {(imageLoading) && <p>Loading...</p>}
-          <button type="submit" disabled={!!Object.values(errors).length}>Create Business</button>
+              />
+              {errors.image && <div className="errors">&nbsp;{errors.image}</div>}
+              {(imageLoading) && <p>Loading...</p>}
+            </span>
+          }
+          <button type="submit" className="inputFields" disabled={!!Object.values(errors).length}>{formType}</button>
         </form>
       }
-      {/* <div>
-        <UploadPicture />
-      </div> */}
     </>
   )
 }
