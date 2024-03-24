@@ -1,12 +1,13 @@
 .businessCards {
   display: flex;
   width: 700px;
-  border: 1px solid black;
+  border: 1px solid #1f2f44;
   align-content: center;
   padding: 15px 10px 10px 10px;
   margin-left: 300px;
   margin-bottom: 20px;
   position: relative;
+  border-radius: 10px;
 }
 
 .businessCards:hover {

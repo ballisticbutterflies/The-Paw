@@ -1,14 +1,15 @@
 .manBizCards {
   display: flex;
-  border: 1px solid black;
-  padding: 15px 10px 10px 10px;
+  border: 1px solid #1f2f44;
+  padding: 10px;
   margin-bottom: 20px;
-  width: 600px
+  width: fit-content;
+  border-radius: 10px;
 }
 
 .manBizImage {
-  height: 150px;
-  width: 250px;
+  height: 160px;
+  width: 180px;
   padding: 10px;
 }
 
@@ -21,7 +22,7 @@
   display: flex;
   flex-direction: column;
   text-wrap: wrap;
-  padding-left: 20px;
+  padding: 10px 0 0 20px;
   width: 300px;
 }
 
@@ -58,4 +59,3 @@
 .deleteBiz {
   margin: auto;
 }
-
