@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
+import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
+import OpenModalButton from "../OpenModalButton";
 
 function SingleBusinessPage() {
     const { businessId } = useParams();
@@ -96,11 +98,17 @@ function SingleBusinessPage() {
                 </div>
                 <div className="seeAllPhotos">
                     {business.business_images && totalImages(business.business_images, business.review_images) === 1 &&
-                        <button>See {business.business_images && totalImages(business.business_images, business.review_images)} photo</button>
+                        <OpenModalButton
+                            buttonText="See 1 photo"
+                            modalComponent={<AllPhotosModal business={business} businessId={businessId} />}
+                        />
                     }
 
                     {business.business_images && totalImages(business.business_images, business.review_images) > 1 &&
-                        <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
+                        <OpenModalButton
+                            buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
+                            modalComponent={<AllPhotosModal business={business} businessId={businessId} />}
+                        />
                     }
                 </div>
             </div >

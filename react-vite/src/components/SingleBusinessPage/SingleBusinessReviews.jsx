@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
 
 function SingleBusinessReviews({ businessId }) {
     const dispatch = useDispatch();
@@ -70,12 +69,12 @@ function SingleBusinessReviews({ businessId }) {
                     <div>
                         <div className="reviewImagesWrapper">{review.review_images !== 'No review images found' &&
                             review.review_images.map(image =>
-                            (<>
-                                <span className="reviewImagesContainer">
-                                    <img key={image.id}
+                            (
+                                <span key={image.id} className="reviewImagesContainer">
+                                    <img
                                         className="reviewImages"
                                         src={image.url} /></span>
-                            </>
+
 
                             )
                             )
