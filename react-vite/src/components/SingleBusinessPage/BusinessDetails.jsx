@@ -1,4 +1,5 @@
 import SingleBusinessReviews from "./SingleBusinessReviews";
+import OpenModalButton from "../OpenModalButton";
 
 function BusinessDetails({ business, businessId }) {
     return (
@@ -6,6 +7,11 @@ function BusinessDetails({ business, businessId }) {
             <div className="businessDetailsButtons">
                 <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
                 <button><i className="fa-solid fa-camera" /> Add photo</button>&nbsp;&nbsp;
+                <OpenModalMenuItem
+                    itemText="Add Photo"
+                    onItemClick={closeMenu}
+                    modalComponent={<LoginFormModal />}
+                />
                 <button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button>
             </div>
             <hr />

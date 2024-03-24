@@ -8,6 +8,7 @@ import SingleBusinessPage from '../components/SingleBusinessPage';
 import CreateBusinessForm from '../components/BusinessFormPage/CreateBusinessForm';
 import EditBusinessForm from '../components/BusinessFormPage/EditBusinessForm';
 import ManageBusinessPage from '../components/ManageBusinessesPage';
+import AddPhotosToBusiness from '../components/AddPhotosToBusiness';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/businesses/current",
         element: <ManageBusinessPage />,
+      },
+      {
+        path: "/businesses/:businessId/addphotos",
+        element: <AddPhotosToBusiness />,
       },
     ],
   },

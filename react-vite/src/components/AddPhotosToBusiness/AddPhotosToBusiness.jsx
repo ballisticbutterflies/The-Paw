@@ -1,4 +1,4 @@
-function AddPhotosToBusiness() {
+function AddPhotosToBusiness({ businessId }) {
     return <h1>Add Photos</h1>
 }
 
