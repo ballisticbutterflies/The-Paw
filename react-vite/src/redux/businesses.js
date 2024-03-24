@@ -75,8 +75,6 @@ export const createImage = (post) => async (dispatch) => {
     }
 };
 
-<<<<<<< HEAD
-=======
 export const updateBusiness = (business) => async (dispatch) => {
     const response = await fetch(`/api/businesses/${business.id}`, {
         method: "PUT",
@@ -105,7 +103,6 @@ export const loadCurrUserBusinesses = () => async (dispatch) => {
         return errors;
     }
 }
->>>>>>> d2a41ac1eded5ba93c8f929efa2b313388aa18d8
 
 // REDUCER
 

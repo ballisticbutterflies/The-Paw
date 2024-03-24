@@ -263,13 +263,9 @@ def get_images_by_business_id(id):
             'created_at': image.created_at,
             'updated_at': image.updated_at
             } for image in review_images]
-<<<<<<< HEAD
         
         images_dict['review_images'] = review_images_data
     
-=======
-
->>>>>>> d2a41ac1eded5ba93c8f929efa2b313388aa18d8
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
 
     business_images_data = [{
@@ -281,12 +277,8 @@ def get_images_by_business_id(id):
         'created_at': image.created_at,
         'updated_at': image.updated_at
         } for image in business_images]
-<<<<<<< HEAD
     
     images_dict['business_images'] = business_images_data
-=======
-
->>>>>>> d2a41ac1eded5ba93c8f929efa2b313388aa18d8
     images_dict['business_id'] = id
 
     return { 'images': images_dict }
@@ -325,8 +317,6 @@ def update_business(id):
         return business.to_dict()
 
     return {"errors": form.errors}, 400
-<<<<<<< HEAD
-=======
 
 @businesses_route.route('/current')
 @login_required
@@ -364,4 +354,3 @@ def get_user_businesses():
         business_data.append(business_dict)
 
     return { 'businesses': business_data }
->>>>>>> d2a41ac1eded5ba93c8f929efa2b313388aa18d8

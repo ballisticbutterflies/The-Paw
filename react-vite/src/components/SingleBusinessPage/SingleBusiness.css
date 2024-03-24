@@ -217,13 +217,13 @@
 }
 
 .reviewImagesWrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 15px;
 }
 
 .reviewImagesContainer {
-    width: 300px;
+    width: 100%;
     height: 225px;
 }
 
