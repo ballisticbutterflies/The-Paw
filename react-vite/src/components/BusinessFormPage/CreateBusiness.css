@@ -1,0 +1,22 @@
+.createBizForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 415px;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.errors {
+  color: #c24830;
+  font-weight: 500;
+
+}
+
+.inputFields {
+  margin-top: 15px;
+
+}
+
+.imageInput {
+  width: 413px;
+}

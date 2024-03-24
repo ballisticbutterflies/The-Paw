@@ -1,6 +1,6 @@
 const LOAD_BUSINESSES = 'search/LOAD_BUSINESSES'
 
-export const loadBusinesses = (businesses) => ({
+const loadBusinesses = (businesses) => ({
     type: LOAD_BUSINESSES,
     businesses
 })

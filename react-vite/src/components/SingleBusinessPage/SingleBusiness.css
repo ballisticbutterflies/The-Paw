@@ -107,7 +107,7 @@
 }
 
 .businessDetails {
-    width: 80%;
+    width: 750px;
     padding-right: 35px;
 }
 
@@ -217,6 +217,7 @@
 
 .reviewImagesWrapper {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
 }
 
