@@ -237,7 +237,8 @@ def get_images_by_business_id(id):
     review_ids = [review.id for review in reviews]
     review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
 
-    images_list = []
+    # images_list = []
+    images_dict = {}
 
     user_ids = [review.user_id for review in reviews]
     users = User.query.filter(User.id.in_(user_ids)).all()
@@ -262,7 +263,7 @@ def get_images_by_business_id(id):
             'updated_at': image.updated_at
             } for image in review_images]
         
-        images_list.extend(review_images_data)
+        images_dict['review_images'] = review_images_data
     
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
 
@@ -276,9 +277,10 @@ def get_images_by_business_id(id):
         'updated_at': image.updated_at
         } for image in business_images]
     
-    images_list.extend(business_images_data)
+    images_dict['business_images'] = business_images_data
+    images_dict['business_id'] = id
 
-    return { 'images': {'business_id': id, 'images_list': images_list } }
+    return { 'images': images_dict }
 
 @businesses_route.route('/<int:id>', methods=["PUT"])
 @login_required
