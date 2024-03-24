@@ -45,7 +45,7 @@ def get_business(id):
         business_dict['reviews']['avg_stars'] = avg_stars
         business_dict['review_images'] = review_image_data
 
-        
+
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
 
     business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
@@ -71,7 +71,7 @@ def get_reviews_by_business_id(id):
 
     if (business == None):
         return {"message": "Business couldn\'t be found"}, 404
-  
+
     reviews = Review.query.filter(Review.business_id == id).order_by(Review.created_at.desc()).all()
 
 
@@ -94,11 +94,11 @@ def get_reviews_by_business_id(id):
             user_num_reviews[user_id] += 1
         else:
             user_num_reviews[user_id] = 1
-    
+
     all_business_review_images = Image.query.filter(Image.imageable_type != 'user').all()
 
     user_num_images = {}
-    
+
     for image in all_business_review_images:
         user_id = image.uploader_id
         if user_id in user_num_images:
@@ -158,28 +158,28 @@ def create_review(business_id):
     """
     form = CreateReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    
+
 
     business_owner_id = get_business(business_id)['business'][0]['owner_id']
     current_user_id = current_user.id
     print("######################, business owner id: ", business_owner_id, " current user id: ", current_user_id)
 
 
-    forbidden_res = {'errors': {'message': 'Forbidden' }}, 403  
+    forbidden_res = {'errors': {'message': 'Forbidden' }}, 403
 
     def forbidden_res_func():
         print("its aliiiiiive")
-        return {'errors': {'message': 'Forbidden' }}, 403 
+        return {'errors': {'message': 'Forbidden' }}, 403
 
     existing_review = Review.query.filter(Review.user_id == current_user_id, Review.business_id== business_id).first()
     if existing_review:
-        return forbidden_res_func()  
+        return forbidden_res_func()
 
     if current_user_id == business_owner_id:
         return forbidden_res_func()
 
     print("hello howdy")
-    
+
     if not existing_review:
         if form.validate_on_submit():
             review = Review(
@@ -198,7 +198,7 @@ def create_review(business_id):
 @login_required
 def create_business():
     '''
-    Creates a new biz and adds it to db redirects to its biz page?
+    Creates a new biz and adds it to db redirects to its biz page
     '''
     form = CreateBusinessForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -223,3 +223,95 @@ def create_business():
 
         return business.to_dict()
     return form.errors, 401
+
+
+
+@businesses_route.route('/<int:id>/images')
+def get_images_by_business_id(id):
+    business = Business.query.get(id)
+
+    if (business == None):
+        return {"message": "Business couldn't be found" }, 404
+    
+    reviews = Review.query.filter(Review.business_id == id).all()
+    review_ids = [review.id for review in reviews]
+    review_images = Image.query.filter((Image.imageable_type == 'review'), Image.imageable_id.in_(review_ids)).all()
+
+    images_dict = {}
+
+    user_ids = [review.user_id for review in reviews]
+    users = User.query.filter(User.id.in_(user_ids)).all()
+
+    users_dict = { user.id: {
+        'id': user.id,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        } for user in users }
+    
+    for review in reviews:
+        user_data = users_dict.get(review.user_id)
+
+        review_image_data = [{
+            'id': image.id,
+            'url': image.url,
+            'uploader_id': image.uploader_id,
+            'user': user_data,
+            'imageable_id': image.imageable_id,
+            'imageable_type': image.imageable_type,
+            'created_at': image.created_at,
+            'updated_at': image.updated_at
+            } for image in review_images]
+    
+    business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
+
+    business_image_data = [{
+        'id': image.id,
+        'url': image.url,
+        'uploader_id': image.uploader_id,           
+        'imageable_id': image.imageable_id,
+        'imageable_type': image.imageable_type,
+        'created_at': image.created_at,
+        'updated_at': image.updated_at
+        } for image in business_images]
+    
+    images_dict['business_id'] = id
+    images_dict['review_images'] = review_image_data
+    images_dict['business_images'] = business_image_data
+
+    return { 'images': images_dict }
+
+@businesses_route.route('/<int:id>', methods=["PUT"])
+@login_required
+def update_business(id):
+    """
+    Updates an existing business based on business id
+    """
+    business = Business.query.get(id)
+
+    if business is None:
+        return {'message': 'Business couldn\'t be found' }, 404
+
+    if business.owner_id != current_user.id:
+        return {'message': 'YOU DONT OWN THIS BUSINESS! GET OUTTA HERE!'}, 401
+
+    form = CreateBusinessForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        business.category_id = form.data['category_id']
+        business.address = form.data['address']
+        business.city = form.data['city']
+        business.state = form.data['state']
+        business.zip_code = form.data['zip_code']
+        business.name = form.data['name']
+        business.description = form.data['description']
+        business.website = form.data['website']
+        business.email = form.data['email']
+        business.phone = form.data['phone']
+        business.price = form.data['price']
+
+        db.session.commit()
+        return business.to_dict()
+
+    return {"errors": form.errors}, 400
+
