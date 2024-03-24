@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useModal } from "../../context/Modal"
 import { useEffect } from "react";
 import { getImagesByBusiness } from "../../redux/images";
 import "./AllPhotos.css"
