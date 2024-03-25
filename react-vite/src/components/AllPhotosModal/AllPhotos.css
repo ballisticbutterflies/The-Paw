@@ -38,6 +38,7 @@
     gap: 15px;
     justify-items: center;
     overflow-y: auto !important;
+    max-height: 400px;
 }
 
 .allPhotosWrapper {
