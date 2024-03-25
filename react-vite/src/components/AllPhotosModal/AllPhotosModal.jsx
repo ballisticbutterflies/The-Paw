@@ -5,6 +5,8 @@ import "./AllPhotos.css";
 import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useParams, Link } from "react-router-dom";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteImageModal from "../DeleteImageModal/DeleteImageModal";
 
 
 function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
@@ -14,6 +16,21 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
 
     const images = useSelector(state => state.images[businessId])
     const sessionUser = useSelector(state => state.session.user)
+
+    // const imageId = useSelector(state => {
+    //     if (state.images.business_images) {
+    //         state.images.business_images.map(image => {
+    //             return image.id
+    //         })
+    //     }
+
+    //     if (state.images.review_images) {
+    //         state.images.review_images.map(image => {
+    //             console.log("IDDD", image.id)
+    //             return image.id
+    //         })
+    //     }
+    // })
 
     useEffect(() => {
         dispatch(getImagesByBusiness(businessId))
@@ -52,8 +69,9 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                 <div className="photoCredit">
                                     <div>&nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}</div>
                                     <div>{sessionUser && sessionUser.id == business_image.uploader_id && (
-                                        <span>
-                                            <i className="fa-solid fa-trash-can" />&nbsp;&nbsp;
+                                        <span><OpenModalMenuItem
+                                            itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
+                                            modalComponent={<DeleteImageModal imageId={business_image.id} />} />
                                         </span>)}</div>
                                 </div>
                             </span>
