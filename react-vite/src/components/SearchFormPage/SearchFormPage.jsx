@@ -73,7 +73,7 @@ function SearchFormPage() {
                 <img className="businessesImage" src={business.images[0]} alt={business.name} />
               </span>
               <>
-                <span key={`bizDeets-${business.id}`} className="businessDeets">
+                <span className="businessDeets">
                   <span>{index + 1}.&nbsp;{business.name}</span>
                   {
                     business.avg_stars &&
@@ -86,7 +86,7 @@ function SearchFormPage() {
                   }
 
                   {business.price !== null &&
-                    <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}  
+                    <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
                     </span>
                   }
 
