@@ -13,7 +13,7 @@ def get_business(id):
     """
     business = Business.query.get(id)
     if (business is None):
-        return {'message': 'Buiness couldn\'t be found' }, 404
+        return {'message': 'Business couldn\'t be found' }, 404
 
     business_data = []
     business_dict = business.to_dict()
