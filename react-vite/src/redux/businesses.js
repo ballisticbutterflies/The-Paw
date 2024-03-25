@@ -3,6 +3,7 @@ const CREATE_BUSINESS = 'businesses/CREATE_BUSINESS'
 const CREATE_BUSINESS_IMAGES = 'businesses/CREATE_BUSINESS_IMAGES'
 const UPDATE_BUSINESS = 'businesses/UPDATE_BUSINESS'
 const LOAD_BUSINESSES = 'businesses/LOAD_BUSINESSES'
+const DELETE_BUSINESS = 'businesses/DELETE_BUSINESS'
 
 export const loadBusinesses = (businesses) => ({
     type: LOAD_BUSINESSES,
@@ -29,6 +30,10 @@ export const editBusiness = (business) => ({
     business
 })
 
+export const removeBusiness = (businessId) => ({
+    type: DELETE_BUSINESS,
+    businessId
+})
 
 // THUNK
 
@@ -104,6 +109,19 @@ export const loadCurrUserBusinesses = () => async (dispatch) => {
     }
 }
 
+export const deleteBusiness = (businessId) => async (dispatch) => {
+    const response = await fetch(`/api/businesses/${businessId}`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+        dispatch(removeBusiness(businessId));
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+}
+
 // REDUCER
 
 const businessesReducer = (state = {}, action) => {
@@ -131,6 +149,11 @@ const businessesReducer = (state = {}, action) => {
                 bizState[business.id] = business;
             })
             return bizState
+        }
+        case DELETE_BUSINESS: {
+            const newState = { ...state }
+            delete newState[action.businessId]
+            return newState
         }
         default:
             return { ...state }
