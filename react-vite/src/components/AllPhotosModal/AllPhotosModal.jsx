@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { getImagesByBusiness } from "../../redux/images";
 import "./AllPhotos.css"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+
 
 function AllPhotosModal({ businessId, business }) {
     const dispatch = useDispatch();
@@ -19,8 +23,15 @@ function AllPhotosModal({ businessId, business }) {
 
     return (images && business &&
         <div className="modal">
-            <div className="allPhotosHeader"><div><h1>Photos for {business.name}</h1></div>
-                <button><i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</button>
+            <div className="allPhotosHeader">
+                <div><h1>Photos for {business.name}</h1></div>
+                <div>
+                    <OpenModalButton
+                        buttonText={<>
+                            <i className="fa-solid fa-camera" /> Add photo</>}
+                        modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                    />
+                </div>
             </div>
             <div className="allPhotosContainer">
                 {images.images.business_images &&
@@ -47,8 +58,8 @@ function AllPhotosModal({ businessId, business }) {
                     )
                     )}
             </div>
-        </div>
-    )
+
+        </div>)
 }
 
 export default AllPhotosModal
