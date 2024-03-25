@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { createImage } from "../../redux/businesses";
 import { useModal } from "../../context/Modal";
 import "./AddPhotos.css"
-import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 
-function AddPhotosToBusiness({ businessId: propBusinessId }) {
+function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
     const dispatch = useDispatch();
     const { businessId: paramsBusinessId } = useParams()
     const businessId = propBusinessId || paramsBusinessId
@@ -17,9 +15,9 @@ function AddPhotosToBusiness({ businessId: propBusinessId }) {
     const [errors] = useState({});
     const { closeModal } = useModal();
 
-    const images = useSelector(state => state.images[businessId])
-
     const sessionUser = useSelector(state => state.session.user)
+
+    const business = useSelector(state => state.businesses[businessId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,13 +41,7 @@ function AddPhotosToBusiness({ businessId: propBusinessId }) {
 
     return (
         <>
-            <h1>{images.images.business_name}: Add Photos</h1>
-            <div>
-                <OpenModalMenuItem
-                    itemText="View all photos"
-                    modalComponent={<AllPhotosModal businessId={businessId} />} />
-
-            </div>
+            <h1>{business?.name || businessName}: Add Photos</h1>
             {sessionUser &&
                 <div className="addPhoto">
                     <br />

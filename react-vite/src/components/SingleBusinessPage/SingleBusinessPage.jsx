@@ -107,7 +107,7 @@ function SingleBusinessPage() {
                     {business.business_images && totalImages(business.business_images, business.review_images) > 1 &&
                         <OpenModalButton
                             buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
-                            modalComponent={<AllPhotosModal business={business} businessId={businessId} />}
+                            modalComponent={<AllPhotosModal business={business} propBusinessId={businessId} />}
                         />
                     }
                 </div>

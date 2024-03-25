@@ -31,7 +31,7 @@ function AllPhotosModal({ businessId: propBusinessId }) {
                     <OpenModalButton
                         buttonText={<>
                             <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
-                        modalComponent={<AddPhotosToBusiness businessId={businessId} />}
+                        modalComponent={<AddPhotosToBusiness businessId={businessId} businessName={images.images.business_name} />}
                     />
                 </div>
             </div>
