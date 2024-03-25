@@ -57,15 +57,15 @@ function SignupFormModal() {
     if (!first_name) errObj.first_name = "First name is required."
     if (!last_name) errObj.last_name = "Last name is required."
     if (!email) errObj.email= "Email is required."
-    if (!emailRegex.test(email)) errObj.email = "Email is invalid."
-    if (!city) errObj.last_name = "City is required."
-    if (!state) errObj.last_name = "State is required."
+    if (email && !emailRegex.test(email)) errObj.email = "Email is invalid."
+    if (!city) errObj.city = "City is required."
+    if (!state) errObj.state = "State is required."
 
     setErrors(errObj)
   }, [password, confirmPassword, first_name, last_name, email, city, state])
 
 
-  const states = [{value: '--'},
+  const states = [
     {value:'AL'}, {value:'AK'}, {value:'AZ'}, {value:'AR'}, {value:'CA'},
     {value:'CO'}, {value:'CT'}, {value:'DE'}, {value:'DC'}, {value:'FL'},
     {value:'GA'}, {value:'HI'}, {value:'ID'}, {value:'IL'}, {value:'IN'},
@@ -80,91 +80,77 @@ function SignupFormModal() {
   ]
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <p >
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-      <label>
-          First Name
+      <form className="signUpModal" onSubmit={handleSubmit}>
+      <h1>Sign Up</h1>
           <input
             type="text"
+            placeholder="First Name"
             value={first_name}
             onChange={(e) => setFirst_name(e.target.value)}
             required
           />
-        </label>
-        {errors.first_name && <p>{errors.first_name}</p>}
-        <label>
-          Last Name
+        {errors.first_name && <span className="errors">&nbsp;{errors.first_name}</span>}
           <input
             type="text"
+            placeholder="Last Name"
             value={last_name}
             onChange={(e) => setLast_name(e.target.value)}
             required
           />
-        </label>
-        {errors.last_name && <p>{errors.last_name}</p>}
-        <label>
-          City
+        {errors.last_name && <span className="errors">&nbsp;{errors.last_name}</span>}
           <input
             type="text"
+            placeholder="City"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           />
-        </label>
-        {errors.city && <p>{errors.city}</p>}
-        <label>
-          State
+        {errors.city && <span className="errors">&nbsp;{errors.city}</span>}
           <select value={state}
             onChange={(e) => setState(e.target.value)}
             required
           >
+            <option value="">Select State</option>
             {states && states.map((ele, index) => (
               <option key={index}>{ele['value']}</option>
             ))}
           </select>
-        </label>
-        {errors.state && <p>{errors.state}</p>}
-        <label>
-          Email
+        {errors.state && <span className="errors">&nbsp;{errors.state}</span>}
           <input
             type="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
+        {errors.email && <span className="errors">&nbsp;{errors.email}</span>}
           <input
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
-          Confirm Password
+        {errors.password && <span className="errors">&nbsp;{errors.password}</span>}
           <input
             type="password"
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <span className="errors">&nbsp;{errors.confirmPassword}</span>}
         <button type="submit" disabled={!!Object.values(errors).length}>Sign Up</button>
-      </form>
-      <span>
+      <span>Already a user? &nbsp;
         <OpenModalMenuItem
-        itemText="Already a user? Log In"
+        itemText="Log In"
         modalComponent={<LoginFormModal />}
         />
       </span>
-    </>
+      </form>
+    </p>
   );
 }
 

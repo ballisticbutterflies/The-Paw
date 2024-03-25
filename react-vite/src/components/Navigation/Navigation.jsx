@@ -8,6 +8,8 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
+import ForBusinessButton from "./ForBusinessButton";
+import ManageBusinessPage from "../ManageBusinessesPage/ManageBusinessPage";
 
 // function Navigation({ isLoaded }) {
 function Navigation() {
@@ -49,7 +51,6 @@ function Navigation() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
 
-
           <input
             id="location"
             list="locations"
@@ -67,7 +68,7 @@ function Navigation() {
         </form>
       </div>
       <div className="forBiz">
-        For Business&nbsp;&nbsp;<i className="fa-solid fa-angle-down" id="caret"></i>
+        For Business&nbsp;&nbsp;<ForBusinessButton />
       </div>
       <div className="writeReview">
         Write a Review
