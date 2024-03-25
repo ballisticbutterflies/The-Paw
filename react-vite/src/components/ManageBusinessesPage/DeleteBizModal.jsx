@@ -19,7 +19,7 @@ const DeleteBizModal = ({ businessId }) => {
       <div className="deleteModal">
         <h3>Confirm Delete</h3>
         <span>Are you sure you want to delete this business?</span>
-        <button style={{ marginTop: "10px" }} onClick={handleDelete}>Yes, I'm Sure (Delete Permanently)</button>
+        <button style={{ marginTop: "10px" }} onClick={handleDelete}>Yes, I`&apos;`m Sure (Delete Permanently)</button>
         <button style={{ backgroundColor: "#c3cddf", color: "#768c9f", marginTop: "10px" }} onClick={closeModal}>No, Just Kitt-ing Around! (Keep Business)</button>
       </div>
     </>

@@ -34,11 +34,11 @@ function ForBusinessButton() {
 
   const ulClassName = "forbiz-dropdown" + (showMenu ? "" : " hidden");
 
-  const redirect = (e) => {
-    e.preventDefault();
+  // const redirect = (e) => {
+  //   e.preventDefault();
 
-    closeMenu();
-  };
+  //   closeMenu();
+  // };
 
   return (
     <>

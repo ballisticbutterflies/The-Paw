@@ -9,7 +9,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 import ForBusinessButton from "./ForBusinessButton";
-import ManageBusinessPage from "../ManageBusinessesPage/ManageBusinessPage";
+// import ManageBusinessPage from "../ManageBusinessesPage/ManageBusinessPage";
 
 // function Navigation({ isLoaded }) {
 function Navigation() {
