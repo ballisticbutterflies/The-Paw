@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import Business, Review, Image
+from app.models import Business, Review, Image, Category
 from sqlalchemy import func, desc
 from urllib.parse import unquote
 
@@ -17,6 +17,7 @@ def search():
   price_string = request.args.get('price')
   prices = price_string.split(',') if price_string else []
   city = request.args.get('city')
+  category = request.args.get('category')
 
 #base query to fetch businesses
   query = Business.query
@@ -30,6 +31,9 @@ def search():
 
   if city:
     query = query.filter(Business.city == city)
+
+  if category:
+    query = query.filter(Business.category_id == category)
 
   businesses = query.all()
 
@@ -47,11 +51,20 @@ def search():
     images = Image.query.filter_by(imageable_id=business.id, imageable_type='business').all()
     image_urls = [image.url for image in images]
 
+    categories = Category.query.filter(Category.id == business.category_id)
+    category_dict = { category.id: {
+        'id': category.id,
+        'name': category.name
+        } for category in categories }
+    category_data = category_dict.get(business.category_id)
+
+
     business_dict = business.to_dict()
     business_dict['avg_stars'] = avg_stars
     business_dict['num_reviews'] = num_reviews
     business_dict['recent_review_text'] = recent_review_text
     business_dict['images'] = image_urls
+    business_dict['category'] = category_data
 
     business_data.append(business_dict)
 

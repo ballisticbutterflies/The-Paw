@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
+import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
+import OpenModalButton from "../OpenModalButton";
 
 function SingleBusinessPage() {
     const { businessId } = useParams();
@@ -55,7 +57,7 @@ function SingleBusinessPage() {
         }
     }
 
-    return (business &&
+    return (business && business.business_images &&
         <>
             <div className="businessPhotoHeader">
                 <img src={business.business_images[0].image_url} />
@@ -95,11 +97,20 @@ function SingleBusinessPage() {
                     </div>
                 </div>
                 <div className="seeAllPhotos">
-                    <button>See all {business.business_images && totalImages(business.business_images, business.review_images)} photos</button>
+                    {business.business_images && totalImages(business.business_images, business.review_images) === 1 ? (
+                        <OpenModalButton
+                            buttonText="See 1 photo"
+                            modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
+                        />
+                    ) : (<OpenModalButton
+                        buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
+                        modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
+                    />)
+                    }
                 </div>
             </div >
             <div className="businessContainer">
-                <BusinessDetails business={business} />
+                <BusinessDetails business={business} businessId={businessId} />
                 <BusinessContactCard business={business} />
             </div>
         </>

@@ -53,3 +53,23 @@ def upload_image():
 
     # return render_template("post_form.html", form=form, errors=None)
     return {"error": "Unexpected error"}
+
+
+@image_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_image(id):
+    image = Image.query.get(id)
+
+    if image == None:
+        return {'message': "Image couldn't be found"}, 404
+
+    if image.uploader_id != current_user.id:
+        return { "message": "Unauthorized" }, 401
+
+    try:
+        db.session.delete(image)
+        db.session.commit()
+        return { 'message' : 'Successfully deleted' }, 200
+    except Exception as e:
+        db.session.rollback()
+        return {'message': 'An error occurred while deleting the image'}, 500

@@ -1,11 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
+import HomePage from '../components/HomePage';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import SearchFormPage from '../components/SearchFormPage';
 import SingleBusinessPage from '../components/SingleBusinessPage';
-import CreateBusinessPage from '../components/CreateBusinessPage';
-
+import AllPhotosModal from '../components/AllPhotosModal';
+import CreateBusinessForm from '../components/BusinessFormPage/CreateBusinessForm';
+import EditBusinessForm from '../components/BusinessFormPage/EditBusinessForm';
+import ManageBusinessPage from '../components/ManageBusinessesPage';
+import AddPhotosToBusiness from '../components/AddPhotosToBusiness';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +17,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage />,
       },
       {
         path: "login",
@@ -32,8 +36,24 @@ export const router = createBrowserRouter([
         element: <SingleBusinessPage />,
       },
       {
-        path: "/businesses",
-        element: <CreateBusinessPage />,
+        path: "/businesses/new",
+        element: <CreateBusinessForm />,
+      },
+      {
+        path: "/businesses/:businessId/edit",
+        element: <EditBusinessForm />,
+      },
+      {
+        path: "/businesses/current",
+        element: <ManageBusinessPage />,
+      },
+      {
+        path: "/businesses/:businessId/addphotos",
+        element: <AddPhotosToBusiness />,
+      },
+      {
+        path: "/businesses/:businessId/images",
+        element: <AllPhotosModal />,
       },
     ],
   },

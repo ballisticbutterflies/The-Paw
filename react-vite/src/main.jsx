@@ -7,6 +7,7 @@ import { router } from "./router";
 import * as sessionActions from "./redux/session";
 import * as searchActions from "./redux/search";
 import * as businessActions from "./redux/businesses";
+import * as imageActions from "./redux/images";
 import "./index.css";
 
 const store = configureStore();
@@ -16,6 +17,7 @@ if (import.meta.env.MODE !== "production") {
   window.sessionActions = sessionActions;
   window.searchActions = searchActions;
   window.businessActions = businessActions;
+  window.imageActions = imageActions;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

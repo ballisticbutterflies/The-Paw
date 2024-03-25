@@ -25,7 +25,7 @@ def seed_categories():
         name='Adoption'
     )
     more = Category(
-        name='More...'
+        name='Other'
     )
 
 
