@@ -13,6 +13,7 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     const businessId = propBusinessId || paramsBusinessId
 
     const images = useSelector(state => state.images[businessId])
+    const sessionUser = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(getImagesByBusiness(businessId))
@@ -48,7 +49,13 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                             <span key={business_image.id} className="allPhotosWrapper">
                                 <img className="images"
                                     src={business_image.url} />
-                                <div className="photoCredit">&nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}</div>
+                                <div className="photoCredit">
+                                    <div>&nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}</div>
+                                    <div>{sessionUser && sessionUser.id == business_image.uploader_id && (
+                                        <span>
+                                            <i className="fa-solid fa-trash-can" />&nbsp;&nbsp;
+                                        </span>)}</div>
+                                </div>
                             </span>
                         </>
                     )
