@@ -42,7 +42,7 @@ function ForBusinessButton() {
 
   return (
     <>
-      <button className="forBizButton" onClick={toggleMenu}>
+      <button className="forBizButton" onClick={toggleMenu}>For Business&nbsp;&nbsp;
         <i className="fa-solid fa-angle-down" id="caret" />
       </button>
       {showMenu &&

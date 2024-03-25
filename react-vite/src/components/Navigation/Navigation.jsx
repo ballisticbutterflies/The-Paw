@@ -68,7 +68,7 @@ function Navigation() {
         </form>
       </div>
       <div className="forBiz">
-        For Business&nbsp;&nbsp;<ForBusinessButton />
+        <ForBusinessButton />
       </div>
       <div className="writeReview">
         Write a Review
