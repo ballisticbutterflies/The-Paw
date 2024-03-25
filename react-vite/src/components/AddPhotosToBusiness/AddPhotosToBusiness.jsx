@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createImage } from "../../redux/businesses";
@@ -7,14 +7,17 @@ import "./AddPhotos.css"
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 
-function AddPhotosToBusiness({ businessId, business }) {
+function AddPhotosToBusiness({ businessId: propBusinessId }) {
     const dispatch = useDispatch();
+    const { businessId: paramsBusinessId } = useParams()
+    const businessId = propBusinessId || paramsBusinessId
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors] = useState({});
     const { closeModal } = useModal();
 
+    const images = useSelector(state => state.images[businessId])
 
     const sessionUser = useSelector(state => state.session.user)
 
@@ -38,13 +41,13 @@ function AddPhotosToBusiness({ businessId, business }) {
             })
     }
 
-    return (business &&
+    return (
         <>
-            <h1>{business.name}: Add Photos</h1>
+            <h1>{images.images.business_name}: Add Photos</h1>
             <div>
                 <OpenModalMenuItem
                     itemText="View all photos"
-                    modalComponent={<AllPhotosModal businessId={businessId} business={business} />} />
+                    modalComponent={<AllPhotosModal businessId={businessId} />} />
 
             </div>
             {sessionUser &&

@@ -4,10 +4,13 @@ import { getImagesByBusiness } from "../../redux/images";
 import "./AllPhotos.css";
 import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import { useParams } from "react-router-dom";
 
 
-function AllPhotosModal({ businessId, business }) {
+function AllPhotosModal({ businessId: propBusinessId }) {
     const dispatch = useDispatch();
+    const { businessId: paramsBusinessId } = useParams()
+    const businessId = propBusinessId || paramsBusinessId
 
     const images = useSelector(state => state.images[businessId])
 
@@ -20,15 +23,15 @@ function AllPhotosModal({ businessId, business }) {
         return last + "."
     }
 
-    return (images && business &&
+    return (images &&
         <div className="modal">
             <div className="allPhotosHeader">
-                <div><h1>Photos for {business.name}</h1></div>
+                <div><h1>Photos for {images.images.business_name}</h1></div>
                 <div>
                     <OpenModalButton
                         buttonText={<>
                             <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
-                        modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                        modalComponent={<AddPhotosToBusiness businessId={businessId} />}
                     />
                 </div>
             </div>
