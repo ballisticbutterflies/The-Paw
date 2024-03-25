@@ -59,3 +59,10 @@
 .deleteBiz {
   margin: auto;
 }
+
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+}

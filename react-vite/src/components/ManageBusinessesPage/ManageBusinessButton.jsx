@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import OpenModalButton from "../OpenModalButton";
+import DeleteBizModal from "./DeleteBizModal";
+
 import "./ManageBusiness.css"
 
 
@@ -40,18 +42,15 @@ function ManageBizButton({ business }) {
         <>
           <ul className={ulClassName} ref={ulRef}>
             <p className="updateBiz">
-            <Link to={`/businesses/${business.id}/edit`}
-              onClick={closeMenu}
-            >Update Business</Link>
-
+              <Link to={`/businesses/${business.id}/edit`}
+                onClick={closeMenu}
+              >Update Business</Link>
             </p>
-
-            <button onClick={() => window.alert("Feature Coming Soon...")}>Delete</button>
-          {/* <OpenModalMenuItem
-                itemText="Delete Business"
-                onItemClick={closeMenu}
-                modalComponent={<DeleteFormModal />}
-              /> */}
+            <OpenModalButton
+              buttonText="Delete Business"
+              businessId={business.id}
+              modalComponent={<DeleteBizModal businessId={business.id} />}
+            />
           </ul>
         </>
 
