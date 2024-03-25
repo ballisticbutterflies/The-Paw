@@ -30,15 +30,13 @@
     color: #1f2f44;
 }
 
-.allPhotosContainer {
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr); */
+.allPhotosContainerModal {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 15px;
     justify-items: center;
     overflow-y: auto !important;
-    max-height: calc(100vh - 400px) !important;
+    max-height: calc(100vh - 100px) !important;
 }
 
 .allPhotosWrapper {
@@ -63,4 +61,18 @@
     color: #FFFFFF;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+
+.page {
+    margin: auto;
+    padding-top: 10px;
+    max-width: 1125px;
+    height: auto;
+}
+
+.allPhotosContainerPage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 15px;
+    justify-items: center;
 }

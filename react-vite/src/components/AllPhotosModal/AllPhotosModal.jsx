@@ -4,10 +4,10 @@ import { getImagesByBusiness } from "../../redux/images";
 import "./AllPhotos.css";
 import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 
-function AllPhotosModal({ businessId: propBusinessId }) {
+function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     const dispatch = useDispatch();
     const { businessId: paramsBusinessId } = useParams()
     const businessId = propBusinessId || paramsBusinessId
@@ -24,9 +24,15 @@ function AllPhotosModal({ businessId: propBusinessId }) {
     }
 
     return (images &&
-        <div className="modal">
+        <div className={modalLoad ? "modal" : "page"}>
             <div className="allPhotosHeader">
-                <div><h1>Photos for {images.images.business_name}</h1></div>
+                <div>{modalLoad ? (
+                    <h1>Photos for {images.images.business_name}</h1>
+                ) : (
+                    <h1>Photos for <Link to={`/businesses/${businessId}`}>{images.images.business_name}</Link></h1>
+                )}
+
+                </div>
                 <div>
                     <OpenModalButton
                         buttonText={<>
@@ -35,7 +41,7 @@ function AllPhotosModal({ businessId: propBusinessId }) {
                     />
                 </div>
             </div>
-            <div className="allPhotosContainer">
+            <div className={modalLoad ? "allPhotosContainerModal" : "allPhotosContainerPage"}>
                 {images.images.business_images &&
                     images.images.business_images.map(business_image => (
                         <>
