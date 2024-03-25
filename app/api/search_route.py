@@ -16,8 +16,9 @@ def search():
   rating = request.args.get('rating')
   price_string = request.args.get('price')
   prices = price_string.split(',') if price_string else []
-  city = request.args.get('city')
+  city_state = request.args.get('location')
   category = request.args.get('category')
+  search_query = request.args.get('search')
 
 #base query to fetch businesses
   query = Business.query
@@ -29,11 +30,17 @@ def search():
   if prices:
     query = query.filter(Business.price.in_(prices))
 
-  if city:
-    query = query.filter(Business.city == city)
+  if city_state:
+    city, state = city_state.split(', ')
+    query = query.filter(Business.city == city, Business.state == state)
 
   if category:
-    query = query.filter(Business.category_id == category)
+    category_obj = Category.query.filter_by(name=category).first()
+    if category_obj:
+      query = query.filter(Business.category_id == category_obj.id)
+
+  if search_query:
+    query = query.filter(Business.name.ilike(f'%{search_query}%'))
 
   businesses = query.all()
 
