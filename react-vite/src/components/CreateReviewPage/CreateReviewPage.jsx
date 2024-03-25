@@ -15,6 +15,8 @@ function CreateReviewPage() {
     const sessionUser = useSelector(state => state.session.user)
 
     const { businessId } = useParams();
+    const businessRes = fetchSingleBusiness(businessId)
+    console.log(businessRes)
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(null);
     const [hover, setHover] = useState(null);
@@ -72,7 +74,7 @@ function CreateReviewPage() {
         <>
           {
             <form className="createReviewForm" onSubmit={handleSubmit} encType="multipart/form-data">
-              <h1>Add your business to The Paw!</h1>
+              <h1>{businessId.}</h1>
               <input
                 type="text"
                 value={address}
