@@ -1,10 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { getImagesByBusiness } from "../../redux/images";
-import "./AllPhotos.css"
+import "./AllPhotos.css";
+import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import { useParams, Link } from "react-router-dom";
 
-function AllPhotosModal({ businessId, business }) {
+
+function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     const dispatch = useDispatch();
+    const { businessId: paramsBusinessId } = useParams()
+    const businessId = propBusinessId || paramsBusinessId
 
     const images = useSelector(state => state.images[businessId])
 
@@ -17,12 +23,25 @@ function AllPhotosModal({ businessId, business }) {
         return last + "."
     }
 
-    return (images && business &&
-        <div className="modal">
-            <div className="allPhotosHeader"><div><h1>Photos for {business.name}</h1></div>
-                <button><i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</button>
+    return (images &&
+        <div className={modalLoad ? "modal" : "page"}>
+            <div className="allPhotosHeader">
+                <div>{modalLoad ? (
+                    <h1>Photos for {images.images.business_name}</h1>
+                ) : (
+                    <h1>Photos for <Link to={`/businesses/${businessId}`}>{images.images.business_name}</Link></h1>
+                )}
+
+                </div>
+                <div>
+                    <OpenModalButton
+                        buttonText={<>
+                            <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
+                        modalComponent={<AddPhotosToBusiness businessId={businessId} businessName={images.images.business_name} />}
+                    />
+                </div>
             </div>
-            <div className="allPhotosContainer">
+            <div className={modalLoad ? "allPhotosContainerModal" : "allPhotosContainerPage"}>
                 {images.images.business_images &&
                     images.images.business_images.map(business_image => (
                         <>
@@ -47,8 +66,8 @@ function AllPhotosModal({ businessId, business }) {
                     )
                     )}
             </div>
-        </div>
-    )
+
+        </div>)
 }
 
 export default AllPhotosModal

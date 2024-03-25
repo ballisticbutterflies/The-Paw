@@ -7,6 +7,7 @@ export const loadImages = (image) => (console.log("TEST", image), {
 
 export const getImagesByBusiness = (businessId) => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId}/images`)
+    console.log("RES", response);
 
     if (response.ok) {
         const images = await response.json();

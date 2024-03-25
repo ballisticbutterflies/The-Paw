@@ -1,20 +1,26 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createImage } from "../../redux/businesses";
 import { useModal } from "../../context/Modal";
 import "./AddPhotos.css"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 
-function AddPhotosToBusiness({ businessId, business }) {
+function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
     const dispatch = useDispatch();
+    const { businessId: paramsBusinessId } = useParams()
+    const businessId = propBusinessId || paramsBusinessId
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors] = useState({});
     const { closeModal } = useModal();
 
-
     const sessionUser = useSelector(state => state.session.user)
+
+    const business = useSelector(state => state.businesses[businessId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,16 +33,31 @@ function AddPhotosToBusiness({ businessId, business }) {
 
         setImageLoading(true);
 
-        await dispatch(createImage(formData)).then(closeModal()).then(() => navigate('/')).catch((error) => {
-            console.error("Error uploading image:", error);
-            setImageLoading(false);
-        })
+        await dispatch(createImage(formData))
+            .then(() => closeModal())
+            .then(() => navigate(`/businesses/${businessId}/images`))
+            .catch((error) => {
+                console.error("Error uploading image:", error);
+                setImageLoading(false);
+            })
     }
 
-    return (business &&
+    return (
         <>
-            <h1>{business.name}: Add Photos</h1>
-            <div>View all photos</div>
+            <h1>{business?.name || businessName}: Add Photos</h1>
+            {!sessionUser &&
+                <div>
+                    <span>Please&nbsp;
+                        <OpenModalMenuItem
+                            itemText="log in"
+                            modalComponent={<LoginFormModal />} />
+                    </span> or&nbsp;
+                    <span>
+                        <OpenModalMenuItem
+                            itemText="sign up"
+                            modalComponent={<SignupFormModal />} />
+                    </span> to add photos.</div>
+            }
             {sessionUser &&
                 <div className="addPhoto">
                     <br />

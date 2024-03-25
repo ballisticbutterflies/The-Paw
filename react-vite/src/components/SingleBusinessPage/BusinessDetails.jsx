@@ -1,7 +1,6 @@
 import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
-import { useModal } from '../../context/Modal';
 
 function BusinessDetails({ business, businessId }) {
 

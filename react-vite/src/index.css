@@ -66,9 +66,17 @@ select {
 }
 
 a {
-    color: #1f2f44;
+    color: #5f5ba8;
     text-decoration: none;
-    font-weight: 500px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.modalLink {
+    color: #5f5ba8;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 a:hover {
@@ -85,4 +93,4 @@ hr {
 
 button:hover {
     cursor: pointer;
-  }
+}

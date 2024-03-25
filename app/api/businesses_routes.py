@@ -276,8 +276,9 @@ def get_images_by_business_id(id):
 
     images_dict['business_images'] = business_images_data
     images_dict['business_id'] = id
+    images_dict['business_name'] = business.name
 
-    return { 'images': images_dict }
+    return { 'images': images_dict }, 200
 
 @businesses_route.route('/<int:id>/edit', methods=["PUT"])
 @login_required

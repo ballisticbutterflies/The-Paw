@@ -97,18 +97,15 @@ function SingleBusinessPage() {
                     </div>
                 </div>
                 <div className="seeAllPhotos">
-                    {business.business_images && totalImages(business.business_images, business.review_images) === 1 &&
+                    {business.business_images && totalImages(business.business_images, business.review_images) === 1 ? (
                         <OpenModalButton
                             buttonText="See 1 photo"
-                            modalComponent={<AllPhotosModal business={business} businessId={businessId} />}
+                            modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
                         />
-                    }
-
-                    {business.business_images && totalImages(business.business_images, business.review_images) > 1 &&
-                        <OpenModalButton
-                            buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
-                            modalComponent={<AllPhotosModal business={business} businessId={businessId} />}
-                        />
+                    ) : (<OpenModalButton
+                        buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
+                        modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
+                    />)
                     }
                 </div>
             </div >
