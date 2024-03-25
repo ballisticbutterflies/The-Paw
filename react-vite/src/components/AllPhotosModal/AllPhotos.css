@@ -1,10 +1,11 @@
 .modal {
-    max-height: calc(100vh - 200px) !important;
+    max-height: calc(100vh - 100px) !important;
     /* margin-top: 10px;
     margin-left: 30px;
     margin-right: 30px;
     padding-bottom: 30px; */
     width: 75vw !important;
+    overflow-y: auto !important;
 }
 
 .allPhotosHeader {
@@ -35,8 +36,8 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 15px;
     justify-items: center;
-    overflow-y: auto !important;
-    max-height: calc(100vh - 100px) !important;
+    /* overflow-y: auto !important; */
+    /* max-height: calc(100vh - 100px) !important; */
 }
 
 .allPhotosWrapper {
