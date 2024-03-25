@@ -27,10 +27,13 @@ function AddPhotosToBusiness({ businessId, business }) {
 
         setImageLoading(true);
 
-        await dispatch(createImage(formData)).then(closeModal()).then(() => navigate('/')).catch((error) => {
-            console.error("Error uploading image:", error);
-            setImageLoading(false);
-        })
+        await dispatch(createImage(formData))
+            .then(() => closeModal())
+            .then(() => navigate(`/businesses/${businessId}/images`))
+            .catch((error) => {
+                console.error("Error uploading image:", error);
+                setImageLoading(false);
+            })
     }
 
     return (business &&

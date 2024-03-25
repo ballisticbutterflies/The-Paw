@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { getImagesByBusiness } from "../../redux/images";
-import "./AllPhotos.css"
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import "./AllPhotos.css";
 import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 
