@@ -58,7 +58,7 @@ function CreateReviewPage() {
 
             setImageLoading(true);
             // ! so to have multiple images uploaded at once we could iterate through an array of form data here
-            dispatch(createReviewImages(formData).then(() => {
+            dispatch(createImage(formData).then(() => {
                 dispatch(fetchSingleBusiness(businessId))
                 .then(() => navigate(`/businesses/${businessId}`));
             }).catch((error)=> {
