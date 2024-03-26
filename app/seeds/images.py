@@ -105,6 +105,27 @@ def seed_images():
         uploader_id=5
     )
 
+    perch_biz1 = Image(
+        imageable_id=8,
+        imageable_type="business",
+        url="https://s3-media0.fl.yelpcdn.com/bphoto/xPZYGIOhMeYEvPsT9RPofA/o.jpg",
+        uploader_id=1
+    )
+
+    perch_biz2 = Image(
+        imageable_id=8,
+        imageable_type="business",
+        url="https://s3-media0.fl.yelpcdn.com/bphoto/FNEMMG8W4Ul8ITdAVuUEYA/o.jpg",
+        uploader_id=1
+    )
+
+    salondog_biz = Image(
+        imageable_id=9,
+        imageable_type="business",
+        url="https://s3.amazonaws.com/static.organiclead.com/Site-177309ee-02b0-4f65-a7c5-680a68bf3b33/shutterstock_1708371508.jpg",
+        uploader_id=5
+    )
+
     db.session.add(petagogy_biz)
     db.session.add(petagogy_review1)
     db.session.add(petagogy_review2)
@@ -120,6 +141,9 @@ def seed_images():
     db.session.add(bakery_rev)
     db.session.add(photog_biz)
     db.session.add(vet_biz)
+    db.session.add(perch_biz1)
+    db.session.add(perch_biz2)
+    db.session.add(salondog_biz)
     db.session.commit()
 
 

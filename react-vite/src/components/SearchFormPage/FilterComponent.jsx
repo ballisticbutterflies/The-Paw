@@ -38,8 +38,6 @@ const FilterComponent = ({ onFilterChange }) => {
 
     const url = `${queryString}`;
 
-    console.log(url)
-
     onFilterChange(url)
   }
 

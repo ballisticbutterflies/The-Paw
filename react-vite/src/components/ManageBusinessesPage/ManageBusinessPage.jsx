@@ -58,36 +58,36 @@ function ManageBusinessPage() {
       <h1>Manage Businesses</h1>
       {businesses && businesses.map((business, index) => (
         <div key={business.id} className="bizandbutton">
-          <Link key={business.name} style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
-            <img className="manBizImage" src={business.image} alt={business.name} />
-            <span className="manBizDeets">
-              {index + 1}.&nbsp;{business.name}
-              {
-                business.avg_stars &&
-                business.num_reviews && reviewsExists(business.num_reviews) &&
-                <span>{business?.avg_stars && starReviews(business.avg_stars)}
-                  &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
-                  &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-              }
-              {business.price !== null &&
-                <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
-                </span>
-              }
+            <Link style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
+              <img className="manBizImage" src={business.image} alt={business.name} />
+              <span className="manBizDeets">
+                {index + 1}.&nbsp;{business.name}
+                {
+                  business.avg_stars &&
+                  business.num_reviews && reviewsExists(business.num_reviews) &&
+                  <span>{business?.avg_stars && starReviews(business.avg_stars)}
+                    &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
+                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                }
+                {business.price !== null &&
+                  <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
+                  </span>
+                }
 
-              {business.price === null &&
-                <span className="priceSubcat">{business.category?.name}
-                </span>
-              }
-              <span>HOURS PLACEHOLDER</span>
-              {
-                business.description &&
-                descriptionTextSubstr(business.description)
-              }
-            </span>
-          </Link>
-          <div key={"BUTTON"} className="manbutton">
-            <ManageBizButton business={business} />
-          </div>
+                {business.price === null &&
+                  <span className="priceSubcat">{business.category?.name}
+                  </span>
+                }
+                <span>HOURS PLACEHOLDER</span>
+                {
+                  business.description &&
+                  descriptionTextSubstr(business.description)
+                }
+              </span>
+            </Link>
+            <div className="manbutton">
+              <ManageBizButton business={business} />
+            </div>
         </div>
       ))}
 

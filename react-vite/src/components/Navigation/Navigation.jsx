@@ -3,17 +3,19 @@ import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { fetchBusinesses } from "../../redux/search";
+import { clearBusinesses, fetchBusinesses, searchBarBusinesses } from "../../redux/search";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 import ForBusinessButton from "./ForBusinessButton";
+import { useNavigate } from "react-router-dom";
 // import ManageBusinessPage from "../ManageBusinessesPage/ManageBusinessPage";
 
 // function Navigation({ isLoaded }) {
 function Navigation() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
@@ -36,13 +38,19 @@ function Navigation() {
     dispatch(fetchBusinesses())
   }, [dispatch])
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchBarBusinesses(searchQuery, location))
+    .then(navigate('/search/'))
+    .then(dispatch(clearBusinesses()))
+  };
+
 
   return (
     <div className="nav">
       <NavLink to="/"><img className="logo" src='../../images/the_paw_in_black.png' /></NavLink>
-
       <div className="searchForm">
-        <form className="formNav">
+        <form className="formNav" onSubmit={handleSubmit}>
           <input
             id="searchQuery"
             type="text"
@@ -50,13 +58,12 @@ function Navigation() {
             placeholder="things to do, groomers, restaurants"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-
           <input
             id="location"
             list="locations"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="city, state"
+            placeholder="City, State"
           />
           <datalist id="locations">
             {uniqueLocations.map(op => (
