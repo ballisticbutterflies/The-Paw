@@ -17,21 +17,6 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     const images = useSelector(state => state.images[businessId])
     const sessionUser = useSelector(state => state.session.user)
 
-    // const imageId = useSelector(state => {
-    //     if (state.images.business_images) {
-    //         state.images.business_images.map(image => {
-    //             return image.id
-    //         })
-    //     }
-
-    //     if (state.images.review_images) {
-    //         state.images.review_images.map(image => {
-    //             console.log("IDDD", image.id)
-    //             return image.id
-    //         })
-    //     }
-    // })
-
     useEffect(() => {
         dispatch(getImagesByBusiness(businessId))
     }, [dispatch, businessId])
@@ -78,10 +63,9 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                                     itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
                                                     modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
                                             }
-                                            {sessionUser && sessionUser.id === business_image.uploader_id && images.images.business_images.length > 1 && <OpenModalMenuItem
+                                            {sessionUser && sessionUser.id === business_image.uploader_id && images.images.business_images.length > 0 && images.images.review_images?.length > 0 && <OpenModalMenuItem
                                                 itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
                                                 modalComponent={<DeleteImageModal imageId={business_image.id} />} />}
-
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +79,21 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                             <span key={review_image.id} className="allPhotosWrapper">
                                 <img className="images"
                                     src={review_image.url} />
-                                <div className="photoCredit">&nbsp;&nbsp;By {review_image.user.first_name} {review_image.user.last_name && lastInitial(review_image.user.last_name)}</div>
+                                <div className="photoCredit">
+                                    <div className="photoCreditText">
+                                        <div>
+                                            &nbsp;&nbsp;By {review_image.user.first_name} {review_image.user.last_name && lastInitial(review_image.user.last_name)}
+                                        </div>
+
+                                        <div className="trash">
+                                            {sessionUser && sessionUser.id === review_image.uploader_id &&
+                                                <OpenModalMenuItem
+                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
+                                                    modalComponent={<DeleteImageModal imageId={review_image.id} />} />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                             </span>
 
                         </>
