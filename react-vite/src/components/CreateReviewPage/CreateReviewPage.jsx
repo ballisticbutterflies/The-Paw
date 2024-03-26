@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createNewReview, createImage } from "../../redux/reviews";
 import { fetchSingleBusiness } from "../../redux/businesses";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from '../LoginFormModal';
 import "./CreateReview.css"
 
 
@@ -135,7 +137,11 @@ function CreateReviewPage() {
                     onChange={(e) => setImage(e.target.files[0])}
                 />
               {(imageLoading) && <p>Loading...</p>}
-              <button type="submit" disabled={!!Object.values(errors).length}>Create Review</button>
+              {sessionUser &&<button type="submit" disabled={!!Object.values(errors).length}>Create Review</button>}
+              {!sessionUser && <OpenModalButton
+                  buttonText="Create Review"
+                  modalComponent={<LoginFormModal />}
+                />}
               {/* two submisbuttons one displayed when signed in one display when no sessoin user, the non user button triggers modal, yes user button submits forms */}
             </form>
           }
