@@ -93,6 +93,8 @@ class Business(db.Model):
             'hours': {
             'mon_open': self.mon_open,
             'mon_close': self.mon_close,
+            'tue_open': self.tue_open,
+            'tue_close': self.tue_close,
             'wed_open': self.wed_open,
             'wed_close': self.wed_close,
             'thu_open': self.thu_open,
