@@ -65,9 +65,13 @@
 }
 
 .photoCreditText {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
+}
 
+.trash {
+    justify-self: end;
 }
 
 .page {
