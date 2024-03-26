@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
         element: <CreateBusinessPage />,
       },
       {
-        path: "reviews/new",
+        path: "/businesses/:businessId/reviews/new",
         element: <CreateReviewPage/>,
       },
     ],
