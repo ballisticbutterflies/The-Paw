@@ -54,3 +54,10 @@ def get_all_reviews():
     all_reviews_dict = {'reviews': [format_reviews(review) for review in reviews]} # structure final response dict by calling the above helper function to 
     return all_reviews_dict
    
+@reviews_route.route('<int:review_id>/update', methods="PUT")
+@login_required
+def update_review(review_id):
+    """
+    Updates an existing review based on id as long as the current user is the author
+    """
+    review = Review.query.get(review_id)
