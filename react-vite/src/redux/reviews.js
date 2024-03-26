@@ -35,7 +35,7 @@ export const getBusinessReviews = (businessId) => async (dispatch) => {
 
 export const createNewReview = (newReviewData, businessId) => async (dispatch) => {
     
-    console.log("hitting creat new review thunk")
+    // console.log("hitting creat new review thunk")
     const res = await fetch(`/api/businesses/${businessId}/reviews`, {
       method: "POST",
       headers: {
@@ -64,7 +64,7 @@ export const createImage = (newImages) => async (dispatch) => {
         return res;
     } else if (res.ok) {
         const createdReviewImages = await res.json();
-        dispatch(createdReviewImages(createdReviewImages));
+        dispatch(createReviewImages(createdReviewImages));
         return createdReviewImages;
     }
 };

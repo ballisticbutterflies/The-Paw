@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createNewReview, createImage } from "../../redux/reviews";
+import { createNewReview, createImage, getBusinessReviews } from "../../redux/reviews";
 import { fetchSingleBusiness } from "../../redux/businesses";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from '../LoginFormModal';
@@ -50,25 +50,25 @@ function CreateReviewPage() {
             console.log("successful review submission");
         
             if(image != null){
-            // ! so like don't we need to be able to upload multiple images?
+                // ! so like don't we need to be able to upload multiple images?
 
-            const formData = new FormData();
-            formData.append("image", image);
-            formData.append("uploader_id", sessionUser.id);
-            formData.append("imageable_id", businessId); // Pass business ID
-            formData.append("imageable_type", "review"); // Hardcoded for review type
+                const formData = new FormData();
+                formData.append("image", image);
+                formData.append("uploader_id", sessionUser.id);
+                formData.append("imageable_id", businessId); // Pass business ID
+                formData.append("imageable_type", "review"); // Hardcoded for review type
 
-            setImageLoading(true);
-            // ! so to have multiple images uploaded at once we could iterate through an array of form data here
-            dispatch(createImage(formData).then(() => {
-                dispatch(fetchSingleBusiness(businessId))
-                .then(() => navigate(`/businesses/${businessId}`));
-            }).catch((error)=> {
-                console.error("Error uploading image: ", error);
-                setImageLoading(false);
-            }))}
+                setImageLoading(true);
+                // ! so to have multiple images uploaded at once we could iterate through an array of form data here
+                dispatch(createImage(formData)).then(() => {
+                    dispatch(fetchSingleBusiness(businessId)).then(dispatch(getBusinessReviews(businessId))).then(navigate(`/businesses/${businessId}`))
+                }).catch((error)=> {
+                    console.error("Error uploading image: ", error);
+                    setImageLoading(false);
+                })
+            }
             else{
-                navigate(`/businesses/${businessId}`)
+                dispatch(fetchSingleBusiness(businessId)).then(dispatch(getBusinessReviews(businessId))).then(navigate(`/businesses/${businessId}`))
             }
         }
 
