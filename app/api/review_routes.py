@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Business, Review, Image, User;
+from app.models import Business, Review, Image, User, db;
 from .user_routes import user_routes, user
 
 reviews_route = Blueprint('reviews', __name__)
@@ -54,3 +54,23 @@ def get_all_reviews():
     all_reviews_dict = {'reviews': [format_reviews(review) for review in reviews]} # structure final response dict by calling the above helper function to 
     return all_reviews_dict
    
+@reviews_route.route('<int:review_id>/delete', methods=["DELETE"])
+@login_required
+def delete_review(review_id):
+    """
+    Deletes existing review by id as long as current user is author of review
+    """
+    review = Review.query.get(review_id)
+
+    if review is None:
+        return {'message': 'Business couldn\'t be found' }, 404
+    elif review.user_id != current_user.id:
+        return {'errors': {'message': 'Forbidden' }}, 403
+    else: 
+        try: 
+            db.session.delete(review)
+            db.session.commit()
+            return {'message': 'Review successfully deleted'}, 200
+        except Exception as e:
+            db.session.rollback()
+            return {'message': 'An unknown error occured while attempting to delete the business. Please refresh the page and try again.'}, 500

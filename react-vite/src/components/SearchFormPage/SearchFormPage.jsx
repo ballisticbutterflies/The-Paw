@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
@@ -52,9 +52,9 @@ function SearchFormPage() {
   }
 
 
-  useEffect(() => {
-    dispatch(fetchBusinesses())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchBusinesses())
+  // }, [dispatch])
 
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
@@ -73,7 +73,7 @@ function SearchFormPage() {
                 <img className="businessesImage" src={business.images} alt={business.name} />
               </span>
               <>
-                <span key={`bizDeets-${business.id}`} className="businessDeets">
+                <span className="businessDeets">
                   <span>{index + 1}.&nbsp;{business.name}</span>
                 {
                   business.avg_stars &&
@@ -85,7 +85,15 @@ function SearchFormPage() {
 
                 }
 
-                  <span>CATEGORIES PLACEHOLDER · {business.price}</span>
+                  {business.price !== null &&
+                    <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
+                    </span>
+                  }
+
+                  {business.price === null &&
+                    <span className="priceSubcat">{business.category?.name}
+                    </span>
+                  }
                   <span>HOURS PLACEHOLDER</span>
                   <span>
                     {business.recent_review_text &&

@@ -92,6 +92,7 @@
   margin-top: 5px;
   margin-right: 50px;
   border-radius: 5px;
+  z-index: 2;
 }
 
 .profiledropdownoptions {
@@ -104,4 +105,21 @@
   background-color: #c3cddf;
   padding: 10px;
   border-radius: 5px;
+}
+
+.forbiz-dropdown {
+  position:absolute;
+  z-index: 2;
+  padding: 10px;
+  width: fit-content;
+  background-color: #FFFBF6;
+  margin-top: 162px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.forBizButton {
+  color: black;
+  padding: 0;
+  background-color: #ffbe6e;
 }

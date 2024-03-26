@@ -1,9 +1,19 @@
-function BusinessDetails({ business }) {
+import SingleBusinessReviews from "./SingleBusinessReviews";
+import OpenModalButton from "../OpenModalButton";
+import AddPhotosToBusiness from "../AddPhotosToBusiness";
+
+function BusinessDetails({ business, businessId }) {
+
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
                 <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
-                <button><i className="fa-solid fa-camera" /> Add photo</button>&nbsp;&nbsp;
+
+                <OpenModalButton
+                    buttonText={<>
+                        <i className="fa-solid fa-camera" /> Add photo</>}
+                    modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                />&nbsp;&nbsp;
                 <button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button>
             </div>
             <hr />

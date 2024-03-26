@@ -5,6 +5,7 @@ import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import SignupFormModal from "../SignupFormModal";
+import { Link } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -102,7 +103,7 @@ function LoginFormModal() {
           modalComponent={<SignupFormModal />}
         />
       </></p>
-      <div><span onClick={demoUser}>Login as Demo User</span></div>
+      <div><Link onClick={demoUser}>Login as Demo User</Link></div>
     </>
   );
 }
