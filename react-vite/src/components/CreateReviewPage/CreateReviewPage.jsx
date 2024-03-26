@@ -49,7 +49,9 @@ function CreateReviewPage() {
         if(newlyCreatedReview.id) {
             console.log("successful review submission");
         
+            if(image != null){
             // ! so like don't we need to be able to upload multiple images?
+
             const formData = new FormData();
             formData.append("image", image);
             formData.append("uploader_id", sessionUser.id);
@@ -64,7 +66,10 @@ function CreateReviewPage() {
             }).catch((error)=> {
                 console.error("Error uploading image: ", error);
                 setImageLoading(false);
-            }))    
+            }))}
+            else{
+                navigate(`/businesses/${businessId}`)
+            }
         }
 
     }
