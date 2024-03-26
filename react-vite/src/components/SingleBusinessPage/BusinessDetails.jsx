@@ -2,7 +2,7 @@ import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
 
-function BusinessDetails({ business, businessId }) {
+function BusinessDetails({ business, businessId, locationHoursSection }) {
 
     const stdTimeFormat = (military) => {
         if (military === null) return "Closed"
@@ -35,7 +35,7 @@ function BusinessDetails({ business, businessId }) {
                 <h3>About this Business</h3>
                 {business.description}
             </div>
-            <hr />
+            <hr ref={locationHoursSection} />
             <div>
                 <h3>Location & Hours</h3>
                 <div className="locationHours">

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleBusiness } from "../../redux/businesses";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
@@ -50,12 +50,22 @@ function SingleBusinessPage() {
     }
 
     const reviewAvg = (avg) => {
-        if (avg !== 'New') {
+        if (avg !== null) {
             return avg.toFixed(1);
         } else {
             return avg
         }
     }
+
+    const locationHoursSection = useRef(null)
+
+    const scrollTo = (section) => {
+        window.scrollTo({
+            top: section.current.offsetTop,
+            behavior: "smooth",
+        });
+    };
+
 
     return (business && business.business_images &&
         <>
@@ -93,7 +103,7 @@ function SingleBusinessPage() {
 
                     <div className="currHours">
                         [CLOSED 8AM - 6PM]&nbsp;&nbsp;
-                        <span className="seeHours">See hours</span>
+                        <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                     </div>
                 </div>
                 <div className="seeAllPhotos">
@@ -110,7 +120,7 @@ function SingleBusinessPage() {
                 </div>
             </div >
             <div className="businessContainer">
-                <BusinessDetails business={business} businessId={businessId} />
+                <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} />
                 <BusinessContactCard business={business} />
             </div>
         </>
