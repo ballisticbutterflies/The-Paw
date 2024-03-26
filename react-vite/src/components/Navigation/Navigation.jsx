@@ -36,14 +36,19 @@ function Navigation() {
 
   useEffect(() => {
     dispatch(fetchBusinesses())
+
   }, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(searchBarBusinesses(searchQuery, location))
-    .then(navigate('/search/'))
-    .then(dispatch(clearBusinesses()))
+    .then(() => {
+      navigate('/search/')
+      setSearchQuery('')
+    })
+    .then(() => setLocation(''))
   };
+
 
 
   return (

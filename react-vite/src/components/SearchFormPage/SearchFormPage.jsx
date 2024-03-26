@@ -1,9 +1,10 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBusinesses } from "../../redux/search";
+import { fetchBusinesses, searchBarBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
+import { loadBusinesses } from "../../redux/businesses";
 
 
 function SearchFormPage() {
@@ -52,11 +53,11 @@ function SearchFormPage() {
   }
 
 
-  // useEffect(() => {
-  //   dispatch(fetchBusinesses())
-  // }, [dispatch])
+
+
 
   const handleFilterChange = (filters) => {
+    
     dispatch(fetchBusinesses(filters))
 
   }
