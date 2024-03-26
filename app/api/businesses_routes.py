@@ -383,7 +383,7 @@ def delete_business(id):
         return {'message': 'An error occurred while deleting the business.'}, 500
 
 
-@businesses_route.route('/')
+@businesses_route.route('')
 def get_businesses():
     '''
     Gets all businesses
