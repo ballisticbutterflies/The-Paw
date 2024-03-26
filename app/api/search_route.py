@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image, Category
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, or_
 from urllib.parse import unquote
 
 search_route = Blueprint('search', __name__)
@@ -18,7 +18,7 @@ def search():
   prices = price_string.split(',') if price_string else []
   city_state = request.args.get('location')
   category = request.args.get('category')
-  search_query = request.args.get('search')
+  search_query = request.args.get('search_query')
 
 #base query to fetch businesses
   query = Business.query
@@ -35,12 +35,14 @@ def search():
     query = query.filter(Business.city == city, Business.state == state)
 
   if category:
-    category_obj = Category.query.filter_by(name=category).first()
-    if category_obj:
-      query = query.filter(Business.category_id == category_obj.id)
+      query = query.filter(Business.category_id == category.id)
 
   if search_query:
-    query = query.filter(Business.name.ilike(f'%{search_query}%'))
+    query = query.filter(or_(
+      Business.name.ilike(f'%{search_query}%'),
+      Business.category.has(Category.name.ilike(f'%{search_query}%')),
+      Business.reviews.any(Review.review.ilike(f'%{search_query}%'))
+    ))
 
   businesses = query.all()
 
