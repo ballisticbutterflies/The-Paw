@@ -35,7 +35,7 @@ def search():
     query = query.filter(Business.city == city, Business.state == state)
 
   if category:
-      query = query.filter(Business.category_id == category.id)
+      query = query.filter(Business.category_id == category)
 
   if search_query:
     query = query.filter(or_(

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
@@ -52,9 +52,9 @@ function SearchFormPage() {
   }
 
 
-  useEffect(() => {
-    dispatch(fetchBusinesses())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchBusinesses())
+  // }, [dispatch])
 
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
