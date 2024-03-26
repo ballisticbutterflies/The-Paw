@@ -67,12 +67,18 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                 <img className="images"
                                     src={business_image.url} />
                                 <div className="photoCredit">
-                                    <div>&nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}</div>
-                                    <div>{sessionUser && sessionUser.id == business_image.uploader_id && (
+                                    <div className="photoCreditText">&nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}{sessionUser && sessionUser.id === business_image.uploader_id && images.images.business_images.length === 1 &&
+                                        <span><OpenModalMenuItem
+                                            itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
+                                            modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
+                                        </span>
+                                    }</div>
+                                    <div>{sessionUser && sessionUser.id === business_image.uploader_id && images.images.business_images.length > 1 &&
                                         <span><OpenModalMenuItem
                                             itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
                                             modalComponent={<DeleteImageModal imageId={business_image.id} />} />
-                                        </span>)}</div>
+                                        </span>
+                                    }</div>
                                 </div>
                             </span>
                         </>
