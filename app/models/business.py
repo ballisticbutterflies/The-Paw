@@ -88,7 +88,22 @@ class Business(db.Model):
             'website': self.website,
             'email': self.email,
             'phone': self.phone,
-            'price': self.price
+            'price': self.price,
+            'set_hours': self.set_hours,
+            'hours': {
+            'mon_open': self.mon_open,
+            'mon_close': self.mon_close,
+            'wed_open': self.wed_open,
+            'wed_close': self.wed_close,
+            'thu_open': self.thu_open,
+            'thu_close': self.thu_close,
+            'fri_open': self.fri_open,
+            'fri_close': self.fri_close,
+            'sat_open': self.sat_open,
+            'sat_close': self.sat_close,
+            'sun_open': self.sun_open,
+            'sun_close': self.sun_close,
+            }
         }
 
 # class Attribute(db.Model):
