@@ -1,72 +1,69 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchCategories } from "../../redux/categories";
-import { useSelector } from "react-redux";
+import {  useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchBusinesses } from "../../redux/search";
-
+import { searchBarBusinesses } from "../../redux/search";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function CategoriesComponent() {
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [location] = useState('');
 
+  const handleCategoryClick = (category) => {
+    dispatch(searchBarBusinesses(category, location))
+      .then(() => navigate('/search'));
+  };
 
-  useEffect(() => {
-    dispatch(fetchBusinesses())
-  }, [dispatch])
-
-  
 
   return (
     <>
       <div className="categoryContainer">
-        <div >
-          { search &&
-          <Link to={`/search/?category=1`} >
-          <img className="categoryDots" src="../../../public/images/icons/restaurants.png" />
-          <span className="categoryStuff">Restaurants</span>
+        <div onClick={() => handleCategoryClick("Restaurants")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/restaurants.png" />
           </Link>
-          }
+          <span className="categoryStuff">Restaurants</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/veterinarian.png" />
+        <div onClick={() => handleCategoryClick("Veterinarians")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/veterinarian.png" />
           </Link>
           <span className="categoryStuff">Veterinarians</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/services.png" />
+        <div onClick={() => handleCategoryClick("Services")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/services.png" />
           </Link>
           <span className="categoryStuff">Services</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/shopping.png" />
+        <div onClick={() => handleCategoryClick("Shopping")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/shopping.png" />
           </Link>
           <span className="categoryStuff">Shopping</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/travel.png" />
+        <div onClick={() => handleCategoryClick("Travel")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/travel.png" />
           </Link>
           <span className="categoryStuff">Travel</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/activities.png" />
+        <div onClick={() => handleCategoryClick("Activities")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/activities.png" />
           </Link>
           <span className="categoryStuff">Activities</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/adoption.png" />
+        <div onClick={() => handleCategoryClick("Adoption")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/adoption.png" />
           </Link>
           <span className="categoryStuff">Adoption</span>
         </div>
-        <div >
-          <Link>
-            <img className="categoryDots" src="../../../public/images/icons/other.png" />
+        <div onClick={() => handleCategoryClick("Other")}>
+          <Link value={searchQuery} onClick={(e) => setSearchQuery(e.target.value)}>
+            <img className="categoryDots" src="/images/icons/other.png" />
           </Link>
           <span className="categoryStuff">Other</span>
         </div>

@@ -52,10 +52,6 @@ function SearchFormPage() {
   }
 
 
-  // useEffect(() => {
-  //   dispatch(fetchBusinesses())
-  // }, [dispatch])
-
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
 
