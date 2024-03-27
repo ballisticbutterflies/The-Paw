@@ -33,7 +33,7 @@ class CreateBusinessForm(FlaskForm):
   email = StringField('email')
   phone = StringField('phone')
   price = StringField('price')
-  set_hours = BooleanField('set_hours', validators=[DataRequired()])
+  set_hours = StringField('set_hours', validators=[DataRequired()])
   mon_open = SelectField('mon_open', choices=hours, default='')
   mon_close = SelectField('mon_close', choices=hours, default='')
   tue_open = SelectField('tue_open', choices=hours, default='')

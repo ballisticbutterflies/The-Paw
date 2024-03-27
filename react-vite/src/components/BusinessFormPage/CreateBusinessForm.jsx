@@ -12,11 +12,26 @@ const CreateBusinessForm = () => {
     email: '',
     website: '',
     phone: '',
-    category_id: ''
+    category_id: '',
+    set_hours: '',
+    mon_open: '',
+    mon_close: '',
+    tue_open: '',
+    tue_close: '',
+    wed_open: '',
+    wed_close: '',
+    thu_open: '',
+    thu_close: '',
+    fri_open: '',
+    fri_close: '',
+    sat_open: '',
+    sat_close: '',
+    sun_open: '',
+    sun_close: ''
   }
   return (
     <CreateBusinessPage
-      business= {newBusiness}
+      business={newBusiness}
       formType="Create Business"
     />
   )
