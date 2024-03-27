@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useParams, Link } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteImageModal from "../DeleteImageModal/DeleteImageModal";
+import LoginFormModal from "../LoginFormModal";
 
 
 function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
@@ -37,11 +38,20 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
 
                 </div>
                 <div>
-                    <OpenModalButton
-                        buttonText={<>
-                            <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
-                        modalComponent={<AddPhotosToBusiness businessId={businessId} businessName={images.images.business_name} />}
-                    />
+                    {!sessionUser &&
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
+                            modalComponent={<LoginFormModal />}
+                        />
+                    }
+                    {sessionUser &&
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
+                            modalComponent={<AddPhotosToBusiness businessId={businessId} businessName={images.images.business_name} />}
+                        />
+                    }
                 </div>
             </div>
             <div className={modalLoad ? "allPhotosContainerModal" : "allPhotosContainerPage"}>

@@ -1,24 +1,33 @@
 import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
-import { useNavigate } from "react-router-dom";
 import { stdTimeFormat } from "../../utils";
+import { useSelector } from "react-redux"
+import LoginFormModal from "../LoginFormModal";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
-
-    const navigate = useNavigate();
-
+    const sessionUser = useSelector(state => state.session.user)
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
-                <button className="businessDetails_writeAReview" onClick={() => navigate(`/businesses/${businessId}/reviews/new`)}><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
+                <span className="businessDetails_writeAReview"><button><i className="fa-solid fa-paw" /> &nbsp;Write a review</button></span>&nbsp;&nbsp;
+                <span className="bizDeetsButton">{!sessionUser &&
+                    <OpenModalButton
+                        buttonText={<>
+                            <i className="fa-solid fa-camera" /> Add photo</>}
+                        modalComponent={<LoginFormModal />}
+                    />
+                }
+                    {sessionUser &&
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-camera" /> Add photo</>}
+                            modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                        />
+                    }</span>
 
-                <OpenModalButton
-                    buttonText={<>
-                        <i className="fa-solid fa-camera" /> Add photo</>}
-                    modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
-                />&nbsp;&nbsp;
-                <button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button>
+                &nbsp;&nbsp;
+                <span className="bizDeetsButton"><button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
             </div>
             <hr />
             <div>
@@ -35,7 +44,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                             <div>{business.city}, {business.state} {business.zip_code}</div>
                         </div>
                     </div>
-                    <div><button>Get Directions</button></div>
+                    <div><span className="bizDeetsButton"><button>Get Directions</button></span></div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">

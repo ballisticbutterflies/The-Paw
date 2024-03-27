@@ -19,7 +19,7 @@ function LoginFormModal() {
     const check = {}
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    if (!emailRegex.test(email)) check.email = 'Invalid email'
+    if (email && !emailRegex.test(email)) check.email = 'Email format is invalid.'
     if (password.length < 6) check.password = 'Invalid password length'
     setDisableCheck(check)
   }, [email, password])
@@ -59,16 +59,13 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="loginSignupModals">
+      <form className="signUpModal" onSubmit={handleSubmit}>
+        <h1>Log In</h1>
         <div>
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && <p className="errors" style={{ paddingTop: "5px" }}>{errors.password}</p>}
         </div>
         <div>
-          <label>
-            Email
-          </label>
         </div>
         <div>
           <input
@@ -76,12 +73,11 @@ function LoginFormModal() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Email"
           />
         </div>
+        {disableCheck.email && <span className="errors">&nbsp;{disableCheck.email}</span>}
         <div>
-          <label>
-            Password
-          </label>
         </div>
         <div>
           <input
@@ -89,22 +85,23 @@ function LoginFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Password"
           />
         </div>
-        <div>
+        <div style={{ marginTop: "10px" }}>
           <button
             disabled={Object.values(disableCheck).length}
             type="submit">Log In</button>
         </div>
+        <p>New to The Paw? <>
+          <OpenModalMenuItem
+            itemText={<span className="modalLink">Sign Up</span>}
+            modalComponent={<SignupFormModal />}
+          />
+        </></p>
+        <div><Link onClick={demoUser}>Login as Demo User</Link></div>
       </form>
-      <p>New to The Paw? <>
-        <OpenModalMenuItem
-          itemText="Sign Up"
-          modalComponent={<SignupFormModal />}
-        />
-      </></p>
-      <div><Link onClick={demoUser}>Login as Demo User</Link></div>
-    </>
+    </div>
   );
 }
 

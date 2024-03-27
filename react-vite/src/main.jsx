@@ -8,6 +8,7 @@ import * as sessionActions from "./redux/session";
 import * as searchActions from "./redux/search";
 import * as businessActions from "./redux/businesses";
 import * as imageActions from "./redux/images";
+import * as userActions from "./redux/users"
 import "./index.css";
 
 const store = configureStore();
@@ -18,6 +19,7 @@ if (import.meta.env.MODE !== "production") {
   window.searchActions = searchActions;
   window.businessActions = businessActions;
   window.imageActions = imageActions;
+  window.userActions = userActions;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

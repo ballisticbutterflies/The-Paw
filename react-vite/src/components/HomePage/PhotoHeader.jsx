@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function PhotoHeader() {
     return (
         <>
@@ -10,8 +11,8 @@ function PhotoHeader() {
                     </div>
                 </div>
                 <div className="photoHeaderCredit">
-                    <div>Some Groomer Name</div>
-                    <div style={{ fontWeight: "300" }}>Photo from the business owner</div>
+                    <div><Link to="/businesses/9">Salon Dog</Link></div>
+                    <div style={{ fontWeight: "300" }}>Photo by Simon K.</div>
                 </div>
             </div >
         </>

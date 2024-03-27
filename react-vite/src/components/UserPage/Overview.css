@@ -1,0 +1,29 @@
+/* styling for overview */
+.needs-border{
+    padding: 1em;
+    background-color: #FFFBF6;
+    border-radius: 3px;
+    border: #1f2f44 solid 1px;
+}
+
+#user-details{
+    display:flex;
+    flex-direction: row;
+}
+
+.details-indiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+
+}
+
+#details-location{
+    padding: 3% 3em 3% 2em;
+}
+
+#details-time{
+    padding: 3% 2em 3% 3em;
+}
