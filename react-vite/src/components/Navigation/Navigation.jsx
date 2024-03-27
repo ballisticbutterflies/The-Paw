@@ -2,9 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import { searchBarBusinesses } from "../../redux/search";
-import { clearBusinesses, fetchBusinesses, searchBarBusinesses } from "../../redux/search";
 
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
@@ -23,7 +21,7 @@ function Navigation() {
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
   const businesses = Object.values(useSelector((state) => state.businesses))
-  
+
   const locations_list = []
 
   businesses.map(business => {
@@ -47,11 +45,11 @@ function Navigation() {
     e.preventDefault();
     dispatch(searchBarBusinesses(searchQuery, location))
 
-    .then(() => {
-      navigate('/search/')
-      setSearchQuery('')
-    })
-    .then(() => setLocation(''))
+      .then(() => {
+        navigate('/search/')
+        setSearchQuery('')
+      })
+      .then(() => setLocation(''))
 
   };
 
