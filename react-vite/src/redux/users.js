@@ -27,11 +27,10 @@ export const getUser = (userId) => async (dispatch) => {
 // REDUCER
 
 const userReducer = (state = {}, action) => {
-
+    console.log("hitting reducer")
     switch (action.type) {
         case LOAD_USER: {
-            console.log("hitting reducer")
-            return {...state, [action.user.id]: action.user }
+            return {...state, [action.users.userId]: action.user }
             // const userState = {};
             // userState[user.id]
         }
