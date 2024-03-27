@@ -77,7 +77,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                 {business.reviews.num_reviews == 0 ? (
                     <div>Be the first to review!</div>
                 ) : (
-                    <SingleBusinessReviews business={business} businessId={businessId} />
+                    <SingleBusinessReviews business={business} businessId={businessId} sessionUser={sessionUser} />
                 )}
                 <br />
             </div>
