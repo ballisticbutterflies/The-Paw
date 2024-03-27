@@ -40,6 +40,7 @@ textarea {
     color: #1f2f44;
     border-radius: 3px;
     border: #c3cddf solid 1px;
+    resize: none;
 }
 
 input,
