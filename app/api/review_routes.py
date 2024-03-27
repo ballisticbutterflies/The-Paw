@@ -62,6 +62,14 @@ def update_review(review_id):
     """
     review = Review.query.get(review_id)
 
+    if review is None:
+        return {'message': 'Business couldn\'t be found' }, 404
+    elif review.user_id != current_user.id:
+        return {'errors': {'message': 'Forbidden' }}, 403
+
+            
+
+
     
 @reviews_route.route('<int:review_id>/delete', methods=["DELETE"])
 @login_required
