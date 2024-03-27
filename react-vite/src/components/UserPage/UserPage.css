@@ -1,9 +1,12 @@
-* {
-    
+div#full-user-page {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
 }
 
 .user-sidebar-container{
     display: flex;
+    flex: 1;
     flex-direction: column;
     width: min-content;
     padding-left: 2em;
@@ -64,4 +67,14 @@ img.pfp {
  border-radius: 50%; 
 
  /* justify-content: center; */
+}
+
+/* end of user side bar css for positioning, start of styling for specific pages */
+
+
+.sub-pages{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    margin: 3% 0% 0% 5%;
 }

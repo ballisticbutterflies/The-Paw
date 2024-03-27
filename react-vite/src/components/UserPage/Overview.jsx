@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "../../redux/users";
+import './Overview.css'
 
 
 function UserOverview() {
@@ -29,7 +30,17 @@ function UserOverview() {
 
     return (
         <>
-            <p>This is the overview!</p>
+            <h2>More about me</h2>
+            <div id="user-details" className="needs-border">
+                <div id='details-location' className="details-indiv">
+                    <h5>Location</h5>
+                    <p>{viewedUser.city}, {viewedUser.state}</p>
+                </div>
+                <div id='details-time' className="details-indiv">
+                    <h5>Pawmate Since</h5>
+                    <p>Spring 2024</p>
+                </div>
+            </div>
         </>
     )
 }
