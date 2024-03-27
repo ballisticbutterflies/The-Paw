@@ -61,7 +61,7 @@ function CreateReviewPage() {
                 const formData = new FormData();
                 formData.append("image", image);
                 formData.append("uploader_id", sessionUser.id);
-                formData.append("imageable_id", businessId); // Pass business ID
+                formData.append("imageable_id", newlyCreatedReview.id); // Pass business ID
                 formData.append("imageable_type", "review"); // Hardcoded for review type
 
                 setImageLoading(true);
