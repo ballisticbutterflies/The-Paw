@@ -54,6 +54,10 @@ function UserPage() {
                             {!viewedUser.pfp_url && (<img className="pfp" id='generic-pfp' src='../../../public/images/defaultAvatar.png' alt="" />)}
                             <h1>{viewedUser.first_name}  {viewedUser.last_name.slice(0,1)}.</h1>
                             <h5>{viewedUser.city}, {viewedUser.state}</h5>   
+                            <div className="user-summ-stats">
+                                <div className="user-summ-stat-item"><i className="fa-solid fa-paw"/>&nbsp;&nbsp;<h5>{viewedUser.num_reviews}</h5></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div className="user-summ-stat-item"><i className="fa-solid fa-image"/>&nbsp;&nbsp;<h5>{viewedUser.num_images}</h5></div>
+                            </div>
                         </div>
                         <div className="user-navigation-container">
                             <div className="single-user-navigation" onClick={() => {setCurrentView('overview')}}><i className="fa-solid fa-circle-user"/>&nbsp;&nbsp;<h4 className="nav-description">Profile Overview</h4></div>
