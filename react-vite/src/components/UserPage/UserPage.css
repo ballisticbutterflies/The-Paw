@@ -69,6 +69,7 @@ img.pfp {
  /* justify-content: center; */
 }
 
+
 /* end of user side bar css for positioning, start of styling for specific pages */
 
 
@@ -78,3 +79,4 @@ img.pfp {
     flex-direction: column;
     margin: 3% 0% 0% 5%;
 }
+

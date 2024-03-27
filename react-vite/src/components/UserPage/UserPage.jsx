@@ -45,6 +45,7 @@ function UserPage() {
         <>
             { viewedUser && (
                 <div id="full-user-page">
+
                     <div className="user-sidebar-container">
                         <div className="user-summary-container">
                             {!viewedUser.user_pfp.image_url && (<img className="pfp" id="generic-pfp" src={viewedUser.pfp_url} alt="" />)}
@@ -60,7 +61,6 @@ function UserPage() {
                             <div className="single-user-navigation" onClick={() => {setCurrentView('overview')}}><i className="fa-solid fa-circle-user"/>&nbsp;&nbsp;<h4 className="nav-description">Profile Overview</h4></div>
                             <div className="single-user-navigation" onClick={() => {setCurrentView('reviews')}}><i className="fa-solid fa-paw"/>&nbsp;&nbsp;<h4 className="nav-description">Reviews Written</h4></div>
                             <div className="single-user-navigation" onClick={() => {setCurrentView('photos')}}><i className="fa-solid fa-image"/>&nbsp;&nbsp;<h4 className="nav-description">Photos Added</h4></div>
-                            {/* <div className="single-user-navigation" onClick={() => {setCurrentView('businesses')}}><i className="fa-solid fa-shop"></i>&nbsp;&nbsp;<h4 className="nav-description">Businesses Owned</h4></div> */}
                         </div>
                     </div>
                     <div className="sub-pages"></div>
