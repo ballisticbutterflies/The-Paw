@@ -10,24 +10,24 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
-                <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
-                {!sessionUser &&
+                <span className="businessDetails_writeAReview"><button><i className="fa-solid fa-paw" /> &nbsp;Write a review</button></span>&nbsp;&nbsp;
+                <span className="bizDeetsButton">{!sessionUser &&
                     <OpenModalButton
                         buttonText={<>
                             <i className="fa-solid fa-camera" /> Add photo</>}
                         modalComponent={<LoginFormModal />}
                     />
                 }
-                {sessionUser &&
-                    <OpenModalButton
-                        buttonText={<>
-                            <i className="fa-solid fa-camera" /> Add photo</>}
-                        modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
-                    />
-                }
+                    {sessionUser &&
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-camera" /> Add photo</>}
+                            modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                        />
+                    }</span>
 
                 &nbsp;&nbsp;
-                <button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button>
+                <span className="bizDeetsButton"><button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
             </div>
             <hr />
             <div>
@@ -44,7 +44,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                             <div>{business.city}, {business.state} {business.zip_code}</div>
                         </div>
                     </div>
-                    <div><button>Get Directions</button></div>
+                    <div><span className="bizDeetsButton"><button>Get Directions</button></span></div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">

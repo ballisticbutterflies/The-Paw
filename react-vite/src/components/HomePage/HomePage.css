@@ -46,6 +46,10 @@
     background-color: #5f5ba8;
 }
 
+.photoHeader button:hover {
+    background-color: rgba(95, 91, 168, 0.9);
+}
+
 .photoHeader a {
     color: #FFFFFF;
 }
