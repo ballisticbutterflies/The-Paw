@@ -41,7 +41,8 @@ def search():
     query = query.filter(or_(
       Business.name.ilike(f'%{search_query}%'),
       Business.category.has(Category.name.ilike(f'%{search_query}%')),
-      Business.reviews.any(Review.review.ilike(f'%{search_query}%'))
+      Business.reviews.any(Review.review.ilike(f'%{search_query}%')),
+      Business.description.any(Review.review.ilike(f'%{search_query}%'))
     ))
 
   businesses = query.all()
