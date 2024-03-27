@@ -20,10 +20,8 @@ const rootReducer = combineReducers({
   businesses: businessesReducer,
   reviews: reviewsReducer,
   images: imagesReducer,
-
-  categories: categoriesReducer
-
- users: userReducer
+  categories: categoriesReducer,
+  users: userReducer
 
 });
 
