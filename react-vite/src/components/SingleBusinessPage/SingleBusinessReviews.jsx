@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function SingleBusinessReviews({ businessId }) {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const reviews = Object.values(useSelector(state => state.reviews)).sort((a, b) => {
         if (a.createdAt > b.createdAt) return -1;
@@ -50,7 +52,7 @@ function SingleBusinessReviews({ businessId }) {
         <>
             {reviews.map((review) => (review.user &&
                 <div key={review.id}>
-                    <div className="userInfo">
+                    <div className="userInfo" onClick={() => navigate(`/users/${review.user.id}`)}>
                         <div className="avatar">
                             {review.user.user_image_url ? (
                                 <img className="avatarFormat" src={review.user.user_image_url} />
