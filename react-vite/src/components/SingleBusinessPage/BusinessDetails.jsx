@@ -1,8 +1,9 @@
 import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
+import { stdTimeFormat } from "../../utils";
 
-function BusinessDetails({ business, businessId }) {
+function BusinessDetails({ business, businessId, locationHoursSection }) {
 
     return (
         <div className="businessDetails">
@@ -21,7 +22,7 @@ function BusinessDetails({ business, businessId }) {
                 <h3>About this Business</h3>
                 {business.description}
             </div>
-            <hr />
+            <hr ref={locationHoursSection} />
             <div>
                 <h3>Location & Hours</h3>
                 <div className="locationHours">
@@ -32,22 +33,42 @@ function BusinessDetails({ business, businessId }) {
                         </div>
                     </div>
                     <div><button>Get Directions</button></div>
-                    <div className="businessDetailsHours">[hours]</div>
+                    <div className="businessDetailsHours">{business.set_hours === "yes" &&
+                        business.hours && (
+                            <div className="hours">
+                                <div>Mon</div>
+                                <div>{stdTimeFormat(business.hours.mon_open)} - {stdTimeFormat(business.hours.mon_close)}</div>
+                                <div>Tue</div>
+                                <div>{stdTimeFormat(business.hours.tue_open)} - {stdTimeFormat(business.hours.tue_close)}</div>
+                                <div>Wed</div>
+                                <div>{stdTimeFormat(business.hours.wed_open)} - {stdTimeFormat(business.hours.wed_close)}</div>
+                                <div>Thu</div>
+                                <div>{stdTimeFormat(business.hours.thu_open)} - {stdTimeFormat(business.hours.thu_close)}</div>
+                                <div>Fri</div>
+                                <div>{stdTimeFormat(business.hours.fri_open)} - {stdTimeFormat(business.hours.fri_close)}</div>
+                                <div>Sat</div>
+                                <div>{stdTimeFormat(business.hours.sat_open)} - {stdTimeFormat(business.hours.sat_close)}</div>
+                                <div>Sun</div>
+                                <div>{stdTimeFormat(business.hours.sun_open)} - {stdTimeFormat(business.hours.sun_close)}</div>
+                            </div>
+                        )
+                    }
+                    </div>
                 </div>
+                <hr />
+                <div>
+                    <h3>Amenities and More [Services Offered if applicable]</h3>
+                    <div>[Street Parking]</div>
+                </div>
+                <hr />
+                <h3>Reviews</h3>
+                {business.reviews.num_reviews == 0 ? (
+                    <div>Be the first to review!</div>
+                ) : (
+                    <SingleBusinessReviews business={business} businessId={businessId} />
+                )}
+                <br />
             </div>
-            <hr />
-            <div>
-                <h3>Amenities and More [Services Offered if applicable]</h3>
-                <div>[Street Parking]</div>
-            </div>
-            <hr />
-            <h3>Reviews</h3>
-            {business.reviews.num_reviews == 0 ? (
-                <div>Be the first to review!</div>
-            ) : (
-                <SingleBusinessReviews business={business} businessId={businessId} />
-            )}
-            <br />
         </div>
     )
 }

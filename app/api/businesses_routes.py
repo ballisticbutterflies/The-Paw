@@ -401,7 +401,8 @@ def get_user_businesses():
         business_dict = business.to_dict()
         business_dict['avg_stars'] = avg_stars
         business_dict['num_reviews'] = num_reviews
-        business_dict['image'] = image.url
+        business_dict['image'] = image.url if image else None
+        print("JFOSFSDFSDFDSFDSFSFDSF", image)
         business_dict['category'] = category_data
         business_dict['set_hours'] = business.set_hours
         business_dict['hours'] = {
