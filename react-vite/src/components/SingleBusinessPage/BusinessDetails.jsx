@@ -1,13 +1,16 @@
 import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
+import { useNavigate } from "react-router-dom";
 
 function BusinessDetails({ business, businessId }) {
+
+    const navigate = useNavigate();
 
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
-                <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
+                <button className="businessDetails_writeAReview" onClick={() => navigate(`/businesses/${businessId}/reviews/new`)}><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
 
                 <OpenModalButton
                     buttonText={<>

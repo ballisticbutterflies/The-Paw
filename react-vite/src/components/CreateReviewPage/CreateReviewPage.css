@@ -41,3 +41,7 @@ button, input[type="file"] {
     width: fit-content;
     padding: 1% 2%;
 }
+
+.custom-error-page{
+    margin: 2em 10em;
+}
