@@ -33,7 +33,8 @@ button:disabled {
     color: #768c9f;
 }
 
-input {
+input,
+textarea {
     background-color: #FFFBF6;
     font-family: "Poppins", sans-serif;
     color: #1f2f44;

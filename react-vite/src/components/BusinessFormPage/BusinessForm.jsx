@@ -151,8 +151,8 @@ function CreateBusinessPage({ business, formType }) {
     if (!state) errObj.state = "State is required."
     if (!zip_code) errObj.zip_code = "ZIP Code is required."
     if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid."
-    if (!name) errObj.name = "Name is required."
-    if (name.length > 100) errObj.name = "Name must be less than 100 characters."
+    if (!name) errObj.name = "Business name is required."
+    if (name.length > 100) errObj.name = "Business name must be less than 100 characters."
     if (!description) errObj.description = "Description is required."
     if (!category_id) errObj.category_id = "Category is required."
     if (description.length >= 1 && description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters."
@@ -164,6 +164,7 @@ function CreateBusinessPage({ business, formType }) {
     // if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
     if (set_hours !== "yes" && set_hours !== "no") errObj.set_hours = "Set hours is required."
     if (set_hours === undefined) errObj.set_hours = "Set hours is required."
+    if (set_hours === "yes" && !mon_open && !tue_open && !wed_open && !thu_open && !fri_open && !sat_open && !sun_open) errObj.hours = "Hours are required if you have set hours."
     if (
       (mon_open && !mon_close) || (!mon_open && mon_close) ||
       (tue_open && !tue_close) || (!tue_open && tue_close) ||
@@ -189,6 +190,27 @@ function CreateBusinessPage({ business, formType }) {
         <form className="createBizForm" onSubmit={handleSubmit} encType="multipart/form-data">
           {formType && formType === "Update Business" && <h1>Update your business details!</h1>}
           {formType && formType === "Create Business" && <h1>Add your business to The Paw!</h1>}
+          <select className="inputFields"
+            value={category_id}
+            onChange={(e) => setCategory_id(e.target.value)}
+            name="category"
+          >
+            <option value="">Select Category</option>
+            {categories.map((category, index) => (
+              <option key={category} value={index + 1}>
+                {category}
+              </option>
+            ))}
+          </select>
+          {errors.category_id && <span className="errors">&nbsp;{errors.category_id}</span>}
+          <input className="inputFields"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Business Name"
+            name="name"
+          />
+          {errors.name && <span className="errors">&nbsp;{errors.name}</span>}
           <input className="inputFields"
             type="text"
             value={address}
@@ -226,14 +248,6 @@ function CreateBusinessPage({ business, formType }) {
             name="zip_code"
           />
           {errors.zip_code && <span className="errors">&nbsp;{errors.zip_code}</span>}
-          <input className="inputFields"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Name"
-            name="name"
-          />
-          {errors.name && <span className="errors">&nbsp;{errors.name}</span>}
           <textarea className="inputFields"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -242,58 +256,6 @@ function CreateBusinessPage({ business, formType }) {
             rows="5"
           />
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
-          <div className="inputFields">
-            Price (Optional):&nbsp;
-            {["$", "$$", "$$$", "$$$$"].map((option) => (
-              <label key={option}>
-                <input
-                  type="radio"
-                  value={option}
-                  checked={price == option}
-                  onClick={() => updatePrice(option)}
-                  onChange={() => { }}
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-          <select className="inputFields"
-            value={category_id}
-            onChange={(e) => setCategory_id(e.target.value)}
-            name="category"
-          >
-            <option value="">Select Category</option>
-            {categories.map((category, index) => (
-              <option key={category} value={index + 1}>
-                {category}
-              </option>
-            ))}
-          </select>
-          {errors.category_id && <span className="errors">&nbsp;{errors.category_id}</span>}
-          <input className="inputFields"
-            type="text"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            placeholder="Website"
-            name="website"
-          />
-          {errors.website && <span className="errors">&nbsp;{errors.website}</span>}
-          <input className="inputFields"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            name="email"
-          />
-          {errors.email && <span className="errors">&nbsp;{errors.email}</span>}
-          <input className="inputFields"
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Phone"
-            name="phone"
-          />
-          {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
           <div className="inputFields">
             Does your business have set hours?:&nbsp;
             <label>
@@ -316,9 +278,10 @@ function CreateBusinessPage({ business, formType }) {
             </label>
           </div>
           {errors.set_hours && <span className="errors">&nbsp;{errors.set_hours}</span>}
-          <div className="hoursForm">
+          <div className={set_hours == "yes" ? "hoursForm" : "hidden"}>
+
+            <span>Monday:&nbsp;</span>
             <div>
-              <span>Monday:&nbsp;</span>
               <select className="inputFields"
                 value={mon_open}
                 onChange={(e) => setMon_open(e.target.value)}
@@ -344,8 +307,10 @@ function CreateBusinessPage({ business, formType }) {
                 ))}
               </select>
             </div>
+
+
+            <span>Tuesday:&nbsp;</span>
             <div>
-              <span>Tuesday:&nbsp;</span>
               <select className="inputFields"
                 value={tue_open}
                 onChange={(e) => setTue_open(e.target.value)}
@@ -371,8 +336,10 @@ function CreateBusinessPage({ business, formType }) {
                 ))}
               </select>
             </div>
+
+
+            <span>Wednesday:&nbsp;</span>
             <div>
-              <span>Wednesday:&nbsp;</span>
               <select className="inputFields"
                 value={wed_open}
                 onChange={(e) => setWed_open(e.target.value)}
@@ -398,8 +365,10 @@ function CreateBusinessPage({ business, formType }) {
                 ))}
               </select>
             </div>
+
+
+            <span>Thursday:&nbsp;</span>
             <div>
-              <span>Thursday:&nbsp;</span>
               <select className="inputFields"
                 value={thu_open}
                 onChange={(e) => setThu_open(e.target.value)}
@@ -425,8 +394,10 @@ function CreateBusinessPage({ business, formType }) {
                 ))}
               </select>
             </div>
+
+
+            <span>Friday:&nbsp;</span>
             <div>
-              <span>Friday:&nbsp;</span>
               <select className="inputFields"
                 value={fri_open}
                 onChange={(e) => setFri_open(e.target.value)}
@@ -452,8 +423,10 @@ function CreateBusinessPage({ business, formType }) {
                 ))}
               </select>
             </div>
+
+
+            <span>Saturday:&nbsp;</span>
             <div>
-              <span>Saturday:&nbsp;</span>
               <select className="inputFields"
                 value={sat_open}
                 onChange={(e) => setSat_open(e.target.value)}
@@ -479,8 +452,10 @@ function CreateBusinessPage({ business, formType }) {
                 ))}
               </select>
             </div>
+
+
+            <span>Sunday:&nbsp;</span>
             <div>
-              <span>Sunday:&nbsp;</span>
               <select className="inputFields"
                 value={sun_open}
                 onChange={(e) => setSun_open(e.target.value)}
@@ -507,7 +482,47 @@ function CreateBusinessPage({ business, formType }) {
               </select>
             </div>
           </div>
+
           {errors.hours && <span className="errors">&nbsp;{errors.hours}</span>}
+          <input className="inputFields"
+            type="text"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            placeholder="Website"
+            name="website"
+          />
+          {errors.website && <span className="errors">&nbsp;{errors.website}</span>}
+          <input className="inputFields"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            name="email"
+          />
+          {errors.email && <span className="errors">&nbsp;{errors.email}</span>}
+          <input className="inputFields"
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Phone"
+            name="phone"
+          />
+          {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
+          <div className="inputFields">
+            Price (Optional):&nbsp;
+            {["$", "$$", "$$$", "$$$$"].map((option) => (
+              <label key={option}>
+                <input
+                  type="radio"
+                  value={option}
+                  checked={price == option}
+                  onClick={() => updatePrice(option)}
+                  onChange={() => { }}
+                />
+                {option}
+              </label>
+            ))}
+          </div>
           {formType && formType === 'Create Business' &&
             <span className="inputFields" >
               <input className="imageInput"
@@ -515,7 +530,7 @@ function CreateBusinessPage({ business, formType }) {
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
               />
-              {errors.image && <div className="errors">&nbsp;{errors.image}</div>}
+              {errors.image && <div className="errorsImage">&nbsp;{errors.image}</div>}
               {(imageLoading) && <p>Loading...</p>}
             </span>
           }
