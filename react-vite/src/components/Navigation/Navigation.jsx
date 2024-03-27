@@ -57,7 +57,7 @@ function Navigation() {
             id="searchQuery"
             type="text"
             value={searchQuery}
-            placeholder="things to do, groomers, restaurants"
+            placeholder="things to do, parks, restaurants"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <input
