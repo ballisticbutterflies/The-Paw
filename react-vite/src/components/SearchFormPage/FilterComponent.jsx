@@ -93,7 +93,7 @@ const FilterComponent = ({ onFilterChange }) => {
             onChange={(e) => setCategory_id(e.target.value)}
             name="category"
           >
-            <option value="">Select Category</option>
+            <option value="">Select A New Category</option>
             {categories.map((category, index) => (
               <option key={category} value={parseInt(index + 1)}>
                 {category}
