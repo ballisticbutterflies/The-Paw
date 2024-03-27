@@ -17,11 +17,11 @@ function SearchFormPage() {
     let emptyStars = []
 
     for (let i = 0; i < numStars; i++) {
-      filledStars.push(<span className='paws-filled'><i className="fa-solid fa-paw" />&nbsp;</span>)
+      filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
     let empty = 5 - filledStars.length
     for (let i = 0; i < empty; i++) {
-      emptyStars.push(<span className='paws-unfilled'><i className="fa-solid fa-paw" />&nbsp;</span>)
+      emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
     return [filledStars, emptyStars]
   }
@@ -37,6 +37,9 @@ function SearchFormPage() {
 
 
   const reviewsExists = (review) => {
+    if (review === 1) {
+      return '(' + review + ' ' + 'review' + ')'
+    }
     if (review >= 1) {
       return '(' + review + ' ' + 'reviews' + ')'
     }
@@ -52,13 +55,9 @@ function SearchFormPage() {
   }
 
 
-  // useEffect(() => {
-  //   dispatch(fetchBusinesses())
-  // }, [dispatch])
 
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
-
   }
 
   return (
@@ -69,12 +68,14 @@ function SearchFormPage() {
         {businesses && businesses.map((business, index) => (
           <span key={business.id}>
             <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
-              <span>
+
+              <span className="businessesImageWrapper">
                 <img className="businessesImage" src={business.images[0]} alt={business.name} />
               </span>
+
               <>
                 <span className="businessDeets">
-                  <span>{index + 1}.&nbsp;{business.name}</span>
+                  <h2>{index + 1}.&nbsp;{business.name}</h2>
                   {
                     business.avg_stars &&
 
@@ -94,16 +95,20 @@ function SearchFormPage() {
                     <span className="priceSubcat">{business.category?.name}
                     </span>
                   }
-                  <span>HOURS PLACEHOLDER</span>
+
                   <span>
-                    {business.recent_review_text &&
-                      <>
-                        <i className="fa-regular fa-message fa-flip-horizontal" />
-                      </>
-                    }&nbsp;
-                    {business.recent_review_text &&
-                      reviewTextSubstr(business.recent_review_text)
-                    }
+                    {business.recent_review_text ?
+                      (
+                        <>
+                          <i className="fa-regular fa-message fa-flip-horizontal" />
+
+                          &nbsp;&nbsp;
+                          {business.recent_review_text &&
+                            reviewTextSubstr(business.recent_review_text)
+                          }                      </>) : (
+
+                        <span><span className='paws-unfilled' style={{ fontSize: "medium" }}><i className="fa-solid fa-paw" /></span>&nbsp;&nbsp;Be the first to review!</span>
+                      )}
                   </span>
                 </span>
               </>

@@ -7,6 +7,10 @@
   border-radius: 10px;
 }
 
+.manBizCards:hover {
+  box-shadow: 3px 3px 10px .5px;
+}
+
 .manBizImage {
   height: 160px;
   width: 180px;
@@ -49,6 +53,11 @@
   border-radius: 50%;
   color: #1f2f44;
   background-color: transparent;
+
+}
+
+.manageMenu:hover {
+  box-shadow: #5f5ba8 1px 1px 5px .5px ;
 }
 
 .updateBiz {
