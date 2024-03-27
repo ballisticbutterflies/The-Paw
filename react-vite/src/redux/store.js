@@ -10,13 +10,16 @@ import searchReducer from "./search";
 import businessesReducer from "./businesses";
 import reviewsReducer from "./reviews";
 import imagesReducer from "./images";
+import categoriesReducer from "./categories";
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   search: searchReducer,
   businesses: businessesReducer,
   reviews: reviewsReducer,
-  images: imagesReducer
+  images: imagesReducer,
+  categories: categoriesReducer
 });
 
 let enhancer;
