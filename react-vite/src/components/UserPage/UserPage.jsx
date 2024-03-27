@@ -3,7 +3,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "../../redux/users";
 import UserReviews from "./UserReviews";
-import UserSidebar from "./UserSidebar";
+// import UserSidebar from "./UserSidebar";
 import UserOverview from "./Overview";
 import UserPhotos from "./UserPhotos";
 import UserBusinesses from "./UserBusinesses";
@@ -19,6 +19,11 @@ function UserPage() {
     ))
 
     console.log("line 21 on user page", sessionUser)
+    const viewedUser = useSelector(state => (
+        state.user ? state.user[userId] : null
+    ))
+
+    console.log("viewed user", viewedUser)
 
     useEffect(() => {
         console.log("useEffect running")
@@ -33,7 +38,7 @@ function UserPage() {
             <p>please what is going</p>
         </div>
         <div className="user-sidebar-container">
-            <UserSidebar/>
+            {/* <p>{viewedUser.firstName}</p> */}
         </div>
         <div className="user-overview-container">
             <UserOverview/>
