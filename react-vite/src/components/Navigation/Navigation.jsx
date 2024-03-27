@@ -1,19 +1,16 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { searchBarBusinesses } from "../../redux/search";
-
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 import ForBusinessButton from "./ForBusinessButton";
 import { useNavigate } from "react-router-dom";
-import { fetchAllBusinesses } from "../../redux/businesses";
-// import ManageBusinessPage from "../ManageBusinessesPage/ManageBusinessPage";
 
-// function Navigation({ isLoaded }) {
+
 function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,10 +33,6 @@ function Navigation() {
 
   const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
 
-  useEffect(() => {
-
-    dispatch(fetchAllBusinesses())
-  }, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +57,7 @@ function Navigation() {
             id="searchQuery"
             type="text"
             value={searchQuery}
-            placeholder="things to do, groomers, restaurants"
+            placeholder="things to do, parks, restaurants"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <input
