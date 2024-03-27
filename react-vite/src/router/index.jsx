@@ -10,6 +10,7 @@ import CreateBusinessForm from '../components/BusinessFormPage/CreateBusinessFor
 import EditBusinessForm from '../components/BusinessFormPage/EditBusinessForm';
 import ManageBusinessPage from '../components/ManageBusinessesPage';
 import AddPhotosToBusiness from '../components/AddPhotosToBusiness';
+import UserPage from '../components/UserPage/UserPage';
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/businesses/:businessId/images",
         element: <AllPhotosModal />,
+      },
+      {
+        path: "/users/:userId",
+        element: <UserPage />,
       },
     ],
   },
