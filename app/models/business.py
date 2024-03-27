@@ -35,7 +35,7 @@ class Business(db.Model):
     email = Column(String(255), nullable=True)
     phone = Column(String(10), nullable=True)
     price = Column(String(4), nullable=True)
-    set_hours = Column(Boolean, nullable=False, default=True)
+    set_hours = Column(String(3), nullable=False)
     mon_open = Column(String(4), nullable=True)
     mon_close = Column(String(4), nullable=True)
     tue_open = Column(String(4), nullable=True)
