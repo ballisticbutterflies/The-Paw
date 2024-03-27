@@ -1,6 +1,7 @@
 const LOAD_BUSINESS_REVIEWS = 'reviews/LOAD_BUSINESS_REVIEWS'
 const CREATE_REVIEW = 'review/CREATE_REVIEW'
 const CREATE_REVIEW_IMAGES = 'review/CREATE_REVIEW_IMAGES'
+const UPDATE_REVIEW = 'review/UPDATE_REVIEW'
 
 
 export const loadBusinessReviews = (reviews) => ({
@@ -10,22 +11,29 @@ export const loadBusinessReviews = (reviews) => ({
 
 export const createReview = (newReview) => {
     return {
-      type: CREATE_REVIEW,
-      newReview,
+        type: CREATE_REVIEW,
+        newReview,
     };
 };
+
 export const createReviewImages = (newImages) => {
     return {
-      type: CREATE_REVIEW_IMAGES,
-      newImages,
+        type: CREATE_REVIEW_IMAGES,
+        newImages,
     };
 };
+
+export const editReview = (reviewId, review) => ({
+    type: UPDATE_REVIEW,
+    reviewId,
+    review
+});
 
 // THUNK
 
 export const getBusinessReviews = (businessId) => async (dispatch) => {
     const response = await fetch(`/api/businesses/${businessId}/reviews`)
-    
+
     if (response.ok) {
         const reviews = await response.json();
         dispatch(loadBusinessReviews(reviews))
@@ -34,22 +42,22 @@ export const getBusinessReviews = (businessId) => async (dispatch) => {
 }
 
 export const createNewReview = (newReviewData, businessId) => async (dispatch) => {
-    
+
     // console.log("hitting creat new review thunk")
     const res = await fetch(`/api/businesses/${businessId}/reviews`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newReviewData),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newReviewData),
     });
 
     if (!res.ok) {
-      return res;
+        return res;
     } else if (res.ok) {
-      const createdReview = await res.json();
-      dispatch(createReview(createReview));
-      return createdReview;
+        const createdReview = await res.json();
+        dispatch(createReview(createReview));
+        return createdReview;
     }
 };
 
@@ -68,7 +76,24 @@ export const createImage = (newImages) => async (dispatch) => {
         return createdReviewImages;
     }
 };
-  
+
+export const updateReview = (reviewId, review) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}/edit`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(review)
+    });
+
+    if (response.ok) {
+        const updatedReview = await response.json();
+        dispatch(editReview(updateReview));
+        return updatedReview
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+}
+
 // REDUCER
 
 const reviewsReducer = (state = {}, action) => {
@@ -83,11 +108,11 @@ const reviewsReducer = (state = {}, action) => {
             return reviewState
         }
         case CREATE_REVIEW: {
-            return {...state, reviews: {[action.newReview.id]: action.newReview}}
+            return { ...state, reviews: { [action.newReview.id]: action.newReview } }
         }
         case CREATE_REVIEW_IMAGES: {
-            return {...state, "images": [action.newImages]}
-        
+            return { ...state, "images": [action.newImages] }
+
         }
         default:
             return { ...state }
