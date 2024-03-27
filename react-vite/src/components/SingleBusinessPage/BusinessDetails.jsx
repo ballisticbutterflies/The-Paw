@@ -1,22 +1,9 @@
 import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
+import { stdTimeFormat } from "../../utils";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
-
-    const stdTimeFormat = (military) => {
-        if (military === null) return "Closed"
-
-        let hrParts = parseInt(military.substring(0, 2));
-        let hr = ((hrParts + 11) % 12) + 1;
-        let min = military.substring(2);
-        let amPm;
-
-        if (hrParts > 11) amPm = 'PM'
-        else amPm = 'AM'
-
-        return `${hr}:${min} ${amPm}`
-    }
 
     return (
         <div className="businessDetails">
@@ -46,7 +33,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                         </div>
                     </div>
                     <div><button>Get Directions</button></div>
-                    <div className="businessDetailsHours">{business.set_hours === true &&
+                    <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">
                                 <div>Mon</div>
