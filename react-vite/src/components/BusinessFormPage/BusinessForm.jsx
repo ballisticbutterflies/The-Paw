@@ -256,7 +256,7 @@ function CreateBusinessPage({ business, formType }) {
             rows="5"
           />
           {errors.description && <span className="errors">&nbsp;{errors.description}</span>}
-          <div className="inputFields">
+          <div className="inputFields" style={{ marginLeft: "3px" }}>
             Does your business have set hours?:&nbsp;
             <label>
               <input
@@ -293,7 +293,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={mon_close}
                 onChange={(e) => setMon_close(e.target.value)}
@@ -322,7 +322,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={tue_close}
                 onChange={(e) => setTue_close(e.target.value)}
@@ -351,7 +351,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={wed_close}
                 onChange={(e) => setWed_close(e.target.value)}
@@ -380,7 +380,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={thu_close}
                 onChange={(e) => setThu_close(e.target.value)}
@@ -409,7 +409,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={fri_close}
                 onChange={(e) => setFri_close(e.target.value)}
@@ -438,7 +438,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={sat_close}
                 onChange={(e) => setSat_close(e.target.value)}
@@ -467,7 +467,7 @@ function CreateBusinessPage({ business, formType }) {
                     {stdTimeFormat(hour)}
                   </option>
                 ))}
-              </select>&nbsp;to&nbsp;
+              </select>&nbsp;&nbsp;to&nbsp;&nbsp;
               <select className="inputFields"
                 value={sun_close}
                 onChange={(e) => setSun_close(e.target.value)}
@@ -482,8 +482,8 @@ function CreateBusinessPage({ business, formType }) {
               </select>
             </div>
           </div>
-
           {errors.hours && <span className="errors">&nbsp;{errors.hours}</span>}
+
           <input className="inputFields"
             type="text"
             value={website}
@@ -508,7 +508,7 @@ function CreateBusinessPage({ business, formType }) {
             name="phone"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}
-          <div className="inputFields">
+          <div className="inputFields" style={{ marginLeft: "3px" }}>
             Price (Optional):&nbsp;
             {["$", "$$", "$$$", "$$$$"].map((option) => (
               <label key={option}>

@@ -7,11 +7,21 @@
   row-gap: 15px;
 }
 
+.createBizForm input[type="text"],
+.createBizForm textarea {
+  padding: 5px;
+}
+
+.createBizForm select {
+  padding: 5px 1px;
+}
+
+
 .errors {
   color: #c24830;
   font-weight: 500;
   margin-top: -14px;
-  margin-left: -3px;
+  margin-left: -1px;
 
 }
 
@@ -34,4 +44,5 @@
   grid-template-rows: repeat(7, 1fr);
   align-items: center;
   row-gap: 5px;
+  margin-left: 3px;
 }
