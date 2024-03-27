@@ -13,7 +13,7 @@ function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-
+  console.log(user);
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
@@ -43,7 +43,11 @@ function ProfileButton() {
 
   return (
     <>
-      <div onClick={toggleMenu}><FaUserCircle /></div>
+      <div onClick={toggleMenu} style={{ cursor: "pointer" }}>                            {user.user_image_url ? (
+        <img className="profileAvatar" src={user.user_image_url} />
+      ) : (
+        <img className="profileAvatar" src='../../images/defaultAvatar.png' />
+      )}</div>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (

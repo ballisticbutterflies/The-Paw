@@ -76,8 +76,6 @@ function SingleBusinessReviews({ businessId }) {
                                     <img
                                         className="reviewImages"
                                         src={image.url} /></span>
-
-
                             )
                             )
                         } </div>
