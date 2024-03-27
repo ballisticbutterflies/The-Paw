@@ -52,7 +52,7 @@ function CreateReviewPage() {
             setErrors(newlyCreatedReview.errors);
         }
         
-        if(newlyCreatedReview.id) {
+        if(newlyCreatedReview && newlyCreatedReview.id) {
             // console.log("successful review submission");
         
             if(image != null){
@@ -60,8 +60,11 @@ function CreateReviewPage() {
 
                 const formData = new FormData();
                 formData.append("image", image);
-                formData.append("uploader_id", sessionUser.id);
-                formData.append("imageable_id", newlyCreatedReview.id); // Pass business ID
+                let currentUserId;
+                if(sessionUser) currentUserId = sessionUser.id
+                if(!sessionUser) currentUserId = null
+                formData.append("uploader_id", currentUserId);
+                formData.append("imageable_id", newlyCreatedReview.id); 
                 formData.append("imageable_type", "review"); // Hardcoded for review type
 
                 setImageLoading(true);
@@ -89,7 +92,7 @@ function CreateReviewPage() {
         setErrors(errObj);
         // dispatch(fetchSingleBusiness(businessId))
     //   }, [dispatch, businessId, review, stars])
-    }, [ review, stars, sessionUser.id])
+    }, [ review, stars])
 
     // const hasExistingReview = (currentUserId, business) => {
     //     reviews = business.reviews
