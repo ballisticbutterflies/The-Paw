@@ -3,8 +3,17 @@
     flex-direction: column;
     width: fit-content;
     padding: 0 1em 1em 1em;
-    border: solid #5f5ba8 1px;
+    border: solid #c3cddf 1px;
     background-color: #FFFBF6;
+    border-radius: 3px;
+}
+
+.review-fields textarea {
+    margin-left: -5px;
+}
+
+.review-fields textarea:focus {
+    outline: none;
 }
 
 
@@ -20,8 +29,14 @@ div.stars-container {
     flex-direction: row;
     background-color: #FFFBF6;
     width: fit-content;
+    margin-top: 10px;
+
     /* padding: 3px 6px 3px 6px;
     border-radius: 5px; */
+}
+
+.stars-container span:hover {
+    cursor: pointer;
 }
 
 div.stars-container>.rating-descriptions {
@@ -30,10 +45,7 @@ div.stars-container>.rating-descriptions {
 
 .descriptions-container {
     align-content: center;
-}
-
-.descriptions-container paws-unfilled:hover {
-    cursor: pointer;
+    margin-left: 8px;
 }
 
 #paws-and-descriptions {
@@ -41,11 +53,11 @@ div.stars-container>.rating-descriptions {
     flex-direction: row;
 }
 
-button,
+/* button,
 input[type="file"] {
     width: fit-content;
     padding: 1% 2%;
-}
+} */
 
 .custom-error-page {
     margin: 2em 10em;

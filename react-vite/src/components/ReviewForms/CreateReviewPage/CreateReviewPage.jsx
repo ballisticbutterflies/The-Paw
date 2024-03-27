@@ -127,45 +127,45 @@ function CreateReviewPage() {
                                             setHover(0);
                                         }}
                                     >
-                                        <i className="fa-solid fa-paw" />&nbsp;
+                                        <span><i className="fa-solid fa-paw" /></span>&nbsp;
                                     </div>
                                 )
                             })}
-
-                        </div>
-                        <div className="descriptions-container">
-                            {hover == 1 && <span>Pawful!</span>}
-                            {hover == 2 && <span>Less than purrfect</span>}
-                            {hover == 3 && <span>Just OK-9</span>}
-                            {hover == 4 && <span>Purraiseworthy!</span>}
-                            {hover == 5 && <span>Absolutely Pawesome!</span>}
+                            <div className="descriptions-container">
+                                {hover == 0 && <span>Select your rating</span>}
+                                {hover == 1 && <span>Pawful!</span>}
+                                {hover == 2 && <span>Less than purrfect</span>}
+                                {hover == 3 && <span>Just OK-9</span>}
+                                {hover == 4 && <span>Purraiseworthy!</span>}
+                                {hover == 5 && <span>Absolutely Pawesome!</span>}
+                            </div>
                         </div>
                     </div>
                     <textarea
                         id="review-input"
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
-                        placeholder="Write your review here. Please write a review of at least 85 characters but no more than 2000 characters."
+                        placeholder="Write your review here. It must be least 85 characters, but no more than 2,000 characters."
                         name="review"
                     />
                 </div>
-                <div className="errors-container">
-                    {errors.stars && <span className="errors">{errors.stars}</span>}
-                    <br />
-                    {errors.review && <span className="errors">{errors.review}</span>}
+                <div>
+                    <h2>Attach Photos</h2>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImage(e.target.files[0])}
+                    />
+                    {(imageLoading) && <p>Loading...</p>}
                 </div>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setImage(e.target.files[0])}
-                />
-                {(imageLoading) && <p>Loading...</p>}
-                {sessionUser && <button type="submit" disabled={!!Object.values(errors).length}>Create Review</button>}
-                {!sessionUser && <OpenModalButton
-                    buttonText="Create Review"
-                    modalComponent={<LoginFormModal />}
-                />}
-                {/* two submisbuttons one displayed when signed in one display when no sessoin user, the non user button triggers modal, yes user button submits forms */}
+                <p>
+                    {sessionUser && <button type="submit" disabled={!!Object.values(errors).length}>Create Review</button>}
+                    {!sessionUser && <OpenModalButton
+                        buttonText="Create Review"
+                        modalComponent={<LoginFormModal />}
+                    />}
+                    {/* two submisbuttons one displayed when signed in one display when no sessoin user, the non user button triggers modal, yes user button submits forms */}
+                </p>
             </form>
             }
             {
