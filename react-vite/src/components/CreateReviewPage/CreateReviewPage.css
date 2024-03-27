@@ -1,0 +1,43 @@
+.review-fields {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 0 1em 1em 1em;
+    border: solid #5f5ba8 1px;
+}
+
+
+#review-input {
+    height: 10em;
+    width: 35em;
+}
+
+
+div.stars-container{
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    width: fit-content;
+    padding: 3px 6px 3px 6px;
+    border-radius: 5px;
+}
+
+div.stars-container > .rating-descriptions{
+    background-color: none;
+}
+
+#paws-and-descriptions{
+    display: flex;
+    flex-direction: row;
+}
+
+form {
+    display: flex;
+    margin-left: 15%;
+    flex-direction: column;
+}
+
+button, input[type="file"] {
+    width: fit-content;
+    padding: 1% 2%;
+}
