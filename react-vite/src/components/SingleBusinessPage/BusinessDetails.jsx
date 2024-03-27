@@ -2,19 +2,31 @@ import SingleBusinessReviews from "./SingleBusinessReviews";
 import OpenModalButton from "../OpenModalButton";
 import AddPhotosToBusiness from "../AddPhotosToBusiness";
 import { stdTimeFormat } from "../../utils";
+import { useSelector } from "react-redux"
+import LoginFormModal from "../LoginFormModal";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
-
+    const sessionUser = useSelector(state => state.session.user)
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
                 <button className="businessDetails_writeAReview"><i className="fa-solid fa-paw" /> &nbsp;Write a review</button>&nbsp;&nbsp;
+                {!sessionUser &&
+                    <OpenModalButton
+                        buttonText={<>
+                            <i className="fa-solid fa-camera" /> Add photo</>}
+                        modalComponent={<LoginFormModal />}
+                    />
+                }
+                {sessionUser &&
+                    <OpenModalButton
+                        buttonText={<>
+                            <i className="fa-solid fa-camera" /> Add photo</>}
+                        modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                    />
+                }
 
-                <OpenModalButton
-                    buttonText={<>
-                        <i className="fa-solid fa-camera" /> Add photo</>}
-                    modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
-                />&nbsp;&nbsp;
+                &nbsp;&nbsp;
                 <button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button>
             </div>
             <hr />

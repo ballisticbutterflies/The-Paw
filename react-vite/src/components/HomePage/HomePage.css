@@ -46,6 +46,10 @@
     background-color: #5f5ba8;
 }
 
+.photoHeader a {
+    color: #FFFFFF;
+}
+
 .photoHeaderCredit {
     position: relative;
     /* left: 3.4%; */

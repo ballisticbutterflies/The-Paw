@@ -51,31 +51,31 @@ function ForBusinessButton() {
             {
               sessionUser ? (
                 <>
-                  <p>
+                  <div className="profiledropdownoptions">
                     <Link to={'/businesses/new'}
-                      onClick={closeMenu}
-                    >Add Business</Link>
-                  </p>
-                  <p>
+                      onClick={closeMenu}><i className="fa-solid fa-store" />&nbsp; Add Business</Link>
+                  </div>
+                  <hr />
+                  <div className="profiledropdownoptions">
                     <Link to={`/businesses/current`}
-                      onClick={closeMenu}
-                    >Update Business</Link>
-                  </p>
+                      onClick={closeMenu}><i className="fa-solid fa-pen-to-square" />&nbsp; Update Business</Link>
+                  </div>
                 </>
               ) : (
                 <>
-                  <p>
+                  <div className="profiledropdownoptions">
                     <OpenModalMenuItem
-                      itemText="Update Business"
+                      itemText={<><i className="fa-solid fa-store" />&nbsp; Add Business</>}
                       modalComponent={<LoginFormModal />}
                     />
-                  </p>
-                  <p>
+                  </div>
+                  <hr />
+                  <div className="profiledropdownoptions">
                     <OpenModalMenuItem
-                      itemText="Add Business"
+                      itemText={<><i className="fa-solid fa-pen-to-square" />&nbsp; Update Business</>}
                       modalComponent={<LoginFormModal />}
                     />
-                  </p>
+                  </div>
                 </>
               )
             }
