@@ -57,3 +57,37 @@
     font-weight: 500;
     width: fit-content;
 }
+
+.categoryDots {
+    height: 200px;
+    padding: 10px 20px 50px;
+    border: #5f5ba8 1px solid;
+    border-radius: 15px;
+    background-color: #5f5ba8;
+    margin: 30px;
+}
+
+.categoryContainer {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: fit-content;
+    padding-top: 15px;
+
+}
+
+.categoryStuff {
+    color: white;
+    font-weight: 700;
+    position: relative;
+    margin: auto;
+    font-size: larger;
+    z-index: 2;
+    bottom: 80px;
+}
+
+.categoryContainer div {
+    display: flex;
+    flex-direction: column;
+
+}

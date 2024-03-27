@@ -1,6 +1,6 @@
 const LOAD_CATEGORIES = 'categories/LOAD_CATEGORIES'
 
-const loadCategories = () => ({
+const loadCategories = (categories) => ({
   type: LOAD_CATEGORIES,
   categories
 })
