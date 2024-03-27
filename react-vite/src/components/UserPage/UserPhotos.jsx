@@ -28,7 +28,7 @@ function UserPhotos() {
 
     return (
         <>
-
+             <p>This is the photos view!</p>
         </>
     )
 }

@@ -29,6 +29,7 @@ function UserReviews() {
 
     return (
         <>
+         <p>This is the reviews view!</p>
 
         </>
     )
