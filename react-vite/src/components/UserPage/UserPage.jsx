@@ -44,10 +44,8 @@ function UserPage() {
     return (
         <>
             { viewedUser && (
-                <>
-                    <div>
-                        <p>please what is going</p>
-                    </div>
+                <div id="full-user-page">
+
                     <div className="user-sidebar-container">
                         <div className="user-summary-container">
                             {!viewedUser.user_pfp.image_url && (<img className="pfp" id="generic-pfp" src={viewedUser.pfp_url} alt="" />)}
@@ -63,23 +61,20 @@ function UserPage() {
                             <div className="single-user-navigation" onClick={() => {setCurrentView('overview')}}><i className="fa-solid fa-circle-user"/>&nbsp;&nbsp;<h4 className="nav-description">Profile Overview</h4></div>
                             <div className="single-user-navigation" onClick={() => {setCurrentView('reviews')}}><i className="fa-solid fa-paw"/>&nbsp;&nbsp;<h4 className="nav-description">Reviews Written</h4></div>
                             <div className="single-user-navigation" onClick={() => {setCurrentView('photos')}}><i className="fa-solid fa-image"/>&nbsp;&nbsp;<h4 className="nav-description">Photos Added</h4></div>
-                            <div className="single-user-navigation" onClick={() => {setCurrentView('businesses')}}><i className="fa-solid fa-shop"></i>&nbsp;&nbsp;<h4 className="nav-description">Businesses Owned</h4></div>
                         </div>
                     </div>
-                    { currentView == 'overview' && (<div className="user-overview-container">
-                        <UserOverview/>
-                    </div>)}
-                    {currentView == 'reviews' && (<div className="user-review-container">
-                        <UserReviews/>
-                    </div>)}
-                    {currentView== 'photos' && (<div className="user-photo-container">
-                        <UserPhotos/>
-                    </div>)}
-                    {/* {currentView == 'businesses' && (<div className="user-business-container">
-                        <UserBusinesses/>
-                    </div>)} */}
-                </>
-            )
+                    <div className="sub-pages"></div>
+                        { currentView == 'overview' && (<div className="sub-page-indiv" id="user-overview-container">
+                            <UserOverview/>
+                        </div>)}
+                        {currentView == 'reviews' && (<div className="sub-page-indiv" id="user-review-container">
+                            <UserReviews/>
+                        </div>)}
+                        {currentView== 'photos' && (<div className="sub-page-indiv" id="user-photo-container">
+                            <UserPhotos/>
+                        </div>)}
+                    </div>
+                )
             }
         </>
     )
