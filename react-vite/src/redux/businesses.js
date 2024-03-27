@@ -86,7 +86,7 @@ export const createImage = (post) => async (dispatch) => {
 };
 
 export const updateBusiness = (business) => async (dispatch) => {
-    const response = await fetch(`/api/businesses/${business.id}`, {
+    const response = await fetch(`/api/businesses/${business.id}/edit`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(business)

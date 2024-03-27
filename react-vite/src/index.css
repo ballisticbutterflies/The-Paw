@@ -33,12 +33,20 @@ button:disabled {
     color: #768c9f;
 }
 
-input {
+input,
+textarea {
     background-color: #FFFBF6;
     font-family: "Poppins", sans-serif;
     color: #1f2f44;
     border-radius: 3px;
     border: #c3cddf solid 1px;
+    resize: none;
+}
+
+input,
+textarea,
+select {
+    padding: 5px;
 }
 
 input button {
@@ -79,6 +87,13 @@ a {
     cursor: pointer;
 }
 
+.modalLink:hover {
+    color: #5f5ba8;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 a:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -93,4 +108,31 @@ hr {
 
 button:hover {
     cursor: pointer;
+}
+
+.loginSignupModals {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 455px;
+}
+
+.loginSignupModals button {
+    width: 103%;
+}
+
+
+.loginSignupModals .errors {
+    color: #c24830;
+    font-weight: 500;
+    margin-top: -8px;
+    margin-left: -1px;
+}
+
+.loginSignupModals input {
+    width: 100%;
+}
+
+.loginSignupModals select {
+    width: 103%;
 }

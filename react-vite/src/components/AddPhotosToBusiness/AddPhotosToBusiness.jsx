@@ -45,19 +45,6 @@ function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
     return (
         <>
             <h1>{business?.name || businessName}: Add Photos</h1>
-            {!sessionUser &&
-                <div>
-                    <span>Please&nbsp;
-                        <OpenModalMenuItem
-                            itemText="log in"
-                            modalComponent={<LoginFormModal />} />
-                    </span> or&nbsp;
-                    <span>
-                        <OpenModalMenuItem
-                            itemText="sign up"
-                            modalComponent={<SignupFormModal />} />
-                    </span> to add photos.</div>
-            }
             {sessionUser &&
                 <div className="addPhoto">
                     <br />

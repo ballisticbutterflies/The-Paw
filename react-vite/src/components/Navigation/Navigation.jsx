@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { searchBarBusinesses } from "../../redux/search";
+import { clearBusinesses, fetchBusinesses, searchBarBusinesses } from "../../redux/search";
+
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -44,11 +46,13 @@ function Navigation() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(searchBarBusinesses(searchQuery, location))
+
     .then(() => {
       navigate('/search/')
       setSearchQuery('')
     })
     .then(() => setLocation(''))
+
   };
 
 
@@ -78,7 +82,7 @@ function Navigation() {
             ))
             }
           </datalist>
-          <button id="search" type="submit"><FaSearch /></button>
+          <button id="search" type="submit"><i className="fa-solid fa-magnifying-glass" style={{ color: "#5f5ba8", fontSize: "large" }} /></button>
         </form>
       </div>
       <div className="forBiz">
