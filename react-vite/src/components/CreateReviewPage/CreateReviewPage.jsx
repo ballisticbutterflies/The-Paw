@@ -5,7 +5,7 @@ import { createNewReview, createImage, getBusinessReviews } from "../../redux/re
 import { fetchSingleBusiness } from "../../redux/businesses";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from '../LoginFormModal';
-import "./CreateReview.css"
+import "./CreateReviewPage.css"
 
 
 function CreateReviewPage() {
