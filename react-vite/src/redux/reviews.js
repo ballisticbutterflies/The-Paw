@@ -23,9 +23,8 @@ export const createReviewImages = (newImages) => {
     };
 };
 
-export const editReview = (reviewId, review) => ({
+export const editReview = (review) => (console.log("THINGY", review), {
     type: UPDATE_REVIEW,
-    reviewId,
     review
 });
 
@@ -78,15 +77,18 @@ export const createImage = (newImages) => async (dispatch) => {
 };
 
 export const updateReview = (reviewId, review) => async (dispatch) => {
+    // const sessionUser = getState().session.user
     const response = await fetch(`/api/reviews/${reviewId}/edit`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(review)
+        body: JSON.stringify({ ...review })
     });
+
+    console.log("REVIEW", response);
 
     if (response.ok) {
         const updatedReview = await response.json();
-        dispatch(editReview(updateReview));
+        dispatch(editReview(updatedReview));
         return updatedReview
     } else {
         const errors = await response.json();
@@ -113,6 +115,13 @@ const reviewsReducer = (state = {}, action) => {
         case CREATE_REVIEW_IMAGES: {
             return { ...state, "images": [action.newImages] }
 
+        }
+        case UPDATE_REVIEW: {
+            console.log("ACTION!!!!", action);
+            return {
+                ...state,
+                [action.review.id]: action.review.review
+            }
         }
         default:
             return { ...state }

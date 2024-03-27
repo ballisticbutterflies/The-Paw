@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateReviewPage from "../ReviewForms/UpdateReviewPage";
+import { fetchSingleBusiness } from "../../redux/businesses";
 
 function SingleBusinessReviews({ businessId, sessionUser }) {
     const navigate = useNavigate()
@@ -15,8 +16,14 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
     });
 
     useEffect(() => {
-        dispatch(getBusinessReviews(businessId))
+        const runDispatches = async () => {
+            await dispatch(fetchSingleBusiness(businessId)).then(() =>
+                dispatch(getBusinessReviews(businessId))
+            );
+        };
+        runDispatches();
     }, [dispatch, businessId])
+
 
     const lastInitial = (lastName) => {
         let last = lastName.charAt(0)

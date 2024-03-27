@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { useState, useEffect } from "react";
 import { updateReview } from "../../../redux/reviews";
+import { fetchSingleBusiness } from "../../../redux/businesses";
+import { getBusinessReviews } from "../../../redux/reviews";
 
 function UpdateReviewPage({ reviewId }) {
     const { closeModal } = useModal();
@@ -21,7 +23,12 @@ function UpdateReviewPage({ reviewId }) {
         setErrors(errObj);
     }, [review, stars])
 
-    const handleSubmit = (e) => {
+    // useEffect(() => {
+    //     dispatch(fetchSingleBusiness(reviewData.business_id))
+    //     dispatch(getBusinessReviews(reviewData.business_id))
+    // }, [dispatch, reviewData.business_id])
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
 
@@ -30,15 +37,17 @@ function UpdateReviewPage({ reviewId }) {
             stars
         }
 
-        return dispatch(updateReview(reviewId, reviewData))
+        await dispatch(updateReview(reviewId, reviewData))
+            .then(dispatch(fetchSingleBusiness(reviewData.business_id)))
+            .then(dispatch(getBusinessReviews(reviewData.business_id)))
             .then(closeModal)
-            .catch(async (res) => {
-                const data = await res.json()
-                if (data && data.errors) {
-                    setErrors(data.errors)
-                }
-            })
+
+
+        if (errors) {
+            setErrors(errors)
+        }
     }
+
 
     return (
         <>
