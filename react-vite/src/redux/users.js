@@ -30,7 +30,7 @@ const userReducer = (state = {}, action) => {
     console.log("hitting reducer")
     switch (action.type) {
         case LOAD_USER: {
-            return {...state, [action.users.userId]: action.user }
+            return {...state, [action.user.id]: action.user }
             // const userState = {};
             // userState[user.id]
         }
