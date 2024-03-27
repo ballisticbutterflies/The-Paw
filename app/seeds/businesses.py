@@ -16,7 +16,7 @@ def seed_businesses():
         email='info@petagogy.com',
         phone='4123627387',
         price='$$$',
-        set_hours=True,
+        set_hours="yes",
         mon_open='1000',
         mon_close='2000',
         tue_open='1000',
@@ -46,7 +46,7 @@ def seed_businesses():
         website='https://mishkacakes.com/',
         phone='6289000923',
         price='$$$$',
-        set_hours=True,
+        set_hours="yes",
         mon_open='1100',
         mon_close='1700',
         tue_open='1100',
@@ -75,7 +75,7 @@ def seed_businesses():
         description='Leo J. Ryan Memorial Park is a dog-friendly park that offers 20 acres of lawn areas, lagoon access, a gazebo on the lagoon, and restroom facilities.',
         website='https://www.fostercity.org/parksrec/page/leo-j-ryan-park',
         phone='6502863380',
-        set_hours=False
+        set_hours="no"
     )
 
     dumpling_home = Business(
@@ -91,7 +91,7 @@ def seed_businesses():
         website='https://www.dumplinghome.com/',
         phone='4155031666',
 	    price='$$',
-        set_hours=True,
+        set_hours="yes",
         mon_open='1130',
         mon_close='2015',
         tue_open='1130',
@@ -120,7 +120,7 @@ def seed_businesses():
         email= "baker@threedogbakeryhtx.com",
         phone= "7135339933",
         price= "$$",
-        set_hours=True,
+        set_hours="yes",
         wed_open='1000',
         wed_close='2000',
         thu_open='1000',
@@ -146,7 +146,7 @@ def seed_businesses():
         website='https://www.carolinetwohillphotography.com/',
         phone='6094252118',
         price='$$',
-        set_hours=False
+        set_hours="no"
     )
 
     exotic_vet = Business(
@@ -218,7 +218,7 @@ def seed_businesses():
         name='Salon Dog',
         description='Salon Dog is a team of experienced and caring pet groomers dedicated to providing top-quality grooming services for your beloved pets.',
         website='https://salondog.net/',
-        set_hours=True,
+        set_hours="yes",
         mon_open='0900',
         mon_close='1800',
         wed_open='0900',
