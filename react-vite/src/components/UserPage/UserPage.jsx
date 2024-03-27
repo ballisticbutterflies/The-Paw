@@ -66,13 +66,14 @@ function UserPage() {
                             <div className="single-user-navigation" onClick={() => {setCurrentView('businesses')}}><i className="fa-solid fa-shop"></i>&nbsp;&nbsp;<h4 className="nav-description">Businesses Owned</h4></div>
                         </div>
                     </div>
-                    { currentView == 'overview' && (<div className="user-overview-container">
+                    <div className="sub-pages"></div>
+                    { currentView == 'overview' && (<div className="sub-page-indiv" id="user-overview-container">
                         <UserOverview/>
                     </div>)}
-                    {currentView == 'reviews' && (<div className="user-review-container">
+                    {currentView == 'reviews' && (<div className="sub-page-indiv" id="user-review-container">
                         <UserReviews/>
                     </div>)}
-                    {currentView== 'photos' && (<div className="user-photo-container">
+                    {currentView== 'photos' && (<div className="sub-page-indiv" id="user-photo-container">
                         <UserPhotos/>
                     </div>)}
                     {/* {currentView == 'businesses' && (<div className="user-business-container">
