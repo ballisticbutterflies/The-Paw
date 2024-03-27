@@ -105,8 +105,8 @@ function CreateReviewPage() {
     // }
 
     return (
-        <>
-            {errors.message != 'forbidden' && <form className="createReviewForm" onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className="createReviewForm">
+            {errors.message != 'forbidden' && <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <h1>Tell us about it!</h1>
                 <div className="review-fields">
                     <div id="paws-and-descriptions">
@@ -134,11 +134,11 @@ function CreateReviewPage() {
 
                         </div>
                         <div className="descriptions-container">
-                            {hover == 1 && <p>Pawful!</p>}
-                            {hover == 2 && <p>Less than purrfect</p>}
-                            {hover == 3 && <p>Just OK-9</p>}
-                            {hover == 4 && <p>Purraiseworthy!</p>}
-                            {hover == 5 && <p>Absolutely Pawesome!</p>}
+                            {hover == 1 && <span>Pawful!</span>}
+                            {hover == 2 && <span>Less than purrfect</span>}
+                            {hover == 3 && <span>Just OK-9</span>}
+                            {hover == 4 && <span>Purraiseworthy!</span>}
+                            {hover == 5 && <span>Absolutely Pawesome!</span>}
                         </div>
                     </div>
                     <textarea
@@ -181,7 +181,7 @@ function CreateReviewPage() {
             {/* <div>
             <UploadPicture />
           </div> */}
-        </>
+        </div>
     )
 }
 
