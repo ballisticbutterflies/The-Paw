@@ -62,7 +62,10 @@ function SearchFormPage() {
       <div className="searchPage">
         <h1>Paw-Recommended Results:</h1>
         <FilterComponent onFilterChange={handleFilterChange} />
-        {businesses && businesses.map((business, index) => (
+        {businesses.length === 0 ? (
+          <span className="noBiz" >Please select another filter to see results!<img src="/images/icons/404.png"/></span>
+        ) : (
+        businesses && businesses.map((business, index) => (
           <span key={business.id}>
             <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
               <span>
@@ -105,7 +108,8 @@ function SearchFormPage() {
               </>
             </Link>
           </span>
-        ))}
+        ))
+        )}
 
       </div>
     </>

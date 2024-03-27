@@ -75,3 +75,14 @@
   border-bottom: 1px solid #c3cddf;
   margin-bottom: 10px;
 }
+
+.noBiz {
+  display: flex;
+  width: 500px;
+  align-content: center;
+  margin-left: 400px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-size: large;
+}
