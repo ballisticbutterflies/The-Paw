@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { createImage } from "../../redux/businesses";
 import { useModal } from "../../context/Modal";
 import "./AddPhotos.css"
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
 
 function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
     const dispatch = useDispatch();

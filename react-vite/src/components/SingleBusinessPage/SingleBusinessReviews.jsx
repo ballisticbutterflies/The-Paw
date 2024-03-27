@@ -92,7 +92,7 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                     <div>
                         {sessionUser && sessionUser.id === review.user_id && <OpenModalMenuItem
                             itemText={<>Edit</>}
-                            modalComponent={<UpdateReviewPage reviewId={review.id} />} />
+                            modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} />} />
                         }
                     </div>
                     <br />

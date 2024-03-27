@@ -43,7 +43,7 @@ export const fetchSingleBusiness = (businessId) => async (dispatch) => {
     if (response.ok) {
         const business = await response.json();
         dispatch(loadSingleBusiness(business))
-        // return business
+        return business
     }
 }
 
