@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { getUser } from "../../redux/users";
 
 
-function UserReviews() {
+function UserBusinesses() {
     const { userId } = useParams();
     const dispatch = useDispatch();
 
@@ -12,14 +12,13 @@ function UserReviews() {
         state.session.user ? state.session.user : null
     ))
 
-    console.log("line 14 on user reviewws", sessionUser)
-
+    console.log("line 14 on user businesses", sessionUser)
+    
     const viewedUser = useSelector(state => (
         state.users ? state.users[userId] : null
     ))
 
     console.log("viewed user", viewedUser)
-    
 
     useEffect(() => {
         dispatch(getUser(parseInt(userId)))
@@ -34,4 +33,4 @@ function UserReviews() {
     )
 }
 
-export default UserReviews;
+export default UserBusinesses;

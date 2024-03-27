@@ -1,7 +1,9 @@
 const LOAD_USER = 'users/LOAD_USER'
 
 
-export const loadUser = (user) => ({
+export const loadUser = (user) => (
+    console.log("hitting action"),
+    {
     type: LOAD_USER,
     user
 })
@@ -10,21 +12,28 @@ export const loadUser = (user) => ({
 // THUNK
 
 export const getUser = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/users/${userId}`)
+    const res = await fetch(`/api/users/${userId}`)
+    console.log("hitting thunk in users")
 
-    if (response.ok) {
-        const user = await response.json();
+    if(!res.ok) {
+        return res;
+    } else if (res.ok) {
+        const user = await res.json();
         dispatch(loadUser(user))
-        return user
+        return user;
     }
 }
 
 // REDUCER
 
 const userReducer = (state = {}, action) => {
+
     switch (action.type) {
         case LOAD_USER: {
+            console.log("hitting reducer")
             return {...state, [action.users.userId]: action.user }
+            // const userState = {};
+            // userState[user.id]
         }
         default:
             return { ...state }
