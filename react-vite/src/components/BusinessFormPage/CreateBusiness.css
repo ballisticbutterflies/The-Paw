@@ -16,7 +16,6 @@
   padding: 5px 1px;
 }
 
-
 .errors {
   color: #c24830;
   font-weight: 500;
@@ -31,7 +30,7 @@
 }
 
 .imageInput {
-  width: 413px;
+  width: 405px;
 }
 
 .hidden {

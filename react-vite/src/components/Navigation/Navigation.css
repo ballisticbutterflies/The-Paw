@@ -1,13 +1,13 @@
 .nav {
   display: grid;
-  grid-template-columns: 12% 45% 13% 11% 11%;
+  grid-template-columns: 12% 45% 10% 10% 15%;
   gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
   margin: 0px;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .nav img {
@@ -82,6 +82,15 @@
   grid-column: 5 / 6;
 }
 
+.profileAvatar {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}
+
 .profile-dropdown {
   position: absolute;
   padding: 20px;
@@ -99,6 +108,19 @@
   padding: 10px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  font-weight: 500 !important;
+  color: #1f2f44 !important;
+}
+
+.profiledropdownoptions a {
+  font-weight: 500 !important;
+  color: #1f2f44 !important;
+}
+
+
+.profiledropdownoptions a:hover {
+  text-decoration: none !important;
 }
 
 .profiledropdownoptions:hover {
@@ -108,18 +130,22 @@
 }
 
 .forbiz-dropdown {
-  position:absolute;
+  position: absolute;
   z-index: 2;
-  padding: 10px;
+  padding: 20px;
   width: fit-content;
   background-color: #FFFBF6;
-  margin-top: 162px;
+  margin-top: 183px;
   border-radius: 5px;
-  text-align: center;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start; */
 }
 
 .forBizButton {
-  color: black;
+  color: #1f2f44;
   padding: 0;
-  background-color: #ffbe6e;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
 }
