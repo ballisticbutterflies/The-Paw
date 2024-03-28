@@ -181,7 +181,7 @@ def seed_businesses():
     perch= Business(
     # id 8
         owner_id=1,
-        category_id=4,
+        category_id=1,
         address='1932 W Division',
         city='Chicago',
         state='IL',
