@@ -4,17 +4,20 @@ import { loadCurrUserBusinesses } from "../../redux/businesses";
 import { Link } from "react-router-dom";
 import "./ManageBusiness.css"
 import ManageBizButton from "./ManageBusinessButton";
+import { getTodaysHours } from "../../utils";
 
 function ManageBusinessPage() {
 
   const dispatch = useDispatch();
 
   const businesses = Object.values(useSelector(state => state.businesses))
-  console.log("14914142444", businesses);
+
 
   useEffect(() => {
     dispatch(loadCurrUserBusinesses())
   }, [dispatch])
+
+
 
   const starReviews = (numStars) => {
     let filledStars = []
@@ -79,7 +82,11 @@ function ManageBusinessPage() {
                 <span className="priceSubcat">{business.category?.name}
                 </span>
               }
-              <span>HOURS PLACEHOLDER</span>
+              {getTodaysHours(business) &&
+                <span className="todayHours">
+                  Today&apos;s Hours: {getTodaysHours(business).open} - {getTodaysHours(business).close}
+                </span>
+              }
               {
                 business.description &&
                 descriptionTextSubstr(business.description)
@@ -91,7 +98,6 @@ function ManageBusinessPage() {
           </div>
         </div>
       ))}
-
     </div>
   )
 }

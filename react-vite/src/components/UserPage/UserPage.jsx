@@ -14,7 +14,7 @@ import "./UserPage.css"
 
 function UserPage() {
     const { userId } = useParams();
-    console.log("userId", userId)
+    // console.log("userId", userId)
 
     const [currentView, setCurrentView] = useState('overview')
 
@@ -24,18 +24,17 @@ function UserPage() {
         state.session.user ? state.session.user : null
     ))
 
-    console.log("line 21 on user page", sessionUser)
+    // console.log("line 21 on user page", sessionUser)
 
     const viewedUser = useSelector(state => (
         state.users ? state.users[userId] : null
     ))
 
-    console.log("viewed user", viewedUser)
-
+    // console.log("viewed user", viewedUser)
 
 
     useEffect(() => {
-        console.log("useEffect running")
+        // console.log("useEffect running")
         dispatch(getUser(userId))
     }, [dispatch, userId])
 

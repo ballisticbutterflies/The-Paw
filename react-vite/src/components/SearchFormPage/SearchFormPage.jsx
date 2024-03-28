@@ -4,6 +4,7 @@ import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
+import { getTodaysHours } from "../../utils";
 import { useEffect } from "react";
 import { fetchAllBusinesses } from "../../redux/businesses";
 
@@ -104,6 +105,13 @@ function SearchFormPage() {
 
                     {business.price === null &&
                       <span className="priceSubcat">{business.category?.name}
+                      </span>
+                    }
+
+                    {
+                      getTodaysHours(business) &&
+                      <span className="todayHours">
+                        Today&apos;s Hours: {getTodaysHours(business).open} - {getTodaysHours(business).close}
                       </span>
                     }
 

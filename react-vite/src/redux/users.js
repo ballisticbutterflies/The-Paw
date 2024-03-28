@@ -47,7 +47,7 @@ export const getUser = (userId) => async (dispatch) => {
 
 export const getUserImages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/images/all`)
-    console.log("hitting thunk in users")
+    // console.log("hitting thunk in users")
 
     if(!res.ok) {
         return res;
@@ -60,7 +60,7 @@ export const getUserImages = (userId) => async (dispatch) => {
 
 export const getUserReviews = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/reviews`)
-    console.log("hitting thunk in users")
+    // console.log("hitting thunk in users")
 
     if(!res.ok) {
         return res;
@@ -86,7 +86,7 @@ export const deleteUserReview = (reviewId) => async (dispatch) => {
 // REDUCER
 
 const userReducer = (state = {}, action) => {
-    console.log("hitting reducer")
+    // console.log("hitting reducer")
     switch (action.type) {
         case LOAD_USER: {
             return {...state, [action.user.id]: action.user }
