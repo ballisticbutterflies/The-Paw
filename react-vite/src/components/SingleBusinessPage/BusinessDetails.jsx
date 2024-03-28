@@ -4,13 +4,30 @@ import AddPhotosToBusiness from "../AddPhotosToBusiness";
 import { stdTimeFormat } from "../../utils";
 import { useSelector } from "react-redux"
 import LoginFormModal from "../LoginFormModal";
+import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
     const sessionUser = useSelector(state => state.session.user)
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
-                <span className="businessDetails_writeAReview"><button><i className="fa-solid fa-paw" /> &nbsp;Write a review</button></span>&nbsp;&nbsp;
+                <span className="businessDetails_writeAReview">
+                    {!sessionUser &&
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-camera" /> Add photo</>}
+                            modalComponent={<LoginFormModal />}
+                        />
+                    }
+                    {sessionUser && sessionUser.id !== business.owner_id &&
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-paw" /> Write a review</>}
+                            modalComponent={<CreateReviewPage propsBusinessId={businessId} modalLoad={true} />}
+                        />
+                    }</span>
+
+                &nbsp;&nbsp;
                 <span className="bizDeetsButton">{!sessionUser &&
                     <OpenModalButton
                         buttonText={<>
@@ -74,7 +91,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                 </div>
                 <hr />
                 <h3>Reviews</h3>
-                {business.reviews.num_reviews == 0 ? (
+                {sessionUser?.id !== business.owner_id && business.reviews.num_reviews == 0 ? (
                     <div>Be the first to review!</div>
                 ) : (
                     <SingleBusinessReviews business={business} businessId={businessId} sessionUser={sessionUser} />

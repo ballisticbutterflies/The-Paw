@@ -2,6 +2,7 @@ const LOAD_BUSINESS_REVIEWS = 'reviews/LOAD_BUSINESS_REVIEWS'
 const CREATE_REVIEW = 'review/CREATE_REVIEW'
 const CREATE_REVIEW_IMAGES = 'review/CREATE_REVIEW_IMAGES'
 const UPDATE_REVIEW = 'review/UPDATE_REVIEW'
+const DELETE_REVIEW = 'review/DELETE_REVIEW'
 
 
 export const loadBusinessReviews = (reviews) => ({
@@ -23,9 +24,14 @@ export const createReviewImages = (newImages) => {
     };
 };
 
-export const editReview = (review) => (console.log("THINGY", review), {
+export const editReview = (review) => ({
     type: UPDATE_REVIEW,
     review
+});
+
+export const removeImage = (reviewId) => ({
+    type: DELETE_REVIEW,
+    reviewId
 });
 
 // THUNK
@@ -77,19 +83,29 @@ export const createImage = (newImages) => async (dispatch) => {
 };
 
 export const updateReview = (reviewId, review) => async (dispatch) => {
-    // const sessionUser = getState().session.user
     const response = await fetch(`/api/reviews/${reviewId}/edit`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...review })
     });
 
-    console.log("REVIEW", response);
-
     if (response.ok) {
         const updatedReview = await response.json();
         dispatch(editReview(updatedReview));
         return updatedReview
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+}
+
+export const deleteReview = (reviewId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+        dispatch(removeImage(reviewId));
     } else {
         const errors = await response.json();
         return errors;
@@ -122,6 +138,11 @@ const reviewsReducer = (state = {}, action) => {
                 ...state,
                 [action.review.id]: action.review.review
             }
+        }
+        case DELETE_REVIEW: {
+            const newState = { ...state }
+            delete newState[action.reviewId]
+            return newState;
         }
         default:
             return { ...state }

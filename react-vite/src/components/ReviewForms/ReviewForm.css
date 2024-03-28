@@ -1,47 +1,69 @@
+.reviewForm {
+    width: 500px;
+}
+
 .review-fields {
     display: flex;
     flex-direction: column;
     width: fit-content;
     padding: 0 1em 1em 1em;
-    border: solid #5f5ba8 1px;
+    border: solid #c3cddf 1px;
+    background-color: #FFFBF6;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.review-fields textarea {
+    margin-left: -5px;
+}
+
+.review-fields textarea:focus {
+    outline: none;
 }
 
 
 #review-input {
     height: 10em;
     width: 35em;
+    border: none;
 }
 
 
-div.stars-container{
+div.stars-container {
     display: flex;
     flex-direction: row;
-    background-color: #FFFFFF;
+    background-color: #FFFBF6;
     width: fit-content;
-    padding: 3px 6px 3px 6px;
-    border-radius: 5px;
+    margin-top: 10px;
+
+    /* padding: 3px 6px 3px 6px;
+    border-radius: 5px; */
 }
 
-div.stars-container > .rating-descriptions{
+.stars-container span:hover {
+    cursor: pointer;
+}
+
+div.stars-container>.rating-descriptions {
     background-color: none;
 }
 
-#paws-and-descriptions{
+.descriptions-container {
+    align-content: center;
+    margin-left: 8px;
+}
+
+#paws-and-descriptions {
     display: flex;
     flex-direction: row;
 }
 
-form {
-    display: flex;
-    margin-left: 15%;
-    flex-direction: column;
-}
-
-button, input[type="file"] {
+/* button,
+input[type="file"] {
     width: fit-content;
     padding: 1% 2%;
-}
+} */
 
-.custom-error-page{
+.custom-error-page {
     margin: 2em 10em;
 }
