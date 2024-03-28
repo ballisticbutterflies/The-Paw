@@ -66,20 +66,21 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                         <div>
                                             &nbsp;&nbsp;By {business_image.user.first_name} {business_image.user.last_name && lastInitial(business_image.user.last_name)}
                                         </div>
-
-                                        <div className="trash">
-                                            {sessionUser && sessionUser.id === business_image.uploader_id &&
+                                        {sessionUser && sessionUser.id === business_image.uploader_id ? (<div className="trash">
+                                            {
                                                 images.images.business_images.length === 1 && images.images.review_images?.length === 0 ? (
-                                                <OpenModalMenuItem
-                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
-                                            ) : (
+                                                    <OpenModalMenuItem
+                                                        itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
+                                                        modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
+                                                ) : (
 
-                                                <OpenModalMenuItem
-                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={business_image.id} />} />)
+                                                    <OpenModalMenuItem
+                                                        itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
+                                                        modalComponent={<DeleteImageModal imageId={business_image.id} />} />)
+
                                             }
                                         </div>
+                                        ) : (<></>)}
                                     </div>
                                 </div>
                             </span >
