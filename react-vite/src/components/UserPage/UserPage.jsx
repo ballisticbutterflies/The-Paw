@@ -14,7 +14,7 @@ import "./UserPage.css"
 
 function UserPage() {
     const { userId } = useParams();
-    console.log("userId", userId)
+    // console.log("userId", userId)
 
     const [currentView, setCurrentView] = useState('overview')
 
@@ -24,18 +24,18 @@ function UserPage() {
         state.session.user ? state.session.user : null
     ))
 
-    console.log("line 21 on user page", sessionUser)
+    // console.log("line 21 on user page", sessionUser)
 
     const viewedUser = useSelector(state => (
         state.users ? state.users[userId] : null
     ))
 
-    console.log("viewed user", viewedUser)
+    // console.log("viewed user", viewedUser)
 
-    
+
 
     useEffect(() => {
-        console.log("useEffect running")
+        // console.log("useEffect running")
         dispatch(getUser(userId))
     }, [dispatch, userId])
 
@@ -51,7 +51,7 @@ function UserPage() {
                             {!viewedUser.user_pfp.image_url && (<img className="pfp" id="generic-pfp" src={viewedUser.pfp_url} alt="" />)}
                             {viewedUser.user_pfp.image_url && viewedUser.user_pfp.image_url.length && (<img className="pfp" id='personalized-pfp' src='../../../public/images/defaultAvatar.png' alt="" />)}
                             <h1>{viewedUser.first_name}  {viewedUser.last_name.slice(0,1)}.</h1>
-                            <h5>{viewedUser.city}, {viewedUser.state}</h5>   
+                            <h5>{viewedUser.city}, {viewedUser.state}</h5>
                             <div className="user-summ-stats">
                                 <div className="user-summ-stat-item"><i className="fa-solid fa-paw"/>&nbsp;&nbsp;<h5>{viewedUser.num_reviews}</h5></div>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <div className="user-summ-stat-item"><i className="fa-solid fa-image"/>&nbsp;&nbsp;<h5>{viewedUser.num_images}</h5></div>

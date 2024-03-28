@@ -16,20 +16,20 @@ function UserPhotos() {
         state.session.user ? state.session.user : null
     ))
 
-    console.log("line 14 on user photos", sessionUser)
+    // console.log("line 14 on user photos", sessionUser)
 
     const viewedUser = useSelector(state => (
         state.users ? state.users[userId] : null
     ))
 
-    console.log("viewed user", viewedUser)
+    // console.log("viewed user", viewedUser)
 
     const viewedUserImages = useSelector(state => (
         state.users ? state.users.undefined : null
     ))
 
-    console.log("viewed user images", viewedUserImages)
-    
+    // console.log("viewed user images", viewedUserImages)
+
     const hasAtLeastOneImage = function () {
         if(viewedUserImages != null){
             if (!viewedUserImages.length <= 0){
@@ -50,9 +50,9 @@ function UserPhotos() {
 
     return (
         <>
-           <h2>Photos</h2> 
+           <h2>Photos</h2>
            <div id="photos-container">
-                { viewedUserImages && hasAtLeastOneImage() == 'No Images' && 
+                { viewedUserImages && hasAtLeastOneImage() == 'No Images' &&
                     (<h4>Looks like this user does not have any images uploaded!</h4> )
                 }
                 {viewedUserImages && hasAtLeastOneImage() && (
@@ -85,7 +85,7 @@ function UserPhotos() {
                                 </>
                             )
                         )
-                    )   
+                    )
                 }
            </div>
         </>

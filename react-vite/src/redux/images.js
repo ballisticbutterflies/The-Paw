@@ -13,7 +13,7 @@ export const removeImage = (imageId) => ({
 
 export const getImagesByBusiness = (businessId) => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId}/images`)
-    console.log("RES", response);
+    // console.log("RES", response);
 
     if (response.ok) {
         const images = await response.json();
@@ -50,7 +50,7 @@ const imagesReducer = (state = {}, action) => {
         }
         case DELETE_IMAGE: {
             const newState = { ...state }
-            console.log("ACTION", action)
+            // console.log("ACTION", action)
             // if (action.image.images.business_images)
             delete newState[action.imageId]
             return newState;

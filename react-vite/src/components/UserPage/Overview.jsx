@@ -14,14 +14,14 @@ function UserOverview() {
         state.session.user ? state.session.user : null
     ))
 
-    console.log("line 14 on user overview", sessionUser)
+    // console.log("line 14 on user overview", sessionUser)
 
     const viewedUser = useSelector(state => (
         state.users ? state.users[userId] : null
     ))
 
-    console.log("viewed user", viewedUser)
-    
+    // console.log("viewed user", viewedUser)
+
 
     useEffect(() => {
         dispatch(getUser(parseInt(userId)))

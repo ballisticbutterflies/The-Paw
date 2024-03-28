@@ -16,21 +16,21 @@ function UserReviews() {
         state.session.user ? state.session.user : null
     ))
 
-    console.log("line 14 on user reviewws", sessionUser)
+    // console.log("line 14 on user reviewws", sessionUser)
 
     const viewedUser = useSelector(state => (
         state.users ? state.users[userId] : null
     ))
 
-    console.log("viewed user", viewedUser)
-    
+    // console.log("viewed user", viewedUser)
+
     let viewedUserReviews = useSelector(state => (
         state.users.userReviewsState ? state.users.userReviewsState.userReviews : null
     ))
 
     // // if(viewedUserReviews ) viewedUserReviews = Object.values(viewedUserReviews)
-    console.log("viewed user reviews", (viewedUserReviews))
-    if(viewedUserReviews )console.log("viewed user reviews isarray", Array.isArray(viewedUserReviews))
+    // console.log("viewed user reviews", (viewedUserReviews))
+    // if(viewedUserReviews )console.log("viewed user reviews isarray", Array.isArray(viewedUserReviews))
 
     // if(viewedUserReviews )console.log("viewed user reviews 0", viewedUserReviews[0])
 
@@ -41,7 +41,7 @@ function UserReviews() {
     //         <span>{student.age}</span>
     //     </div>
     // ))}
-    
+
     const hasAtLeastOneReview = function () {
         if(viewedUserReviews != null){
             if (!viewedUserReviews.length <= 0){
@@ -68,17 +68,17 @@ function UserReviews() {
             // console.log("line 78", Object.values(user_review))
             // console.log("line 79", Array.isArray(Object.values(user_review)))
             // console.log("line 70", Object.values(user_review)[0])
-            return Object.values(user_review)[0]    
+            return Object.values(user_review)[0]
         })
     }
 
 
     // console.log('reviewsArr',reviewsArr)
-    // console.log("sessionUser",sessionUser) 
-    // console.log("sessionUser.id",sessionUser.id) 
-    // console.log("userId",userId) 
-    // console.log("userId === sessionUser.id",userId===sessionUser.id) 
-    // console.log("userId == sessionUser.id",userId==sessionUser.id) 
+    // console.log("sessionUser",sessionUser)
+    // console.log("sessionUser.id",sessionUser.id)
+    // console.log("userId",userId)
+    // console.log("userId === sessionUser.id",userId===sessionUser.id)
+    // console.log("userId == sessionUser.id",userId==sessionUser.id)
 
     const reviewStars = (numStars) => {
         let filled_paws = [];
@@ -101,11 +101,11 @@ function UserReviews() {
         <>
             <h2>Reviews</h2>
             <div id="reviews-container">
-                { viewedUserReviews && hasAtLeastOneReview() == 'No Reviews' && 
+                { viewedUserReviews && hasAtLeastOneReview() == 'No Reviews' &&
                     (<h4>Looks like this user has not written any reviews!</h4> )
                 }
                 {viewedUserReviews && hasAtLeastOneReview() && (
-                    reviewsArr.map(user_review => (                        
+                    reviewsArr.map(user_review => (
                         <>
                             <div className="review-card">
                                 <div className="biz-review-content">
@@ -128,7 +128,7 @@ function UserReviews() {
                                                     <img
                                                         className="reviewImages"
                                                         src={image.image_url} /></span>
-                                            ))} 
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@ function UserReviews() {
                             </div>
                         </>
                     ))
-                    
+
                 )}
             </div>
         </>

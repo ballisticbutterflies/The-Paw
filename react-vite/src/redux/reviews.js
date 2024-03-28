@@ -133,7 +133,7 @@ const reviewsReducer = (state = {}, action) => {
 
         }
         case UPDATE_REVIEW: {
-            console.log("ACTION!!!!", action);
+            // console.log("ACTION!!!!", action);
             return {
                 ...state,
                 [action.review.id]: action.review.review

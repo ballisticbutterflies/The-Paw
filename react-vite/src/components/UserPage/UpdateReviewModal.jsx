@@ -8,7 +8,7 @@ function UpdateReviewModal({ userReview, reviewId, userId }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const reviewData = userReview;
-    console.log("reviewData: ",reviewData)
+    // console.log("reviewData: ",reviewData)
     const [review, setReview] = useState(reviewData?.review);
     const [stars, setStars] = useState(reviewData?.stars);
     const [hover, setHover] = useState(reviewData?.hover);
