@@ -16,8 +16,13 @@ function SingleBusinessPage() {
         state.businesses[businessId]
     ))
 
+
     useEffect(() => {
-        dispatch(fetchSingleBusiness(businessId))
+        const runDispatches = async () => {
+            dispatch(fetchSingleBusiness(businessId)
+            );
+        };
+        runDispatches();
     }, [dispatch, businessId])
 
     const reviewStars = (numStars) => {

@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Business, Review, Image, User, db;
 from .user_routes import user_routes, user
+from app.forms import CreateReviewForm
 
 reviews_route = Blueprint('reviews', __name__)
 
@@ -54,6 +55,39 @@ def get_all_reviews():
     all_reviews_dict = {'reviews': [format_reviews(review) for review in reviews]} # structure final response dict by calling the above helper function to 
     return all_reviews_dict
    
+
+@reviews_route.route('/<int:id>/edit', methods=["PUT"])
+@login_required
+def update_review(id):
+    """
+    Updates an exisiting review if it is owned by user logged in
+    """
+    review = Review.query.get(id)
+
+    if review is None:
+        return {'message': 'Review couldn\'t be found' }, 404
+
+    if review.user_id != current_user.id:
+        return {'message': 'Unauthorized user'}, 401
+
+    form = CreateReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        review.review = form.data['review']
+        review.stars = form.data['stars']
+
+        try:
+            db.session.commit()
+            return review.to_dict()
+        except Exception as e:
+            # Handle database errors
+            db.session.rollback()
+            return {'message': 'An error occurred while updating the review.'}, 500
+
+    return form.errors, 401
+
+
 @reviews_route.route('<int:review_id>/delete', methods=["DELETE"])
 @login_required
 def delete_review(review_id):

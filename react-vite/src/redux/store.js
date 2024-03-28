@@ -10,7 +10,9 @@ import searchReducer from "./search";
 import businessesReducer from "./businesses";
 import reviewsReducer from "./reviews";
 import imagesReducer from "./images";
+import categoriesReducer from "./categories";
 import userReducer from "./users";
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   businesses: businessesReducer,
   reviews: reviewsReducer,
   images: imagesReducer,
+  categories: categoriesReducer,
   users: userReducer
 
 });

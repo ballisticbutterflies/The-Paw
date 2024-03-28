@@ -2,8 +2,11 @@ import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import UpdateReviewPage from "../ReviewForms/UpdateReviewPage";
+import { fetchSingleBusiness } from "../../redux/businesses";
 
-function SingleBusinessReviews({ businessId }) {
+function SingleBusinessReviews({ businessId, sessionUser }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const reviews = Object.values(useSelector(state => state.reviews)).sort((a, b) => {
@@ -13,8 +16,14 @@ function SingleBusinessReviews({ businessId }) {
     });
 
     useEffect(() => {
-        dispatch(getBusinessReviews(businessId))
+        const runDispatches = async () => {
+            await dispatch(fetchSingleBusiness(businessId)).then(() =>
+                dispatch(getBusinessReviews(businessId))
+            );
+        };
+        runDispatches();
     }, [dispatch, businessId])
+
 
     const lastInitial = (lastName) => {
         let last = lastName.charAt(0)
@@ -79,6 +88,12 @@ function SingleBusinessReviews({ businessId }) {
                             )
                             )
                         } </div>
+                    </div>
+                    <div>
+                        {sessionUser && sessionUser.id === review.user_id && <OpenModalMenuItem
+                            itemText={<>Edit</>}
+                            modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} />} />
+                        }
                     </div>
                     <br />
                     <br />

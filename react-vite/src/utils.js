@@ -1,5 +1,5 @@
 export const stdTimeFormat = (military) => {
-    if (military === "") return "Closed"
+    if (military === null) return "Closed"
 
     let hrParts = parseInt(military.substring(0, 2));
     let hr = ((hrParts + 11) % 12) + 1;

@@ -1,6 +1,6 @@
 from flask import Blueprint, request;
 from flask_login import login_required, current_user
-from sqlalchemy import func
+from sqlalchemy import func, desc
 from app.models import Business, Review, Image, User, Category, db;
 from app.forms import CreateBusinessForm, CreateReviewForm
 
@@ -449,3 +449,44 @@ def delete_business(id):
     except Exception as e:
         db.session.rollback()
         return {'message': 'An error occurred while deleting the business.'}, 500
+
+
+@businesses_route.route('')
+def get_businesses():
+    '''
+    Gets all businesses
+    '''
+    businesses = Business.query.all()
+    business_data = []
+
+    for business in businesses:
+    #calculate avg stars
+        avg_stars = Review.query.filter_by(business_id=business.id).with_entities(func.avg(Review.stars)).scalar()
+    #and num reviews
+        num_reviews = Review.query.filter_by(business_id=business.id).count()
+    #and bring over review text too
+        recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
+        recent_review_text = recent_review.review if recent_review else None
+    #and image
+
+        images = Image.query.filter_by(imageable_id=business.id, imageable_type='business').all()
+        image_urls = [image.url for image in images]
+
+        categories = Category.query.filter(Category.id == business.category_id)
+        category_dict = { category.id: {
+            'id': category.id,
+            'name': category.name
+            } for category in categories }
+        category_data = category_dict.get(business.category_id)
+
+
+        business_dict = business.to_dict()
+        business_dict['avg_stars'] = avg_stars
+        business_dict['num_reviews'] = num_reviews
+        business_dict['recent_review_text'] = recent_review_text
+        business_dict['images'] = image_urls
+        business_dict['category'] = category_data
+
+        business_data.append(business_dict)
+
+    return { 'businesses': business_data }

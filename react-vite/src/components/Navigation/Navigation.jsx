@@ -1,24 +1,24 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { clearBusinesses, fetchBusinesses, searchBarBusinesses } from "../../redux/search";
+import { useState } from "react";
+import { searchBarBusinesses } from "../../redux/search";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 import ForBusinessButton from "./ForBusinessButton";
 import { useNavigate } from "react-router-dom";
-// import ManageBusinessPage from "../ManageBusinessesPage/ManageBusinessPage";
 
-// function Navigation({ isLoaded }) {
+
 function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const user = useSelector((store) => store.session.user);
-  const businesses = Object.values(useSelector((state) => state.search))
+  const businesses = Object.values(useSelector((state) => state.businesses))
+
   const locations_list = []
 
   businesses.map(business => {
@@ -33,16 +33,19 @@ function Navigation() {
 
   const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
 
-  useEffect(() => {
-    dispatch(fetchBusinesses())
-  }, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(searchBarBusinesses(searchQuery, location))
-      .then(navigate('/search/'))
-      .then(dispatch(clearBusinesses()))
+
+      .then(() => {
+        navigate('/search/')
+        setSearchQuery('')
+      })
+      .then(() => setLocation(''))
+
   };
+
 
 
   return (
@@ -54,7 +57,7 @@ function Navigation() {
             id="searchQuery"
             type="text"
             value={searchQuery}
-            placeholder="things to do, groomers, restaurants"
+            placeholder="things to do, parks, restaurants"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <input

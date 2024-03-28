@@ -10,7 +10,8 @@ import CreateBusinessForm from '../components/BusinessFormPage/CreateBusinessFor
 import EditBusinessForm from '../components/BusinessFormPage/EditBusinessForm';
 import ManageBusinessPage from '../components/ManageBusinessesPage';
 import AddPhotosToBusiness from '../components/AddPhotosToBusiness';
-import CreateReviewPage from '../components/CreateReviewPage';
+import CreateReviewPage from '../components/ReviewForms/CreateReviewPage';
+import UpdateReviewPage from '../components/ReviewForms/UpdateReviewPage';
 import UserPage from '../components/UserPage/UserPage';
 
 export const router = createBrowserRouter([
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "/businesses/:businessId/reviews/new",
         element: <CreateReviewPage />,
+      },
+      {
+        path: "/businesses/:businessId/reviews/edit",
+        element: <UpdateReviewPage />,
       },
       {
         path: "/users/:userId",
