@@ -24,10 +24,10 @@ function Navigation() {
   businesses.map(business => {
     let city = business.city
     let state = business.state
-    let cityState = city.concat(', ', state)
-
-    locations_list.push(cityState)
-
+    if (city && state) {
+      let cityState = city.concat(', ', state)
+      locations_list.push(cityState)
+    }
     return locations_list
   })
 
