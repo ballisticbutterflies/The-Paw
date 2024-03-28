@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getUser, getUserImages } from "../../redux/users";
+// import { getImagesByBusiness } from "../../redux/images";
 import "./UserPhotos.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteImageModal from "../DeleteImageModal/DeleteImageModal";
@@ -44,7 +45,7 @@ function UserPhotos() {
             );
           };
           runDispatches();
-    }, [dispatch, userId, sessionUser,viewedUserImages])
+    }, [dispatch, userId, sessionUser])
 
 
     return (
@@ -62,15 +63,20 @@ function UserPhotos() {
                                             src={user_image.image_url} />
                                         <div className="photoCredit">
                                             <div className="photoCreditText">
-                                                <div>
+                                                <div id="biz-name">
                                                     &nbsp;&nbsp;{user_image.business_name}
                                                 </div>
 
                                                 <div className="trash">
-                                                    {sessionUser && sessionUser.id === viewedUser.id &&
+                                                    {((sessionUser && sessionUser.id === viewedUser.id )&& (typeof user_image.biz_images_count == "string" || user_image.biz_images_count > 1)) &&
                                                         <OpenModalMenuItem
                                                             itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
                                                             modalComponent={<DeleteImageModal imageId={user_image.id} />} />
+                                                    }
+                                                    {((sessionUser && sessionUser.id === viewedUser.id )&& (typeof user_image.biz_images_count == "number" && user_image.biz_images_count <= 1)) &&
+                                                        <OpenModalMenuItem
+                                                            itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
+                                                            modalComponent={<DeleteImageModal imageId={user_image.id} onlyImage={true}/>} />
                                                     }
                                                 </div>
                                             </div>

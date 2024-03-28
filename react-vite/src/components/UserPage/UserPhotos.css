@@ -28,8 +28,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
 }
 
 .trash {
-    justify-self: end;
+    position: absolute;
+    right: 0;
 }
