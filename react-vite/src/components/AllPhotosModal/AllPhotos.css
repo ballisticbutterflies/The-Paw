@@ -64,6 +64,16 @@
     border-bottom-right-radius: 3px;
 }
 
+.photoCreditText {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+}
+
+.trash {
+    justify-self: end;
+}
+
 .page {
     margin: auto;
     padding-top: 10px;

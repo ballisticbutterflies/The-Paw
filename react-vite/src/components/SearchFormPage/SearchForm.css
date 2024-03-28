@@ -3,34 +3,47 @@
   width: 700px;
   border: 1px solid #1f2f44;
   align-content: center;
-  padding: 15px 10px 10px 10px;
+  padding: 5px;
   margin-left: 300px;
   margin-bottom: 20px;
   position: relative;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .businessCards:hover {
-  box-shadow: 3px 7px 35px 3px;
+  box-shadow: 2px 2px 5px .05px;
 }
 
+.businessesImageWrapper {
+  width: 300px;
+  height: 225px;
+  padding: 20px 25px 20px 20px;
+}
 
 .businessesImage {
-  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 3px;
   width: 300px;
-  padding: 20px;
+  height: 225px;
 }
-
 
 .businessDeets {
   display: flex;
   flex-direction: column;
+  row-gap: 8px;
   text-wrap: wrap;
-  padding: 20px 20px 0 0;
-
+  padding: 10px 15px 0 0;
+  color: #1f2f44 !important;
+  font-weight: 300 !important;
 }
 
-.pawRatingInputFilter > h4 {
+.businessDeets h2 {
+  margin-bottom: 0px;
+  color: #5f5ba8 !important;
+}
+
+.pawRatingInputFilter>h4 {
   margin: 2px 0;
 }
 
@@ -47,7 +60,7 @@
   color: #c3cddf;
 }
 
-.priceInputFilter > h4 {
+.priceInputFilter>h4 {
   margin: 2px 0;
 }
 
@@ -67,11 +80,51 @@
 }
 
 .searchPage {
-  padding-left: 25px;
+  /* padding-left: 25px; */
+  padding-top: 20px;
+  max-width: 1125px;
+  margin: auto;
 }
 
 .categoryFilter {
   padding-bottom: 30px;
   border-bottom: 1px solid #c3cddf;
   margin-bottom: 10px;
+}
+
+.noBiz {
+  display: flex;
+  width: 500px;
+  align-content: center;
+  margin-left: 400px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-size: large;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-buttons button {
+  margin: 10px 0 0 28px;
+}
+
+.apply-filter-button {
+  border-radius: 3px;
+  padding: 12px 16px 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.clear-filter-button {
+  border-radius: 3px;
+  padding: 12px 16px 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border: #c3cddf 1px solid;
+  background-color: transparent;
+  color: #1f2f44;
 }

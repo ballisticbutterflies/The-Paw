@@ -15,7 +15,22 @@ def seed_businesses():
         website='https://www.petagogy.com/',
         email='info@petagogy.com',
         phone='4123627387',
-        price='$$$'
+        price='$$$',
+        set_hours="yes",
+        mon_open='1000',
+        mon_close='2000',
+        tue_open='1000',
+        tue_close='2000',
+        wed_open='1000',
+        wed_close='2000',
+        thu_open='1000',
+        thu_close='2000',
+        fri_open='1000',
+        fri_close='2000',
+        sat_open='1000',
+        sat_close='2000',
+        sun_open='1100',
+        sun_close='1600',
     )
 
     mishka = Business(
@@ -30,7 +45,22 @@ def seed_businesses():
         description='Mishka dog cakes made with no artificial colors, no preservatives! You can also find our full line of hand crafted, luxury dog clothing and accessories.',
         website='https://mishkacakes.com/',
         phone='6289000923',
-        price='$$$$'
+        price='$$$$',
+        set_hours="yes",
+        mon_open='1100',
+        mon_close='1700',
+        tue_open='1100',
+        tue_close='1800',
+        wed_open='1100',
+        wed_close='1800',
+        thu_open='1100',
+        thu_close='1800',
+        fri_open='1100',
+        fri_close='1800',
+        sat_open='1000',
+        sat_close='1800',
+        sun_open='1000',
+        sun_close='1800',
     )
 
     leo_j_ryan = Business(
@@ -45,6 +75,7 @@ def seed_businesses():
         description='Leo J. Ryan Memorial Park is a dog-friendly park that offers 20 acres of lawn areas, lagoon access, a gazebo on the lagoon, and restroom facilities.',
         website='https://www.fostercity.org/parksrec/page/leo-j-ryan-park',
         phone='6502863380',
+        set_hours="no"
     )
 
     dumpling_home = Business(
@@ -59,7 +90,20 @@ def seed_businesses():
         description='Casual, colorful eatery dishing up fried, steamed, or boiled dumplings, plus noodles and small plates, with a dog-friendly patio!',
         website='https://www.dumplinghome.com/',
         phone='4155031666',
-	    price='$$'
+	    price='$$',
+        set_hours="yes",
+        mon_open='1130',
+        mon_close='2015',
+        tue_open='1130',
+        tue_close='2015',
+        wed_open='1130',
+        wed_close='2015',
+        thu_open='1130',
+        thu_close='2015',
+        fri_open='1130',
+        fri_close='2015',
+        sat_open='1130',
+        sat_close='2015'
     )
 
     bakery = Business(
@@ -75,7 +119,18 @@ def seed_businesses():
         website= "https://www.threedogbakeryhtx.com/",
         email= "baker@threedogbakeryhtx.com",
         phone= "7135339933",
-        price= "$$"
+        price= "$$",
+        set_hours="yes",
+        wed_open='1000',
+        wed_close='2000',
+        thu_open='1000',
+        thu_close='2000',
+        fri_open='0900',
+        fri_close='2000',
+        sat_open='0900',
+        sat_close='2000',
+        sun_open='1000',
+        sun_close='1900',
     )
 
     caroline = Business(
@@ -90,10 +145,11 @@ def seed_businesses():
         description='Caroline longs and strides to discovering and telling your dog’s unique story with beautiful, natural fine art images just begging to be displayed in your home and shared with family, friends and loved ones.',
         website='https://www.carolinetwohillphotography.com/',
         phone='6094252118',
-        price='$$'
+        price='$$',
+        set_hours="no"
     )
 
-    exotic_vet= Business(
+    exotic_vet = Business(
     # id 7
         owner_id= 5,
         category_id=2,
@@ -106,7 +162,75 @@ def seed_businesses():
         website='https://www.birdandexotic.com/',
         email= "birdandexoticclinicofseattle@gmail.com",
         phone='2067834538',
-        price='$$'
+        price='$$',
+        set_hours="yes",
+        mon_open='0900',
+        mon_close='1700',
+        tue_open='0800',
+        tue_close='2015',
+        wed_open='1800',
+        wed_close='2015',
+        thu_open='1800',
+        thu_close='2015',
+        fri_open='1800',
+        fri_close='2015',
+        sat_open='0900',
+        sat_close='1600'
+    )
+
+    perch= Business(
+    # id 8
+        owner_id=1,
+        category_id=1,
+        address='1932 W Division',
+        city='Chicago',
+        state='IL',
+        zip_code='60622',
+        name='The Perch',
+        description='The Perch Kitchen and Tap is a partnership between 4 STAR Restaurant Group and Finch Beer Co. - Wicker Park\'s newest full service restaurant + bar with an onsite brewery.',
+        website='https://theperchchicago.com',
+        price='$$$',
+        set_hours="yes",
+        mon_open='1100',
+        mon_close='2100',
+        tue_open='0100',
+        tue_close='2100',
+        wed_open='1100',
+        wed_close='2100',
+        thu_open='1100',
+        thu_close='2100',
+        fri_open='1100',
+        fri_close='2200',
+        sat_open='0900',
+        sat_close='2100',
+        sun_open='0900',
+        sun_close='2100'
+    )
+
+    salondog= Business(
+    # id 9
+        owner_id=3,
+        category_id=3,
+        address='2542 W Fullerton Ave',
+        city='Chicago',
+        state='IL',
+        zip_code='60647',
+        name='Salon Dog',
+        description='Salon Dog is a team of experienced and caring pet groomers dedicated to providing top-quality grooming services for your beloved pets.',
+        website='https://salondog.net/',
+        set_hours="yes",
+        mon_open='0900',
+        mon_close='1800',
+        wed_open='0900',
+        wed_close='1800',
+        thu_open='0900',
+        thu_close='1800',
+        fri_open='0900',
+        fri_close='1800',
+        sat_open='1000',
+        sat_close='1800',
+        sun_open='1000',
+        sun_close='1800'
     )
 
     db.session.add(petagogy)
@@ -116,6 +240,8 @@ def seed_businesses():
     db.session.add(bakery)
     db.session.add(caroline)
     db.session.add(exotic_vet)
+    db.session.add(perch)
+    db.session.add(salondog)
     db.session.commit()
 
 

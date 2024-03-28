@@ -1,6 +1,6 @@
 from flask import Blueprint, request;
 from flask_login import login_required, current_user
-from sqlalchemy import func
+from sqlalchemy import func, desc
 from app.models import Business, Review, Image, User, Category, db;
 from app.forms import CreateBusinessForm, CreateReviewForm
 
@@ -48,9 +48,7 @@ def get_business(id):
 
 
     business_images = Image.query.filter((Image.imageable_type == 'business'), Image.imageable_id == id).all()
-
     business_image_urls = [{'id': image.id, 'image_url': image.url, 'uploader_id': image.uploader_id} for image in business_images]
-
     business_dict['business_images'] = business_image_urls
 
     categories = Category.query.filter(Category.id == business.category_id)
@@ -61,6 +59,24 @@ def get_business(id):
     category_data = category_dict.get(business.category_id)
 
     business_dict['category'] = category_data
+
+    business_dict['set_hours'] = business.set_hours
+    business_dict['hours'] = {
+        'mon_open': business.mon_open,
+        'mon_close': business.mon_close,
+        'tue_open': business.tue_open,
+        'tue_close': business.tue_close,
+        'wed_open': business.wed_open,
+        'wed_close': business.wed_close,
+        'thu_open': business.thu_open,
+        'thu_close': business.thu_close,
+        'fri_open': business.fri_open,
+        'fri_close': business.fri_close,
+        'sat_open': business.sat_open,
+        'sat_close': business.sat_close,
+        'sun_open': business.sun_open,
+        'sun_close': business.sun_close,
+    }
 
     business_data.append(business_dict)
     return { 'business': business_data }
@@ -151,6 +167,7 @@ def get_reviews_by_business_id(id):
     else:
         return { 'reviews': reviews_list }
 
+
 @businesses_route.route('/<int:business_id>/reviews', methods=['POST'])
 @login_required
 def create_review(business_id):
@@ -195,6 +212,7 @@ def create_review(business_id):
             return review.to_dict()
     return form.errors, 401
 
+
 @businesses_route.route('/', methods=['POST'])
 @login_required
 def create_business():
@@ -217,7 +235,22 @@ def create_business():
             website=form.data['website'],
             email=form.data['email'],
             phone=form.data['phone'],
-            price=form.data['price']
+            price=form.data['price'],
+            set_hours=form.data['set_hours'],
+            mon_open=form.data['mon_open'],
+            mon_close=form.data['mon_close'],
+            tue_open=form.data['tue_open'],
+            tue_close=form.data['tue_close'],
+            wed_open=form.data['wed_open'],
+            wed_close=form.data['wed_close'],
+            thu_open=form.data['thu_open'],
+            thu_close=form.data['thu_close'],
+            fri_open=form.data['fri_open'],
+            fri_close=form.data['fri_close'],
+            sat_open=form.data['sat_open'],
+            sat_close=form.data['sat_close'],
+            sun_open=form.data['sun_open'],
+            sun_close=form.data['sun_close'],
         )
         db.session.add(business)
         db.session.commit()
@@ -280,6 +313,7 @@ def get_images_by_business_id(id):
 
     return { 'images': images_dict }, 200
 
+
 @businesses_route.route('/<int:id>/edit', methods=["PUT"])
 @login_required
 def update_business(id):
@@ -309,6 +343,21 @@ def update_business(id):
         business.email = form.data['email']
         business.phone = form.data['phone']
         business.price = form.data['price']
+        business.set_hours=form.data['set_hours']
+        business.mon_open=form.data['mon_open']
+        business.mon_close=form.data['mon_close']
+        business.tue_open=form.data['tue_open']
+        business.tue_close=form.data['tue_close']
+        business.wed_open=form.data['wed_open']
+        business.wed_close=form.data['wed_close']
+        business.thu_open=form.data['thu_open']
+        business.thu_close=form.data['thu_close']
+        business.fri_open=form.data['fri_open']
+        business.fri_close=form.data['fri_close']
+        business.sat_open=form.data['sat_open']
+        business.sat_close=form.data['sat_close']
+        business.sun_open=form.data['sun_open']
+        business.sun_close=form.data['sun_close']
 
         try:
             # Commit transaction
@@ -320,6 +369,7 @@ def update_business(id):
             return {'message': 'An error occurred while updating the business.'}, 500
 
     return {"errors": form.errors}, 400
+
 
 @businesses_route.route('/current')
 @login_required
@@ -351,8 +401,26 @@ def get_user_businesses():
         business_dict = business.to_dict()
         business_dict['avg_stars'] = avg_stars
         business_dict['num_reviews'] = num_reviews
-        business_dict['image'] = image.url
+        business_dict['image'] = image.url if image else None
+        print("JFOSFSDFSDFDSFDSFSFDSF", image)
         business_dict['category'] = category_data
+        business_dict['set_hours'] = business.set_hours
+        business_dict['hours'] = {
+            'mon_open': business.mon_open,
+            'mon_close': business.mon_close,
+            'tue_open': business.tue_open,
+            'tue_close': business.tue_close,
+            'wed_open': business.wed_open,
+            'wed_close': business.wed_close,
+            'thu_open': business.thu_open,
+            'thu_close': business.thu_close,
+            'fri_open': business.fri_open,
+            'fri_close': business.fri_close,
+            'sat_open': business.sat_open,
+            'sat_close': business.sat_close,
+            'sun_open': business.sun_open,
+            'sun_close': business.sun_close,
+        }
 
         business_data.append(business_dict)
 
@@ -381,3 +449,44 @@ def delete_business(id):
     except Exception as e:
         db.session.rollback()
         return {'message': 'An error occurred while deleting the business.'}, 500
+
+
+@businesses_route.route('')
+def get_businesses():
+    '''
+    Gets all businesses
+    '''
+    businesses = Business.query.all()
+    business_data = []
+
+    for business in businesses:
+    #calculate avg stars
+        avg_stars = Review.query.filter_by(business_id=business.id).with_entities(func.avg(Review.stars)).scalar()
+    #and num reviews
+        num_reviews = Review.query.filter_by(business_id=business.id).count()
+    #and bring over review text too
+        recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
+        recent_review_text = recent_review.review if recent_review else None
+    #and image
+
+        images = Image.query.filter_by(imageable_id=business.id, imageable_type='business').all()
+        image_urls = [image.url for image in images]
+
+        categories = Category.query.filter(Category.id == business.category_id)
+        category_dict = { category.id: {
+            'id': category.id,
+            'name': category.name
+            } for category in categories }
+        category_data = category_dict.get(business.category_id)
+
+
+        business_dict = business.to_dict()
+        business_dict['avg_stars'] = avg_stars
+        business_dict['num_reviews'] = num_reviews
+        business_dict['recent_review_text'] = recent_review_text
+        business_dict['images'] = image_urls
+        business_dict['category'] = category_data
+
+        business_data.append(business_dict)
+
+    return { 'businesses': business_data }

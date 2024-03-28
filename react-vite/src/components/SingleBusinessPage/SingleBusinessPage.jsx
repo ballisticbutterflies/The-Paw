@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleBusiness } from "../../redux/businesses";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalButton from "../OpenModalButton";
+
+
 
 function SingleBusinessPage() {
     const { businessId } = useParams();
@@ -16,8 +18,13 @@ function SingleBusinessPage() {
         state.businesses[businessId]
     ))
 
+
     useEffect(() => {
-        dispatch(fetchSingleBusiness(businessId))
+        const runDispatches = async () => {
+            dispatch(fetchSingleBusiness(businessId)
+            );
+        };
+        runDispatches();
     }, [dispatch, businessId])
 
     const reviewStars = (numStars) => {
@@ -50,12 +57,22 @@ function SingleBusinessPage() {
     }
 
     const reviewAvg = (avg) => {
-        if (avg !== 'New') {
+        if (avg !== null) {
             return avg.toFixed(1);
         } else {
             return avg
         }
     }
+
+    const locationHoursSection = useRef(null)
+
+    const scrollTo = (section) => {
+        window.scrollTo({
+            top: section.current.offsetTop,
+            behavior: "smooth",
+        });
+    };
+
 
     return (business && business.business_images &&
         <>
@@ -70,13 +87,22 @@ function SingleBusinessPage() {
                             <span className="paws-unfilled"><i className="fa-solid fa-paw" /></span>&nbsp; Be the first to review!
                         </p>
                     }
-                    {business.reviews?.num_reviews > 0 &&
+                    {business.reviews?.num_reviews > 1 &&
                         <p className="businessReviews">
                             <span className="pawBlock">
                                 {business.reviews.avg_stars &&
                                     reviewStars(business.reviews.avg_stars)}</span>
                             &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
                             &nbsp;({business.reviews.num_reviews} reviews)
+                        </p>
+                    }
+                    {business.reviews?.num_reviews === 1 &&
+                        <p className="businessReviews">
+                            <span className="pawBlock">
+                                {business.reviews.avg_stars &&
+                                    reviewStars(business.reviews.avg_stars)}</span>
+                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
+                            &nbsp;({business.reviews.num_reviews} review)
                         </p>
                     }
 
@@ -93,7 +119,7 @@ function SingleBusinessPage() {
 
                     <div className="currHours">
                         [CLOSED 8AM - 6PM]&nbsp;&nbsp;
-                        <span className="seeHours">See hours</span>
+                        <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                     </div>
                 </div>
                 <div className="seeAllPhotos">
@@ -110,7 +136,7 @@ function SingleBusinessPage() {
                 </div>
             </div >
             <div className="businessContainer">
-                <BusinessDetails business={business} businessId={businessId} />
+                <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} />
                 <BusinessContactCard business={business} />
             </div>
         </>

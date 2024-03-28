@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 # from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Column, ForeignKey
-from sqlalchemy.types import Integer, String
+from sqlalchemy.types import Integer, String, Boolean
 from sqlalchemy.sql import func
 from sqlalchemy.types import DateTime
 
@@ -35,6 +35,21 @@ class Business(db.Model):
     email = Column(String(255), nullable=True)
     phone = Column(String(10), nullable=True)
     price = Column(String(4), nullable=True)
+    set_hours = Column(String(3), nullable=False)
+    mon_open = Column(String(4), nullable=True)
+    mon_close = Column(String(4), nullable=True)
+    tue_open = Column(String(4), nullable=True)
+    tue_close = Column(String(4), nullable=True)
+    wed_open = Column(String(4), nullable=True)
+    wed_close = Column(String(4), nullable=True)
+    thu_open = Column(String(4), nullable=True)
+    thu_close = Column(String(4), nullable=True)
+    fri_open = Column(String(4), nullable=True)
+    fri_close = Column(String(4), nullable=True)
+    sat_open = Column(String(4), nullable=True)
+    sat_close = Column(String(4), nullable=True)
+    sun_open = Column(String(4), nullable=True)
+    sun_close = Column(String(4), nullable=True)
     created_at = db.Column(DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
 
@@ -73,7 +88,24 @@ class Business(db.Model):
             'website': self.website,
             'email': self.email,
             'phone': self.phone,
-            'price': self.price
+            'price': self.price,
+            'set_hours': self.set_hours,
+            'hours': {
+            'mon_open': self.mon_open,
+            'mon_close': self.mon_close,
+            'tue_open': self.tue_open,
+            'tue_close': self.tue_close,
+            'wed_open': self.wed_open,
+            'wed_close': self.wed_close,
+            'thu_open': self.thu_open,
+            'thu_close': self.thu_close,
+            'fri_open': self.fri_open,
+            'fri_close': self.fri_close,
+            'sat_open': self.sat_open,
+            'sat_close': self.sat_close,
+            'sun_open': self.sun_open,
+            'sun_close': self.sun_close,
+            }
         }
 
 # class Attribute(db.Model):

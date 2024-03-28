@@ -1,0 +1,82 @@
+div#full-user-page {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+}
+
+.user-sidebar-container{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: min-content;
+    padding-left: 2em;
+}
+
+.user-summary-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.user-summ-stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 7em;
+}
+
+.user-summ-stat-item{
+    padding: 0% 2%;
+    display: inline-block;
+    /* flex-direction: row; */
+}
+
+.user-navigation-container {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+}
+
+div.single-user-navigation{
+    display: inline-block;
+    /* display: flex;
+    flex-direction: row; */
+    width: max-content;
+    /* justify-content: spa; */
+}
+
+div.single-user-navigation:hover{
+    cursor: pointer;
+}
+
+i {
+    display: inline-block;
+}
+
+i.fa-paw {
+    display: inline-block;
+}
+
+
+h4.nav-description, h5 {
+    display: inline-block;
+}
+
+img.pfp {
+ max-height: 5em;
+ max-width: 5em;  
+ border-radius: 50%; 
+
+ /* justify-content: center; */
+}
+
+
+/* end of user side bar css for positioning, start of styling for specific pages */
+
+
+.sub-pages{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    margin: 3% 0% 0% 5%;
+}
+

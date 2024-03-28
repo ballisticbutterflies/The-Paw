@@ -4,6 +4,7 @@ import { loadCurrUserBusinesses } from "../../redux/businesses";
 import { Link } from "react-router-dom";
 import "./ManageBusiness.css"
 import ManageBizButton from "./ManageBusinessButton";
+import { getTodaysHours } from "../../utils";
 
 function ManageBusinessPage() {
 
@@ -11,9 +12,12 @@ function ManageBusinessPage() {
 
   const businesses = Object.values(useSelector(state => state.businesses))
 
+
   useEffect(() => {
     dispatch(loadCurrUserBusinesses())
   }, [dispatch])
+
+
 
   const starReviews = (numStars) => {
     let filledStars = []
@@ -58,7 +62,7 @@ function ManageBusinessPage() {
       <h1>Manage Businesses</h1>
       {businesses && businesses.map((business, index) => (
         <div key={business.id} className="bizandbutton">
-          <Link key={business.name} style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
+          <Link style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
             <img className="manBizImage" src={business.image} alt={business.name} />
             <span className="manBizDeets">
               {index + 1}.&nbsp;{business.name}
@@ -78,19 +82,22 @@ function ManageBusinessPage() {
                 <span className="priceSubcat">{business.category?.name}
                 </span>
               }
-              <span>HOURS PLACEHOLDER</span>
+              {getTodaysHours(business) &&
+                <span className="todayHours">
+                  Today&apos;s Hours: {getTodaysHours(business).open} - {getTodaysHours(business).close}
+                </span>
+              }
               {
                 business.description &&
                 descriptionTextSubstr(business.description)
               }
             </span>
           </Link>
-          <div key={"BUTTON"} className="manbutton">
+          <div className="manbutton">
             <ManageBizButton business={business} />
           </div>
         </div>
       ))}
-
     </div>
   )
 }

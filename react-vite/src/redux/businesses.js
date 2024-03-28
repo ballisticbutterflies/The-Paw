@@ -2,11 +2,12 @@ const LOAD_SINGLE_BUSINESS = 'businesses/LOAD_SINGLE_BUSINESS'
 const CREATE_BUSINESS = 'businesses/CREATE_BUSINESS'
 const CREATE_BUSINESS_IMAGES = 'businesses/CREATE_BUSINESS_IMAGES'
 const UPDATE_BUSINESS = 'businesses/UPDATE_BUSINESS'
-const LOAD_BUSINESSES = 'businesses/LOAD_BUSINESSES'
+const LOAD_CURR_BUSINESSES = 'businesses/LOAD_CURR_BUSINESSES'
 const DELETE_BUSINESS = 'businesses/DELETE_BUSINESS'
+const LOAD_ALL_BUSINESSES = 'businesses/LOAD_ALL_BUSINESSES'
 
-export const loadBusinesses = (businesses) => ({
-    type: LOAD_BUSINESSES,
+export const loadCurrBusinesses = (businesses) => ({
+    type: LOAD_CURR_BUSINESSES,
     businesses
 })
 
@@ -34,7 +35,11 @@ export const removeBusiness = (businessId) => ({
     type: DELETE_BUSINESS,
     businessId
 })
+export const loadAllBusinesses = (businesses) => ({
+    type: LOAD_ALL_BUSINESSES,
+    businesses
 
+})
 // THUNK
 
 export const fetchSingleBusiness = (businessId) => async (dispatch) => {
@@ -81,7 +86,7 @@ export const createImage = (post) => async (dispatch) => {
 };
 
 export const updateBusiness = (business) => async (dispatch) => {
-    const response = await fetch(`/api/businesses/${business.id}`, {
+    const response = await fetch(`/api/businesses/${business.id}/edit`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(business)
@@ -101,7 +106,7 @@ export const loadCurrUserBusinesses = () => async (dispatch) => {
 
     if (response.ok) {
         const businesses = await response.json();
-        dispatch(loadBusinesses(businesses))
+        dispatch(loadCurrBusinesses(businesses))
         return businesses
     } else {
         const errors = await response.json()
@@ -122,6 +127,19 @@ export const deleteBusiness = (businessId) => async (dispatch) => {
     }
 }
 
+export const fetchAllBusinesses = () => async (dispatch) => {
+    const response = await fetch('/api/businesses')
+
+    if (response.ok) {
+        const businesses = await response.json();
+        dispatch(loadAllBusinesses(businesses))
+        return businesses
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+}
+
 // REDUCER
 
 const businessesReducer = (state = {}, action) => {
@@ -133,6 +151,13 @@ const businessesReducer = (state = {}, action) => {
             })
             return businessState
         }
+        case LOAD_ALL_BUSINESSES: {
+            const bizState = {...state}
+            action.businesses.businesses.forEach(business => {
+                bizState[business.id] = business;
+            })
+            return bizState
+        }
         case CREATE_BUSINESS: {
             const businessState = {}
             businessState[action.business.id] = action.business
@@ -143,7 +168,7 @@ const businessesReducer = (state = {}, action) => {
             imageState["images"] = [action.post.image]
             return imageState
         }
-        case LOAD_BUSINESSES: {
+        case LOAD_CURR_BUSINESSES: {
             const bizState = {}
             action.businesses.businesses.forEach(business => {
                 bizState[business.id] = business;

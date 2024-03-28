@@ -1,18 +1,30 @@
 import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import UpdateReviewPage from "../ReviewForms/UpdateReviewPage";
+import { fetchSingleBusiness } from "../../redux/businesses";
+import OpenModalButton from "../OpenModalButton";
+import DeleteReviewModal from "../ReviewForms/DeleteReviewModal";
 
-function SingleBusinessReviews({ businessId }) {
+function SingleBusinessReviews({ businessId, sessionUser }) {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const reviews = Object.values(useSelector(state => state.reviews)).sort((a, b) => {
-        if (a.createdAt > b.createdAt) return -1;
-        if (a.createdAt < b.createdAt) return 1;
+        if (a.id > b.id) return -1;
+        if (a.id < b.id) return 1;
         return 0;
     });
 
     useEffect(() => {
-        dispatch(getBusinessReviews(businessId))
+        const runDispatches = async () => {
+            await dispatch(fetchSingleBusiness(businessId)).then(() =>
+                dispatch(getBusinessReviews(businessId))
+            );
+        };
+        runDispatches();
     }, [dispatch, businessId])
+
 
     const lastInitial = (lastName) => {
         let last = lastName.charAt(0)
@@ -50,7 +62,7 @@ function SingleBusinessReviews({ businessId }) {
         <>
             {reviews.map((review) => (review.user &&
                 <div key={review.id}>
-                    <div className="userInfo">
+                    <div className="userInfo" onClick={() => navigate(`/users/${review.user.id}`)}>
                         <div className="avatar">
                             {review.user.user_image_url ? (
                                 <img className="avatarFormat" src={review.user.user_image_url} />
@@ -74,11 +86,23 @@ function SingleBusinessReviews({ businessId }) {
                                     <img
                                         className="reviewImages"
                                         src={image.url} /></span>
-
-
                             )
                             )
                         } </div>
+                    </div>
+                    <div className="edit_delete">
+                        {sessionUser && sessionUser?.id === review.user_id &&
+                            <>
+                                <OpenModalButton
+                                    buttonText="Edit"
+                                    modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} modalLoad={true} />} />
+                                &nbsp;
+                                &nbsp;
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    modalComponent={<DeleteReviewModal reviewId={review.id} businessId={businessId} />} />
+                            </>}
+
                     </div>
                     <br />
                     <br />
