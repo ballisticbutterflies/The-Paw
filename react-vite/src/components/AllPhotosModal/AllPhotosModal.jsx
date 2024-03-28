@@ -68,14 +68,17 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                         </div>
 
                                         <div className="trash">
-                                            {sessionUser && sessionUser.id === business_image.uploader_id && images.images.business_images.length === 1 && images.images.review_images?.length === 0 &&
+                                            {sessionUser && sessionUser.id === business_image.uploader_id &&
+                                                images.images.business_images.length === 1 && images.images.review_images?.length === 0 ? (
                                                 <OpenModalMenuItem
-                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
+                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
                                                     modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
+                                            ) : (
+
+                                                <OpenModalMenuItem
+                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
+                                                    modalComponent={<DeleteImageModal imageId={business_image.id} />} />)
                                             }
-                                            {sessionUser && sessionUser.id === business_image.uploader_id && images.images.business_images.length > 0 && images.images.review_images?.length > 0 && <OpenModalMenuItem
-                                                itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
-                                                modalComponent={<DeleteImageModal imageId={business_image.id} />} />}
                                         </div>
                                     </div>
                                 </div>
