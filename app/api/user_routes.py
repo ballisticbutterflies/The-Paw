@@ -75,11 +75,14 @@ def user_reviews(id):
     def format_reviews(review):
         review_id = review.to_dict()['id'] # extract review id
         review_dict_indiv = get_review(review_id) # use get review by id route to simplify this route
+        business = get_business(review_dict_indiv['business_id'])
+        review_dict_indiv['business'] = business 
+        del review_dict_indiv['business_id']
 
         return { review_id: review_dict_indiv } # create a final dict to hold each review with the key as the id for easier routing
 
 
-    all_reviews_dict = {'reviews': [format_reviews(user_review) for user_review in user_reviews]} # structure final response dict by calling the above helper function to 
+    all_reviews_dict = [format_reviews(user_review) for user_review in user_reviews] # structure final response dict by calling the above helper function to 
     return all_reviews_dict
 
 @user_routes.route('/<int:id>')
