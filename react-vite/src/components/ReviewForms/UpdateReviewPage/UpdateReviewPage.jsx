@@ -3,6 +3,7 @@ import { useModal } from "../../../context/Modal";
 import { useState, useEffect } from "react";
 import { updateReview } from "../../../redux/reviews";
 import { getBusinessReviews } from "../../../redux/reviews";
+import { fetchSingleBusiness } from "../../../redux/businesses";
 
 function UpdateReviewPage({ reviewId, businessId }) {
     const { closeModal } = useModal();
@@ -34,6 +35,7 @@ function UpdateReviewPage({ reviewId, businessId }) {
         try {
             await dispatch(updateReview(reviewId, reviewData))
             await (dispatch(getBusinessReviews(businessId)))
+            await dispatch(fetchSingleBusiness(businessId))
             closeModal();
 
         } catch (error) {

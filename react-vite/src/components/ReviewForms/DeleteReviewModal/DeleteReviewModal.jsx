@@ -1,15 +1,25 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { deleteReview } from "../../../redux/reviews";
+import { getBusinessReviews } from "../../../redux/reviews";
+import { fetchSingleBusiness } from "../../../redux/businesses";
 
-function DeleteReviewModal({ reviewId }) {
+function DeleteReviewModal({ reviewId, businessId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
-        dispatch(deleteReview(reviewId))
-            .then(closeModal())
+
+        try {
+            await dispatch(deleteReview(reviewId))
+            await (dispatch(getBusinessReviews(businessId)))
+            await dispatch(fetchSingleBusiness(businessId))
+            closeModal();
+
+        } catch (error) {
+            console.error("Error updating review:", error);
+        }
     }
     return (
         <div className="deleteModal">

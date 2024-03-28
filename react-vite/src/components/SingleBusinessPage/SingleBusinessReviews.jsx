@@ -100,7 +100,7 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                                 &nbsp;
                                 <OpenModalButton
                                     buttonText="Delete"
-                                    modalComponent={<DeleteReviewModal reviewId={review.id} />} />
+                                    modalComponent={<DeleteReviewModal reviewId={review.id} businessId={businessId} />} />
                             </>}
 
                     </div>
