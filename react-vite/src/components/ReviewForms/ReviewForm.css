@@ -1,3 +1,7 @@
+.reviewForm {
+    width: 500px;
+}
+
 .review-fields {
     display: flex;
     flex-direction: column;
@@ -6,6 +10,7 @@
     border: solid #c3cddf 1px;
     background-color: #FFFBF6;
     border-radius: 3px;
+    margin-bottom: 10px;
 }
 
 .review-fields textarea {

@@ -65,34 +65,34 @@ function UpdateReviewPage({ reviewId, businessId }) {
                                             setHover(0);
                                         }}
                                     >
-                                        <i className="fa-solid fa-paw" />&nbsp;
+                                        <span><i className="fa-solid fa-paw" /></span>&nbsp;
                                     </div>
                                 )
                             })}
-
-                        </div>
-                        <div className="descriptions-container">
-                            {hover == 1 && <p>Pawful!</p>}
-                            {hover == 2 && <p>Less than purrfect</p>}
-                            {hover == 3 && <p>Just OK-9</p>}
-                            {hover == 4 && <p>Purraiseworthy!</p>}
-                            {hover == 5 && <p>Absolutely Pawesome!</p>}
+                            <div className="descriptions-container">
+                                {hover == 0 && <span>Select your rating</span>}
+                                {hover == 1 && <span>Pawful!</span>}
+                                {hover == 2 && <span>Less than purrfect</span>}
+                                {hover == 3 && <span>Just OK-9</span>}
+                                {hover == 4 && <span>Purraiseworthy!</span>}
+                                {hover == 5 && <span>Absolutely Pawesome!</span>}
+                            </div>
                         </div>
                     </div>
                     <textarea
                         id="review-input"
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
-                        placeholder="Write your review here. Please write a review of at least 85 characters but no more than 2000 characters."
+                        placeholder="Write your review here. It must be least 85 characters, but no more than 2,000 characters."
                         name="review"
                     />
                 </div>
-                <div className="errors-container">
-                    {errors.stars && <span className="errors">{errors.stars}</span>}
-                    <br />
+                <div className="errorsContainer">
+                    {errors.stars && <span className="errors">{errors.stars}</span>}&nbsp;
                     {errors.review && <span className="errors">{errors.review}</span>}
                 </div>
-                <button type="submit" disabled={!!Object.values(errors).length}>Update Review</button>
+                <p><button type="submit" disabled={!!Object.values(errors).length}>Update Review</button></p>
+
             </form>
         </>
     )
