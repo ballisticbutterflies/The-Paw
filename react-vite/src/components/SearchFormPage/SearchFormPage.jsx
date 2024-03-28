@@ -14,8 +14,6 @@ function SearchFormPage() {
 
   const businesses = Object.values(useSelector((state) => state.search))
 
-  console.log(businesses)
-
   const starReviews = (numStars) => {
     let filledStars = []
     let emptyStars = []
