@@ -22,6 +22,7 @@ function CategoriesComponent() {
 
   return (
     <>
+      <h1 className="categoriesHeader">Categories</h1>
       <div className="categoryContainer">
         <div onClick={() => handleCategoryClick(1)}>
           <Link value={category} onClick={(e) => setCategory(e.target.value)}>
