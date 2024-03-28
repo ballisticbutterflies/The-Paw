@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { clearBusinesses, searchBarBusinesses } from "../../redux/search";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
@@ -9,7 +9,6 @@ import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
 import ForBusinessButton from "./ForBusinessButton";
 import { useNavigate } from "react-router-dom";
-
 
 
 function Navigation() {
