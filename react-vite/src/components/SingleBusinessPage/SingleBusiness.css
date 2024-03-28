@@ -132,6 +132,17 @@
     color: #1f2f44;
 }
 
+.edit_delete button {
+    background-color: #f78a63;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
 .businessDetails_writeAReview button {
     color: white;
     border: #5f5ba8 1px solid;

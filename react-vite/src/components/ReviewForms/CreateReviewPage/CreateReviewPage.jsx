@@ -10,11 +10,12 @@ import { useModal } from "../../../context/Modal";
 
 
 
-function CreateReviewPage() {
+function CreateReviewPage({ businessId: propBusinessId, modalLoad }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
-    const { businessId } = useParams();
+    const { businessId: paramsBusinessId } = useParams();
+    const businessId = propBusinessId || paramsBusinessId
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0);
     const [hover, setHover] = useState(0);
@@ -112,9 +113,10 @@ function CreateReviewPage() {
     // }
 
     return (
-        <>
+        <div className={modalLoad ? "" : "page"}>
             {errors.message != 'forbidden' && <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <h1>Tell us about it!</h1>
+
                 <div className="reviewForm">
                     <div className="review-fields">
                         <div id="paws-and-descriptions">
@@ -194,7 +196,7 @@ function CreateReviewPage() {
             {/* <div>
             <UploadPicture />
           </div> */}
-        </ >
+        </div>
     )
 }
 

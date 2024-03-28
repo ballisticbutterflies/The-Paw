@@ -19,11 +19,11 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                             modalComponent={<LoginFormModal />}
                         />
                     }
-                    {sessionUser &&
+                    {sessionUser && sessionUser.id !== business.owner_id &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-paw" /> Write a review</>}
-                            modalComponent={<CreateReviewPage propsBusinessId={businessId} />}
+                            modalComponent={<CreateReviewPage propsBusinessId={businessId} modalLoad={true} />}
                         />
                     }</span>
 
@@ -91,7 +91,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                 </div>
                 <hr />
                 <h3>Reviews</h3>
-                {business.reviews.num_reviews == 0 ? (
+                {sessionUser?.id !== business.owner_id && business.reviews.num_reviews == 0 ? (
                     <div>Be the first to review!</div>
                 ) : (
                     <SingleBusinessReviews business={business} businessId={businessId} sessionUser={sessionUser} />

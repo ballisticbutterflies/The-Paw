@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateReviewPage from "../ReviewForms/UpdateReviewPage";
 import { fetchSingleBusiness } from "../../redux/businesses";
+import OpenModalButton from "../OpenModalButton";
 
 function SingleBusinessReviews({ businessId, sessionUser }) {
     const navigate = useNavigate()
@@ -89,10 +89,10 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                             )
                         } </div>
                     </div>
-                    <div>
-                        {sessionUser && sessionUser.id === review.user_id && <OpenModalMenuItem
-                            itemText={<>Edit</>}
-                            modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} />} />
+                    <div className="edit_delete">
+                        {sessionUser && sessionUser?.id === review.user_id && <OpenModalButton
+                            buttonText="Edit"
+                            modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} modalLoad={true} />} />
                         }
                     </div>
                     <br />
