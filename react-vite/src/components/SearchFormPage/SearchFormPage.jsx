@@ -60,9 +60,12 @@ function SearchFormPage() {
     dispatch(fetchBusinesses(filters))
   }
 
-  useEffect(() => {
-    dispatch(fetchAllBusinesses(businesses))
-  },[dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchAllBusinesses(businesses))
+  //   .catch(error => {
+  //     return error
+  //   })
+  // },[dispatch, businesses])
 
 
   return (

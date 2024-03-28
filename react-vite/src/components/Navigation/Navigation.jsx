@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { searchBarBusinesses } from "../../redux/search";
+import { clearBusinesses, searchBarBusinesses } from "../../redux/search";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -37,6 +37,7 @@ function Navigation() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(clearBusinesses())
     dispatch(searchBarBusinesses(searchQuery, location))
 
       .then(() => {

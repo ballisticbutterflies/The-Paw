@@ -152,7 +152,7 @@ const businessesReducer = (state = {}, action) => {
             return businessState
         }
         case LOAD_ALL_BUSINESSES: {
-            const bizState = {}
+            const bizState = {...state}
             action.businesses.businesses.forEach(business => {
                 bizState[business.id] = business;
             })
