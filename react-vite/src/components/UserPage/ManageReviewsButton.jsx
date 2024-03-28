@@ -5,7 +5,7 @@ import DeleteReviewModal from "./DeleteReviewModal";
 import "./UserReviews.css"
 
 
-function ManageReviewButton({ review }) {
+function ManageReviewButton({ review , userId }) {
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -34,6 +34,7 @@ function ManageReviewButton({ review }) {
 
   return (
     <>
+    <p>test test test</p>
       <button className='manageMenu' onClick={toggleMenu}>
         <i className="fa-solid fa-ellipsis" />
       </button>
@@ -43,12 +44,12 @@ function ManageReviewButton({ review }) {
             <p className="updateReview">
               <Link to={`/reviews/${review.id}/edit`}
                 onClick={closeMenu}
-              >Update Business</Link>
+              >Update Review</Link>
             </p>
             <OpenModalButton
               buttonText="Delete Review"
-              businessId={review.id}
-              modalComponent={<DeleteReviewModal reviewId={review.id} />}
+              reviewId={review.id}
+              modalComponent={<DeleteReviewModal reviewId={review.id} userId={userId}/>}
             />
           </ul>
         </>

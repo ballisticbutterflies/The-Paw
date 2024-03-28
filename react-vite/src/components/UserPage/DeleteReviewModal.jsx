@@ -1,14 +1,15 @@
 import { useDispatch } from "react-redux";
-import { useModal } from "../../../context/Modal";
-import { deleteUserReview } from "../../redux/users";
+import { useModal } from "../../context/Modal";
+import { deleteUserReview, getUserReviews } from "../../redux/users";
 
-function DeleteReviewModal({ reviewId }) {
+function DeleteReviewModal({ reviewId, userId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteUserReview(reviewId))
+        .then(dispatch(getUserReviews(userId)))
             .then(closeModal())
     }
     return (

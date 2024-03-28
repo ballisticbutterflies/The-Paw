@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getUser, getUserReviews } from "../../redux/users";
+import ManageReviewButton from "./ManageReviewsButton";
 import './UserReviews.css'
 
 
@@ -71,17 +72,13 @@ function UserReviews() {
         })
     }
 
-    // if(viewedUserReviews){
-    //     reviewsArr = viewedUserReviews.map((user_review) => 
-    //         Object.values(user_review)[0]   
-    //     )
-    // }
-    console.log('reviewsArr',reviewsArr)
 
-    // reviewsArr.map(user_review => (                        
-    // //    console.log(user_review.business.business_images[0].image_url)
-    // console.log('boop')
-    // ))
+    console.log('reviewsArr',reviewsArr)
+    console.log("sessionUser",sessionUser) 
+    console.log("sessionUser.id",sessionUser.id) 
+    console.log("userId",userId) 
+    console.log("userId === sessionUser.id",userId===sessionUser.id) 
+    console.log("userId == sessionUser.id",userId==sessionUser.id) 
 
     const reviewStars = (numStars) => {
         let filled_paws = [];
@@ -124,18 +121,19 @@ function UserReviews() {
                                         <span className="pawBlock">{reviewStars(user_review.stars)} [DATE]</span>
                                     </div>
                                     <p id="review-text">{user_review.review}</p>
-                                    <div className="reviewImagesWrapper">{user_review.images.length > 0  &&
-                            user_review.images.map(image =>
-                            (
-                                <span key={image.id} className="reviewImagesContainer">
-                                    <img
-                                        className="reviewImages"
-                                        src={image.image_url} /></span>
-                            )
-                            )
-                        } </div>
+                                    <div className="reviewImagesWrapper">{user_review.images.length > 0  && user_review.images.map(image =>
+                                        (
+                                            <span key={image.id} className="reviewImagesContainer">
+                                                <img
+                                                    className="reviewImages"
+                                                    src={image.image_url} /></span>
+                                        ))} 
+                                    </div>
 
                                 </div>
+                                { (sessionUser && sessionUser.id == userId) && <div className="manage-button">
+                                    <ManageReviewButton review={user_review} userId={userId} />
+                                </div>}
                             </div>
                         </>
                     ))
