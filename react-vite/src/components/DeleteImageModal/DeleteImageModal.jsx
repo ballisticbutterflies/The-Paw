@@ -1,16 +1,24 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteImage } from "../../redux/images";
+import { getUserImages } from "../../redux/users";
+import { useSelector } from "react-redux";
+
 
 function DeleteImageModal({ imageId, onlyImage }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
+    const userId = useSelector(state => state.session.user.id)
+
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteImage(imageId))
+            .then(dispatch(getUserImages(userId)))
             .then(closeModal)
     }
+
+
     return (
         <>
             {!onlyImage ? (<div className="deleteModal">
