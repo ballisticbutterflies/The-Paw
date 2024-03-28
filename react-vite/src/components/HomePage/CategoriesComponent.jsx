@@ -1,13 +1,12 @@
 import {  useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchBusinesses, searchBarBusinesses } from "../../redux/search";
+import { fetchBusinesses } from "../../redux/search";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function CategoriesComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
   const [category, setCategory] = useState('');
 
   const handleCategoryClick = (category) => {
