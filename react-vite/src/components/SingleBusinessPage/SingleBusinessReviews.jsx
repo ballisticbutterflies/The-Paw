@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import UpdateReviewPage from "../ReviewForms/UpdateReviewPage";
 import { fetchSingleBusiness } from "../../redux/businesses";
 import OpenModalButton from "../OpenModalButton";
+import DeleteReviewModal from "../ReviewForms/DeleteReviewModal";
 
 function SingleBusinessReviews({ businessId, sessionUser }) {
     const navigate = useNavigate()
@@ -90,10 +91,18 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                         } </div>
                     </div>
                     <div className="edit_delete">
-                        {sessionUser && sessionUser?.id === review.user_id && <OpenModalButton
-                            buttonText="Edit"
-                            modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} modalLoad={true} />} />
-                        }
+                        {sessionUser && sessionUser?.id === review.user_id &&
+                            <>
+                                <OpenModalButton
+                                    buttonText="Edit"
+                                    modalComponent={<UpdateReviewPage reviewId={review.id} businessId={businessId} modalLoad={true} />} />
+                                &nbsp;
+                                &nbsp;
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    modalComponent={<DeleteReviewModal reviewId={review.id} />} />
+                            </>}
+
                     </div>
                     <br />
                     <br />
