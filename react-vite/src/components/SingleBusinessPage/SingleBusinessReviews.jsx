@@ -11,8 +11,8 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const reviews = Object.values(useSelector(state => state.reviews)).sort((a, b) => {
-        if (a.createdAt > b.createdAt) return -1;
-        if (a.createdAt < b.createdAt) return 1;
+        if (a.id > b.id) return -1;
+        if (a.id < b.id) return 1;
         return 0;
     });
 
@@ -100,7 +100,7 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                                 &nbsp;
                                 <OpenModalButton
                                     buttonText="Delete"
-                                    modalComponent={<DeleteReviewModal reviewId={review.id} />} />
+                                    modalComponent={<DeleteReviewModal reviewId={review.id} businessId={businessId} />} />
                             </>}
 
                     </div>

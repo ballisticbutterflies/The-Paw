@@ -85,13 +85,22 @@ function SingleBusinessPage() {
                             <span className="paws-unfilled"><i className="fa-solid fa-paw" /></span>&nbsp; Be the first to review!
                         </p>
                     }
-                    {business.reviews?.num_reviews > 0 &&
+                    {business.reviews?.num_reviews > 1 &&
                         <p className="businessReviews">
                             <span className="pawBlock">
                                 {business.reviews.avg_stars &&
                                     reviewStars(business.reviews.avg_stars)}</span>
                             &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
                             &nbsp;({business.reviews.num_reviews} reviews)
+                        </p>
+                    }
+                    {business.reviews?.num_reviews === 1 &&
+                        <p className="businessReviews">
+                            <span className="pawBlock">
+                                {business.reviews.avg_stars &&
+                                    reviewStars(business.reviews.avg_stars)}</span>
+                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
+                            &nbsp;({business.reviews.num_reviews} review)
                         </p>
                     }
 
