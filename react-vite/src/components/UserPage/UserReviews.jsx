@@ -58,7 +58,7 @@ function UserReviews() {
             );
           };
           runDispatches();
-    }, [dispatch, userId, sessionUser])
+    }, [dispatch, userId, sessionUser, viewedUser.num_reviews])
 
     let reviewsArr;
     if(viewedUserReviews){
@@ -73,12 +73,12 @@ function UserReviews() {
     }
 
 
-    console.log('reviewsArr',reviewsArr)
-    console.log("sessionUser",sessionUser) 
-    console.log("sessionUser.id",sessionUser.id) 
-    console.log("userId",userId) 
-    console.log("userId === sessionUser.id",userId===sessionUser.id) 
-    console.log("userId == sessionUser.id",userId==sessionUser.id) 
+    // console.log('reviewsArr',reviewsArr)
+    // console.log("sessionUser",sessionUser) 
+    // console.log("sessionUser.id",sessionUser.id) 
+    // console.log("userId",userId) 
+    // console.log("userId === sessionUser.id",userId===sessionUser.id) 
+    // console.log("userId == sessionUser.id",userId==sessionUser.id) 
 
     const reviewStars = (numStars) => {
         let filled_paws = [];
@@ -108,32 +108,33 @@ function UserReviews() {
                     reviewsArr.map(user_review => (                        
                         <>
                             <div className="review-card">
-                                <div className="business-content" onClick={() => navigate(`/businesses/${user_review.business.business[0].id}`)}>
-                                    <div className="business-image">
-                                    <img className="formatImage" src={user_review.business.business[0].business_images[0].image_url} alt="" />
+                                <div className="biz-review-content">
+                                    <div className="business-content" onClick={() => navigate(`/businesses/${user_review.business.business[0].id}`)}>
+                                        <div className="business-image">
+                                        <img className="formatImage" src={user_review.business.business[0].business_images[0].image_url} alt="" />
+                                        </div>
+                                            <h5 className="biz-name">{user_review.business.business[0].name}</h5>
+                                            <p className="biz-category">{user_review.business.business[0].category.name}</p>
+                                            <p className="biz-location">{user_review.business.business[0].city} {user_review.business.business[0].state}</p>
                                     </div>
-                                        <h5 className="biz-name">{user_review.business.business[0].name}</h5>
-                                        <p className="biz-category">{user_review.business.business[0].category.name}</p>
-                                        <p className="biz-location">{user_review.business.business[0].city} {user_review.business.business[0].state}</p>
+                                    <div className="review-content">
+                                        <div className="paw-and-date">
+                                            <span className="pawBlock">{reviewStars(user_review.stars)} [DATE]</span>
+                                        </div>
+                                        <p id="review-text">{user_review.review}</p>
+                                        <div className="reviewImagesWrapper">{user_review.images.length > 0  && user_review.images.map(image =>
+                                            (
+                                                <span key={image.id} className="reviewImagesContainer">
+                                                    <img
+                                                        className="reviewImages"
+                                                        src={image.image_url} /></span>
+                                            ))} 
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="review-content">
-                                    <div className="paw-and-date">
-                                        <span className="pawBlock">{reviewStars(user_review.stars)} [DATE]</span>
-                                    </div>
-                                    <p id="review-text">{user_review.review}</p>
-                                    <div className="reviewImagesWrapper">{user_review.images.length > 0  && user_review.images.map(image =>
-                                        (
-                                            <span key={image.id} className="reviewImagesContainer">
-                                                <img
-                                                    className="reviewImages"
-                                                    src={image.image_url} /></span>
-                                        ))} 
-                                    </div>
-
-                                </div>
-                                { (sessionUser && sessionUser.id == userId) && <div className="manage-button">
+                                { (sessionUser && (sessionUser.id == userId) && <div className="manage-button">
                                     <ManageReviewButton review={user_review} userId={userId} />
-                                </div>}
+                                </div>)}
                             </div>
                         </>
                     ))

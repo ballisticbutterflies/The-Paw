@@ -72,7 +72,7 @@ export const getUserReviews = (userId) => async (dispatch) => {
 }
 
 export const deleteUserReview = (reviewId) => async (dispatch) => {
-    const res = await fetch(`/api/reviews/${reviewId}/delete`, {
+    const res = await fetch(`/api/reviews/${reviewId}`, {
         method: "DELETE"
     })
     if(!res.ok) {

@@ -4,11 +4,20 @@
     border-width: 1px 0 0 0;
     border-color: rgba(31,47,68, 0.3);
     border-style: solid;
+    display: flex;
 }
 
 .review-card:first-child{
     border-width: 0px;
 
+}
+
+.biz-review-content{
+    flex: 1;
+}
+
+.manage-button{
+    width: fit-content;
 }
 
 .business-content{

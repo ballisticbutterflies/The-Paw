@@ -8,9 +8,15 @@ function DeleteReviewModal({ reviewId, userId }) {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(deleteUserReview(reviewId))
-        .then(dispatch(getUserReviews(userId)))
-            .then(closeModal())
+        // dispatch(deleteUserReview(reviewId))
+        // .then(dispatch(getUserReviews(userId)))
+        //     .then(closeModal())
+        const runDispatches = async () => {
+            await dispatch(deleteUserReview(parseInt(reviewId))).then(() =>
+                dispatch(getUserReviews(parseInt(userId))).then(()=> closeModal())
+            );
+            };
+            runDispatches();
     }
     return (
         <div className="deleteModal">

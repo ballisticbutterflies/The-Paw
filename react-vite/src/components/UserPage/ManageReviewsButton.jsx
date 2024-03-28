@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "./DeleteReviewModal";
+import UpdateReviewModal from "./UpdateReviewModal";
 import "./UserReviews.css"
 
 
@@ -28,24 +29,29 @@ function ManageReviewButton({ review , userId }) {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu])
 
-  const closeMenu = () => setShowMenu(false);
+//   const closeMenu = () => setShowMenu(false);
 
   const ulClassName = "manage-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-    <p>test test test</p>
+    {/* <p>test test test</p> */}
       <button className='manageMenu' onClick={toggleMenu}>
         <i className="fa-solid fa-ellipsis" />
       </button>
       {showMenu &&
         <>
           <ul className={ulClassName} ref={ulRef}>
-            <p className="updateReview">
+            {/* <p className="updateReview">
               <Link to={`/reviews/${review.id}/edit`}
                 onClick={closeMenu}
               >Update Review</Link>
-            </p>
+            </p> */}
+            <OpenModalButton
+              buttonText="Update Review"
+              reviewId={review.id}
+              modalComponent={<UpdateReviewModal userReview={review} reviewId={review.id} userId={userId}/>}
+            />
             <OpenModalButton
               buttonText="Delete Review"
               reviewId={review.id}
