@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getUser, getUserReviews } from "../../redux/users";
@@ -8,6 +8,8 @@ import './UserReviews.css'
 function UserReviews() {
     const { userId } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     const sessionUser = useSelector(state => (
         state.session.user ? state.session.user : null
@@ -76,7 +78,27 @@ function UserReviews() {
     // }
     console.log('reviewsArr',reviewsArr)
 
-    
+    // reviewsArr.map(user_review => (                        
+    // //    console.log(user_review.business.business_images[0].image_url)
+    // console.log('boop')
+    // ))
+
+    const reviewStars = (numStars) => {
+        let filled_paws = [];
+        let unfilled_paws = []
+
+        for (let i = 0; i < numStars; i++) {
+            filled_paws.push(<span className="paws-filled"><i className="fa-solid fa-paw"></i> </span>)
+        }
+
+        let remaining_paws = 5 - filled_paws.length
+
+        for (let i = 0; i < remaining_paws; i++) {
+            unfilled_paws.push(<span className="paws-unfilled"><i className="fa-solid fa-paw"></i> </span>)
+        }
+
+        return [filled_paws, unfilled_paws]
+    }
 
     return (
         <>
@@ -86,10 +108,35 @@ function UserReviews() {
                     (<h4>Looks like this user has not written any reviews!</h4> )
                 }
                 {viewedUserReviews && hasAtLeastOneReview() && (
-                    reviewsArr.map(user_review => (
-                        
+                    reviewsArr.map(user_review => (                        
                         <>
-                            <p>boop, {user_review.review}</p>
+                            <div className="review-card">
+                                <div className="business-content" onClick={() => navigate(`/businesses/${user_review.business.business[0].id}`)}>
+                                    <div className="business-image">
+                                    <img className="formatImage" src={user_review.business.business[0].business_images[0].image_url} alt="" />
+                                    </div>
+                                        <h5 className="biz-name">{user_review.business.business[0].name}</h5>
+                                        <p className="biz-category">{user_review.business.business[0].category.name}</p>
+                                        <p className="biz-location">{user_review.business.business[0].city} {user_review.business.business[0].state}</p>
+                                </div>
+                                <div className="review-content">
+                                    <div className="paw-and-date">
+                                        <span className="pawBlock">{reviewStars(user_review.stars)} [DATE]</span>
+                                    </div>
+                                    <p id="review-text">{user_review.review}</p>
+                                    <div className="reviewImagesWrapper">{user_review.images.length > 0  &&
+                            user_review.images.map(image =>
+                            (
+                                <span key={image.id} className="reviewImagesContainer">
+                                    <img
+                                        className="reviewImages"
+                                        src={image.image_url} /></span>
+                            )
+                            )
+                        } </div>
+
+                                </div>
+                            </div>
                         </>
                     ))
                     

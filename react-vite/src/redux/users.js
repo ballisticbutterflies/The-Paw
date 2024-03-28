@@ -1,6 +1,7 @@
 const LOAD_USER = 'users/LOAD_USER'
 const LOAD_USER_IMAGES = 'users/LOAD_USER_IMAGES'
 const LOAD_USER_REVIEWS = 'users/LOAD_USER_REVIEWS'
+const DELETE_USER_REVIEW = 'users/DELETE_USER_REVIEW'
 
 
 export const loadUser = (user) => (
@@ -24,6 +25,10 @@ export const loadUserReviews = (userReviews) => (
     userReviews
 })
 
+export const removeUserReview = (reviewId) => ({
+    type: DELETE_USER_REVIEW,
+    reviewId
+});
 
 // THUNK
 
@@ -63,6 +68,17 @@ export const getUserReviews = (userId) => async (dispatch) => {
         const userReviews = await res.json();
         dispatch(loadUserReviews(userReviews));
         return userReviews;
+    }
+}
+
+export const deleteUserReview = (reviewId) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${reviewId}/delete`, {
+        method: "DELETE"
+    })
+    if(!res.ok) {
+        return res;
+    } else if (res.ok) {
+        dispatch(removeUserReview(reviewId));
     }
 }
 
