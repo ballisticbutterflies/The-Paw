@@ -1,10 +1,11 @@
-import {  useState } from "react";
+import {  useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchBusinesses } from "../../redux/search";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchAllBusinesses } from "../../redux/businesses";
 
-function CategoriesComponent() {
+function CategoriesComponent () {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [category, setCategory] = useState('');
@@ -18,6 +19,10 @@ function CategoriesComponent() {
       .then(() => navigate('/search'));
   };
 
+
+  useEffect(() => {
+      dispatch(fetchAllBusinesses())
+  }, [dispatch])
 
   return (
     <>

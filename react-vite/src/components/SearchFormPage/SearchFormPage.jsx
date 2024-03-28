@@ -4,6 +4,8 @@ import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
+import { useEffect } from "react";
+import { fetchAllBusinesses } from "../../redux/businesses";
 
 
 function SearchFormPage() {
@@ -11,6 +13,8 @@ function SearchFormPage() {
   const dispatch = useDispatch();
 
   const businesses = Object.values(useSelector((state) => state.search))
+
+  console.log(businesses)
 
   const starReviews = (numStars) => {
     let filledStars = []
@@ -57,6 +61,11 @@ function SearchFormPage() {
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
   }
+
+  useEffect(() => {
+    dispatch(fetchAllBusinesses(businesses))
+  },[dispatch])
+
 
   return (
     <>
