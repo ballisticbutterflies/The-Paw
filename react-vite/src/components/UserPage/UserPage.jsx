@@ -32,7 +32,7 @@ function UserPage() {
 
     console.log("viewed user", viewedUser)
 
-    
+
 
     useEffect(() => {
         console.log("useEffect running")
@@ -49,9 +49,9 @@ function UserPage() {
                     <div className="user-sidebar-container">
                         <div className="user-summary-container">
                             {!viewedUser.user_pfp.image_url && (<img className="pfp" id="generic-pfp" src={viewedUser.pfp_url} alt="" />)}
-                            {viewedUser.user_pfp.image_url && viewedUser.user_pfp.image_url.length && (<img className="pfp" id='personalized-pfp' src='../../../public/images/defaultAvatar.png' alt="" />)}
+                            {viewedUser.user_pfp.image_url && viewedUser.user_pfp.image_url.length && (<img className="pfp" id='personalized-pfp' src='../../../images/defaultAvatar.png' alt="" />)}
                             <h1>{viewedUser.first_name}  {viewedUser.last_name.slice(0,1)}.</h1>
-                            <h5>{viewedUser.city}, {viewedUser.state}</h5>   
+                            <h5>{viewedUser.city}, {viewedUser.state}</h5>
                             <div className="user-summ-stats">
                                 <div className="user-summ-stat-item"><i className="fa-solid fa-paw"/>&nbsp;&nbsp;<h5>{viewedUser.num_reviews}</h5></div>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <div className="user-summ-stat-item"><i className="fa-solid fa-image"/>&nbsp;&nbsp;<h5>{viewedUser.num_images}</h5></div>

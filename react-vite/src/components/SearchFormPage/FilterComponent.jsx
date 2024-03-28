@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import StarRatingInput from "./StarRatingInput";
+import { fetchBusinesses } from "../../redux/search";
 
 
 const FilterComponent = ({ onFilterChange }) => {
+
+  const dispatch = useDispatch()
 
   const [stars, setStars] = useState("")
   const [price, setPrice] = useState([
@@ -44,7 +48,7 @@ const FilterComponent = ({ onFilterChange }) => {
   const onChangeStars = (number) => {
     if (number) {
       setStars(parseInt(number))
-    }else {
+    } else {
       setStars("")
     }
   }
@@ -59,6 +63,19 @@ const FilterComponent = ({ onFilterChange }) => {
     'Services', 'Shopping',
     'Travel', 'Activities',
     'Adoption', 'Other']
+
+  const handleClick = e => {
+    e.preventDefault();
+    setStars('')
+    setPrice([
+      { name: "$", checked: false },
+      { name: "$$", checked: false },
+      { name: "$$$", checked: false },
+      { name: "$$$$", checked: false },
+    ])
+    setCategory_id('')
+    dispatch(fetchBusinesses())
+  }
 
 
   return (
@@ -101,7 +118,10 @@ const FilterComponent = ({ onFilterChange }) => {
             ))}
           </select>
         </div>
-        <button onClick={handleFilterChange}>Apply Filters</button>
+        <div className="filter-buttons">
+          <button className="apply-filter-button" onClick={handleFilterChange}>Apply Filters</button>
+          <button className="clear-filter-button" onClick={handleClick}>Clear Filters</button>
+        </div>
       </div>
     </>
   )

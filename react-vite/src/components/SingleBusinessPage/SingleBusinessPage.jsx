@@ -8,6 +8,8 @@ import BusinessContactCard from "./BusinessContactCard";
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalButton from "../OpenModalButton";
 
+
+
 function SingleBusinessPage() {
     const { businessId } = useParams();
     const dispatch = useDispatch();

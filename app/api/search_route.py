@@ -31,8 +31,13 @@ def search():
     query = query.filter(Business.price.in_(prices))
 
   if city_state:
-    city, state = city_state.split(', ')
-    query = query.filter(Business.city == city, Business.state == state)
+    try:
+        city, state = city_state.split(', ')
+        query = query.filter(Business.city == city, Business.state == state)
+    except ValueError:
+        query = None
+        return {'errors': {'message': "Invalid format for city_state. Please provide a string in the format 'city, state'."}}, 403
+
 
   if category:
       query = query.filter(Business.category_id == category)
@@ -45,7 +50,9 @@ def search():
       Business.description.ilike(f'%{search_query}%')
     ))
 
+
   businesses = query.all()
+
 
   business_data = []
   for business in businesses:
@@ -77,5 +84,4 @@ def search():
     business_dict['category'] = category_data
 
     business_data.append(business_dict)
-
   return { 'businesses': business_data }
