@@ -32,6 +32,9 @@ export const fetchBusinesses = (filters = {}) => async (dispatch) => {
         const businesses = await response.json();
         dispatch(loadBusinesses(businesses))
 
+    } else {
+        const errors = await response.json();
+        return errors;
     }
 }
 
@@ -49,12 +52,17 @@ export const searchBarBusinesses = (searchQuery, location) => async (dispatch) =
         url += `?${queryParams.join('&')}`;
     }
 
+
     const response = await fetch(url)
 
     if (response.ok) {
+
         const businesses = await response.json();
         dispatch(loadBusinesses(businesses))
-
+        return businesses
+    } else {
+        const errors = await response.json();
+        return errors;
     }
 }
 

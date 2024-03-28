@@ -5,6 +5,8 @@ import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
+import { useEffect } from "react";
+import { fetchAllBusinesses } from "../../redux/businesses";
 
 
 function SearchFormPage() {
@@ -58,6 +60,14 @@ function SearchFormPage() {
   const handleFilterChange = (filters) => {
     dispatch(fetchBusinesses(filters))
   }
+
+  useEffect(() => {
+    dispatch(fetchAllBusinesses(businesses))
+    .catch(error => {
+      return error
+    })
+  },[dispatch, businesses])
+
 
   return (
     <>
