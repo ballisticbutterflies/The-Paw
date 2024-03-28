@@ -1,13 +1,13 @@
-import {  useState } from "react";
+import {  useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchBusinesses, searchBarBusinesses } from "../../redux/search";
+import { fetchBusinesses } from "../../redux/search";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchAllBusinesses } from "../../redux/businesses";
 
-function CategoriesComponent() {
+function CategoriesComponent () {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
   const [category, setCategory] = useState('');
 
   const handleCategoryClick = (category) => {
@@ -20,8 +20,13 @@ function CategoriesComponent() {
   };
 
 
+  useEffect(() => {
+      dispatch(fetchAllBusinesses())
+  }, [dispatch])
+
   return (
     <>
+      <h1 className="categoriesHeader">Categories</h1>
       <div className="categoryContainer">
         <div onClick={() => handleCategoryClick(1)}>
           <Link value={category} onClick={(e) => setCategory(e.target.value)}>
