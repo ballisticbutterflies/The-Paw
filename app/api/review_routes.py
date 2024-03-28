@@ -88,7 +88,7 @@ def update_review(id):
     return form.errors, 401
 
 
-@reviews_route.route('<int:review_id>/delete', methods=["DELETE"])
+@reviews_route.route('<int:review_id>', methods=["DELETE"])
 @login_required
 def delete_review(review_id):
     """

@@ -46,8 +46,6 @@ function Navigation() {
 
   };
 
-
-
   return (
     <div className="nav">
       <NavLink to="/"><img className="logo" src='../../images/the_paw_in_black.png' /></NavLink>
