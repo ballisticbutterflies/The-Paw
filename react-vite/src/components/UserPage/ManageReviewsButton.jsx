@@ -46,20 +46,16 @@ function ManageReviewButton({ review }) {
               >Update Business</Link>
             </p>
             <OpenModalButton
-              buttonText="Delete Business"
-              businessId={business.id}
+              buttonText="Delete Review"
+              businessId={review.id}
               modalComponent={<DeleteReviewModal reviewId={review.id} />}
             />
           </ul>
         </>
-
-
       }
-
-
     </>
   )
 
 }
 
-export default ManageBizButton
+export default ManageReviewButton
