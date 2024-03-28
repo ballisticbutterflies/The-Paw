@@ -82,7 +82,7 @@ function ManageBusinessPage() {
                 <span className="priceSubcat">{business.category?.name}
                 </span>
               }
-              {
+              {getTodaysHours(business) &&
                 <span className="todayHours">
                   Today&apos;s Hours: {getTodaysHours(business).open} - {getTodaysHours(business).close}
                 </span>

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "../../redux/users";
 import './Overview.css'
@@ -10,9 +10,9 @@ function UserOverview() {
     const { userId } = useParams();
     const dispatch = useDispatch();
 
-    const sessionUser = useSelector(state => (
-        state.session.user ? state.session.user : null
-    ))
+    // const sessionUser = useSelector(state => (
+    //     state.session.user ? state.session.user : null
+    // ))
 
     // console.log("line 14 on user overview", sessionUser)
 
