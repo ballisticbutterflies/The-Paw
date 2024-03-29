@@ -64,7 +64,7 @@ function Navigation() {
             list="locations"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="City, State"
+            placeholder="city, state"
           />
           <datalist id="locations">
             {uniqueLocations.map(op => (
@@ -78,10 +78,10 @@ function Navigation() {
       <div className="forBiz">
         <ForBusinessButton />
       </div>
-      <div className="writeReview">
+      {/* <div className="writeReview">
         Write a Review
-      </div>
-      <div className="leftNav">
+      </div> */}
+      <div className="rightNav">
         {user ? (
           <>
             <div>
@@ -90,7 +90,7 @@ function Navigation() {
           </>
         ) : (
           <>
-            <div className="leftNav">
+            <div className="rightNav">
               <div>
                 <OpenModalButton
                   buttonText="Log In"

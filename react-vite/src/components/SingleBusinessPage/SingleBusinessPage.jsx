@@ -126,13 +126,17 @@ function SingleBusinessPage() {
                     <div className="currHours">
                         {business.set_hours === "yes" && getTodaysHours(business) &&
                             <span>
-                                OPEN: {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
-                                <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                                <span style={{
+                                    color: "#0BDA51"
+                                }}>Open Today&nbsp;&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
+                                < span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                             </span>
                         }
                         {business.set_hours === "yes" && !getTodaysHours(business) &&
                             <span>
-                                CLOSED <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                                <span style={{
+                                    color: "#FF474C"
+                                }}>Closed Today&nbsp;&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                             </span>
                         }
 

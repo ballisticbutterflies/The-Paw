@@ -8,6 +8,9 @@ import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
     const sessionUser = useSelector(state => state.session.user)
+    const reviews = Object.values(useSelector(state => state.reviews))
+    const reviewerIds = reviews.map(review => review.user_id)
+
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
@@ -19,7 +22,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                             modalComponent={<LoginFormModal />}
                         />
                     }
-                    {sessionUser && sessionUser.id !== business.owner_id &&
+                    {sessionUser && sessionUser.id !== business.owner_id && !reviewerIds.includes(sessionUser.id) &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-paw" /> Write a review</>}
@@ -44,7 +47,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                     }</span>
 
                 &nbsp;&nbsp;
-                <span className="bizDeetsButton"><button><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
+                <span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')}><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
             </div>
             <hr />
             <div>
@@ -61,35 +64,55 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                             <div>{business.city}, {business.state} {business.zip_code}</div>
                         </div>
                     </div>
-                    <div><span className="bizDeetsButton"><button>Get Directions</button></span></div>
+                    <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">
-                                <div>Mon</div>
-                                <div>{stdTimeFormat(business.hours.mon_open)} - {stdTimeFormat(business.hours.mon_close)}</div>
-                                <div>Tue</div>
-                                <div>{stdTimeFormat(business.hours.tue_open)} - {stdTimeFormat(business.hours.tue_close)}</div>
-                                <div>Wed</div>
-                                <div>{stdTimeFormat(business.hours.wed_open)} - {stdTimeFormat(business.hours.wed_close)}</div>
-                                <div>Thu</div>
-                                <div>{stdTimeFormat(business.hours.thu_open)} - {stdTimeFormat(business.hours.thu_close)}</div>
-                                <div>Fri</div>
-                                <div>{stdTimeFormat(business.hours.fri_open)} - {stdTimeFormat(business.hours.fri_close)}</div>
-                                <div>Sat</div>
-                                <div>{stdTimeFormat(business.hours.sat_open)} - {stdTimeFormat(business.hours.sat_close)}</div>
-                                <div>Sun</div>
-                                <div>{stdTimeFormat(business.hours.sun_open)} - {stdTimeFormat(business.hours.sun_close)}</div>
+                                <span style={{ paddingRight: "10px" }}>Mon</span>
+                                <span>{stdTimeFormat(business.hours.mon_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.mon_close)}</span>
+
+                                <span>Tue</span>
+                                <span>{stdTimeFormat(business.hours.tue_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.tue_close)}</span>
+
+                                <span>Wed</span>
+                                <span>{stdTimeFormat(business.hours.wed_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.wed_close)}</span>
+
+                                <span>Thu</span>
+                                <span>{stdTimeFormat(business.hours.thu_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.thu_close)}</span>
+
+                                <span>Fri</span>
+                                <span>{stdTimeFormat(business.hours.fri_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.fri_close)}</span>
+
+                                <span>Sat</span>
+                                <span>{stdTimeFormat(business.hours.sat_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.sat_close)}</span>
+
+                                <span>Sun</span>
+                                <span>{stdTimeFormat(business.hours.sun_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.sun_close)}</span>
                             </div>
                         )
                     }
                     </div>
                 </div>
                 <hr />
-                <div>
+                {/* <div>
                     <h3>Amenities and More [Services Offered if applicable]</h3>
                     <div>[Street Parking]</div>
                 </div>
-                <hr />
+                <hr /> */}
                 <h3>Reviews</h3>
                 {sessionUser?.id !== business.owner_id && business.reviews.num_reviews == 0 ? (
                     <div>Be the first to review!</div>
@@ -98,7 +121,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                 )}
                 <br />
             </div>
-        </div>
+        </div >
     )
 }
 

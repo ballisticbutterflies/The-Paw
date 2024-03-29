@@ -99,7 +99,7 @@ function LoginFormModal() {
             modalComponent={<SignupFormModal />}
           />
         </></p>
-        <div><Link onClick={demoUser}>Login as Demo User</Link></div>
+        <div><Link onClick={demoUser}>Log in as Demo User</Link></div>
       </form>
     </div>
   );

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { getImagesByBusiness } from "../../redux/images";
 import "./AllPhotos.css";
-// import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
+import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useParams, Link } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
@@ -45,20 +45,20 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
 
                 </div>
                 <div>
-                    {!sessionUser &&
+                    {!sessionUser && modalLoad &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
                             modalComponent={<LoginFormModal />}
                         />
                     }
-                    {/* {sessionUser &&
+                    {sessionUser && modalLoad &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
                             modalComponent={<AddPhotosToBusiness businessId={businessId} businessName={images.images.business_name} />}
                         />
-                    } */}
+                    }
                 </div>
             </div>
             <div className={modalLoad ? "allPhotosContainerModal" : "allPhotosContainerPage"}>
@@ -103,7 +103,7 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                         </div>
 
                                         <div className="trash">
-                                            {sessionUser && sessionUser.id === review_image.uploader_id  &&
+                                            {sessionUser && sessionUser.id === review_image.uploader_id &&
                                                 <OpenModalMenuItem
                                                     itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
                                                     modalComponent={<DeleteImageModal imageId={review_image.id} onlyImage={false} businessId={businessId} />} />
