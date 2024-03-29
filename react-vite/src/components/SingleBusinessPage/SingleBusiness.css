@@ -86,14 +86,14 @@
 
 .paws-filled,
 .paws-unfilled {
-    font-size: x-large;
+    font-size: x-large !important;
 }
 
 .pawBlock {
-    background-color: #FFFFFF;
-    width: fit-content;
-    padding: 10px 6px 3px 6px;
-    border-radius: 5px;
+    background-color: #FFFFFF !important;
+    width: fit-content !important;
+    padding: 10px 6px 3px 6px !important;
+    border-radius: 5px !important;
 }
 
 .businessReviews span {
@@ -166,8 +166,8 @@
 
 .hours {
     display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 20px;
+    grid-template-columns: repeat(4, auto);
+    column-gap: 8px;
     font-weight: 500;
 }
 
@@ -220,7 +220,7 @@
     grid-auto-rows: 22px;
 }
 
-.userInfo:hover{
+.userInfo:hover {
     cursor: pointer;
 }
 

@@ -68,20 +68,40 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">
-                                <div>Mon</div>
-                                <div>{stdTimeFormat(business.hours.mon_open)} - {stdTimeFormat(business.hours.mon_close)}</div>
-                                <div>Tue</div>
-                                <div>{stdTimeFormat(business.hours.tue_open)} - {stdTimeFormat(business.hours.tue_close)}</div>
-                                <div>Wed</div>
-                                <div>{stdTimeFormat(business.hours.wed_open)} - {stdTimeFormat(business.hours.wed_close)}</div>
-                                <div>Thu</div>
-                                <div>{stdTimeFormat(business.hours.thu_open)} - {stdTimeFormat(business.hours.thu_close)}</div>
-                                <div>Fri</div>
-                                <div>{stdTimeFormat(business.hours.fri_open)} - {stdTimeFormat(business.hours.fri_close)}</div>
-                                <div>Sat</div>
-                                <div>{stdTimeFormat(business.hours.sat_open)} - {stdTimeFormat(business.hours.sat_close)}</div>
-                                <div>Sun</div>
-                                <div>{stdTimeFormat(business.hours.sun_open)} - {stdTimeFormat(business.hours.sun_close)}</div>
+                                <span style={{ paddingRight: "10px" }}>Mon</span>
+                                <span>{stdTimeFormat(business.hours.mon_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.mon_close)}</span>
+
+                                <span>Tue</span>
+                                <span>{stdTimeFormat(business.hours.tue_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.tue_close)}</span>
+
+                                <span>Wed</span>
+                                <span>{stdTimeFormat(business.hours.wed_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.wed_close)}</span>
+
+                                <span>Thu</span>
+                                <span>{stdTimeFormat(business.hours.thu_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.thu_close)}</span>
+
+                                <span>Fri</span>
+                                <span>{stdTimeFormat(business.hours.fri_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.fri_close)}</span>
+
+                                <span>Sat</span>
+                                <span>{stdTimeFormat(business.hours.sat_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.sat_close)}</span>
+
+                                <span>Sun</span>
+                                <span>{stdTimeFormat(business.hours.sun_open)}</span>
+                                <span>-</span>
+                                <span>{stdTimeFormat(business.hours.sun_close)}</span>
                             </div>
                         )
                     }
