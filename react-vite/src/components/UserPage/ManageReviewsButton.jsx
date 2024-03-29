@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 // import { Link } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "./DeleteReviewModal";
 import UpdateReviewModal from "./UpdateReviewModal";
 import "./UserReviews.css"

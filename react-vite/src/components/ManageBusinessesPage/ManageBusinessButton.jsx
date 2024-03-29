@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton";
 import DeleteBizModal from "./DeleteBizModal";
 import "./ManageBusiness.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
