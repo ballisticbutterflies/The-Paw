@@ -8,6 +8,9 @@ import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
     const sessionUser = useSelector(state => state.session.user)
+    const reviews = Object.values(useSelector(state => state.reviews))
+    const reviewerIds = reviews.map(review => review.user_id)
+
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
@@ -19,7 +22,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                             modalComponent={<LoginFormModal />}
                         />
                     }
-                    {sessionUser && sessionUser.id !== business.owner_id &&
+                    {sessionUser && sessionUser.id !== business.owner_id && !reviewerIds.includes(sessionUser.id) &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-paw" /> Write a review</>}
