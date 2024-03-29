@@ -1,16 +1,17 @@
 .review-card{
-    margin: 2em 0em 2em 1em;
+    margin: 10px  0;
     padding: 20px;
     border: rgba(31,47,68, 0.3) 1px solid;
     border-radius: 10px;
     display: flex;
-    background-color: #FFFFFF;
+    background-color: #FFFBF6;
 
 }
 
 #reviews-container {
     display: flex;
     flex-direction: row;
+    background-color: ;
 }
 
 
@@ -20,7 +21,7 @@
 
 .manage-button {
 
-    padding-top: 30px;
+    padding-top: 12px;
     padding-left: 10px;
 }
 
@@ -72,8 +73,14 @@
     cursor: pointer;
 }
 
+.updateRev {
+    margin: auto;
+}
 
-
+.updateRev button{
+    margin: auto;
+    color: #5f5ba8 ;
+}
 
 .paws-filled,
 .paws-unfilled {
