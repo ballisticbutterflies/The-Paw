@@ -15,7 +15,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                     {!sessionUser &&
                         <OpenModalButton
                             buttonText={<>
-                                <i className="fa-solid fa-camera" /> Add photo</>}
+                                <i className="fa-solid fa-paw" /> Write a review</>}
                             modalComponent={<LoginFormModal />}
                         />
                     }
