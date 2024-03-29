@@ -1,6 +1,7 @@
 .nav {
   display: grid;
-  grid-template-columns: 12% 45% 10% 10% 15%;
+  /* grid-template-columns: 12% 45% 10% 10% 15%; */
+  grid-template-columns: 15% 45% 15% 16% 1%;
   gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
@@ -73,13 +74,13 @@
   margin-top: 3px;
 }
 
-.leftNav {
+.rightNav {
   display: grid;
-  justify-content: space-between;
-  justify-self: center;
-  align-items: center;
+  justify-content: space-evenly;
+  justify-self: center !important;
+  align-items: center !important;
   width: fit-content;
-  grid-column: 5 / 6;
+  grid-column: 4 / 5;
 }
 
 .profileAvatar {
