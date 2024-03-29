@@ -1,6 +1,6 @@
 #photos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1em;
     justify-items: center;
 }
@@ -30,10 +30,14 @@
     justify-content: space-between;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .trash {
     position: absolute;
     right: 0;
+}
+
+.trash:hover {
+    cursor: pointer;
 }

@@ -1,19 +1,16 @@
 #full-user-page {
     display: flex;
     flex-direction: row;
-    width: fit-content;
-    margin: 30px;
-    padding-top: 20px;
+    column-gap: 20px;
+    /* width: fit-content; */
+    max-width: 1125px;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
-.user-sidebar-container{
-    display: flex;
-    flex-direction: column;
-    width: min-content;
 
-}
-
-.user-summary-container{
+.user-summary-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,15 +21,18 @@
     height: 220px;
     border: 1px solid #c3cddf;
     border-radius: 5px;
+
 }
 
 .user-summary-container:hover {
-    cursor:default
+    cursor: default
 }
-.user-summ-stats{
+
+.user-summ-stats {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 5px;
 
 }
 
@@ -40,22 +40,15 @@
     margin: 0;
 }
 
-.user-summ-stat-item{
+.user-summ-stat-item {
     margin: 0;
     padding: 0;
 
     /* flex-direction: row; */
 }
 
-.user-navigation-container {
-    display: flex;
-    flex-direction: column;
 
-    margin: 20px;
-    width: 140px;
-}
-
-.single-user-navigation{
+.single-user-navigation {
     display: inline-block;
     border-bottom: 1px solid #c3cddf;
     margin: 0;
@@ -73,14 +66,23 @@
     border-bottom: none;
 }
 
+.user-navigation-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    /* margin: 20px;
+    width: 140px; */
+}
+
 .nav-description:hover {
     background-color: #c3cddf;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .nav-description {
-    padding: 10px 5px;
+    padding: 10px;
     width: 140px;
 }
 
@@ -90,34 +92,42 @@ i.fa-paw {
 }
 
 
-h4.nav-description, h5 {
+h4.nav-description,
+h5 {
     display: inline-block;
 
 }
 
 h4.nav-description {
     margin: 0;
+    font-weight: 500 !important;
+    color: #1f2f44 !important;
 }
 
 img.pfp {
- max-height: 5em;
- max-width: 5em;
- border-radius: 50%;
+    max-height: 5em;
+    max-width: 5em;
+    border-radius: 50%;
 
- /* justify-content: center; */
+    /* justify-content: center; */
 }
 
 
 /* end of user side bar css for positioning, start of styling for specific pages */
 
 
-.sub-pages{
+/* .sub-pages {
     flex: 2;
     display: flex;
     flex-direction: column;
     margin: 3% 0% 0% 5%;
+} */
+
+#user-overview-contaner {
+    width: auto;
 }
 
 #user-overview-container:hover {
     cursor: default;
+
 }

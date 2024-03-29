@@ -20,7 +20,7 @@ export const getTodaysHours = (business) => {
   // console.log(`${currHour}:${currMin}`);
 
   let todayHours = { open: 'Opened', close: 'Closed' };
-  console.log(todayHours);
+  // console.log(todayHours);
   const todayKey = getDayKey(today);
 
   const openKey = `${todayKey}_open`;
@@ -36,7 +36,16 @@ export const getTodaysHours = (business) => {
   }
 }
 
+
 const getDayKey = (dayIndex) => {
   const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
   return daysOfWeek[dayIndex];
 };
+
+export const getDate = (date) => {
+  const newDate = new Date(date);
+  const month = newDate.toLocaleString('default', { month: 'short' });
+  const day = newDate.getDate();
+  const year = newDate.getFullYear();
+  return [month, ' ', day, ', ', year]
+}

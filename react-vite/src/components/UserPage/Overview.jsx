@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "../../redux/users";
 import './Overview.css'
+import { getDate } from "../../utils";
 
 
 
@@ -20,7 +21,7 @@ function UserOverview() {
         state.users ? state.users[userId] : null
     ))
 
-    // console.log("viewed user", viewedUser)
+
 
 
     useEffect(() => {
@@ -39,7 +40,7 @@ function UserOverview() {
                 </div>
                 <div id='details-time' className="details-indiv">
                     <h4>Pawmate Since</h4>
-                    <p>Spring 2024</p>
+                    <p>{getDate(viewedUser.created_at)}</p>
                 </div>
             </div>
         </>

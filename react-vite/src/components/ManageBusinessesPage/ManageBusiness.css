@@ -19,6 +19,7 @@
 
 .manBizPage {
   margin: auto;
+  padding-top: 30px;
   max-width: 800px;
 }
 
@@ -35,18 +36,28 @@
 }
 
 .manage-dropdown {
-  background-color: #f78a63;
-  width: 155px;
+  background-color: #FFFBF6;
+  width: fit-content;
   height: 100px;
   display: grid;
-  border-radius: 10px;
-  padding: 7px;
+  border-radius: 5px;
+  padding: 18px;
   position: absolute;
+}
+
+.manage-dropdown button {
+  background-color: transparent;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500 !important;
+  color: #1f2f44 !important;
+
 }
 
 .manbutton {
   margin: 0 15px;
-
 }
 
 .manageMenu {
@@ -58,7 +69,7 @@
 }
 
 .manageMenu:hover {
-  box-shadow: #5f5ba8 1px 1px 5px .5px ;
+  box-shadow: #5f5ba8 1px 1px 5px .5px;
 }
 
 .updateBiz {
