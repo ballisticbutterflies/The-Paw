@@ -145,7 +145,7 @@ function SignupFormModal() {
         <button type="submit" disabled={!!Object.values(errors).length}>Sign Up</button>
         <span>Already a user?&nbsp;
           <OpenModalMenuItem
-            itemText="Log In"
+            itemText={<span className="modalLink">Log in</span>}
             modalComponent={<LoginFormModal />}
           />
         </span>

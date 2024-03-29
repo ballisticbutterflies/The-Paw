@@ -5,12 +5,18 @@ import { Link } from "react-router-dom";
 import "./ManageBusiness.css"
 import ManageBizButton from "./ManageBusinessButton";
 import { getTodaysHours } from "../../utils";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
 
 function ManageBusinessPage() {
 
   const dispatch = useDispatch();
 
   const businesses = Object.values(useSelector(state => state.businesses))
+
+  const sessionUser = Object.values(useSelector(state => state.session.user ? state.session.user : []))
+
+  console.log(sessionUser)
 
 
   useEffect(() => {
@@ -43,6 +49,9 @@ function ManageBusinessPage() {
   }
 
   const reviewsExists = (review) => {
+    if (review === 1) {
+      return '(' + review + ' ' + 'review' + ')'
+    }
     if (review >= 1) {
       return '(' + review + ' ' + 'reviews' + ')'
     }
@@ -58,47 +67,58 @@ function ManageBusinessPage() {
   }
 
   return (
+
     <div className="manBizPage">
       <h1>Manage Businesses</h1>
-      {businesses && businesses.map((business, index) => (
-        <div key={business.id} className="bizandbutton">
-          <Link style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
-            <img className="manBizImage" src={business.image} alt={business.name} />
-            <span className="manBizDeets">
-              {index + 1}.&nbsp;{business.name}
-              {
-                business.avg_stars &&
-                business.num_reviews && reviewsExists(business.num_reviews) &&
-                <span>{business?.avg_stars && starReviews(business.avg_stars)}
-                  &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
-                  &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
-              }
-              {business.price !== null &&
-                <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
-                </span>
-              }
+      {sessionUser.length === 0 ? (
+        <span className="login-prompt" >          <OpenModalMenuItem
+          itemText={<span className="modalLink">Log in</span>}
+          modalComponent={<LoginFormModal />}
+        />&nbsp;to view this page.<img src="/images/icons/tearcouch.png" /></span>
+      ) : (
+        businesses && businesses.map((business, index) => (
+          <div key={business.id} className="bizandbutton">
+            <Link style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
+              <span className="businessesImageWrapper">
+                <img className="businessesImage" src={business.image} alt={business.name} />
+              </span>
+              <span className="businessDeets">
+                <h2>{index + 1}.&nbsp;{business.name}</h2>
+                {
+                  business.avg_stars &&
 
-              {business.price === null &&
-                <span className="priceSubcat">{business.category?.name}
-                </span>
-              }
-              {getTodaysHours(business) &&
-                <span className="todayHours">
-                  Today&apos;s Hours: {getTodaysHours(business).open} - {getTodaysHours(business).close}
-                </span>
-              }
-              {
-                business.description &&
-                descriptionTextSubstr(business.description)
-              }
-            </span>
-          </Link>
-          <div className="manbutton">
-            <ManageBizButton business={business} />
+                  business.num_reviews && reviewsExists(business.num_reviews) &&
+                  <span>{business?.avg_stars && starReviews(business.avg_stars)}
+                    &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
+                    &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
+                }
+                {business.price !== null &&
+                  <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
+                  </span>
+                }
+
+                {business.price === null &&
+                  <span className="priceSubcat">{business.category?.name}
+                  </span>
+                }
+                {getTodaysHours(business) &&
+                  <span className="todayHours">
+                    <span style={{ fontWeight: '600' }}>Today&apos;s Hours:</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}
+                  </span>
+                }
+                {
+                  business.description &&
+                  descriptionTextSubstr(business.description)
+                }
+              </span>
+            </Link>
+            <div className="manbutton">
+              <ManageBizButton business={business} />
+            </div>
           </div>
-        </div>
-      ))}
+        )))}
     </div>
+
   )
 }
 

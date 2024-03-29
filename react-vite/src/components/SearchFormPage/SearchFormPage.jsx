@@ -63,10 +63,10 @@ function SearchFormPage() {
 
   useEffect(() => {
     dispatch(fetchAllBusinesses(businesses))
-    .catch(error => {
-      return error
-    })
-  },[dispatch, businesses])
+      .catch(error => {
+        return error
+      })
+  }, [dispatch, businesses])
 
 
   return (
@@ -111,7 +111,7 @@ function SearchFormPage() {
                     {
                       getTodaysHours(business) &&
                       <span className="todayHours">
-                        Today&apos;s Hours: {getTodaysHours(business).open} - {getTodaysHours(business).close}
+                        <span style={{ fontWeight: '600' }}>Today&apos;s Hours:</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}
                       </span>
                     }
 

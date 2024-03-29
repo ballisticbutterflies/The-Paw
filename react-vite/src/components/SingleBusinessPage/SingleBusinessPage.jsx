@@ -7,12 +7,14 @@ import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalButton from "../OpenModalButton";
+import { getTodaysHours } from "../../utils";
 
 
 
 function SingleBusinessPage() {
     const { businessId } = useParams();
     const dispatch = useDispatch();
+
 
     const business = useSelector(state => (
         state.businesses[businessId]
@@ -23,6 +25,7 @@ function SingleBusinessPage() {
         const runDispatches = async () => {
             dispatch(fetchSingleBusiness(businessId)
             );
+
         };
         runDispatches();
     }, [dispatch, businessId])
@@ -56,6 +59,7 @@ function SingleBusinessPage() {
         }
     }
 
+
     const reviewAvg = (avg) => {
         if (avg !== null) {
             return avg.toFixed(1);
@@ -72,6 +76,8 @@ function SingleBusinessPage() {
             behavior: "smooth",
         });
     };
+
+
 
 
     return (business && business.business_images &&
@@ -118,8 +124,22 @@ function SingleBusinessPage() {
                     }
 
                     <div className="currHours">
-                        [CLOSED 8AM - 6PM]&nbsp;&nbsp;
-                        <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                        {business.set_hours === "yes" && getTodaysHours(business) &&
+                            <span>
+                                <span style={{
+                                    color: "#0BDA51"
+                                }}>Open Today&nbsp;&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
+                                < span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                            </span>
+                        }
+                        {business.set_hours === "yes" && !getTodaysHours(business) &&
+                            <span>
+                                <span style={{
+                                    color: "#FF474C"
+                                }}>Closed Today&nbsp;&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                            </span>
+                        }
+
                     </div>
                 </div>
                 <div className="seeAllPhotos">
