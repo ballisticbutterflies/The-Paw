@@ -4,6 +4,7 @@ import { deleteImage } from "../../redux/images";
 import { getUserImages } from "../../redux/users";
 import { useSelector } from "react-redux";
 import { getImagesByBusiness } from "../../redux/images";
+import { fetchSingleBusiness } from "../../redux/businesses";
 
 
 
@@ -20,6 +21,7 @@ function DeleteImageModal({ imageId, onlyImage, businessId }) {
         dispatch(deleteImage(imageId))
             .then(dispatch(getUserImages(user.id)))
             .then(dispatch(getImagesByBusiness(businessId)))
+            .then(dispatch(fetchSingleBusiness(businessId)))
                     .then(closeModal)
 
 

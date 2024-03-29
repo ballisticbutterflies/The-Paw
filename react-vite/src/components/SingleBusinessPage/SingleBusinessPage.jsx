@@ -19,14 +19,30 @@ function SingleBusinessPage() {
         state.businesses[businessId]
     ))
 
+    const totalImages = (businessImages, reviewImages) => {
+        if (businessImages && reviewImages) {
+
+            return businessImages.length + reviewImages.length;
+        }
+        else if (businessImages && !reviewImages) {
+
+            return businessImages.length;
+        }
+        else if (reviewImages && !businessImages) {
+
+            return reviewImages;
+        }
+    }
+
 
     useEffect(() => {
-        const runDispatches = async () => {
+        // const runDispatches = async () => {
             dispatch(fetchSingleBusiness(businessId)
             );
-        };
-        runDispatches();
-    }, [dispatch, businessId, ])
+
+        // };
+        // runDispatches();
+    }, [dispatch, businessId])
 
     const reviewStars = (numStars) => {
         let filled_paws = [];
@@ -46,20 +62,7 @@ function SingleBusinessPage() {
     }
 
 
-    const totalImages = (businessImages, reviewImages) => {
-        if (businessImages && reviewImages) {
 
-            return businessImages.length + reviewImages.length;
-        }
-        else if (businessImages && !reviewImages) {
-
-            return businessImages.length;
-        }
-        else if (reviewImages && !businessImages) {
-
-            return reviewImages;
-        }
-    }
 
     const reviewAvg = (avg) => {
         if (avg !== null) {
