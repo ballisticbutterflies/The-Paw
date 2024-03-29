@@ -4,9 +4,10 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "./DeleteReviewModal";
 import UpdateReviewModal from "./UpdateReviewModal";
 import "./UserReviews.css"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 
 
-function ManageReviewButton({ review , userId }) {
+function ManageReviewButton({ review, userId }) {
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -29,13 +30,13 @@ function ManageReviewButton({ review , userId }) {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu])
 
-//   const closeMenu = () => setShowMenu(false);
+  //   const closeMenu = () => setShowMenu(false);
 
   const ulClassName = "manage-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-    {/* <p>test test test</p> */}
+      {/* <p>test test test</p> */}
       <button className='manageMenu' onClick={toggleMenu}>
         <i className="fa-solid fa-ellipsis" />
       </button>
@@ -47,18 +48,20 @@ function ManageReviewButton({ review , userId }) {
                 onClick={closeMenu}
               >Update Review</Link>
             </p> */}
-            <p className="updateRev">
-            <OpenModalButton
-              buttonText="Update Review"
-              reviewId={review.id}
-              modalComponent={<UpdateReviewModal userReview={review} reviewId={review.id} userId={userId}/>}
-            />
-            </p>
-            <OpenModalButton
-              buttonText="Delete Review"
-              reviewId={review.id}
-              modalComponent={<DeleteReviewModal reviewId={review.id} userId={userId}/>}
-            />
+            <div className="profiledropdownoptions">
+              <OpenModalMenuItem
+                itemText={<><i className="fa-solid fa-pen-to-square" />&nbsp; Update Review</>}
+                reviewId={review.id}
+                modalComponent={<UpdateReviewModal userReview={review} reviewId={review.id} userId={userId} />}
+              />
+            </div>
+            <div className="profiledropdownoptions">
+              <OpenModalMenuItem
+                itemText={<><i className="fa-solid fa-trash-can" />&nbsp; Delete Review</>}
+                reviewId={review.id}
+                modalComponent={<DeleteReviewModal reviewId={review.id} userId={userId} />}
+              />
+            </div>
           </ul>
         </>
       }

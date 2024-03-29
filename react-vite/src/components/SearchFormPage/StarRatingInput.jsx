@@ -36,13 +36,13 @@ const StarRatingInput = ({ stars, onChange, reset }) => {
 
           <div className="rating-paw-text">&nbsp;
             {activeRating && activeRating > 1 && activeRating < 5 &&
-              <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
+              <span>&nbsp;{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
             }
             {activeRating && activeRating === 1 &&
-              <span>{activeRating}&nbsp;Paw&nbsp;&&nbsp;Up!</span>
+              <span>&nbsp;{activeRating}&nbsp;Paw&nbsp;&&nbsp;Up!</span>
             }
             {activeRating && activeRating === 5 &&
-              <span>{activeRating}&nbsp;Paws!</span>
+              <span>&nbsp;{activeRating}&nbsp;Paws!</span>
             }
           </div>
         )}

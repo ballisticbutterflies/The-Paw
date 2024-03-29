@@ -139,6 +139,10 @@
   height: 26px;
 }
 
+.rating-paw-text {
+  margin-top: 1px;
+}
+
 .rating-input {
   margin: 10px 0 0;
   display: flex;

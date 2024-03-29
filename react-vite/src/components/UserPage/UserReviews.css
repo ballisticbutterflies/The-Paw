@@ -14,15 +14,13 @@
 
 }
 
-
-.biz-review-content {
-    flex: 1;
+.manage-button {
+    padding-left: 10px;
+    padding-bottom: 0px;
 }
 
-.manage-button {
-
-    padding-top: 12px;
-    padding-left: 10px;
+.manage-button .biz-review-content {
+    flex: 1;
 }
 
 .business-content {
@@ -97,7 +95,8 @@
 }
 
 .paw-and-date {
-    display: inline-block;
+    display: flex;
+    align-content: center;
     /* flex-direction: row; */
 }
 

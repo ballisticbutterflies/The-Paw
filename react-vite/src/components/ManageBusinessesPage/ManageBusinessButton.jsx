@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import DeleteBizModal from "./DeleteBizModal";
 import "./ManageBusiness.css"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 
 
 function ManageBizButton({ business }) {
@@ -40,16 +41,18 @@ function ManageBizButton({ business }) {
       {showMenu &&
         <>
           <ul className={ulClassName} ref={ulRef}>
-            <p className="updateBiz">
+            <div className="profiledropdownoptions">
               <Link to={`/businesses/${business.id}/edit`}
                 onClick={closeMenu}
-              >Update Business</Link>
-            </p>
-            <OpenModalButton
-              buttonText="Delete Business"
-              businessId={business.id}
-              modalComponent={<DeleteBizModal businessId={business.id} />}
-            />
+              ><i className="fa-solid fa-pen-to-square" /> Update Business</Link>
+            </div>
+            <div className="profiledropdownoptions">
+              <OpenModalMenuItem
+                itemText={<><i className="fa-solid fa-trash-can" />&nbsp; Delete Business</>}
+                businessId={business.id}
+                modalComponent={<DeleteBizModal businessId={business.id} />}
+              />
+            </div>
           </ul>
         </>
 
