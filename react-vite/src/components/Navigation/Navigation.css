@@ -132,14 +132,12 @@
 .forbiz-dropdown {
   position: absolute;
   z-index: 2;
-  padding: 20px;
-  width: fit-content;
+  padding: 18px;
   background-color: #FFFBF6;
-  margin-top: 183px;
+  margin-top: 200px;
   border-radius: 5px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start; */
+  margin-right: -50px;
+
 }
 
 .forBizButton {

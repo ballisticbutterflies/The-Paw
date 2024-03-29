@@ -52,6 +52,10 @@
   padding-bottom: 20px;
 }
 
+.pawRatingInputFilter:hover {
+  cursor: pointer;
+}
+
 .price-filled {
   color: #5f5ba8;
 }
@@ -109,7 +113,7 @@
 }
 
 .filter-buttons button {
-  margin: 10px 0 0 28px;
+  margin-top: 10px;
 }
 
 .apply-filter-button {
@@ -127,4 +131,23 @@
   border: #c3cddf 1px solid;
   background-color: transparent;
   color: #1f2f44;
+}
+
+.rating-paw-text {
+  flex-direction: column;
+  display: flex;
+  position: absolute;
+}
+
+.rating-input {
+  margin: 10px 0;
+}
+
+
+.priceInputFilter input:hover {
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
 }

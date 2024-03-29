@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const StarRatingInput = ({ stars, onChange }) => {
+const StarRatingInput = ({ stars, onChange, reset }) => {
 
   const [activeRating, setActiveRating] = useState(stars)
+
+
+  useEffect(() => {
+    setActiveRating(stars); // Reset active rating when stars prop changes
+  }, [stars, reset]);
+
 
   const handleStarClick = (starOrder) => {
     const newRating = starOrder === activeRating ? null : starOrder;
     setActiveRating(newRating);
     onChange(newRating);
   };
+
+
 
   return (
     <>
@@ -24,7 +32,7 @@ const StarRatingInput = ({ stars, onChange }) => {
         ))}
         {activeRating !== 0 && (
 
-          <span>
+          <span className="rating-paw-text">
             {activeRating && activeRating > 1 && activeRating < 5 &&
               <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
             }
