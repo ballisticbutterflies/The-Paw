@@ -84,10 +84,18 @@ function SingleBusinessPage() {
     };
 
 
-    return (business && images &&
+    return (business &&
         <>
             <div className="businessPhotoHeader">
-                <img src={(business.business_images && business.business_images.length === 1 && business.business_images[0].image_url) || images.images?.review_images[0].url} />
+                {business.business_images && business.business_images?.length > 0 &&
+                    <img src={business.business_images[0].image_url} />
+                }
+                {business.business_images?.length === 0 && images?.images?.review_images?.length > 0 &&
+                    <img src={images.images.review_images[0].url} />
+                }
+
+                {business.business_images?.length === 0 && images?.images?.review_images?.length === 0 &&
+                    <img src='../../images/defaultBusiness.jpg' />}
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
