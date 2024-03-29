@@ -3,11 +3,16 @@ import { useModal } from "../../context/Modal";
 import { deleteImage } from "../../redux/images";
 import { getUserImages } from "../../redux/users";
 import { useSelector } from "react-redux";
+import { getImagesByBusiness } from "../../redux/images";
+import { fetchSingleBusiness } from "../../redux/businesses";
 
 
-function DeleteImageModal({ imageId, onlyImage }) {
+
+function DeleteImageModal({ imageId, onlyImage, businessId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
+
+    console.log(businessId)
 
     const user = useSelector(state => state.session.user)
 
@@ -15,7 +20,11 @@ function DeleteImageModal({ imageId, onlyImage }) {
         e.preventDefault();
         dispatch(deleteImage(imageId))
             .then(dispatch(getUserImages(user.id)))
-            .then(closeModal)
+            .then(dispatch(getImagesByBusiness(businessId)))
+            .then(dispatch(fetchSingleBusiness(businessId)))
+                    .then(closeModal)
+
+
     }
 
 

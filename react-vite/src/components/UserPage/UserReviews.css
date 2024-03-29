@@ -1,23 +1,27 @@
 .review-card{
     margin: 2em 0em 2em 1em;
-    padding: 1em;
-    border-width: 1px 0 0 0;
-    border-color: rgba(31,47,68, 0.3);
-    border-style: solid;
+    padding: 20px;
+    border: rgba(31,47,68, 0.3) 1px solid;
+    border-radius: 10px;
     display: flex;
-}
-
-.review-card:first-child{
-    border-width: 0px;
+    background-color: #FFFFFF;
 
 }
+
+#reviews-container {
+    display: flex;
+    flex-direction: row;
+}
+
 
 .biz-review-content{
     flex: 1;
 }
 
-.manage-button{
-    width: fit-content;
+.manage-button {
+
+    padding-top: 30px;
+    padding-left: 10px;
 }
 
 .business-content{
@@ -60,11 +64,11 @@
 }
 
 /* .business-content > img {
-    
+
 } */
 
 
-.business-content :hover{
+.review-card :hover{
     cursor: pointer;
 }
 
@@ -89,7 +93,8 @@
 }
 
 .review-content{
-    max-width: 30em;
+    padding: 10px 0;
+    width: 500px;
 }
 
 .reviewImagesWrapper {

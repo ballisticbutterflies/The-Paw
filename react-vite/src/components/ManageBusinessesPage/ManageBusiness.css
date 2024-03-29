@@ -36,11 +36,12 @@
 
 .manage-dropdown {
   background-color: #f78a63;
-  width: fit-content;
+  width: 155px;
   height: 100px;
   display: grid;
-  border-radius: 20px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 7px;
+  position: absolute;
 }
 
 .manbutton {

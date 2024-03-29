@@ -34,11 +34,11 @@ function UserOverview() {
             <h2>More about me</h2>
             <div id="user-details" className="needs-border">
                 <div id='details-location' className="details-indiv">
-                    <h5>Location</h5>
+                    <h4>Location</h4>
                     <p>{viewedUser.city}, {viewedUser.state}</p>
                 </div>
                 <div id='details-time' className="details-indiv">
-                    <h5>Pawmate Since</h5>
+                    <h4>Pawmate Since</h4>
                     <p>Spring 2024</p>
                 </div>
             </div>

@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { getImagesByBusiness } from "../../redux/images";
 import "./AllPhotos.css";
-import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
+// import AddPhotosToBusiness from "../AddPhotosToBusiness/AddPhotosToBusiness";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useParams, Link } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteImageModal from "../DeleteImageModal/DeleteImageModal";
 import LoginFormModal from "../LoginFormModal";
+
+
 
 
 function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
@@ -18,8 +20,13 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     const images = useSelector(state => state.images[businessId])
     const sessionUser = useSelector(state => state.session.user)
 
+
+
     useEffect(() => {
+
         dispatch(getImagesByBusiness(businessId))
+
+
     }, [dispatch, businessId])
 
     const lastInitial = (lastName) => {
@@ -45,13 +52,13 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                             modalComponent={<LoginFormModal />}
                         />
                     }
-                    {sessionUser &&
+                    {/* {sessionUser &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-camera" />&nbsp;&nbsp;Add photo</>}
                             modalComponent={<AddPhotosToBusiness businessId={businessId} businessName={images.images.business_name} />}
                         />
-                    }
+                    } */}
                 </div>
             </div>
             <div className={modalLoad ? "allPhotosContainerModal" : "allPhotosContainerPage"}>
@@ -68,18 +75,15 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                         </div>
 
                                         <div className="trash">
-                                            {sessionUser && sessionUser.id === business_image.uploader_id &&
-                                                images.images.business_images.length === 1 && images.images.review_images?.length === 0 ? (
+                                            {sessionUser && sessionUser.id === business_image.uploader_id && Number(images.images.business_images.length) > 1 &&
                                                 <OpenModalMenuItem
                                                     itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
-                                            ) : (
+                                                    modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={false} businessId={businessId} />} />
 
-                                                <OpenModalMenuItem
-                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={business_image.id} />} />)
                                             }
+
                                         </div>
+
                                     </div>
                                 </div>
                             </span >

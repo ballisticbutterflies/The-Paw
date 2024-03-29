@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { createImage } from "../../redux/businesses";
 import { useModal } from "../../context/Modal";
 import "./AddPhotos.css"
+import { getImagesByBusiness } from "../../redux/images";
 
 function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
     const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
         setImageLoading(true);
 
         await dispatch(createImage(formData))
+            .then(dispatch(getImagesByBusiness(businessId)))
             .then(() => closeModal())
             .then(() => navigate(`/businesses/${businessId}/images`))
             .catch((error) => {

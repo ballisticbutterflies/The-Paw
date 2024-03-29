@@ -49,7 +49,7 @@
 
 .pawRatingInputFilter {
   border-bottom: 1px solid #c3cddf;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 .pawRatingInputFilter:hover {
@@ -65,7 +65,7 @@
 }
 
 .priceInputFilter>h4 {
-  margin: 2px 0;
+  margin: 2px 0 10px;
 }
 
 .priceInputFilter {
@@ -91,7 +91,7 @@
 }
 
 .categoryFilter {
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   border-bottom: 1px solid #c3cddf;
   margin-bottom: 10px;
 }
@@ -134,13 +134,11 @@
 }
 
 .rating-paw-text {
-  flex-direction: column;
-  display: flex;
   position: absolute;
 }
 
 .rating-input {
-  margin: 10px 0;
+  margin: 10px 0 0;
 }
 
 
@@ -150,4 +148,8 @@
 
 select {
   cursor: pointer;
+}
+
+.categoryFilter>h4 {
+  margin: 10px 0 10px;
 }

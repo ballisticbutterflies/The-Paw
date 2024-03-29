@@ -1,56 +1,89 @@
-div#full-user-page {
+#full-user-page {
     display: flex;
     flex-direction: row;
-    width: max-content;
+    width: fit-content;
+    margin: 30px;
+    padding-top: 20px;
 }
 
 .user-sidebar-container{
     display: flex;
-    flex: 1;
     flex-direction: column;
     width: min-content;
-    padding-left: 2em;
+
 }
 
 .user-summary-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 20px 20px 0;
+    width: 220px;
+    height: 220px;
+    border: 1px solid #c3cddf;
+    border-radius: 5px;
+}
+
+.user-summary-container:hover {
+    cursor:default
 }
 .user-summ-stats{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 7em;
+
+}
+
+.user-summary-container>h5 {
+    margin: 0;
 }
 
 .user-summ-stat-item{
-    padding: 0% 2%;
-    display: inline-block;
+    margin: 0;
+    padding: 0;
+
     /* flex-direction: row; */
 }
 
 .user-navigation-container {
     display: flex;
     flex-direction: column;
-    width: min-content;
+
+    margin: 20px;
+    width: 140px;
 }
 
-div.single-user-navigation{
+.single-user-navigation{
     display: inline-block;
+    border-bottom: 1px solid #c3cddf;
+    margin: 0;
+
+    padding: 10px 0;
+
     /* display: flex;
     flex-direction: row; */
-    width: max-content;
+    width: 150px;
+
     /* justify-content: spa; */
 }
 
-div.single-user-navigation:hover{
+.single-user-navigation:nth-child(3) {
+    border-bottom: none;
+}
+
+.nav-description:hover {
+    background-color: #c3cddf;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-i {
-    display: inline-block;
+.nav-description {
+    padding: 10px 5px;
+    width: 140px;
 }
+
 
 i.fa-paw {
     display: inline-block;
@@ -59,12 +92,17 @@ i.fa-paw {
 
 h4.nav-description, h5 {
     display: inline-block;
+
+}
+
+h4.nav-description {
+    margin: 0;
 }
 
 img.pfp {
  max-height: 5em;
- max-width: 5em;  
- border-radius: 50%; 
+ max-width: 5em;
+ border-radius: 50%;
 
  /* justify-content: center; */
 }
@@ -80,3 +118,6 @@ img.pfp {
     margin: 3% 0% 0% 5%;
 }
 
+#user-overview-container:hover {
+    cursor: default;
+}
