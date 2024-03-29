@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleBusiness } from "../../redux/businesses";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
@@ -19,29 +19,14 @@ function SingleBusinessPage() {
         state.businesses[businessId]
     ))
 
-    const totalImages = (businessImages, reviewImages) => {
-        if (businessImages && reviewImages) {
-
-            return businessImages.length + reviewImages.length;
-        }
-        else if (businessImages && !reviewImages) {
-
-            return businessImages.length;
-        }
-        else if (reviewImages && !businessImages) {
-
-            return reviewImages;
-        }
-    }
-
 
     useEffect(() => {
-        // const runDispatches = async () => {
+        const runDispatches = async () => {
             dispatch(fetchSingleBusiness(businessId)
             );
 
-        // };
-        // runDispatches();
+        };
+        runDispatches();
     }, [dispatch, businessId])
 
     const reviewStars = (numStars) => {
@@ -61,7 +46,17 @@ function SingleBusinessPage() {
         return [filled_paws, unfilled_paws]
     }
 
-
+    const totalImages = (businessImages, reviewImages) => {
+        if (businessImages && reviewImages) {
+            return businessImages.length + reviewImages.length;
+        }
+        else if (businessImages && !reviewImages) {
+            return businessImages.length;
+        }
+        else if (reviewImages && !businessImages) {
+            return reviewImages;
+        }
+    }
 
 
     const reviewAvg = (avg) => {
