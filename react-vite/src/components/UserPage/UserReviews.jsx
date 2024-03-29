@@ -107,15 +107,15 @@ function UserReviews() {
                 {viewedUserReviews && hasAtLeastOneReview() && (
                     reviewsArr.map(user_review => (
                         <>
-                            <div className="review-card">
+                            <div className="review-card" onClick={() => navigate(`/businesses/${user_review.business.business[0].id}`)}>
                                 <div className="biz-review-content">
-                                    <div className="business-content" onClick={() => navigate(`/businesses/${user_review.business.business[0].id}`)}>
+                                    <div className="business-content" >
                                         <div className="business-image">
                                         <img className="formatImage" src={user_review.business.business[0].business_images[0].image_url} alt="" />
                                         </div>
                                             <h5 className="biz-name">{user_review.business.business[0].name}</h5>
                                             <p className="biz-category">{user_review.business.business[0].category.name}</p>
-                                            <p className="biz-location">{user_review.business.business[0].city} {user_review.business.business[0].state}</p>
+                                            <p className="biz-location">{user_review.business.business[0].city}, {user_review.business.business[0].state}</p>
                                     </div>
                                     <div className="review-content">
                                         <div className="paw-and-date">
@@ -132,10 +132,12 @@ function UserReviews() {
                                         </div>
                                     </div>
                                 </div>
-                                { (sessionUser && (sessionUser.id == userId) && <div className="manage-button">
-                                    <ManageReviewButton review={user_review} userId={userId} />
-                                </div>)}
                             </div>
+                                { (sessionUser && (sessionUser.id == userId) &&
+                                <div className="manage-button">
+                                    <ManageReviewButton review={user_review} userId={userId} />
+                                </div>
+                                )}
                         </>
                     ))
 

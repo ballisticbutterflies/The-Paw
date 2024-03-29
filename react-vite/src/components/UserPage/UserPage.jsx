@@ -57,9 +57,9 @@ function UserPage() {
                             </div>
                         </div>
                         <div className="user-navigation-container">
-                            <div className="single-user-navigation" onClick={() => { setCurrentView('overview') }}><i className="fa-solid fa-circle-user" />&nbsp;&nbsp;<h4 className="nav-description">Profile Overview</h4></div>
-                            <div className="single-user-navigation" onClick={() => { setCurrentView('reviews') }}><i className="fa-solid fa-paw" />&nbsp;&nbsp;<h4 className="nav-description">Reviews Written</h4></div>
-                            <div className="single-user-navigation" onClick={() => { setCurrentView('photos') }}><i className="fa-solid fa-image" />&nbsp;&nbsp;<h4 className="nav-description">Photos Added</h4></div>
+                            <p className="single-user-navigation" onClick={() => { setCurrentView('overview') }}><h4 className="nav-description"><i className="fa-solid fa-circle-user" />&nbsp;&nbsp;Profile Overview</h4></p>
+                            <p className="single-user-navigation" onClick={() => { setCurrentView('reviews') }}><h4 className="nav-description"><i className="fa-solid fa-paw" />&nbsp;&nbsp;Reviews Written</h4></p>
+                            <p className="single-user-navigation" onClick={() => { setCurrentView('photos') }}><h4 className="nav-description"><i className="fa-solid fa-image" />&nbsp;&nbsp;Photos Added</h4></p>
                         </div>
                     </div>
                     <div className="sub-pages"></div>
