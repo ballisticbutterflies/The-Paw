@@ -47,11 +47,13 @@ function ManageReviewButton({ review , userId }) {
                 onClick={closeMenu}
               >Update Review</Link>
             </p> */}
+            <p className="updateRev">
             <OpenModalButton
               buttonText="Update Review"
               reviewId={review.id}
               modalComponent={<UpdateReviewModal userReview={review} reviewId={review.id} userId={userId}/>}
             />
+            </p>
             <OpenModalButton
               buttonText="Delete Review"
               reviewId={review.id}

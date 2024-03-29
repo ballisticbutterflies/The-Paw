@@ -103,11 +103,13 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                         </div>
 
                                         <div className="trash">
-                                            {sessionUser && sessionUser.id === review_image.uploader_id &&
+                                            {sessionUser && sessionUser.id === review_image.uploader_id  &&
                                                 <OpenModalMenuItem
-                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={review_image.id} />} />
+                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
+                                                    modalComponent={<DeleteImageModal imageId={review_image.id} onlyImage={false} businessId={businessId} />} />
+
                                             }
+
                                         </div>
                                     </div>
                                 </div>
