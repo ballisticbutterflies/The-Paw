@@ -37,3 +37,11 @@ export const getTodaysHours = (business) => {
     const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     return daysOfWeek[dayIndex];
   };
+
+export const getDate = (date) => {
+  const newDate = new Date(date);
+  const month = newDate.toLocaleString('default', { month: 'long' });
+  const day = newDate.getDate();
+  const year = newDate.getFullYear();
+  return [month,' ' ,day, ', ',year]
+}

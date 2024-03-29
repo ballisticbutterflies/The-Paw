@@ -37,3 +37,7 @@
     position: absolute;
     right: 0;
 }
+
+.trash:hover {
+    cursor: pointer;
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getUser, getUserReviews } from "../../redux/users";
 import ManageReviewButton from "./ManageReviewsButton";
+import { getDate } from "../../utils";
 import './UserReviews.css'
 
 
@@ -27,6 +28,7 @@ function UserReviews() {
     let viewedUserReviews = useSelector(state => (
         state.users.userReviewsState ? state.users.userReviewsState.userReviews : null
     ))
+
 
     // // if(viewedUserReviews ) viewedUserReviews = Object.values(viewedUserReviews)
     // console.log("viewed user reviews", (viewedUserReviews))
@@ -72,7 +74,7 @@ function UserReviews() {
         })
     }
 
-
+    console.log(reviewsArr[0].created_at)
     // console.log('reviewsArr',reviewsArr)
     // console.log("sessionUser",sessionUser)
     // console.log("sessionUser.id",sessionUser.id)
@@ -119,7 +121,7 @@ function UserReviews() {
                                     </div>
                                     <div className="review-content">
                                         <div className="paw-and-date">
-                                            <span className="pawBlock">{reviewStars(user_review.stars)} [DATE]</span>
+                                            <span className="pawBlock">{reviewStars(user_review.stars)} {getDate(user_review.created_at)}</span>
                                         </div>
                                         <p id="review-text">{user_review.review}</p>
                                         <div className="reviewImagesWrapper">{user_review.images.length > 0  && user_review.images.map(image =>
