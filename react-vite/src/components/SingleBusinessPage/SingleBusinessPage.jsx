@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleBusiness } from "../../redux/businesses";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
@@ -14,6 +14,7 @@ function SingleBusinessPage() {
     const { businessId } = useParams();
     const dispatch = useDispatch();
 
+
     const business = useSelector(state => (
         state.businesses[businessId]
     ))
@@ -25,7 +26,7 @@ function SingleBusinessPage() {
             );
         };
         runDispatches();
-    }, [dispatch, businessId])
+    }, [dispatch, businessId, ])
 
     const reviewStars = (numStars) => {
         let filled_paws = [];
@@ -44,14 +45,18 @@ function SingleBusinessPage() {
         return [filled_paws, unfilled_paws]
     }
 
+
     const totalImages = (businessImages, reviewImages) => {
         if (businessImages && reviewImages) {
+
             return businessImages.length + reviewImages.length;
         }
         else if (businessImages && !reviewImages) {
+
             return businessImages.length;
         }
         else if (reviewImages && !businessImages) {
+
             return reviewImages;
         }
     }
@@ -72,6 +77,8 @@ function SingleBusinessPage() {
             behavior: "smooth",
         });
     };
+
+
 
 
     return (business && business.business_images &&

@@ -18,6 +18,8 @@ function DeleteImageModal({ imageId, onlyImage }) {
             .then(closeModal)
     }
 
+    console.log(onlyImage, "())()()()()()")
+
 
     return (
         <>
