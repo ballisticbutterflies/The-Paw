@@ -12,6 +12,10 @@ function ManageBusinessPage() {
 
   const businesses = Object.values(useSelector(state => state.businesses))
 
+  const sessionUser = Object.values(useSelector(state => state.session.user ? state.session.user : []))
+
+  console.log(sessionUser)
+
 
   useEffect(() => {
     dispatch(loadCurrUserBusinesses())
@@ -58,9 +62,13 @@ function ManageBusinessPage() {
   }
 
   return (
+
     <div className="manBizPage">
       <h1>Manage Businesses</h1>
-      {businesses && businesses.map((business, index) => (
+    {sessionUser.length === 0 ? (
+      <span className="login-prompt" >Login to view this page.<img src="/images/icons/tearcouch.png" /></span>
+      ) : (
+         businesses && businesses.map((business, index) => (
         <div key={business.id} className="bizandbutton">
           <Link style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
             <img className="manBizImage" src={business.image} alt={business.name} />
@@ -97,8 +105,9 @@ function ManageBusinessPage() {
             <ManageBizButton business={business} />
           </div>
         </div>
-      ))}
+      )))}
     </div>
+
   )
 }
 
