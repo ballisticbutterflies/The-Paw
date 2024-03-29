@@ -58,7 +58,7 @@ function ForBusinessButton() {
                   <hr />
                   <div className="profiledropdownoptions">
                     <Link to={`/businesses/current`}
-                      onClick={closeMenu}><i className="fa-solid fa-pen-to-square" />&nbsp; Update Business</Link>
+                      onClick={closeMenu}><i className="fa-solid fa-pen-to-square" />&nbsp; Manage Business</Link>
                   </div>
                 </>
               ) : (
@@ -72,7 +72,7 @@ function ForBusinessButton() {
                   <hr />
                   <div className="profiledropdownoptions">
                     <OpenModalMenuItem
-                      itemText={<><i className="fa-solid fa-pen-to-square" />&nbsp; Update Business</>}
+                      itemText={<><i className="fa-solid fa-pen-to-square" />&nbsp; Manage Business</>}
                       modalComponent={<LoginFormModal />}
                     />
                   </div>

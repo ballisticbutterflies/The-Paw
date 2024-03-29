@@ -32,7 +32,7 @@ const StarRatingInput = ({ stars, onChange, reset }) => {
         ))}
         {activeRating !== 0 && (
 
-          <span>
+          <span className="rating-paw-text">
             {activeRating && activeRating > 1 && activeRating < 5 &&
               <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
             }
