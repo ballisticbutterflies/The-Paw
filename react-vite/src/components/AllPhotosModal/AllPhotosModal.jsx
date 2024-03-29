@@ -71,12 +71,12 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                                                 images.images.business_images.length === 1 && images.images.review_images?.length === 0 ? (
                                                     <OpenModalMenuItem
                                                         itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
-                                                        modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} />} />
+                                                        modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} businessId={businessId} />} />
                                                 ) : (
 
                                                     <OpenModalMenuItem
                                                         itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
-                                                        modalComponent={<DeleteImageModal imageId={business_image.id} />} />)
+                                                        modalComponent={<DeleteImageModal imageId={business_image.id} businessId={businessId} />} />)
 
                                             }
                                         </div>

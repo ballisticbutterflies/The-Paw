@@ -7,7 +7,7 @@ import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalButton from "../OpenModalButton";
-
+import { getImagesByBusiness } from "../../redux/images";
 
 
 function SingleBusinessPage() {
@@ -16,13 +16,34 @@ function SingleBusinessPage() {
 
     const business = useSelector(state => (
         state.businesses[businessId]
+        // console.log(state)
     ))
 
+    const images = useSelector(state => (
+        state.images[businessId]
+        // console.log(state.images[businessId])
+    ))
+
+    // console.log("YES", images.images.review_images[0].ur);
+    let totalImages = 0;
+
+    totalImages = (businessImages, reviewImages) => {
+        if (businessImages && reviewImages) {
+            return businessImages.length + reviewImages.length;
+        }
+        else if (businessImages && !reviewImages) {
+            return businessImages.length;
+        }
+        else if (reviewImages && !businessImages) {
+            return reviewImages;
+        }
+    }
+    console.log(business);
 
     useEffect(() => {
         const runDispatches = async () => {
-            dispatch(fetchSingleBusiness(businessId)
-            );
+            dispatch(fetchSingleBusiness(businessId))
+            dispatch(getImagesByBusiness(businessId))
         };
         runDispatches();
     }, [dispatch, businessId])
@@ -44,17 +65,6 @@ function SingleBusinessPage() {
         return [filled_paws, unfilled_paws]
     }
 
-    const totalImages = (businessImages, reviewImages) => {
-        if (businessImages && reviewImages) {
-            return businessImages.length + reviewImages.length;
-        }
-        else if (businessImages && !reviewImages) {
-            return businessImages.length;
-        }
-        else if (reviewImages && !businessImages) {
-            return reviewImages;
-        }
-    }
 
     const reviewAvg = (avg) => {
         if (avg !== null) {
@@ -74,10 +84,10 @@ function SingleBusinessPage() {
     };
 
 
-    return (business && business.business_images &&
+    return (business && images &&
         <>
             <div className="businessPhotoHeader">
-                <img src={business.business_images[0].image_url} />
+                <img src={(business.business_images && business.business_images.length === 1 && business.business_images[0].image_url) || images.images?.review_images[0].url} />
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
