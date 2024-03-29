@@ -20,7 +20,7 @@ export const getTodaysHours = (business) => {
   // console.log(`${currHour}:${currMin}`);
 
   let todayHours = { open: 'Opened', close: 'Closed' };
-  console.log(todayHours);
+  // console.log(todayHours);
   const todayKey = getDayKey(today);
 
   const openKey = `${todayKey}_open`;
