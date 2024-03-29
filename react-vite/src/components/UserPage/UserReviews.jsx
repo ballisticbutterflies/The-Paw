@@ -100,20 +100,20 @@ function UserReviews() {
     return (
         <>
             <h2>Reviews</h2>
-            <div id="reviews-container">
+            <div>
                 { viewedUserReviews && hasAtLeastOneReview() == 'No Reviews' &&
                     (<h4>Looks like this user has not written any reviews!</h4> )
                 }
                 {viewedUserReviews && hasAtLeastOneReview() && (
                     reviewsArr.map(user_review => (
-                        <>
+                        <div key={user_review.id} id="reviews-container">
                             <div className="review-card" onClick={() => navigate(`/businesses/${user_review.business.business[0].id}`)}>
                                 <div className="biz-review-content">
                                     <div className="business-content" >
                                         <div className="business-image">
                                         <img className="formatImage" src={user_review.business.business[0].business_images[0].image_url} alt="" />
                                         </div>
-                                            <h5 className="biz-name">{user_review.business.business[0].name}</h5>
+                                            <h4 className="biz-name">{user_review.business.business[0].name}</h4>
                                             <p className="biz-category">{user_review.business.business[0].category.name}</p>
                                             <p className="biz-location">{user_review.business.business[0].city}, {user_review.business.business[0].state}</p>
                                     </div>
@@ -138,7 +138,7 @@ function UserReviews() {
                                     <ManageReviewButton review={user_review} userId={userId} />
                                 </div>
                                 )}
-                        </>
+                        </div>
                     ))
 
                 )}

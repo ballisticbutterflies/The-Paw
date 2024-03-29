@@ -6,14 +6,8 @@
     padding-top: 20px;
 }
 
-.user-sidebar-container{
-    display: flex;
-    flex-direction: column;
-    width: min-content;
 
-}
-
-.user-summary-container{
+.user-summary-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,12 +18,14 @@
     height: 220px;
     border: 1px solid #c3cddf;
     border-radius: 5px;
+
 }
 
 .user-summary-container:hover {
-    cursor:default
+    cursor: default
 }
-.user-summ-stats{
+
+.user-summ-stats {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -40,7 +36,7 @@
     margin: 0;
 }
 
-.user-summ-stat-item{
+.user-summ-stat-item {
     margin: 0;
     padding: 0;
 
@@ -55,7 +51,7 @@
     width: 140px;
 }
 
-.single-user-navigation{
+.single-user-navigation {
     display: inline-block;
     border-bottom: 1px solid #c3cddf;
     margin: 0;
@@ -90,7 +86,8 @@ i.fa-paw {
 }
 
 
-h4.nav-description, h5 {
+h4.nav-description,
+h5 {
     display: inline-block;
 
 }
@@ -100,18 +97,18 @@ h4.nav-description {
 }
 
 img.pfp {
- max-height: 5em;
- max-width: 5em;
- border-radius: 50%;
+    max-height: 5em;
+    max-width: 5em;
+    border-radius: 50%;
 
- /* justify-content: center; */
+    /* justify-content: center; */
 }
 
 
 /* end of user side bar css for positioning, start of styling for specific pages */
 
 
-.sub-pages{
+.sub-pages {
     flex: 2;
     display: flex;
     flex-direction: column;

@@ -1,8 +1,8 @@
-.review-card{
-    margin: 10px  0;
+.review-card {
+    margin: 0 0 20px;
     padding: 20px;
-    border: rgba(31,47,68, 0.3) 1px solid;
-    border-radius: 10px;
+    border: rgba(31, 47, 68, 0.3) 1px solid;
+    border-radius: 5px;
     display: flex;
     background-color: #FFFBF6;
 
@@ -11,11 +11,11 @@
 #reviews-container {
     display: flex;
     flex-direction: row;
-    background-color: ;
+
 }
 
 
-.biz-review-content{
+.biz-review-content {
     flex: 1;
 }
 
@@ -25,7 +25,7 @@
     padding-left: 10px;
 }
 
-.business-content{
+.business-content {
     display: grid;
     width: fit-content;
     column-gap: 20px;
@@ -34,15 +34,17 @@
         "business-image biz-category"
         "business-image biz-location";
     align-items: center;
-    grid-auto-rows: 22px;}
+    grid-auto-rows: 22px;
+}
 
-.business-image{
+.business-image {
     grid-area: business-image;
     font-size: 60px;
     width: fit-content;
     margin-top: 15px;
 }
-.formatImage{
+
+.formatImage {
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
@@ -66,10 +68,10 @@
 
 /* .business-content > img {
 
-} */
+  } */
 
 
-.review-card :hover{
+.review-card :hover {
     cursor: pointer;
 }
 
@@ -77,9 +79,9 @@
     margin: auto;
 }
 
-.updateRev button{
+.updateRev button {
     margin: auto;
-    color: #5f5ba8 ;
+    color: #5f5ba8;
 }
 
 .paws-filled,
@@ -88,7 +90,7 @@
 }
 
 .pawBlock {
-    background-color: #FFFFFF;
+    background-color: transparent;
     width: fit-content;
     padding: 5px 3px 2px 2px;
     border-radius: 3px;
@@ -99,16 +101,18 @@
     /* flex-direction: row; */
 }
 
-.review-content{
+.review-content {
     padding: 10px 0;
     width: 500px;
 }
 
 .reviewImagesWrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
+
+
 
 .reviewImagesContainer {
     width: 100%;
