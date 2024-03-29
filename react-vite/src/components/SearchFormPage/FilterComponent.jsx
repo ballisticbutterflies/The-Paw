@@ -102,7 +102,7 @@ const FilterComponent = ({ onFilterChange }) => {
                 checked={char.checked}
                 onChange={() => updatePrice(index, !char.checked)}
               />
-              {char.name}
+              {char.name}&nbsp;&nbsp;
             </label>
           )}
         </div>
@@ -125,7 +125,7 @@ const FilterComponent = ({ onFilterChange }) => {
           <button className="apply-filter-button" onClick={handleFilterChange}>Apply Filters</button>
           <button className="clear-filter-button" onClick={handleClick}>Clear Filters</button>
         </div>
-      </div>
+      </div >
     </>
   )
 }

@@ -74,13 +74,13 @@
   margin-bottom: 10px;
 }
 
-
 .filterComponent {
   display: flex;
   width: 200px;
   flex-direction: column;
   position: absolute;
   margin-top: -19px;
+  padding-bottom: 30px;
 }
 
 .searchPage {

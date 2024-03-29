@@ -5,6 +5,7 @@
   margin: auto;
   padding-top: 30px;
   row-gap: 15px;
+  padding-bottom: 30px;
 }
 
 .createBizForm input[type="text"],
