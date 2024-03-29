@@ -30,9 +30,9 @@ function BusinessContactCard({ business }) {
                 <>
                     <div className="businessAddressContainer">
                         <div className="businessAddress">
-                            <div>
+                            {/* <div>
                                 Get Directions
-                            </div>
+                            </div> */}
                             <div className="businessCardDetail">{business.address} {business.city}, {business.state} {business.zip_code}</div>
                         </div>
                         <div className="businessContactIcon"><i className="fa-solid fa-diamond-turn-right"></i></div>
