@@ -21,18 +21,20 @@ const StarRatingInput = ({ stars, onChange, reset }) => {
   return (
     <>
       <div className="rating-input">
-        {[1, 2, 3, 4, 5].map((starOrder) => (
-          <span
-          key={starOrder}
-          className={activeRating >= starOrder ? "paws-filled" : "paws-unfilled"}
-          onClick={() => handleStarClick(starOrder)}
-        >
-            <i className="fa-solid fa-paw" />&nbsp;
-          </span>
-        ))}
+        <div className="starsSearch">
+          {[1, 2, 3, 4, 5].map((starOrder) => (
+            <span
+              key={starOrder}
+              className={activeRating >= starOrder ? "paws-filled" : "paws-unfilled"}
+              onClick={() => handleStarClick(starOrder)}
+            >
+              <i className="fa-solid fa-paw" />&nbsp;
+            </span>
+          ))}
+        </div>
         {activeRating !== 0 && (
 
-          <span className="rating-paw-text">&nbsp;
+          <div className="rating-paw-text">&nbsp;
             {activeRating && activeRating > 1 && activeRating < 5 &&
               <span>{activeRating}&nbsp;Paws&nbsp;&&nbsp;Up!</span>
             }
@@ -42,7 +44,7 @@ const StarRatingInput = ({ stars, onChange, reset }) => {
             {activeRating && activeRating === 5 &&
               <span>{activeRating}&nbsp;Paws!</span>
             }
-          </span>
+          </div>
         )}
       </div>
     </>

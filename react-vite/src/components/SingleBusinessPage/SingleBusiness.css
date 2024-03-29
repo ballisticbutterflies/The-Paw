@@ -84,12 +84,12 @@
     cursor: pointer;
 }
 
-.paws-filled,
-.paws-unfilled {
+.businessPhotoHeader .paws-filled,
+.businessPhotoHeader .paws-unfilled {
     font-size: x-large !important;
 }
 
-.pawBlock {
+businessPhotoHeader .pawBlock {
     background-color: #FFFFFF !important;
     width: fit-content !important;
     padding: 10px 6px 3px 6px !important;

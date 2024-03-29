@@ -19,6 +19,7 @@
 
 .manBizPage {
   margin: auto;
+  padding-top: 30px;
   max-width: 800px;
 }
 
@@ -58,7 +59,7 @@
 }
 
 .manageMenu:hover {
-  box-shadow: #5f5ba8 1px 1px 5px .5px ;
+  box-shadow: #5f5ba8 1px 1px 5px .5px;
 }
 
 .updateBiz {

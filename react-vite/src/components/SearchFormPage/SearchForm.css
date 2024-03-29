@@ -77,7 +77,7 @@
 
 .filterComponent {
   display: flex;
-  width: 180px;
+  width: 200px;
   flex-direction: column;
   position: absolute;
   margin-top: -19px;
@@ -133,12 +133,17 @@
   color: #1f2f44;
 }
 
-.rating-paw-text {
-  position: absolute;
+
+.starsSearch {
+  width: 100px;
+  height: 26px;
 }
 
 .rating-input {
   margin: 10px 0 0;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
 }
 
 
