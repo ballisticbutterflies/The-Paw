@@ -7,6 +7,7 @@ import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalButton from "../OpenModalButton";
+import { getTodaysHours } from "../../utils";
 
 
 
@@ -123,8 +124,18 @@ function SingleBusinessPage() {
                     }
 
                     <div className="currHours">
-                        [CLOSED 8AM - 6PM]&nbsp;&nbsp;
-                        <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                        {business.set_hours === "yes" && getTodaysHours(business) &&
+                            <span>
+                                OPEN: {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
+                                <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                            </span>
+                        }
+                        {business.set_hours === "yes" && !getTodaysHours(business) &&
+                            <span>
+                                CLOSED <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                            </span>
+                        }
+
                     </div>
                 </div>
                 <div className="seeAllPhotos">
