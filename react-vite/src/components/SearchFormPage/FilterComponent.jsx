@@ -8,6 +8,7 @@ const FilterComponent = ({ onFilterChange }) => {
 
   const dispatch = useDispatch()
 
+  const [resetRating, setResetRating] = useState(false);
   const [stars, setStars] = useState("")
   const [price, setPrice] = useState([
     { name: "$", checked: false },
@@ -74,6 +75,7 @@ const FilterComponent = ({ onFilterChange }) => {
       { name: "$$$$", checked: false },
     ])
     setCategory_id('')
+    setResetRating(prevState => !prevState);
     dispatch(fetchBusinesses())
   }
 
@@ -87,6 +89,7 @@ const FilterComponent = ({ onFilterChange }) => {
           <StarRatingInput
             onChange={onChangeStars}
             stars={stars}
+            reset={resetRating}
           />
         </div>
         <div className="priceInputFilter">
