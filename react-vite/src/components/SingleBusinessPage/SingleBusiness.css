@@ -220,6 +220,10 @@
     grid-auto-rows: 22px;
 }
 
+.userInfo:hover{
+    cursor: pointer;
+}
+
 .avatar {
     grid-area: avatar;
     font-size: 60px;
