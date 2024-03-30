@@ -56,10 +56,21 @@ def search():
 
   business_data = []
   for business in businesses:
-    #calculate avg stars
-    avg_stars = Review.query.filter_by(business_id=business.id).with_entities(func.avg(Review.stars)).scalar()
-    #and num reviews
+    #pull all reviews for biz
+    reviews = Review.query.filter_by(business_id=business.id).all()
     num_reviews = Review.query.filter_by(business_id=business.id).count()
+    #if reviews exists
+    total_stars = 0
+
+    if reviews:
+      for review in reviews:
+        total_stars += review.stars
+    else:
+       avg_stars = None
+    if num_reviews > 0:
+        avg_stars = total_stars / num_reviews
+
+    #and num reviews
     #and bring over review text too
     recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
     recent_review_text = recent_review.review if recent_review else None
