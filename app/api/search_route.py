@@ -65,6 +65,8 @@ def search():
     if reviews:
       for review in reviews:
         total_stars += review.stars
+    else:
+       avg_stars = None
     if num_reviews > 0:
         avg_stars = total_stars / num_reviews
 

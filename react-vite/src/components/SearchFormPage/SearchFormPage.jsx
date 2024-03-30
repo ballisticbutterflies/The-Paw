@@ -16,10 +16,11 @@ function SearchFormPage() {
   const businesses = Object.values(useSelector((state) => state.search))
 
   const starReviews = (numStars) => {
+
     let filledStars = []
     let emptyStars = []
 
-    for (let i = 0; i < numStars; i++) {
+    for (let i = 0; i < parseInt(numStars); i++) {
       filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
     let empty = 5 - filledStars.length
