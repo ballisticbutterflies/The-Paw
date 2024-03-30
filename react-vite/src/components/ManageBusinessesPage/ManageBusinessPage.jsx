@@ -69,7 +69,7 @@ function ManageBusinessPage() {
   return (
 
     <div className="manBizPage">
-      <h1>Manage Businesses</h1>
+      <h1>Your Businesses on The Paw</h1>
       {sessionUser.length === 0 ? (
         <span className="login-prompt" >          <OpenModalMenuItem
           itemText={<span className="modalLink">Log in</span>}

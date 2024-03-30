@@ -36,11 +36,11 @@ function UserOverview() {
             <div id="user-details" className="needs-border">
                 <div id='details-location' className="details-indiv">
                     <h4>Location</h4>
-                    <p>{viewedUser.city}, {viewedUser.state}</p>
+                    <div>{viewedUser.city}, {viewedUser.state}</div>
                 </div>
                 <div id='details-time' className="details-indiv">
                     <h4>Pawmate Since</h4>
-                    <p>{getDate(viewedUser.created_at)}</p>
+                    <div>{getDate(viewedUser.created_at)}</div>
                 </div>
             </div>
         </>

@@ -62,15 +62,15 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
         <>
             {reviews.map((review) => (review.user &&
                 <div key={review.id}>
-                    <div className="userInfo" onClick={() => navigate(`/users/${review.user.id}`)}>
-                        <div className="avatar">
+                    <div className="userInfo">
+                        <div className="avatar" onClick={() => navigate(`/users/${review.user.id}`)}>
                             {review.user.user_image_url ? (
                                 <img className="avatarFormat" src={review.user.user_image_url} />
                             ) : (
                                 <img className="avatarFormat" src='../../images/defaultAvatar.png' />
                             )}
                         </div>
-                        <div className="userName">{review.user.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
+                        <div className="userName" onClick={() => navigate(`/users/${review.user.id}`)}>{review.user.first_name} {review.user.last_name && lastInitial(review.user.last_name)}</div>
                         <div className="loc">{review.user.city}, {review.user.state}</div>
                         <div className="stats">
                             <span style={{ fontSize: "small" }}><i className="fa-solid fa-paw" /></span> &nbsp;{review.user.user_num_reviews} &nbsp;&nbsp;&nbsp;
