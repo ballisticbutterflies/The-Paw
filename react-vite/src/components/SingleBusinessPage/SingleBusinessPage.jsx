@@ -59,7 +59,6 @@ function SingleBusinessPage() {
         }
     }
 
-
     const reviewAvg = (avg) => {
         if (avg !== null) {
             return avg.toFixed(1);
@@ -112,15 +111,14 @@ function SingleBusinessPage() {
                         </p>
                     }
 
+                    {!business.price ? (
 
-                    {business.price !== null &&
-                        <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
-                        </p>
-                    }
-
-                    {business.price === null &&
                         <p className="priceSubcat">{business.category?.name}
                         </p>
+                    ) : (
+                        <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
+                        </p>
+                    )
                     }
 
                     <div className="currHours">

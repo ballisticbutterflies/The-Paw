@@ -37,6 +37,7 @@
   border-top: none;
   border-bottom: none;
   border-left: none;
+  border-radius: 0px !important;
   border-right: #c3cddf 2px solid;
   padding-right: 10px;
 }

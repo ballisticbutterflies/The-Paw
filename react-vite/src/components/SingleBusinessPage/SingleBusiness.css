@@ -89,7 +89,7 @@
     font-size: x-large !important;
 }
 
-businessPhotoHeader .pawBlock {
+.businessPhotoHeader .pawBlock {
     background-color: #FFFFFF !important;
     width: fit-content !important;
     padding: 10px 6px 3px 6px !important;
