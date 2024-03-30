@@ -52,7 +52,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
             <hr />
             <div>
                 <h3>About this Business</h3>
-                {business.description}
+                <span className="review-text">{business.description}</span>
             </div>
             <hr ref={locationHoursSection} />
             <div>

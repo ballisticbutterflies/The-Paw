@@ -281,3 +281,12 @@
 .reviewImages:hover {
     cursor: pointer;
 }
+
+
+.review-text {
+    max-inline-size: 690px;
+    word-wrap: break-word; /* Break long words when necessary */
+    overflow-wrap: break-word; /* Break words when necessary */
+    white-space: pre-wrap; /* Preserve white space */
+
+}

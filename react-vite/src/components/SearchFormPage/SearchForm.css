@@ -162,3 +162,16 @@ select {
 .categoryFilter>h4 {
   margin: 10px 0 10px;
 }
+
+.recent-review-text {
+  inline-size: 340px;
+  word-wrap: break-word; /* Break long words when necessary */
+  overflow-wrap: break-word; /* Break words when necessary */
+  white-space: pre-wrap; /* Preserve white space */
+
+}
+
+.review-text-wrapper {
+  width: 100%;
+
+}
