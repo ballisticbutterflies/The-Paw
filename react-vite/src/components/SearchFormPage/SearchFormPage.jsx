@@ -116,17 +116,18 @@ function SearchFormPage() {
                       </span>
                     }
 
-                    <span>
+                    <span className="review-text-wrapper">
                       {business.recent_review_text ?
                         (
-                          <>
+                          <div className="recent-review-text">
                             <i className="fa-regular fa-message fa-flip-horizontal" />
 
                             &nbsp;&nbsp;
                             {business.recent_review_text &&
                               reviewTextSubstr(business.recent_review_text)
-                            }                      </>) : (
-
+                            }
+                          </div>
+                        ) : (
                           <span><span className='paws-unfilled' style={{ fontSize: "medium" }}><i className="fa-solid fa-paw" /></span>&nbsp;&nbsp;Be the first to review!</span>
                         )}
                     </span>
