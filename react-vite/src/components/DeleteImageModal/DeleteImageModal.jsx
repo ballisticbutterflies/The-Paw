@@ -49,7 +49,7 @@ function DeleteImageModal({ imageId, onlyImage, businessId }) {
                 :
                 (user && <div className="deleteModal">
                     <h1>Cannot Delete</h1>
-                    <span>Businesses must have at least one photo uploaded. Please add another photo before deleting.</span>
+                    <span>As the business owner, you must have at least one photo uploaded. Please add another photo before deleting.</span>
                 </div>)
             }
             {
