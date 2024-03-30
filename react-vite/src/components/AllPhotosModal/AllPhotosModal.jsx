@@ -8,7 +8,7 @@ import { useParams, Link } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteImageModal from "../DeleteImageModal/DeleteImageModal";
 import LoginFormModal from "../LoginFormModal";
-
+import SinglePhotoModal from "../SinglePhotoModal/SinglePhotoModal";
 
 
 
@@ -66,8 +66,11 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                     images.images.business_images.map(business_image => (
                         <>
                             <span key={business_image.id} className="allPhotosWrapper">
-                                <img className="images"
-                                    src={business_image.url} />
+                                <OpenModalMenuItem
+                                    itemText={<><img
+                                        className="images"
+                                        src={business_image.url} /></>}
+                                    modalComponent={<SinglePhotoModal imageUrl={business_image.url} />} />
                                 <div className="photoCredit">
                                     <div className="photoCreditText">
                                         <div>
@@ -94,8 +97,12 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
                     images.images.review_images.map(review_image => (
                         <>
                             <span key={review_image.id} className="allPhotosWrapper">
-                                <img className="images"
-                                    src={review_image.url} />
+                                <OpenModalMenuItem
+                                    itemText={<><img
+                                        className="images"
+                                        src={review_image.url} /></>}
+                                    modalComponent={<SinglePhotoModal imageUrl={review_image.url} />} />
+
                                 <div className="photoCredit">
                                     <div className="photoCreditText">
                                         <div>
