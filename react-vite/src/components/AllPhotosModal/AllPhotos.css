@@ -71,7 +71,7 @@
 }
 
 .trash {
-    display: none;
+    /* display: none; */
     justify-self: end;
 }
 
