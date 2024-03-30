@@ -189,7 +189,7 @@ function CreateBusinessPage({ business, formType }) {
       {sessionUser &&
         <form className="createBizForm" onSubmit={handleSubmit} encType="multipart/form-data">
           {formType && formType === "Update Business" && <h1>Update your business details!</h1>}
-          {formType && formType === "Create Business" && <h1>Add your business to The Paw!</h1>}
+          {formType && formType === "Create Business" && <h1>Add Your Business to The Paw!</h1>}
           <select className="inputFields"
             value={category_id}
             onChange={(e) => setCategory_id(e.target.value)}

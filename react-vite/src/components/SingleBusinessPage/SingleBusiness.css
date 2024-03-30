@@ -89,7 +89,7 @@
     font-size: x-large !important;
 }
 
-businessPhotoHeader .pawBlock {
+.businessPhotoHeader .pawBlock {
     background-color: #FFFFFF !important;
     width: fit-content !important;
     padding: 10px 6px 3px 6px !important;
@@ -220,15 +220,15 @@ businessPhotoHeader .pawBlock {
     grid-auto-rows: 22px;
 }
 
-.userInfo:hover {
-    cursor: pointer;
-}
-
 .avatar {
     grid-area: avatar;
     font-size: 60px;
     width: fit-content;
     margin-top: 15px;
+}
+
+.avatar:hover {
+    cursor: pointer;
 }
 
 .avatarFormat {
@@ -240,8 +240,14 @@ businessPhotoHeader .pawBlock {
 }
 
 .userName {
+    color: #5f5ba8;
     grid-area: name;
     font-weight: 600;
+}
+
+.userName:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .loc {

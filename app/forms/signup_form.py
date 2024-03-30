@@ -29,6 +29,7 @@ states = [('-','-'),('AL','AL'),('AK','AK'),('AZ','AZ'),('AR','AR'),
           ('UT','UT'),('VT','VT'),('VI','VI'),('VA','VA'),('WA','WA'),
           ('WV','WV'),('WI','WI'),('WY','WY')]
 
+
 class SignUpForm(FlaskForm):
     first_name = StringField('first name', validators=[DataRequired()])
     last_name = StringField('last name', validators=[DataRequired()])
