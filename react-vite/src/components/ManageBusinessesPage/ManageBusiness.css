@@ -92,3 +92,9 @@
   display: flex;
   margin: auto;
 }
+
+.no-biz {
+  display: flex;
+  flex-direction: column;
+  margin:auto;
+}

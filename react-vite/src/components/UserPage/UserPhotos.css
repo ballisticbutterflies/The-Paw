@@ -13,6 +13,10 @@
     height: 100%;
 }
 
+.images:hover {
+    cursor: pointer;
+}
+
 .photoCredit {
     position: relative;
     bottom: 33px;

@@ -34,7 +34,7 @@ function SingleBusinessPage() {
         let filled_paws = [];
         let unfilled_paws = []
 
-        for (let i = 0; i < numStars; i++) {
+        for (let i = 0; i < parseInt(numStars); i++) {
             filled_paws.push(<span className="paws-filled"><i className="fa-solid fa-paw"></i> </span>)
         }
 

@@ -40,7 +40,7 @@ def user_images_all(id):
 
         # assign business_id when imageable type is business
         if user_image_dict['type'] == 'business':
-            business_id = user_image_dict['type_id']
+            business_id = user_image_dict['business_id']
             user_image_dict['biz_images_count'] = Image.query.filter(Image.imageable_type == 'business').filter(Image.imageable_id == business_id).count()
             
         # assign business_id when imageable type is review
@@ -48,6 +48,7 @@ def user_images_all(id):
         if user_image_dict['type'] == 'review':
             get_review_res = Review.query.filter(Review.id == user_image_dict['type_id']).first()
             business_id = get_review_res.business_id
+            user_image_dict['business_id'] = business_id
             user_image_dict['biz_images_count'] = 'not applicable'
 
         # regardless of imageable type, now that we have the appropriate business_id, fetch the business name
