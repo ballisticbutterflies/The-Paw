@@ -49,28 +49,30 @@ function ProfileButton() {
         <img className="profileAvatar" src='../../images/defaultAvatar.png' />
       )}</div>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
-          {user ? (
-            <>
-              <div className="profiledropdownoptions" onClick={() =>{ navigate(`/users/${user.id}`), closeMenu()}}><FaUserCircle />&nbsp; About Me</div>
-              <hr />
-              <div className="profiledropdownoptions" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket" />&nbsp; Log Out </div>
-            </>
-          ) : (
-            <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
+        <div className="dropdown">
+          <ul className={"profile-dropdown"} ref={ulRef}>
+            {user ? (
+              <>
+                <div className="profiledropdownoptions" onClick={() => { navigate(`/users/${user.id}`), closeMenu() }}><FaUserCircle />&nbsp; About Me</div>
+                <hr />
+                <div className="profiledropdownoptions" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket" />&nbsp; Log Out </div>
+              </>
+            ) : (
+              <>
+                <OpenModalMenuItem
+                  itemText="Log In"
+                  onItemClick={closeMenu}
+                  modalComponent={<LoginFormModal />}
+                />
+                <OpenModalMenuItem
+                  itemText="Sign Up"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
+              </>
+            )}
+          </ul>
+        </div>
       )}
     </>
   );

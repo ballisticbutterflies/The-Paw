@@ -46,7 +46,7 @@ function ForBusinessButton() {
         <i className="fa-solid fa-angle-down" id="caret" />
       </button>
       {showMenu &&
-        <>
+        <div className="manBizDropdown">
           <ul className={ulClassName} ref={ulRef}>
             {
               sessionUser ? (
@@ -80,7 +80,7 @@ function ForBusinessButton() {
               )
             }
           </ul>
-        </>
+        </div>
       }
     </>
   )
