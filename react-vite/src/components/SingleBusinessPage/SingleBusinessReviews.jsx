@@ -6,6 +6,8 @@ import UpdateReviewPage from "../ReviewForms/UpdateReviewPage";
 import { fetchSingleBusiness } from "../../redux/businesses";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "../ReviewForms/DeleteReviewModal";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import SinglePhotoModal from "../SinglePhotoModal/SinglePhotoModal";
 
 function SingleBusinessReviews({ businessId, sessionUser }) {
     const navigate = useNavigate()
@@ -57,6 +59,7 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
         });
         return enUSFormatter.format(newDate)
     }
+    console.log(reviews);
 
     return (reviews &&
         <>
@@ -83,9 +86,13 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                             review.review_images.map(image =>
                             (
                                 <span key={image.id} className="reviewImagesContainer">
-                                    <img
-                                        className="reviewImages"
-                                        src={image.url} /></span>
+                                    <OpenModalMenuItem
+                                        itemText={<><img
+                                            className="reviewImages"
+                                            src={image.url} /></>}
+                                        modalComponent={<SinglePhotoModal imageUrl={image.url} />} />
+
+                                </span>
                             )
                             )
                         } </div>
