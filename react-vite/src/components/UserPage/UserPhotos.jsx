@@ -29,7 +29,7 @@ function UserPhotos() {
         state.users ? state.users.undefined : null
     ))
 
-    console.log(viewedUserImages);
+    console.log("VIIII", viewedUserImages);
 
     // console.log("viewed user images", viewedUserImages)
 
@@ -74,12 +74,12 @@ function UserPhotos() {
                                             {((sessionUser && sessionUser.id === viewedUser.id) && (typeof user_image.biz_images_count == "string" || user_image.biz_images_count > 1)) &&
                                                 <OpenModalMenuItem
                                                     itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={user_image.id} />} />
+                                                    modalComponent={<DeleteImageModal imageId={user_image.id} businessId={user_image.business_id} />} />
                                             }
-                                            {((sessionUser && sessionUser.id === viewedUser.id) && (typeof user_image.biz_images_count == "number" && user_image.biz_images_count <= 1)) &&
+                                            {((sessionUser && sessionUser.id === viewedUser.id) && (typeof user_image.biz_images_count == "number" && user_image.biz_images_count === 1)) &&
                                                 <OpenModalMenuItem
                                                     itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF" }} />&nbsp;&nbsp;</>}
-                                                    modalComponent={<DeleteImageModal imageId={user_image.id} onlyImage={true} />} />
+                                                    modalComponent={<DeleteImageModal imageId={user_image.id} businessId={user_image.business_id} onlyImage={true} />} />
                                             }
                                         </div>
                                     </div>
