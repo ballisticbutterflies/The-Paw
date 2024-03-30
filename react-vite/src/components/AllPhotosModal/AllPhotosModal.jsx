@@ -20,8 +20,6 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     const images = useSelector(state => state.images[businessId])
     const sessionUser = useSelector(state => state.session.user)
 
-
-
     useEffect(() => {
 
         dispatch(getImagesByBusiness(businessId))
@@ -35,7 +33,7 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
     }
 
     return (images &&
-        <div className={modalLoad ? "modal" : "page"}>
+        <div className={modalLoad ? "allPhotosModal modal-content" : "page"}>
             <div className="allPhotosHeader">
                 <div>{modalLoad ? (
                     <h1>Photos for {images.images.business_name}</h1>
