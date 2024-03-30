@@ -123,7 +123,7 @@ function UserReviews() {
                                         <div className="paw-and-date">
                                             <span className="pawBlock">{reviewStars(user_review.stars)} &nbsp;&nbsp;{getDate(user_review.created_at)}</span>
                                         </div>
-                                        <p id="review-text">{user_review.review}</p>
+                                        <p className="review-text">{user_review.review}</p>
                                         <div className="reviewImagesWrapper">{user_review.images.length > 0 && user_review.images.map(image =>
                                         (
                                             <span key={image.id} className="reviewImagesContainer">

@@ -109,7 +109,7 @@ function ManageBusinessPage() {
                       <span style={{ fontWeight: '600' }}>Today&apos;s Hours:</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}
                     </span>
                   )}
-                  {business.description && descriptionTextSubstr(business.description)}
+                  <span className="recent-review-text">{business.description && descriptionTextSubstr(business.description)}</span>
                 </span>
               </Link>
               <div className="manbutton">

@@ -80,7 +80,7 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                             <span style={{ fontSize: "small" }}><i className="fa-regular fa-image" /></span> &nbsp;{review.user.user_num_images}</div>
                     </div>
                     <p>{review.stars && (reviewStars(review.stars))} &nbsp;&nbsp;{review.created_at && (dateFormat(review.created_at))}</p>
-                    <p>{review.review}</p>
+                    <p className='review-text'>{review.review}</p>
                     <div>
                         <div className="reviewImagesWrapper">{review.review_images !== 'No review images found' &&
                             review.review_images.map(image =>
