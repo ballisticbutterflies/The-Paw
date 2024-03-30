@@ -99,9 +99,14 @@ function SearchFormPage() {
 
                     }
 
-                    {business.price !== null &&
-                      <span className="priceSubcat">{business.category?.name} &nbsp;&#183;&nbsp; {business.price}
-                      </span>
+                    {!business.price ? (
+
+                      <p className="priceSubcat">{business.category?.name}
+                      </p>
+                    ) : (
+                      <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
+                      </p>
+                    )
                     }
 
                     {business.price === null &&
