@@ -79,7 +79,6 @@ const FilterComponent = ({ onFilterChange }) => {
     dispatch(fetchBusinesses())
   }
 
-
   return (
     <>
       <div className="filterComponent" >
