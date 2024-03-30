@@ -63,7 +63,7 @@ function UserPhotos() {
                         <>
                             <span key={user_image.id} className="allPhotosWrapper">
                                 <img className="images"
-                                    src={user_image.image_url} onClick={() => navigate(`/businesses/${user_image.type_id}`)} />
+                                    src={user_image.image_url} onClick={() => navigate(`/businesses/${user_image.business_id}`)} />
                                 <div className="photoCredit">
                                     <div className="photoCreditText">
                                         <div id="biz-name">
