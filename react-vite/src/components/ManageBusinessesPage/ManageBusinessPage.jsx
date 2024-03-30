@@ -95,15 +95,15 @@ function ManageBusinessPage() {
                       &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}
                     </span>
                   )}
-                  {business.price !== null ? (
-                    <span className="priceSubcat">
-                      {business.category?.name} &nbsp;&#183;&nbsp; {business.price}
-                    </span>
+                  {!business.price ? (
+
+                    <p className="priceSubcat">{business.category?.name}
+                    </p>
                   ) : (
-                    <span className="priceSubcat">
-                      {business.category?.name}
-                    </span>
-                  )}
+                    <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
+                    </p>
+                  )
+                  }
                   {getTodaysHours(business) && (
                     <span className="todayHours">
                       <span style={{ fontWeight: '600' }}>Today&apos;s Hours:</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}
@@ -119,9 +119,9 @@ function ManageBusinessPage() {
           ))
         ) : (
           <div className='no-biz'>
-          <div>It looks like you don&apos;t have any businesses listed on The Paw.</div>
-          &nbsp;
-          <Link to={'/businesses/new'}>Add your business to The Paw!</Link>
+            <div>It looks like you don&apos;t have any businesses listed on The Paw.</div>
+            &nbsp;
+            <Link to={'/businesses/new'}>Add your business to The Paw!</Link>
           </div>
         )
       )}
