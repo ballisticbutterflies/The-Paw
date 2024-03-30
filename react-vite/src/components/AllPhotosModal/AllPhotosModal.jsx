@@ -82,6 +82,13 @@ function AllPhotosModal({ businessId: propBusinessId, modalLoad }) {
 
                                             }
 
+                                            {sessionUser && sessionUser.id === business_image.uploader_id && Number(images.images.business_images.length) === 1 &&
+                                                <OpenModalMenuItem
+                                                    itemText={<><i className="fa-solid fa-trash-can" style={{ color: "#FFFFFF", cursor: "pointer" }} />&nbsp;&nbsp;</>}
+                                                    modalComponent={<DeleteImageModal imageId={business_image.id} onlyImage={true} businessId={businessId} />} />
+
+                                            }
+
                                         </div>
 
                                     </div>
