@@ -5,6 +5,7 @@ import { stdTimeFormat } from "../../utils";
 import { useSelector } from "react-redux"
 import LoginFormModal from "../LoginFormModal";
 import CreateReviewPage from "../ReviewForms/CreateReviewPage";
+import BusinessMap from "./BusinessMap";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
     const sessionUser = useSelector(state => state.session.user)
@@ -57,14 +58,17 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
             <hr ref={locationHoursSection} />
             <div>
                 <h3>Location & Hours</h3>
-                <div className="locationHours">
-                    <div className="businessDetailsLocation">
-                        <div className="businessAddress">
-                            <div>{business.address}</div>
-                            <div>{business.city}, {business.state} {business.zip_code}</div>
+                <div className="locationHoursContainer">
+                    <div className="locationHours">
+                        <BusinessMap business={business} />
+                        <div className="businessDetailsLocation">
+                            <div className="businessAddress">
+                                <div>{business.address}</div>
+                                <div>{business.city}, {business.state} {business.zip_code}</div>
+                            </div>
                         </div>
+                        <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
                     </div>
-                    <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">

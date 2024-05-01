@@ -17,4 +17,5 @@ export default defineConfig((mode) => ({
       "/api": "http://127.0.0.1:5000",
     },
   },
+  define: { 'process.env': env }
 }));
