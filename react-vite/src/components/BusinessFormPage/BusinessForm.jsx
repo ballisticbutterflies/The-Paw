@@ -152,6 +152,7 @@ function CreateBusinessPage({ business, formType }) {
     if (!zip_code) errObj.zip_code = "ZIP Code is required."
     if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid."
     if (!name) errObj.name = "Business name is required."
+    if (name.trim().length < 1) errObj.name = "Business name is required."
     if (name.length > 100) errObj.name = "Business name must be less than 100 characters."
     if (!description) errObj.description = "Description is required."
     if (!category_id) errObj.category_id = "Category is required."
