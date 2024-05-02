@@ -52,18 +52,25 @@ function Footer() {
           </div>
           <div className='dev-heading'>Technologies
             <div className='techs'>
-              <a href='https://docs.python.org/3/'>
-                <i className="fa-brands fa-python fa-lg" />
-              </a>
-              <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript'>
-                <i className="fa-brands fa-js fa-lg" />
-              </a>
-              <a href='https://react.dev/'>
-                <i className="fa-brands fa-react fa-lg" />
-              </a>
-              <a href='https://www.w3.org/Style/CSS/Overview.en.html'>
-                <i className="fa-brands fa-css3-alt fa-lg" />
-              </a>
+              <div className='backend'>
+                <a href='https://docs.python.org/3/'>
+                  <i className="fa-brands fa-python fa-lg" />
+                </a>
+                <a href='https://flask.palletsprojects.com/en/3.0.x/'>
+                  <img className='flask' src="https://img.icons8.com/ios/50/5F5BA8/flask.png" alt="flask" />
+                </a>
+              </div>
+              <div className='frontend'>
+                <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript'>
+                  <i className="fa-brands fa-js fa-lg" />
+                </a>
+                <a href='https://react.dev/'>
+                  <i className="fa-brands fa-react fa-lg" />
+                </a>
+                <a href='https://www.w3.org/Style/CSS/Overview.en.html'>
+                  <i className="fa-brands fa-css3-alt fa-lg" />
+                </a>
+              </div>
             </div>
           </div>
           <div className='dev-heading'>Docs
