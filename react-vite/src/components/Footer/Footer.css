@@ -1,0 +1,52 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-top: 150px;
+
+}
+
+.footer-image {
+  padding-bottom: 15px;
+  height: 330px;
+}
+
+.footer-heading {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: auto;
+  width: 100vw; /* Full viewport width */
+  border-top: 1px solid #d8c3c3;
+  justify-items: center;
+
+}
+
+.dev-heading {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.devs {
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  font-size: 14px;
+
+}
+
+.techs {
+  display: flex;
+  justify-content: space-around;
+
+  padding-top: 10px;
+}
+
+.docs {
+  padding-top: 7px;
+
+  display: flex;
+  flex-direction: column;
+}
