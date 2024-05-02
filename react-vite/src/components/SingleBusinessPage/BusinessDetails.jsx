@@ -60,14 +60,14 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                 <h3>Location & Hours</h3>
                 <div className="locationHoursContainer">
                     <div className="locationHours">
-                        <BusinessMap business={business} />
+                        <div className="businessMap"><BusinessMap business={business} /></div>
                         <div className="businessDetailsLocation">
                             <div className="businessAddress">
                                 <div>{business.address}</div>
                                 <div>{business.city}, {business.state} {business.zip_code}</div>
                             </div>
+                            <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
                         </div>
-                        <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
                     </div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (

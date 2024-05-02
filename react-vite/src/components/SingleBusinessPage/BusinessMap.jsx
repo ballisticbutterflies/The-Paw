@@ -1,4 +1,4 @@
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { fetchGeocode } from '../../redux/maps';
 import './SingleBusiness.css';
 import { useEffect } from 'react';
@@ -9,19 +9,30 @@ function BusinessMap({ business }) {
     const dispatch = useDispatch();
 
     const geocode = Object.values(useSelector(state => state.maps))
+
     let lat;
     let lng;
+
     geocode.map(place => {
         lat = place.lat
         lng = place.lng
     })
 
     useEffect(() => {
-        dispatch(fetchGeocode(business.address, business.city, business.state))
+        const runDispatches = async () => {
+
+            await dispatch(fetchGeocode(business.address, business.city, business.state))
+        }
+
+        runDispatches()
     }, [dispatch, business.address, business.city, business.state])
 
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: "AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo",
+    });
+
     const mapStyles = {
-        height: "100vh",
+        height: "200px",
         width: "100%"
     };
 
@@ -31,13 +42,15 @@ function BusinessMap({ business }) {
 
     return (
         <>
-            <LoadScript googleMapsApiKey="AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo">
+            {!isLoaded ? (
+                <h1>Loading...</h1>
+            ) : (
                 <GoogleMap
                     mapContainerStyle={mapStyles}
-                    zoom={18}
+                    zoom={20}
                     center={defaultCenter}
                 />
-            </LoadScript>
+            )}
         </>
     )
 }

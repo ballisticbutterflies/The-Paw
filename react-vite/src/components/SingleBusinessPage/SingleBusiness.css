@@ -159,7 +159,7 @@
     margin-bottom: 30px;
 }
 
-.locationHoursSection {
+.locationHoursContainer {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -167,9 +167,14 @@
 }
 
 .locationHours {
-    display: grid;
+    width: 400px;
 }
 
+.businessDetailsLocation {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+}
 
 .hours {
     display: grid;
