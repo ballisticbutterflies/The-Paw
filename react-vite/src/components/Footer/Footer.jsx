@@ -1,4 +1,5 @@
-
+import { SiRedux } from "react-icons/si";
+import { SiPostgresql } from "react-icons/si";
 import './Footer.css'
 
 function Footer() {
@@ -20,7 +21,7 @@ function Footer() {
                     <i className="fa-brands fa-github fa-lg" />
                   </span>
                 </a>
-                &nbsp;&nbsp;Carmen Shiu
+                <span className="names">&nbsp;&nbsp;Carmen Shiu</span>
               </div>
               <div>
                 <a href='https://www.linkedin.com/in/simon-sammel/'>
@@ -33,7 +34,7 @@ function Footer() {
                     <i className="fa-brands fa-github fa-lg" />
                   </span>
                 </a>
-                &nbsp;&nbsp;Simon Sammel
+                <span className="names">&nbsp;&nbsp;Simon Sammel</span>
               </div>
               <div>
                 <a href='https://www.linkedin.com/in/tracey-beard/'>
@@ -46,7 +47,7 @@ function Footer() {
                     <i className="fa-brands fa-github fa-lg" />
                   </span>
                 </a>
-                &nbsp;&nbsp;Tracey Beard
+                <span className="names">&nbsp;&nbsp;Tracey Beard</span>
               </div>
             </div>
           </div>
@@ -59,13 +60,20 @@ function Footer() {
                 <a href='https://flask.palletsprojects.com/en/3.0.x/'>
                   <img className='flask' src="https://img.icons8.com/ios/50/5F5BA8/flask.png" alt="flask" />
                 </a>
-              </div>
-              <div className='frontend'>
+                <a className="postgres" href='https://www.postgresql.org/docs/' >
+                  <SiPostgresql />
+                </a>
                 <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript'>
                   <i className="fa-brands fa-js fa-lg" />
                 </a>
                 <a href='https://react.dev/'>
                   <i className="fa-brands fa-react fa-lg" />
+                </a>
+                <a href='https://redux.js.org/'>
+                  <SiRedux />
+                </a>
+                <a href='https://www.w3.org/Style/CSS/Overview.en.html'>
+                  <i className="fa-brands fa-html5 fa-lg"/>
                 </a>
                 <a href='https://www.w3.org/Style/CSS/Overview.en.html'>
                   <i className="fa-brands fa-css3-alt fa-lg" />
@@ -75,13 +83,13 @@ function Footer() {
           </div>
           <div className='dev-heading'>Docs
             <div className='docs'>
-              <a href='https://github.com/ballisticbutterflies/The-Paw'>
+              <a className="docs-links" href='https://github.com/ballisticbutterflies/The-Paw'>
                 Repository
               </a>
-              <a href='https://github.com/ballisticbutterflies/The-Paw/wiki'>
+              <a className="docs-links" href='https://github.com/ballisticbutterflies/The-Paw/wiki'>
                 Wiki
               </a>
-              <a href='https://www.canva.com/design/DAF-sAfmzW0/19OFQL2f7szQz104swZt0w/view?utm_content=DAF-sAfmzW0&utm_campaign=designshare&utm_medium=link&utm_source=editor'>
+              <a className="docs-links" href='https://www.canva.com/design/DAF-sAfmzW0/19OFQL2f7szQz104swZt0w/view?utm_content=DAF-sAfmzW0&utm_campaign=designshare&utm_medium=link&utm_source=editor'>
                 Wireframe
               </a>
             </div>
