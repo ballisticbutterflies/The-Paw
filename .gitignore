@@ -1,6 +1,6 @@
 # created by virtualenv automatically
 
 instance/
-.env
+env/.env
 __pycache__/
 package-lock.json
