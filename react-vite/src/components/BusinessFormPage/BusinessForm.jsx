@@ -147,14 +147,17 @@ function CreateBusinessPage({ business, formType }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let errObj = {}
     if (!address) errObj.address = "Address is required."
+    if (address.trim().length < 1) errObj.address = "Address is required."
     if (!city) errObj.city = "City is required."
+    if (city.trim().length < 1) errObj.city = "City is required."
     if (!state) errObj.state = "State is required."
     if (!zip_code) errObj.zip_code = "ZIP Code is required."
-    if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid."
+    if (zip_code.trim().length > 5) errObj.zip_code = "ZIP Code is invalid."
     if (!name) errObj.name = "Business name is required."
     if (name.trim().length < 1) errObj.name = "Business name is required."
     if (name.length > 100) errObj.name = "Business name must be less than 100 characters."
     if (!description) errObj.description = "Description is required."
+    if (description.trim().length < 1) errObj.description = "Description is required."
     if (!category_id) errObj.category_id = "Category is required."
     if (description.length >= 1 && description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters."
     if (website && !isValidUrl(website)) errObj.website = "Website is not valid."
