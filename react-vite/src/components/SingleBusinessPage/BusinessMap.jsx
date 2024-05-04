@@ -4,7 +4,9 @@ import './SingleBusiness.css';
 import './BusinessMap.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Loader } from "@googlemaps/js-api-loader"
+
+
+
 
 function BusinessMap({ business }) {
     console.log("BUSINESS IN MAP", business);
@@ -59,9 +61,10 @@ function BusinessMap({ business }) {
     // Initialize and add the map
     let map;
 
+
     async function initMap() {
         // The location of Uluru
-        const position = { lat: -25.344, lng: 131.031 };
+        const position = { lat: lat, lng: lng};
         // Request needed libraries.
         //@ts-ignore
         const { Map } = await google.maps.importLibrary("maps");
@@ -69,7 +72,7 @@ function BusinessMap({ business }) {
 
         // The map, centered at Uluru
         map = new Map(document.getElementById("map"), {
-            zoom: 4,
+            zoom: 12,
             center: position,
             mapId: "DEMO_MAP_ID",
         });
@@ -78,8 +81,10 @@ function BusinessMap({ business }) {
         const marker = new AdvancedMarkerElement({
             map: map,
             position: position,
-            title: "Uluru",
+            // title: "Uluru",
         });
+        marker
+
     }
 
     initMap();
