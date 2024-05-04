@@ -31,44 +31,24 @@ function BusinessMap({ business }) {
         runDispatches()
     }, [dispatch, business.address, business.city, business.state])
 
-    // const { isLoaded } = useLoadScript({
-    //     googleMapsApiKey: "AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo",
-    // });
-
-    // const mapStyles = {
-    //     height: "200px",
-    //     width: "100%"
-    // };
-
-    // const defaultCenter = {
-    //     lat: lat, lng: lng
-    // };
-    // let map;
-
-    // const loader = new Loader({
-    //     apiKey: "AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo",
-    //     version: "weekly"
-    // });
-
-    // loader.load().then(async () => {
-    //     const { Map } = await google.maps.importLibrary("maps");
-
-    //     map = new Map(document.getElementById("map"), {
-    //         center: { lat: -34.397, lng: 150.644 },
-    //         zoom: 8,
-    //     });
-    // });
-    // Initialize and add the map
     let map;
 
+    geocode?.map(place => {
+        lat = place?.lat
+        lng = place?.lng
+    })
+    console.log("LAT", typeof (lng));
 
     async function initMap() {
         // The location of Uluru
-        const position = { lat: lat, lng: lng};
         // Request needed libraries.
         //@ts-ignore
         const { Map } = await google.maps.importLibrary("maps");
         const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+        // const { LatLng } = await google.maps.importLibrary("core");
+
+        const position = await google.maps.LatLng(lat, lng);
+        // let latLng = new google.maps.LatLng(position.lat, position.lg);
 
         // The map, centered at Uluru
         map = new Map(document.getElementById("map"), {
