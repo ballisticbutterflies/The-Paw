@@ -4,6 +4,7 @@
   justify-content: space-between;
   flex-direction: column;
   padding-top: 150px;
+  padding-bottom: 20px;
 
 }
 
@@ -17,10 +18,11 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin: auto;
-  width: 100vw; /* Full viewport width */
+  width: 100vw;
+  /* Full viewport width */
   border-top: 1px solid #c3cddf;
   justify-items: center;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .dev-heading {
