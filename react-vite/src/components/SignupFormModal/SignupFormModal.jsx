@@ -55,10 +55,13 @@ function SignupFormModal() {
     if (password.length < 6) errObj.password = "Password must be at least 6 characters."
     if (password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field."
     if (!first_name) errObj.first_name = "First name is required."
+    if (first_name.trim().length < 1) errObj.first_name = "First name is required."
     if (!last_name) errObj.last_name = "Last name is required."
+    if (last_name.trim().length < 1) errObj.last_name = "Last name is required."
     if (!email) errObj.email = "Email is required."
     if (email && !emailRegex.test(email)) errObj.email = "Email format is invalid."
     if (!city) errObj.city = "City is required."
+    if (city.trim().length < 1) errObj.city = "City is required."
     if (!state) errObj.state = "State is required."
 
     setErrors(errObj)
