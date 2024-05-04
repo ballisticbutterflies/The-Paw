@@ -159,9 +159,25 @@
     margin-bottom: 30px;
 }
 
-.locationHours {
+.locationHoursContainer {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     gap: 30px;
+}
+
+.locationHours {
+    width: 400px;
+}
+
+.businessAddress {
+    margin-top: 5px;
+}
+
+.businessDetailsLocation {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
 }
 
 .hours {
@@ -285,8 +301,21 @@
 
 .review-text {
     max-inline-size: 690px;
-    word-wrap: break-word; /* Break long words when necessary */
-    overflow-wrap: break-word; /* Break words when necessary */
-    white-space: pre-wrap; /* Preserve white space */
+    word-wrap: break-word;
+    /* Break long words when necessary */
+    overflow-wrap: break-word;
+    /* Break words when necessary */
+    white-space: pre-wrap;
+    /* Preserve white space */
 
+}
+
+.App {
+    height: 100vh;
+    width: 100vw;
+}
+
+.map-container {
+    height: 100%;
+    width: 100%;
 }

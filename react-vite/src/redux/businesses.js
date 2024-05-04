@@ -40,6 +40,7 @@ export const loadAllBusinesses = (businesses) => ({
     businesses
 
 })
+
 // THUNK
 
 export const fetchSingleBusiness = (businessId) => async (dispatch) => {
@@ -152,7 +153,7 @@ const businessesReducer = (state = {}, action) => {
             return businessState
         }
         case LOAD_ALL_BUSINESSES: {
-            const bizState = {...state}
+            const bizState = { ...state }
             action.businesses.businesses.forEach(business => {
                 bizState[business.id] = business;
             })

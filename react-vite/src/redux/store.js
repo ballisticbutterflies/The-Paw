@@ -12,6 +12,7 @@ import reviewsReducer from "./reviews";
 import imagesReducer from "./images";
 import categoriesReducer from "./categories";
 import userReducer from "./users";
+import mapsReducer from "./maps";
 
 
 const rootReducer = combineReducers({
@@ -21,8 +22,8 @@ const rootReducer = combineReducers({
   reviews: reviewsReducer,
   images: imagesReducer,
   categories: categoriesReducer,
-  users: userReducer
-
+  users: userReducer,
+  maps: mapsReducer
 });
 
 let enhancer;
