@@ -72,7 +72,7 @@ function BusinessMap({ business }) {
 
         // The map, centered at Uluru
         map = new Map(document.getElementById("map"), {
-            zoom: 12,
+            zoom: 18,
             center: position,
             mapId: "DEMO_MAP_ID",
         });
@@ -81,7 +81,7 @@ function BusinessMap({ business }) {
         const marker = new AdvancedMarkerElement({
             map: map,
             position: position,
-            // title: "Uluru",
+            title: `${business.name}`,
         });
         marker
 
