@@ -8,7 +8,7 @@ import BusinessContactCard from "./BusinessContactCard";
 import AllPhotosModal from "../AllPhotosModal/AllPhotosModal";
 import OpenModalButton from "../OpenModalButton";
 import { getTodaysHours } from "../../utils";
-
+import { fetchGeocode } from '../../redux/maps';
 
 
 function SingleBusinessPage() {
@@ -23,12 +23,12 @@ function SingleBusinessPage() {
 
     useEffect(() => {
         const runDispatches = async () => {
-            dispatch(fetchSingleBusiness(businessId)
-            );
+            dispatch(fetchSingleBusiness(businessId));
+            dispatch(fetchGeocode(business.address, business.city, business.state));
 
         };
         runDispatches();
-    }, [dispatch, businessId])
+    }, [dispatch, businessId, business.address, business.city, business.state])
 
     const reviewStars = (numStars) => {
         let filled_paws = [];

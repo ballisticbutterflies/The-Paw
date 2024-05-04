@@ -26,6 +26,7 @@ function BusinessMap({ business }) {
         const runDispatches = async () => {
 
             await dispatch(fetchGeocode(business.address, business.city, business.state))
+
         }
 
         runDispatches()
@@ -37,7 +38,7 @@ function BusinessMap({ business }) {
         lat = place?.lat
         lng = place?.lng
     })
-    console.log("LAT", typeof (lng));
+    console.log("LAT", typeof (lng), lng);
 
     async function initMap() {
         // The location of Uluru
@@ -53,14 +54,14 @@ function BusinessMap({ business }) {
         // The map, centered at Uluru
         map = new Map(document.getElementById("map"), {
             zoom: 18,
-            center: position,
+            center: {lat: lat, lng: lng},
             mapId: "DEMO_MAP_ID",
         });
 
         // The marker, positioned at Uluru
         const marker = new AdvancedMarkerElement({
             map: map,
-            position: position,
+            position: {lat: lat, lng: lng},
             title: `${business.name}`,
         });
         marker
