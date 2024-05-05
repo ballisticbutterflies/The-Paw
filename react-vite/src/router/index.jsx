@@ -13,6 +13,7 @@ import AddPhotosToBusiness from '../components/AddPhotosToBusiness';
 import CreateReviewPage from '../components/ReviewForms/CreateReviewPage';
 import UpdateReviewPage from '../components/ReviewForms/UpdateReviewPage';
 import UserPage from '../components/UserPage/UserPage';
+import GetDirecions from '../components/SingleBusinessPage/GetDirections';
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path: "/users/:userId",
         element: <UserPage />,
+      },
+      {
+        path: "/businesses/directions",
+        element: <GetDirecions />,
       },
     ],
   },
