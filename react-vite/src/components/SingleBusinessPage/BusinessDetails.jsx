@@ -15,6 +15,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
     const getDirections = () => {
         return (<a href="https://www.google.com/maps/dir/?api=1&destination=31251+Lily+St+Union+City+CA+94587" />)
     }
+    getDirections
 
     return (
         <div className="businessDetails">
