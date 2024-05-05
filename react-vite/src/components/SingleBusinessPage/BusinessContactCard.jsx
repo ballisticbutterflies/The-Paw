@@ -30,12 +30,12 @@ function BusinessContactCard({ business }) {
                 <>
                     <div className="businessAddressContainer">
                         <div className="businessAddress">
-                            {/* <div>
-                                Get Directions
-                            </div> */}
+                            <div>
+                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
+                            </div>
                             <div className="businessCardDetail">{business.address} {business.city}, {business.state} {business.zip_code}</div>
                         </div>
-                        <div className="businessContactIcon"><i className="fa-solid fa-diamond-turn-right"></i></div>
+                        <div className="businessContactIcon"><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a></div>
                     </div>
                 </>
             }
