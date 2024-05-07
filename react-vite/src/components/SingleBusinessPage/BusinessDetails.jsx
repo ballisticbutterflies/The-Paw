@@ -12,6 +12,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
     const reviews = Object.values(useSelector(state => state.reviews))
     const reviewerIds = reviews.map(review => review.user_id)
 
+
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">

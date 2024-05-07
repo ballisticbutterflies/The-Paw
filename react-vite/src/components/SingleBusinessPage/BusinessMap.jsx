@@ -2,15 +2,14 @@
 import { fetchGeocode } from '../../redux/maps';
 import './SingleBusiness.css';
 import './BusinessMap.css';
-import { useEffect } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-
 
 
 function BusinessMap({ business }) {
     console.log("BUSINESS IN MAP", business);
     const dispatch = useDispatch();
+    const mapRef = useRef(null)
 
     const geocode = Object.values(useSelector(state => state.maps))
 
@@ -26,68 +25,37 @@ function BusinessMap({ business }) {
         const runDispatches = async () => {
 
             await dispatch(fetchGeocode(business.address, business.city, business.state))
-        }
 
+        }
         runDispatches()
     }, [dispatch, business.address, business.city, business.state])
 
-    // const { isLoaded } = useLoadScript({
-    //     googleMapsApiKey: "AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo",
-    // });
+    console.log("LAT", typeof (lng), lng);
 
-    // const mapStyles = {
-    //     height: "200px",
-    //     width: "100%"
-    // };
-
-    // const defaultCenter = {
-    //     lat: lat, lng: lng
-    // };
-    // let map;
-
-    // const loader = new Loader({
-    //     apiKey: "AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo",
-    //     version: "weekly"
-    // });
-
-    // loader.load().then(async () => {
-    //     const { Map } = await google.maps.importLibrary("maps");
-
-    //     map = new Map(document.getElementById("map"), {
-    //         center: { lat: -34.397, lng: 150.644 },
-    //         zoom: 8,
-    //     });
-    // });
-    // Initialize and add the map
-    let map;
-
-
-    async function initMap() {
-        // The location of Uluru
-        const position = { lat: lat, lng: lng};
-        // Request needed libraries.
-        //@ts-ignore
+    const initMap = useCallback(async () => {
         const { Map } = await google.maps.importLibrary("maps");
         const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-        // The map, centered at Uluru
-        map = new Map(document.getElementById("map"), {
+        const position = new google.maps.LatLng(lat, lng);
+
+        mapRef.current = new Map(document.getElementById("map"), {
             zoom: 18,
             center: position,
             mapId: "DEMO_MAP_ID",
         });
 
-        // The marker, positioned at Uluru
         const marker = new AdvancedMarkerElement({
-            map: map,
+            map: mapRef.current,
             position: position,
             title: `${business.name}`,
         });
         marker
+    }, [business.name, lat, lng])
 
-    }
 
-    initMap();
+    useEffect(() => {
+        if (lat !== undefined && lng !== undefined) initMap();
+    }, [initMap, lat, lng])
 
 
     return (
@@ -104,6 +72,7 @@ function BusinessMap({ business }) {
 
             <div id="map">
             </div>
+
         </>
     )
 }
