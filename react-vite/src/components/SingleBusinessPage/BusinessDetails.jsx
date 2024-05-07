@@ -12,6 +12,10 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
     const reviews = Object.values(useSelector(state => state.reviews))
     const reviewerIds = reviews.map(review => review.user_id)
 
+    const getDirections = () => {
+        return (<a href="https://www.google.com/maps/dir/?api=1&destination=31251+Lily+St+Union+City+CA+94587" />)
+    }
+    getDirections
 
     return (
         <div className="businessDetails">
@@ -67,7 +71,7 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                                 <div>{business.address}</div>
                                 <div>{business.city}, {business.state} {business.zip_code}</div>
                             </div>
-                            <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
+                            <div><span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span></div>
                         </div>
                     </div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
