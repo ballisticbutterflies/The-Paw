@@ -5,11 +5,17 @@ import { stdTimeFormat } from "../../utils";
 import { useSelector } from "react-redux"
 import LoginFormModal from "../LoginFormModal";
 import CreateReviewPage from "../ReviewForms/CreateReviewPage";
+import BusinessMap from "./BusinessMap";
 
 function BusinessDetails({ business, businessId, locationHoursSection }) {
     const sessionUser = useSelector(state => state.session.user)
     const reviews = Object.values(useSelector(state => state.reviews))
     const reviewerIds = reviews.map(review => review.user_id)
+
+    const getDirections = () => {
+        return (<a href="https://www.google.com/maps/dir/?api=1&destination=31251+Lily+St+Union+City+CA+94587" />)
+    }
+    getDirections
 
     return (
         <div className="businessDetails">
@@ -57,14 +63,17 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
             <hr ref={locationHoursSection} />
             <div>
                 <h3>Location & Hours</h3>
-                <div className="locationHours">
-                    <div className="businessDetailsLocation">
-                        <div className="businessAddress">
-                            <div>{business.address}</div>
-                            <div>{business.city}, {business.state} {business.zip_code}</div>
+                <div className="locationHoursContainer">
+                    <div className="locationHours">
+                        <div className="businessMap"><BusinessMap business={business} /></div>
+                        <div className="businessDetailsLocation">
+                            <div className="businessAddress">
+                                <div>{business.address}</div>
+                                <div>{business.city}, {business.state} {business.zip_code}</div>
+                            </div>
+                            <div><span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span></div>
                         </div>
                     </div>
-                    <div><span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')} > Get Directions</button></span></div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
                         business.hours && (
                             <div className="hours">

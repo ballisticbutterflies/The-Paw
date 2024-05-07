@@ -147,23 +147,27 @@ function CreateBusinessPage({ business, formType }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let errObj = {}
     if (!address) errObj.address = "Address is required."
+    if (address.trim().length < 1) errObj.address = "Address is required."
     if (!city) errObj.city = "City is required."
+    if (city.trim().length < 1) errObj.city = "City is required."
     if (!state) errObj.state = "State is required."
-    if (!zip_code) errObj.zip_code = "ZIP Code is required."
-    if (zip_code.length > 5) errObj.zip_code = "ZIP Code is invalid."
+    if (!zip_code || zip_code.trim().length < 5) errObj.zip_code = "ZIP Code is required."
+    if (zip_code.trim().length > 5) errObj.zip_code = "ZIP Code is invalid."
     if (!name) errObj.name = "Business name is required."
+    if (name.trim().length < 1) errObj.name = "Business name is required."
     if (name.length > 100) errObj.name = "Business name must be less than 100 characters."
     if (!description) errObj.description = "Description is required."
+    if (description.trim().length < 1) errObj.description = "Description is required."
     if (!category_id) errObj.category_id = "Category is required."
     if (description.length >= 1 && description.length < 30 || description.length > 255) errObj.description = "Description must be between 30 and 255 characters."
     if (website && !isValidUrl(website)) errObj.website = "Website is not valid."
     if (email && !emailRegex.test(email)) errObj.email = "Email is invalid."
-    if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Please enter a valid phone number using only numerical digits (no special characters or spaces)."
-    if (phone && phone.length >= 1 && phone.length > 10) errObj.phone = "Phone numbers must be 10 digits."
+    if (phone && !isValidPhoneNumber(phone)) errObj.phone = "Phone number is invalid. (Numerical digits only—no special characters or spaces.)"
+    if (phone && phone.length >= 1 && phone.length > 10) errObj.phone = "Phone number must be 10 digits."
     if (!image && formType === 'Create Business') errObj.image = "Image is required."
     // if (image && image.name.split('.').pop() !== "png" && image.name.split('.').pop() !== "jpg" && image.name.split('.').pop() !== "jpeg") errObj.image = "Image URL must end in .png, .jpg, or .jpeg"
-    if (set_hours !== "yes" && set_hours !== "no") errObj.set_hours = "Set hours is required."
-    if (set_hours === undefined) errObj.set_hours = "Set hours is required."
+    if (set_hours !== "yes" && set_hours !== "no") errObj.set_hours = "Selection is required."
+    if (set_hours === undefined) errObj.set_hours = "Selection is required."
     if (set_hours === "yes" && !mon_open && !tue_open && !wed_open && !thu_open && !fri_open && !sat_open && !sun_open) errObj.hours = "Hours are required if you have set hours."
     if (
       (mon_open && !mon_close) || (!mon_open && mon_close) ||
@@ -504,7 +508,7 @@ function CreateBusinessPage({ business, formType }) {
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="Phone"
+            placeholder="Phone Number"
             name="phone"
           />
           {errors.phone && <span className="errors">&nbsp;{errors.phone}</span>}

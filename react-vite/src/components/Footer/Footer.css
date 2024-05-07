@@ -1,0 +1,68 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-top: 150px;
+  padding-bottom: 20px;
+
+}
+
+.footer-image {
+  padding-bottom: 15px;
+  height: 330px;
+}
+
+.footer-heading {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: auto;
+  width: 100vw;
+  /* Full viewport width */
+  border-top: 1px solid #c3cddf;
+  justify-items: center;
+  padding-top: 20px;
+}
+
+.dev-heading {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  align-items: center;
+  font-weight: 500;
+}
+
+.devs {
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  font-size: 14px;
+
+}
+
+
+.backend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+}
+
+.names {
+  font-weight: 300;
+}
+
+.docs {
+  padding-top: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.postgres {
+  font-size: 20px;
+}
+
+.docs-links {
+  font-weight: 300;
+}

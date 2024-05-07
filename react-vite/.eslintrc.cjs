@@ -26,4 +26,7 @@ module.exports = {
     ],
     "react/prop-types": "off",
   },
+  globals: {
+    google: true,
+  },
 };
