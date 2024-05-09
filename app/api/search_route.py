@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image, Category
 from sqlalchemy import func, desc, or_
-from urllib.parse import unquote
 
 search_route = Blueprint('search', __name__)
 

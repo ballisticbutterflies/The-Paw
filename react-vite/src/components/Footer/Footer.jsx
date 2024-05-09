@@ -72,7 +72,7 @@ function Footer() {
                 <a href='https://redux.js.org/' target="_blank" rel="noopener noreferrer">
                   <SiRedux />
                 </a>
-                <a href='https://www.w3.org/Style/CSS/Overview.en.html' target="_blank" rel="noopener noreferrer">
+                <a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target="_blank" rel="noopener noreferrer">
                   <i className="fa-brands fa-html5 fa-lg" />
                 </a>
                 <a href='https://www.w3.org/Style/CSS/Overview.en.html' target="_blank" rel="noopener noreferrer">
