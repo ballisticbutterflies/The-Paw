@@ -80,7 +80,12 @@ function SingleBusinessPage() {
     return (business && business.business_images &&
         <>
             <div className="businessPhotoHeader">
-                <img src={business.business_images[0].image_url} />
+                {business.business_images?.[0] ? (
+                    <img src={business.business_images?.[0]?.image_url
+                    } />
+                ) : (
+                    <img src='../../images/default_business.jpeg' />
+                )}
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
