@@ -1,7 +1,7 @@
 from app.models import db, Business, environment, SCHEMA
 from sqlalchemy.sql import text
 
-def seed_businesses():
+def seed_businesses_2():
     businesses_3 = [
         Business(
             owner_id=37,
@@ -36,6 +36,7 @@ def seed_businesses():
             address='2085 Rustin Ave',
             city='Riverside',
             state='CA',
+            zip_code='92507',
             name='Pure Photography',
             description='Your fur kids are your family! No matter what type of critter you care for, we can create a gorgeous portrait.',
             website='https://www.mypurephotos.com/pets',
@@ -873,7 +874,7 @@ def seed_businesses():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_businesses():
+def undo_businesses_2():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.businesses RESTART IDENTITY CASCADE;")
     else:

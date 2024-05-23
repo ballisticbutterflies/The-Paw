@@ -35,7 +35,7 @@ def upgrade():
     op.create_table('businesses',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=True),
-    sa.Column('address', sa.String(length=255), nullable=False),
+    sa.Column('address', sa.String(length=255), nullable=True),
     sa.Column('city', sa.String(length=255), nullable=False),
     sa.Column('state', sa.String(length=2), nullable=False),
     sa.Column('zip_code', sa.String(length=5), nullable=False),
