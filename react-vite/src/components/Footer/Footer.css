@@ -43,10 +43,12 @@
 
 
 .backend {
+  padding-top: 7px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
   justify-items: center;
+  gap: 10px;
 }
 
 .names {

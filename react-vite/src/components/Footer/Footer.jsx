@@ -1,5 +1,5 @@
 import { SiRedux } from "react-icons/si";
-import { SiPostgresql } from "react-icons/si";
+import { SiPostgresql, SiFlask } from "react-icons/si";
 import './Footer.css'
 
 function Footer() {
@@ -58,7 +58,7 @@ function Footer() {
                   <i className="fa-brands fa-python fa-lg" />
                 </a>
                 <a href='https://flask.palletsprojects.com/en/3.0.x/' target="_blank" rel="noopener noreferrer">
-                  <img className='flask' src="https://img.icons8.com/ios/50/5F5BA8/flask.png" alt="flask" />
+                  <SiFlask />
                 </a>
                 <a className="postgres" href='https://www.postgresql.org/docs/' target="_blank" rel="noopener noreferrer">
                   <SiPostgresql />
