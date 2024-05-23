@@ -129,7 +129,7 @@ function SingleBusinessPage() {
                             <span>
                                 <span style={{
                                     color: "#0BDA51"
-                                }}>Open Today&nbsp;&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
+                                }}>Open Today&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
                                 < span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                             </span>
                         }
@@ -137,7 +137,7 @@ function SingleBusinessPage() {
                             <span>
                                 <span style={{
                                     color: "#FF474C"
-                                }}>Closed Today&nbsp;&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                                }}>Closed Today&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                             </span>
                         }
 

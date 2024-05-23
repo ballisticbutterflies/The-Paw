@@ -26,16 +26,28 @@ function BusinessContactCard({ business }) {
                     <hr />
                 </>
             }
-            {business.address &&
+            {business.city &&
                 <>
                     <div className="businessAddressContainer">
                         <div className="businessAddress">
                             <div>
-                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
+                                {business.address && business.city ? (
+                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
+                                ) : (
+                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
+                                )}
                             </div>
                             <div className="businessCardDetail">{business.address} {business.city}, {business.state} {business.zip_code}</div>
                         </div>
-                        <div className="businessContactIcon"><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a></div>
+                        <div className="businessContactIcon">
+                            {business.address && business.city ? (
+                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
+                            ) : (
+                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
+                            )
+                            }
+
+                        </div>
                     </div>
                 </>
             }

@@ -71,7 +71,13 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                                 <div>{business.address}</div>
                                 <div>{business.city}, {business.state} {business.zip_code}</div>
                             </div>
-                            <div><span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span></div>
+                            <div>
+                                {business.address && business.city ? (
+                                    <span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span>
+                                ) : (
+                                    <span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span>
+                                )}
+                            </div>
                         </div>
                     </div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&
