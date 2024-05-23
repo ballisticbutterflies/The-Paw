@@ -83,7 +83,13 @@ function SearchFormPage() {
               <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
 
                 <span className="businessesImageWrapper">
-                  <img className="businessesImage" src={business.images[0]} alt={business.name} />
+
+                  {business.images?.[0] ? (
+                    <img className="businessesImage" src={business.images[0]} alt={business.name} />
+                  ) : (
+                    <img className="businessesImage" src='../../images/default_business.jpeg' alt={business.name} />
+                  )}
+
                 </span>
 
                 <>
@@ -107,11 +113,6 @@ function SearchFormPage() {
                       <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
                       </p>
                     )
-                    }
-
-                    {business.price === null &&
-                      <span className="priceSubcat">{business.category?.name}
-                      </span>
                     }
 
                     {

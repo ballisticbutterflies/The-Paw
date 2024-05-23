@@ -84,7 +84,13 @@ function ManageBusinessPage() {
             <div key={business.id} className="bizandbutton">
               <Link style={{ textDecoration: "none" }} className="manBizCards" to={`/businesses/${business.id}`}>
                 <span className="businessesImageWrapper">
-                  <img className="businessesImage" src={business.image} alt={business.name} />
+
+                  {business.image ? (
+                    <img className="businessesImage" src={business.image} alt={business.name} />
+                  ) : (
+                    <img className="businessesImage" src='../../images/default_business.jpeg' alt={business.name} />
+                  )}
+
                 </span>
                 <span className="businessDeets">
                   <h2>{index + 1}.&nbsp;{business.name}</h2>
