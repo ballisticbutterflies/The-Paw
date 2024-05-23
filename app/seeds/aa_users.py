@@ -6,6 +6,14 @@ from sqlalchemy.sql import text
 def seed_users():
     users = [
         User(
+            # id=1,
+            first_name='Ellie',
+            last_name='Bellie',
+            city='San Francisco',
+            state='CA',
+            email='demo@aa.io',
+            password='password'),
+        User(
             # id=2,
             first_name='Marnie',
             last_name='Barnie',
