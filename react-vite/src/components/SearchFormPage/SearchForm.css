@@ -219,4 +219,17 @@ select {
   .searchPage h1 {
     margin-left: 5vw;
   }
+
+  .filterButtonWrapper {
+    margin-left: 5vw;
+  }
+
+  .outerFilterWrapper .filterComponent {
+    margin-top: -1px;
+    background-color: #FFFBF6;
+    padding: 15px;
+    width: 80vw;
+    border-radius: 5px;
+    z-index: 1;
+  }
 }

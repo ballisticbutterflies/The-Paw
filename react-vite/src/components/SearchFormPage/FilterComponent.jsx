@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import StarRatingInput from "./StarRatingInput";
 import { fetchBusinesses } from "../../redux/search";
@@ -7,6 +7,8 @@ import { fetchBusinesses } from "../../redux/search";
 const FilterComponent = ({ onFilterChange, isMobile }) => {
 
   const dispatch = useDispatch()
+  const [showMenu, setShowMenu] = useState(false);
+  const ulRef = useRef();
 
   const [resetRating, setResetRating] = useState(false);
   const [stars, setStars] = useState("")
@@ -79,10 +81,82 @@ const FilterComponent = ({ onFilterChange, isMobile }) => {
     dispatch(fetchBusinesses())
   }
 
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (ulRef.current && !ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const toggleMenu = (e) => {
+    e.stopPropagation();
+    setShowMenu(!showMenu);
+  }
+
   return (
     isMobile ? (
       <>
-        <div>Test</div>
+        <div className="filterButtonWrapper">
+          <span className="filterButton" onClick={toggleMenu}>
+            <h3><i className="fa-solid fa-filter" />&nbsp; Filter</h3>
+          </span>
+          <div className="outerFilterWrapper" ref={ulRef}>
+            {showMenu && (
+              <>
+                <div className="filterComponent" >
+                  <div className="pawRatingInputFilter">
+                    <h4>Paw Rating</h4>
+                    <StarRatingInput
+                      onChange={onChangeStars}
+                      stars={stars}
+                      reset={resetRating}
+                    />
+                  </div>
+                  <div className="priceInputFilter">
+                    <h4>Price</h4>
+                    {price.map((char, index) =>
+                      <label key={char.name}>
+                        <input
+                          key={index}
+                          type="checkbox"
+                          checked={char.checked}
+                          onChange={() => updatePrice(index, !char.checked)}
+                        />
+                        {char.name}&nbsp;&nbsp;
+                      </label>
+                    )}
+                  </div>
+                  <div className="categoryFilter">
+                    <h4>Category</h4>
+                    <select
+                      value={category_id}
+                      onChange={(e) => setCategory_id(e.target.value)}
+                      name="category"
+                    >
+                      <option value="">Select A New Category</option>
+                      {categories.map((category, index) => (
+                        <option key={category} value={parseInt(index + 1)}>
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="filter-buttons">
+                    <button className="apply-filter-button" onClick={handleFilterChange}>Apply Filters</button>
+                    <button className="clear-filter-button" onClick={handleClick}>Clear Filters</button>
+                  </div>
+                </div >
+              </>
+            )}
+          </div>
+        </div>
       </>
     ) : (
       <>
