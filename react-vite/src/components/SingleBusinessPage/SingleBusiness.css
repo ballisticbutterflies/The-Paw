@@ -328,8 +328,9 @@
 
 @media screen and (max-width: 480px) {
     .businessHeader {
+        position: absolute;
         left: 5vw;
-        bottom: 85vw;
+        bottom: 375px;
     }
 
     .businessHeader h1 {
@@ -343,7 +344,7 @@
     .seeAllPhotos {
         position: relative;
         left: 5vw;
-        bottom: 80vw;
+        bottom: 80px;
     }
 
     .businessContainer {
