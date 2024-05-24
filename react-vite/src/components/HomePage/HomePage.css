@@ -13,7 +13,7 @@
 .photoHeader::before {
     content: '';
     position: absolute;
-    width: 100%;
+    width: 100vw;
     height: 550px;
     background: rgba(0, 0, 0, 0.6);
     opacity: 0.3;
@@ -104,4 +104,19 @@
     margin: 30px 0 0;
     text-align: center;
     font-size: 38px;
+}
+
+
+@media screen and (max-width: 480px) {
+    .categoryContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .photoHeaderText {
+        width: 80vw;
+    }
+
+    .photoHeaderCredit {
+        bottom: 55%;
+    }
 }
