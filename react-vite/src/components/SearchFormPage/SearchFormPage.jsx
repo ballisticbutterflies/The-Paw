@@ -5,7 +5,7 @@ import "./SearchForm.css";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchAllBusinesses } from "../../redux/businesses";
 
 
@@ -14,6 +14,16 @@ function SearchFormPage() {
   const dispatch = useDispatch();
 
   const businesses = Object.values(useSelector((state) => state.search))
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 480);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
 
   const starReviews = (numStars) => {
 
@@ -74,7 +84,7 @@ function SearchFormPage() {
     <>
       <div className="searchPage">
         <h1>Paw-Recommended Results:</h1>
-        <FilterComponent onFilterChange={handleFilterChange} />
+        <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} />
         {businesses.length === 0 ? (
           <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
         ) : (
@@ -99,7 +109,7 @@ function SearchFormPage() {
                       business.avg_stars &&
 
                       business.num_reviews && reviewsExists(business.num_reviews) &&
-                      <span>{business?.avg_stars && starReviews(business.avg_stars)}
+                      <span className="searchStars">{business?.avg_stars && starReviews(business.avg_stars)}
                         &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
                         &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
 

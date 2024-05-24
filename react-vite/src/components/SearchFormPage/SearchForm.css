@@ -165,13 +165,58 @@ select {
 
 .recent-review-text {
   inline-size: 340px;
-  word-wrap: break-word; /* Break long words when necessary */
-  overflow-wrap: break-word; /* Break words when necessary */
-  white-space: pre-wrap; /* Preserve white space */
+  word-wrap: break-word;
+  /* Break long words when necessary */
+  overflow-wrap: break-word;
+  /* Break words when necessary */
+  white-space: pre-wrap;
+  /* Preserve white space */
 
 }
 
 .review-text-wrapper {
   width: 100%;
 
+}
+
+@media screen and (max-width: 480px) {
+  .businessCards {
+    margin: auto;
+    width: 90vw;
+    flex-direction: column;
+  }
+
+  .businessesImageWrapper {
+    width: auto;
+    height: 200px;
+  }
+
+  .businessesImage {
+    width: 100%;
+    height: 200px;
+  }
+
+  .businessDeets {
+    width: 90%;
+    margin-left: 5vw;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+
+  .businessDeets h2,
+  .priceSubcat,
+  .searchStars,
+  .todayHours {
+    width: fit-content;
+    margin-top: 0px;
+  }
+
+  .recent-review-text {
+    inline-size: 80vw;
+
+  }
+
+  .searchPage h1 {
+    margin-left: 5vw;
+  }
 }
