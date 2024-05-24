@@ -1,3 +1,4 @@
+import random
 from app.models import db, Image, environment, SCHEMA
 from sqlalchemy.sql import text
 
@@ -125,6 +126,15 @@ def seed_images():
         url="https://s3.amazonaws.com/static.organiclead.com/Site-177309ee-02b0-4f65-a7c5-680a68bf3b33/shutterstock_1708371508.jpg",
         uploader_id=5
     )
+
+    for i in range(10, 93):
+        new_image = Image(
+            imageable_id=i,
+            imageable_type='business',
+            url=f'https://thepawimages.s3.us-west-2.amazonaws.com/{i}.jpeg',
+            uploader_id=random.randint(1, 50)
+        )
+        db.session.add(new_image)
 
     db.session.add(petagogy_biz)
     db.session.add(petagogy_review1)
