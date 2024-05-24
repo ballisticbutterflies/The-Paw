@@ -7,3 +7,14 @@
     height: 100%;
     width: 100%;
 }
+
+@media screen and (max-width: 480px) {
+    #map {
+        width: 90vw;
+    }
+
+    #map-canvas {
+        width: 90vw;
+    }
+
+}

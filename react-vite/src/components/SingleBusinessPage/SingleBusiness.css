@@ -115,11 +115,17 @@
     padding-top: 45px;
     margin: auto;
     display: flex;
+    column-gap: 35px;
 }
 
 .businessDetails {
     width: 750px;
-    padding-right: 35px;
+    /* padding-right: 35px; */
+}
+
+.businessDetailsButtons {
+    display: flex;
+    gap: 5px;
 }
 
 .businessDetails button {
@@ -318,4 +324,74 @@
 .map-container {
     height: 100%;
     width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+    .businessHeader {
+        left: 5vw;
+        bottom: 85vw;
+    }
+
+    .businessHeader h1 {
+        width: 80vw;
+    }
+
+    .businessPhotoHeader::before {
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .seeAllPhotos {
+        position: relative;
+        left: 5vw;
+        bottom: 80vw;
+    }
+
+    .businessContainer {
+        padding: 5vw;
+        column-gap: 0;
+        width: auto;
+    }
+
+    .businessDetails button {
+        padding: 10px
+    }
+
+    .businessDetailsButtons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .businessDetailsButtons div {
+        display: flex;
+        column-gap: 10px;
+        justify-content: center;
+    }
+
+    .bizContactMobile div {
+        padding-top: 10px;
+        width: 90px;
+    }
+
+    .businessWebsiteContainer,
+    .businessPhoneContainer,
+    .businessAddressContainer {
+        flex-direction: column;
+        padding-bottom: 0;
+    }
+
+    .businessContactIcon {
+        padding-left: 0;
+    }
+
+    .businessContactIcon i {
+        font-size: x-large;
+    }
+
+    .locationHours {
+        width: auto;
+    }
+
+    .locationHoursContainer {
+        gap: 0px;
+    }
 }

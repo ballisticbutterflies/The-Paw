@@ -1,4 +1,4 @@
-function BusinessContactCard({ business }) {
+function BusinessContactCard({ business, isMobile }) {
     const phoneFormat = (phone) => {
         let areaCode = phone.slice(0, 3);
         let firstThree = phone.slice(3, 6);
@@ -7,51 +7,93 @@ function BusinessContactCard({ business }) {
         return `(${areaCode}) ${firstThree}-${lastFour}`
     }
     return (
-        <div className="businessContact">
-            {business.website &&
-                <>
-                    <div className="businessWebsiteContainer">
-                        <div className="businessCardDetail"><a href={business.website} target="_blank" rel="noopener noreferrer">{business.website}</a></div>
-                        <div className="businessContactIcon"><a href={business.website} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+        isMobile ? (
+            <div className="bizContactMobile">
+                {business.website &&
+                    <div>
+                        <div className="businessWebsiteContainer">
+                            <div className="businessContactIcon"><a href={business.website} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+                            <div>Website</div>
+                        </div>
+                        <hr />
                     </div>
-                    <hr />
-                </>
-            }
-            {business.phone &&
-                <>
-                    <div className="businessPhoneContainer">
-                        <div className="businessCardDetail">{business.phone && phoneFormat(business.phone)}</div>
-                        <div className="businessContactIcon"><i className="fa-solid fa-phone-volume"></i></div>
+                }
+                {business.phone &&
+                    <div>
+                        <div className="businessPhoneContainer">
+                            <div className="businessContactIcon"><i className="fa-solid fa-phone-volume"></i></div>
+                            <div>Call</div>
+                        </div>
+                        <hr />
                     </div>
-                    <hr />
-                </>
-            }
-            {business.city &&
-                <>
-                    <div className="businessAddressContainer">
-                        <div className="businessAddress">
-                            <div>
-                                {business.address && business.city ? (
-                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
-                                ) : (
-                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
-                                )}
+                }
+                {business.city &&
+                    <div>
+                        {business.address && business.city ? (
+                            <div className="businessAddressContainer">
+                                <div className="businessContactIcon">
+                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
+                                </div>
+                                <div>Directions</div>
                             </div>
-                            <div className="businessCardDetail">{business.address} {business.city}, {business.state} {business.zip_code}</div>
-                        </div>
-                        <div className="businessContactIcon">
-                            {business.address && business.city ? (
-                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
-                            ) : (
-                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
-                            )
-                            }
-
-                        </div>
+                        ) : (
+                            <div className="businessAddressContainer">
+                                <div className="businessContactIcon">
+                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
+                                </div>
+                                <div>Directions</div>
+                            </div>
+                        )}
                     </div>
-                </>
-            }
-        </div>
+                }
+            </div>
+        ) : (
+            <div className="businessContact">
+                {business.website &&
+                    <>
+                        <div className="businessWebsiteContainer">
+                            <div className="businessCardDetail"><a href={business.website} target="_blank" rel="noopener noreferrer">{business.website}</a></div>
+                            <div className="businessContactIcon"><a href={business.website} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+                        </div>
+                        <hr />
+                    </>
+                }
+                {business.phone &&
+                    <>
+                        <div className="businessPhoneContainer">
+                            <div className="businessCardDetail">{business.phone && phoneFormat(business.phone)}</div>
+                            <div className="businessContactIcon"><i className="fa-solid fa-phone-volume"></i></div>
+                        </div>
+                        <hr />
+                    </>
+                }
+                {business.city &&
+                    <>
+                        <div className="businessAddressContainer">
+                            <div className="businessAddress">
+                                <div>
+                                    {business.address && business.city ? (
+                                        <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
+                                    ) : (
+                                        <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">Get Directions</a>
+                                    )}
+                                </div>
+                                <div className="businessCardDetail">{business.address} {business.city}, {business.state} {business.zip_code}</div>
+                            </div>
+                            <div className="businessContactIcon">
+                                {business.address && business.city ? (
+                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
+                                ) : (
+                                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-diamond-turn-right"></i></a>
+                                )
+                                }
+
+                            </div>
+                        </div>
+                    </>
+                }
+            </div>
+        )
     )
 }
 

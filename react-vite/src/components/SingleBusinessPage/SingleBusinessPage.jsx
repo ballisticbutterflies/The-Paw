@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleBusiness } from "../../redux/businesses";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import './SingleBusiness.css';
 import BusinessDetails from "./BusinessDetails";
 import BusinessContactCard from "./BusinessContactCard";
@@ -14,7 +14,7 @@ import { getTodaysHours } from "../../utils";
 function SingleBusinessPage() {
     const { businessId } = useParams();
     const dispatch = useDispatch();
-
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
     const business = useSelector(state => (
         state.businesses[businessId]
@@ -27,6 +27,17 @@ function SingleBusinessPage() {
         };
         runDispatches();
     }, [dispatch, businessId])
+
+
+
+    const handleResize = () => {
+        setIsMobile(window.innerWidth <= 480);
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize)
+    }, []);
 
     const reviewStars = (numStars) => {
         let filled_paws = [];
@@ -157,8 +168,9 @@ function SingleBusinessPage() {
                 </div>
             </div >
             <div className="businessContainer">
-                <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} />
-                <BusinessContactCard business={business} />
+                <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} isMobile={isMobile} />
+                {!isMobile && <BusinessContactCard business={business} isMobile={isMobile} />
+                }
             </div>
         </>
     )

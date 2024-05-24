@@ -6,8 +6,9 @@ import { useSelector } from "react-redux"
 import LoginFormModal from "../LoginFormModal";
 import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 import BusinessMap from "./BusinessMap";
+import BusinessContactCard from "./BusinessContactCard";
 
-function BusinessDetails({ business, businessId, locationHoursSection }) {
+function BusinessDetails({ business, businessId, locationHoursSection, isMobile }) {
     const sessionUser = useSelector(state => state.session.user)
     const reviews = Object.values(useSelector(state => state.reviews))
     const reviewerIds = reviews.map(review => review.user_id)
@@ -20,40 +21,42 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
-                <span className="businessDetails_writeAReview">
-                    {!sessionUser &&
-                        <OpenModalButton
-                            buttonText={<>
-                                <i className="fa-solid fa-paw" /> Write a review</>}
-                            modalComponent={<LoginFormModal />}
-                        />
-                    }
-                    {sessionUser && sessionUser.id !== business.owner_id && !reviewerIds.includes(sessionUser.id) &&
-                        <OpenModalButton
-                            buttonText={<>
-                                <i className="fa-solid fa-paw" /> Write a review</>}
-                            modalComponent={<CreateReviewPage propsBusinessId={businessId} modalLoad={true} />}
-                        />
-                    }</span>
-
-                &nbsp;&nbsp;
-                <span className="bizDeetsButton">{!sessionUser &&
-                    <OpenModalButton
-                        buttonText={<>
-                            <i className="fa-solid fa-camera" /> Add photo</>}
-                        modalComponent={<LoginFormModal />}
-                    />
-                }
-                    {sessionUser &&
+                <div>
+                    <span className="businessDetails_writeAReview">
+                        {!sessionUser &&
+                            <OpenModalButton
+                                buttonText={<>
+                                    <i className="fa-solid fa-paw" /> Write a review</>}
+                                modalComponent={<LoginFormModal />}
+                            />
+                        }
+                        {sessionUser && sessionUser.id !== business.owner_id && !reviewerIds.includes(sessionUser.id) &&
+                            <OpenModalButton
+                                buttonText={<>
+                                    <i className="fa-solid fa-paw" /> Write a review</>}
+                                modalComponent={<CreateReviewPage propsBusinessId={businessId} modalLoad={true} />}
+                            />
+                        }</span>
+                    <span className="bizDeetsButton">{!sessionUser &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-camera" /> Add photo</>}
-                            modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                            modalComponent={<LoginFormModal />}
                         />
-                    }</span>
-
-                &nbsp;&nbsp;
-                <span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')}><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
+                    }
+                        {sessionUser &&
+                            <OpenModalButton
+                                buttonText={<>
+                                    <i className="fa-solid fa-camera" /> Add photo</>}
+                                modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                            />
+                        }</span>
+                    <span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')}><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
+                </div>
+                <div>
+                    {isMobile && <BusinessContactCard business={business} isMobile={isMobile} />
+                    }
+                </div>
             </div>
             <hr />
             <div>
