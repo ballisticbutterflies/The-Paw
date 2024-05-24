@@ -232,4 +232,13 @@ select {
     border-radius: 5px;
     z-index: 1;
   }
+
+  .noBiz {
+    margin: auto;
+    width: 90vw;
+  }
+
+  .noBiz img {
+    width: 90vw;
+  }
 }
