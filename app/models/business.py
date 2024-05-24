@@ -25,7 +25,7 @@ class Business(db.Model):
     id = Column(Integer, primary_key=True)
     owner_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')))
     category_id = Column(Integer, ForeignKey(add_prefix_for_prod('categories.id')))
-    address = Column(String(255), nullable=False)
+    address = Column(String(255), nullable=True)
     city = Column(String(255), nullable=False)
     state = Column(String(2), nullable=False)
     zip_code = Column(String(5), nullable=False)

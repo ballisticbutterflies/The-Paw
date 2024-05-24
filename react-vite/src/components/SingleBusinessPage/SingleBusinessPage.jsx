@@ -80,7 +80,12 @@ function SingleBusinessPage() {
     return (business && business.business_images &&
         <>
             <div className="businessPhotoHeader">
-                <img src={business.business_images[0].image_url} />
+                {business.business_images?.[0] ? (
+                    <img src={business.business_images?.[0]?.image_url
+                    } />
+                ) : (
+                    <img src='../../images/default_business.jpeg' />
+                )}
 
                 <div className="businessHeader">
                     <h1>{business.name}</h1>
@@ -124,7 +129,7 @@ function SingleBusinessPage() {
                             <span>
                                 <span style={{
                                     color: "#0BDA51"
-                                }}>Open Today&nbsp;&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
+                                }}>Open Today&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
                                 < span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                             </span>
                         }
@@ -132,7 +137,7 @@ function SingleBusinessPage() {
                             <span>
                                 <span style={{
                                     color: "#FF474C"
-                                }}>Closed Today&nbsp;&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                                }}>Closed Today&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
                             </span>
                         }
 
