@@ -1,7 +1,8 @@
 .nav {
   display: grid;
   /* grid-template-columns: 12% 45% 10% 10% 15%; */
-  grid-template-columns: 15% 45% 15% 16% 1%;
+  /* grid-template-columns: 15% 45% 15% 16% 1%; */
+  grid-template-columns: 1fr 3fr 1fr;
   gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
@@ -76,12 +77,9 @@
 }
 
 .rightNav {
-  display: grid;
-  justify-content: space-evenly;
-  justify-self: center !important;
-  align-items: center !important;
-  width: fit-content;
-  grid-column: 4 / 5;
+  display: flex;
+  justify-content: end;
+  margin-right: 25px;
 }
 
 .profileAvatar {
@@ -113,7 +111,7 @@
   background-color: #FFFBF6;
   right: 0;
   left: inherit;
-  margin-top: 1px;
+  margin-top: 50px;
   border-radius: 5px;
   z-index: 2;
 }
@@ -187,7 +185,7 @@
 
   .searchForm {
     grid-area: search;
-    width: 85vw;
+    width: 90vw;
     margin: auto;
   }
 

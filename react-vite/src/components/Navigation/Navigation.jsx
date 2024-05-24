@@ -84,24 +84,20 @@ function Navigation() {
       <div className="rightNav">
         {user ? (
           <>
-            <div>
-              <ProfileButton />
-            </div>
+            <ProfileButton />
           </>
         ) : (
           <>
-            <div className="rightNav">
-              <div>
-                <OpenModalButton
-                  buttonText="Log In"
-                  modalComponent={<LoginFormModal />}
-                />
-                &nbsp;&nbsp;&nbsp;
-                <OpenModalButton
-                  buttonText="Sign Up"
-                  modalComponent={<SignupFormModal />}
-                />
-              </div>
+            <div>
+              <OpenModalButton
+                buttonText="Log In"
+                modalComponent={<LoginFormModal />}
+              />
+              &nbsp;&nbsp;&nbsp;
+              <OpenModalButton
+                buttonText="Sign Up"
+                modalComponent={<SignupFormModal />}
+              />
             </div>
           </>
         )
