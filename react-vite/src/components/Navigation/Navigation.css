@@ -6,7 +6,7 @@
   align-items: center;
   background-color: #ffbe6e;
   margin: 0px;
-  width: 100%;
+  width: 100vw;
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -109,7 +109,7 @@
 .profile-dropdown {
   position: absolute;
   padding: 20px;
-  width: 125px;
+  width: 175px;
   background-color: #FFFBF6;
   right: 0;
   left: inherit;
@@ -163,4 +163,37 @@
   background-color: transparent;
   font-size: 14px;
   font-weight: 500;
+}
+
+@media screen and (max-width: 480px) {
+  .nav {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "logo profile"
+      "search search";
+    column-gap: 0px;
+    row-gap: 5px;
+    padding: 5vw;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  /* .forBiz {
+    grid-area: biz;
+    display: flex;
+    justify-content: end;
+    padding-bottom: 20px;
+  } */
+
+  .searchForm {
+    grid-area: search;
+    width: 85vw;
+    margin: auto;
+  }
+
+  .rightNav {
+    grid-area: profile;
+  }
 }
