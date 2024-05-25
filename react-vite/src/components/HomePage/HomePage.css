@@ -114,6 +114,7 @@
 
     .photoHeaderText {
         width: 80vw;
+        bottom: 65%;
     }
 
     .photoHeaderCredit {

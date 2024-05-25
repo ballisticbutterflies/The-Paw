@@ -193,6 +193,7 @@ select {
   .businessesImageWrapper {
     width: auto;
     height: 200px;
+    padding: 20px;
   }
 
   .businessesImage {

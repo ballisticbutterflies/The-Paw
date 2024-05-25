@@ -393,6 +393,11 @@
     }
 
     .locationHoursContainer {
-        gap: 0px;
+        row-gap: 20px;
+        /* justify-content: center; */
+    }
+
+    .hours {
+        column-gap: 20px;
     }
 }
