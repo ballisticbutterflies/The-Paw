@@ -29,3 +29,22 @@
 #details-time {
   padding: 3% 2em 3% 3em;
 }
+
+@media screen and (max-width: 480px) {
+  .details-indiv {
+    width: fit-content;
+  }
+
+  #details-location,
+  #details-time,
+  .needs-border {
+    padding: 10px;
+    margin: auto;
+  }
+
+  #details-location h4,
+  #details-time h4 {
+    margin-top: 0px;
+  }
+
+}

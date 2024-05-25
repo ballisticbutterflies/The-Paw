@@ -125,3 +125,15 @@
     width: 100%;
     height: 100%;
 }
+
+@media screen and (max-width: 480px) {
+
+    .review-card,
+    .review-content {
+        width: 100%;
+    }
+
+    .review-text {
+        max-inline-size: 85vw;
+    }
+}
