@@ -22,8 +22,9 @@
     align-items: center;
     grid-template-rows: 1fr;
     position: sticky;
-    top: 0px;
+    top: -10px;
     width: 100%;
+    padding-top: 10px;
     padding-bottom: 10px;
     background-color: #fff2eb;
     z-index: 1;
@@ -105,4 +106,15 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 15px;
     justify-items: center;
+}
+
+@media screen and (max-width: 480px) {
+    .allPhotosModal {
+        height: 65vh;
+    }
+
+    .allPhotosContainerModal {
+        width: 65vw;
+        margin: auto;
+    }
 }

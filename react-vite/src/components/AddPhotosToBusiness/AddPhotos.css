@@ -39,3 +39,32 @@
     justify-content: center;
     text-align: center;
 }
+
+@media screen and (max-width: 480px) {
+    .addPhoto {
+        width: 65vw;
+        height: 65vh;
+        overflow-x: hidden;
+    }
+
+    .addPhoto form,
+    .addPhoto button {
+        width: 65vw;
+        padding: 10px;
+    }
+
+    .addPhoto input {
+        width: 95%;
+    }
+
+    .tipSection {
+        display: flex;
+        flex-direction: column;
+        width: 65vw;
+    }
+
+    .tip {
+        display: grid;
+        width: 65vw;
+    }
+}
