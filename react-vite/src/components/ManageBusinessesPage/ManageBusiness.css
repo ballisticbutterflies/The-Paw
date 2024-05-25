@@ -156,17 +156,7 @@
   }
 
   .manage-dropdown {
-    /* background-color: #FFFBF6;
-    width: fit-content;
-    height: 100px;
-    display: grid;
-    border-radius: 5px;
-    padding: 18px;
-    position: absolute;
-    z-index: 1; */
-
     display: flex;
-    width: fit-content;
     flex-direction: column;
     position: absolute;
     margin-top: 5px;

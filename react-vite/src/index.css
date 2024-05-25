@@ -125,7 +125,7 @@
  }
 
  .loginSignupModals button {
-     width: 103%;
+     width: 100%;
  }
 
 
@@ -141,11 +141,14 @@
  }
 
  .loginSignupModals select {
-     width: 103%;
+     width: 100%;
  }
 
  @media screen and (max-width: 480px) {
-     .loginSignupModals {
+
+     .loginSignupModals,
+     .loginSignupModals button {
          width: 60vw;
      }
+
  }
