@@ -23,6 +23,10 @@
   max-width: 800px;
 }
 
+.manBizPage h1 {
+  width: fit-content;
+}
+
 .manBizDeets {
   display: flex;
   flex-direction: column;
@@ -96,5 +100,78 @@
 .no-biz {
   display: flex;
   flex-direction: column;
-  margin:auto;
+  margin: auto;
+}
+
+@media screen and (max-width: 480px) {
+  .manBizCards {
+    margin: auto;
+    width: 75vw;
+    flex-direction: column;
+  }
+
+  .businessesImageWrapper {
+    width: auto;
+    height: 200px;
+  }
+
+  .businessesImage {
+    width: 100%;
+    height: 200px;
+  }
+
+  .businessDeets {
+    width: 90%;
+    margin-left: 5vw;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+
+  .businessDeets h2,
+  .priceSubcat,
+  .searchStars,
+  .todayHours {
+    width: fit-content;
+    margin-top: 0px;
+  }
+
+  .recent-review-text {
+    inline-size: 65vw;
+  }
+
+  .card {
+    padding-bottom: 20px;
+  }
+
+  .bizandbutton {
+    padding-bottom: 20px;
+  }
+
+  .manBizPage {
+    width: 90vw;
+  }
+
+  .manbutton {
+    margin: 0 10px;
+  }
+
+  .manage-dropdown {
+    /* background-color: #FFFBF6;
+    width: fit-content;
+    height: 100px;
+    display: grid;
+    border-radius: 5px;
+    padding: 18px;
+    position: absolute;
+    z-index: 1; */
+
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    position: absolute;
+    margin-top: 5px;
+    right: 0;
+    height: fit-content;
+    margin-right: 10px;
+  }
 }
