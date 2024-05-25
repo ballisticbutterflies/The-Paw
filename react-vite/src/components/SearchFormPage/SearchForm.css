@@ -90,6 +90,10 @@
   margin: auto;
 }
 
+.searchPage h1 {
+  width: fit-content;
+}
+
 .categoryFilter {
   padding-bottom: 15px;
   border-bottom: 1px solid #c3cddf;
@@ -221,11 +225,22 @@ select {
   }
 
   .filterButtonWrapper {
-    margin-left: 5vw;
+    margin-left: 4vw;
+    padding-bottom: 20px;
+  }
+
+  .filterButton {
+    border-radius: 3px;
+    padding: 12px 16px 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: #c3cddf 1px solid;
+    background-color: transparent;
+    color: #1f2f44;
   }
 
   .outerFilterWrapper .filterComponent {
-    margin-top: -1px;
+    margin-top: 5px;
     background-color: #FFFBF6;
     padding: 15px;
     width: 80vw;
@@ -240,5 +255,9 @@ select {
 
   .noBiz img {
     width: 90vw;
+  }
+
+  .card {
+    padding-bottom: 20px;
   }
 }

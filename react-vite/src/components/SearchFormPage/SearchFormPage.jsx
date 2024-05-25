@@ -89,7 +89,7 @@ function SearchFormPage() {
           <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
         ) : (
           businesses && businesses.map((business, index) => (
-            <span key={business.id}>
+            <div className="card" key={business.id}>
               <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
 
                 <span className="businessesImageWrapper">
@@ -150,7 +150,7 @@ function SearchFormPage() {
                   </span>
                 </>
               </Link>
-            </span>
+            </div>
           ))
         )}
 

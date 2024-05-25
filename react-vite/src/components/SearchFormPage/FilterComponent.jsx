@@ -6,8 +6,9 @@ import { fetchBusinesses } from "../../redux/search";
 
 const FilterComponent = ({ onFilterChange, isMobile }) => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const closeMenu = () => setShowMenu(false);
   const ulRef = useRef();
 
   const [resetRating, setResetRating] = useState(false);
@@ -46,6 +47,7 @@ const FilterComponent = ({ onFilterChange, isMobile }) => {
     const url = `${queryString}`;
 
     onFilterChange(url)
+    closeMenu();
   }
 
   const onChangeStars = (number) => {
@@ -79,6 +81,7 @@ const FilterComponent = ({ onFilterChange, isMobile }) => {
     setCategory_id('')
     setResetRating(prevState => !prevState);
     dispatch(fetchBusinesses())
+    closeMenu();
   }
 
   useEffect(() => {
@@ -104,9 +107,7 @@ const FilterComponent = ({ onFilterChange, isMobile }) => {
     isMobile ? (
       <>
         <div className="filterButtonWrapper">
-          <span className="filterButton" onClick={toggleMenu}>
-            <h3><i className="fa-solid fa-filter" />&nbsp; Filter</h3>
-          </span>
+          <button className="filterButton" onClick={toggleMenu}><i className="fa-solid fa-filter" />&nbsp; Filter</button>
           <div className="outerFilterWrapper" ref={ulRef}>
             {showMenu && (
               <>
