@@ -164,4 +164,9 @@
     height: fit-content;
     margin-right: 10px;
   }
+
+  .deleteModal {
+    width: 65vw;
+  }
+
 }
