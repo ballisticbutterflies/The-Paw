@@ -461,8 +461,6 @@ def seed_businesses():
             fri_close='1800',
             sat_open='0900',
             sat_close='1300',
-            sun_open='closed',
-            sun_close='closed',
         ),
         Business(
             owner_id=38,

@@ -99,72 +99,74 @@ function SingleBusinessPage() {
                 )}
 
                 <div className="businessHeader">
-                    <h1>{business.name}</h1>
+                    <div>
+                        <h1>{business.name}</h1>
 
-                    {business.reviews?.num_reviews === 0 &&
-                        <p className="businessReviews_first">
-                            <span className="paws-unfilled"><i className="fa-solid fa-paw" /></span>&nbsp; Be the first to review!
-                        </p>
-                    }
-                    {business.reviews?.num_reviews > 1 &&
-                        <p className="businessReviews">
-                            <span className="pawBlock">
-                                {business.reviews.avg_stars &&
-                                    reviewStars(business.reviews.avg_stars)}</span>
-                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
-                            &nbsp;({business.reviews.num_reviews} reviews)
-                        </p>
-                    }
-                    {business.reviews?.num_reviews === 1 &&
-                        <p className="businessReviews">
-                            <span className="pawBlock">
-                                {business.reviews.avg_stars &&
-                                    reviewStars(business.reviews.avg_stars)}</span>
-                            &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
-                            &nbsp;({business.reviews.num_reviews} review)
-                        </p>
-                    }
-
-                    {!business.price ? (
-
-                        <p className="priceSubcat">{business.category?.name}
-                        </p>
-                    ) : (
-                        <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
-                        </p>
-                    )
-                    }
-
-                    <div className="currHours">
-                        {business.set_hours === "yes" && getTodaysHours(business) &&
-                            <span>
-                                <span style={{
-                                    color: "#0BDA51"
-                                }}>Open Today&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
-                                < span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
-                            </span>
+                        {business.reviews?.num_reviews === 0 &&
+                            <p className="businessReviews_first">
+                                <span className="paws-unfilled"><i className="fa-solid fa-paw" /></span>&nbsp; Be the first to review!
+                            </p>
                         }
-                        {business.set_hours === "yes" && !getTodaysHours(business) &&
-                            <span>
-                                <span style={{
-                                    color: "#FF474C"
-                                }}>Closed Today&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
-                            </span>
+                        {business.reviews?.num_reviews > 1 &&
+                            <p className="businessReviews">
+                                <span className="pawBlock">
+                                    {business.reviews.avg_stars &&
+                                        reviewStars(business.reviews.avg_stars)}</span>
+                                &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
+                                &nbsp;({business.reviews.num_reviews} reviews)
+                            </p>
+                        }
+                        {business.reviews?.num_reviews === 1 &&
+                            <p className="businessReviews">
+                                <span className="pawBlock">
+                                    {business.reviews.avg_stars &&
+                                        reviewStars(business.reviews.avg_stars)}</span>
+                                &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
+                                &nbsp;({business.reviews.num_reviews} review)
+                            </p>
                         }
 
+                        {!business.price ? (
+
+                            <p className="priceSubcat">{business.category?.name}
+                            </p>
+                        ) : (
+                            <p className="priceSubcat">{business.price} &nbsp;&#183;&nbsp; {business.category?.name}
+                            </p>
+                        )
+                        }
+
+                        <div className="currHours">
+                            {business.set_hours === "yes" && getTodaysHours(business) &&
+                                <span>
+                                    <span style={{
+                                        color: "#0BDA51"
+                                    }}>Open Today&nbsp;</span> {getTodaysHours(business).open} - {getTodaysHours(business).close}&nbsp;&nbsp;
+                                    < span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                                </span>
+                            }
+                            {business.set_hours === "yes" && !getTodaysHours(business) &&
+                                <span>
+                                    <span style={{
+                                        color: "#FF474C"
+                                    }}>Closed Today&nbsp;</span> <span className="seeHours" onClick={() => scrollTo(locationHoursSection)}>See hours</span>
+                                </span>
+                            }
+
+                        </div>
                     </div>
-                </div>
-                <div className="seeAllPhotos">
-                    {business.business_images && totalImages(business.business_images, business.review_images) === 1 ? (
-                        <OpenModalButton
-                            buttonText="See 1 photo"
+                    <div className="seeAllPhotos">
+                        {business.business_images && totalImages(business.business_images, business.review_images) === 1 ? (
+                            <OpenModalButton
+                                buttonText="See 1 photo"
+                                modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
+                            />
+                        ) : (<OpenModalButton
+                            buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
                             modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
-                        />
-                    ) : (<OpenModalButton
-                        buttonText={`See all ${totalImages(business.business_images, business.review_images)} photos`}
-                        modalComponent={<AllPhotosModal businessId={businessId} modalLoad={true} />}
-                    />)
-                    }
+                        />)
+                        }
+                    </div>
                 </div>
             </div >
             <div className="businessContainer">

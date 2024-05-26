@@ -32,6 +32,7 @@
     color: #FFFFFF;
     font-weight: 500;
     width: fit-content;
+    display: flex;
 }
 
 .businessHeader h1 {
@@ -66,11 +67,13 @@
 
 .seeAllPhotos {
     position: relative;
-    left: 76%;
-    bottom: 71%;
+    left: 30vw;
+    /* bottom: 50%; */
     z-index: 11;
-    padding: 5px;
+    /* padding: 5px 5px 0px 5px; */
     width: fit-content;
+    /* display: flex; */
+    align-content: end;
 }
 
 .seeAllPhotos button {
@@ -328,9 +331,12 @@
 
 @media screen and (max-width: 480px) {
     .businessHeader {
-        position: absolute;
-        left: 5vw;
-        bottom: 375px;
+        display: grid;
+    }
+
+    .seeAllPhotos {
+        left: 0;
+        align-content: start;
     }
 
     .businessHeader h1 {
@@ -339,12 +345,6 @@
 
     .businessPhotoHeader::before {
         background: rgba(0, 0, 0, 0.3);
-    }
-
-    .seeAllPhotos {
-        position: relative;
-        left: 5vw;
-        bottom: 80px;
     }
 
     .businessContainer {
