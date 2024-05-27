@@ -25,14 +25,17 @@
 
 .businessHeader {
     position: relative;
-    left: 16%;
+    /* left: 10%; */
+    margin: auto;
     bottom: 58%;
     z-index: 1;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
-    width: fit-content;
-    display: flex;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 50px;
 }
 
 .businessHeader h1 {
@@ -65,15 +68,21 @@
     background-color: rgba(195, 205, 233, 0.4);
 }
 
+.seeAllPhotosSection {
+    display: grid;
+    justify-content: end;
+}
+
 .seeAllPhotos {
-    position: relative;
-    left: 30vw;
+    /* position: relative; */
+    /* left: 30vw; */
     /* bottom: 50%; */
     z-index: 11;
     /* padding: 5px 5px 0px 5px; */
     width: fit-content;
-    /* display: flex; */
     align-content: end;
+    justify-content: end;
+    text-wrap: nowrap;
 }
 
 .seeAllPhotos button {
@@ -330,8 +339,22 @@
 }
 
 @media screen and (max-width: 480px) {
+    .businessPhotoHeader {
+        position: relative;
+    }
+
     .businessHeader {
         display: grid;
+        grid-template-columns: auto;
+        gap: 10px;
+        left: 5vw;
+        bottom: 20px;
+        position: absolute;
+        width: 90vw;
+    }
+
+    .seeAllPhotosSection {
+        justify-content: start;
     }
 
     .seeAllPhotos {
