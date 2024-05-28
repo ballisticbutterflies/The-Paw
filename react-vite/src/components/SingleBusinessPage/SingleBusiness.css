@@ -192,6 +192,12 @@
     margin-top: 5px;
 }
 
+.businessDetailsButtons div {
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+}
+
 .businessDetailsLocation {
     display: flex;
     justify-content: space-between;
@@ -383,12 +389,6 @@
     .businessDetailsButtons {
         display: flex;
         flex-direction: column;
-    }
-
-    .businessDetailsButtons div {
-        display: flex;
-        column-gap: 10px;
-        justify-content: center;
     }
 
     .bizContactMobile div {

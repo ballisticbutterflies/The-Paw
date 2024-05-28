@@ -70,8 +70,8 @@ function BusinessContactCard({ business, isMobile }) {
                 {business.phone &&
                     <>
                         <div className="businessPhoneContainer">
-                            <div className="businessCardDetail">{business.phone && phoneFormat(business.phone)}</div>
-                            <div className="businessContactIcon"><i className="fa-solid fa-phone-volume"></i></div>
+                            <div className="businessCardDetail"><a href={`tel:{business.phone}`} target="_blank" rel="noopener noreferrer">{business.phone && phoneFormat(business.phone)}</a></div>
+                            <div className="businessContactIcon"><a href={`tel:{business.phone}`} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-phone-volume"></i></a></div>
                         </div>
                         <hr />
                     </>
