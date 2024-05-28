@@ -30,7 +30,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     align-items: start;
-    width: 400px !important;
+    width: 400px;
 }
 
 .tip {
@@ -42,14 +42,14 @@
 
 @media screen and (max-width: 480px) {
     .addPhoto {
-        width: 65vw;
+        width: 75vw;
         height: 65vh;
         overflow-x: hidden;
     }
 
     .addPhoto form,
     .addPhoto button {
-        width: 65vw;
+        width: 60vw;
         padding: 10px;
     }
 
@@ -60,11 +60,11 @@
     .tipSection {
         display: flex;
         flex-direction: column;
-        width: 65vw;
+        width: fit-content;
     }
 
     .tip {
         display: grid;
-        width: 65vw;
+        width: 60vw;
     }
 }

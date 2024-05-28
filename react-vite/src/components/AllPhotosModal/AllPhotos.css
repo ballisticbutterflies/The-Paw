@@ -114,7 +114,8 @@
     }
 
     .allPhotosContainerModal {
-        width: 65vw;
+        width: 75vw;
+        max-height: 65vh;
         margin: auto;
     }
 }
