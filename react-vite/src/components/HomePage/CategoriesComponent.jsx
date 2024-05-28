@@ -10,11 +10,13 @@ function CategoriesComponent () {
   const navigate = useNavigate();
   const [category, setCategory] = useState('');
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (categoryId) => {
+    console.log(categoryId, "CATEGORY_ID")
     const queryParams = new URLSearchParams();
-    queryParams.append('category', category)
+    queryParams.append('category', categoryId)
     const queryString = queryParams.toString();
-    const url = `${queryString}`;
+    const url = `/search?${queryString}`;
+    console.log('Target URL:', url);
     dispatch(fetchBusinesses(url))
       .then(() => navigate('/search'));
   };

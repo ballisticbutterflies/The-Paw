@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image, Category
 from sqlalchemy import func, desc, or_
+from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
@@ -18,6 +19,8 @@ def search():
   city_state = request.args.get('location')
   category = request.args.get('category')
   search_query = request.args.get('search_query')
+  page = request.args.get('page', 1, type=int)
+  per_page = request.args.get('per_page', 10, type=int)
 
 #base query to fetch businesses
   query = Business.query
@@ -49,8 +52,14 @@ def search():
       Business.description.ilike(f'%{search_query}%')
     ))
 
+  # Apply pagination to the query
+  try:
+        # Apply pagination to the query
+        paginated_query = query.paginate(page=page, per_page=per_page, error_out=False)
+  except Exception as e:
+        return {'errors': {'message': str(e)}}, 500
 
-  businesses = query.all()
+  businesses = paginated_query.items
 
 
   business_data = []
@@ -94,4 +103,12 @@ def search():
     business_dict['category'] = category_data
 
     business_data.append(business_dict)
-  return { 'businesses': business_data }
+  return jsonify({
+        'businesses': business_data,
+        'total': paginated_query.total,
+        'pages': paginated_query.pages,
+        'current_page': paginated_query.page,
+        'next_page': paginated_query.next_num,
+        'prev_page': paginated_query.prev_num,
+        'per_page': paginated_query.per_page
+    })
