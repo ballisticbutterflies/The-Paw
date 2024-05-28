@@ -215,3 +215,10 @@ img.pfp {
         font-size: xx-large;
     }
 }
+
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #full-user-page {
+        width: 90vw;
+    }
+}

@@ -15,7 +15,7 @@ function SingleBusinessPage() {
     const { businessId } = useParams();
     const dispatch = useDispatch();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-    const [isTablet, setIsTablet] = useState(window.innerWidth <= 1024 && window.innerWidth >= 481);
+    const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth <= 1025);
 
     const business = useSelector(state => (

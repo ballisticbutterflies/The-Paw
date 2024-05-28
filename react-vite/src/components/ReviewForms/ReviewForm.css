@@ -89,3 +89,22 @@ input[type="file"] {
         height: fit-content;
     }
 }
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+    .reviewForm,
+    .review-fields,
+    #review-input,
+    .descriptions-container {
+        width: auto;
+    }
+
+
+    .descriptions-container {
+        align-content: start;
+    }
+
+    div.stars-container {
+        height: fit-content;
+    }
+}

@@ -3,6 +3,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 1em;
     justify-items: center;
+    width: auto;
 }
 
 .images {
@@ -49,5 +50,19 @@
 @media screen and (max-width: 480px) {
     #photos-container {
         grid-template-columns: 1fr
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #photos-container {
+        grid-template-columns: 1fr
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #photos-container {
+        display: flex;
+        flex-direction: column;
+        width: auto;
     }
 }

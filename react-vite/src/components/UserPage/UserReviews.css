@@ -134,7 +134,7 @@
     }
 
     .review-text {
-        max-inline-size: 85vw;
+        max-inline-size: auto;
     }
 }
 
@@ -146,6 +146,18 @@
     }
 
     .review-text {
-        max-inline-size: 75vw;
+        max-inline-size: auto;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+    .review-card,
+    .review-content {
+        width: 100%;
+    }
+
+    .review-text {
+        max-inline-size: auto;
     }
 }

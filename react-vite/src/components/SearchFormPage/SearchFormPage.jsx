@@ -15,11 +15,11 @@ function SearchFormPage() {
 
   const businesses = Object.values(useSelector((state) => state.search))
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-  const [isTablet, setIsTablet] = useState(window.innerWidth <= 1024 && window.innerWidth >= 481);
+  const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
-    setIsTablet(window.innerWidth <= 1024 && window.innerWidth >= 481);
+    setIsTablet(window.innerWidth <= 768 && window.innerWidth >= 481);
   }
 
   useEffect(() => {

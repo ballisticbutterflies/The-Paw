@@ -203,8 +203,25 @@
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  .rightNavButtons {
-    display: grid;
-    gap: 5px;
+  .nav {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "logo profile"
+      "search search";
+    padding: 5vw 2vw;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .searchForm {
+    grid-area: search;
+    width: 90vw;
+    margin: auto;
+  }
+
+  .rightNav {
+    grid-area: profile;
   }
 }

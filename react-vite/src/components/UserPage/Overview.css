@@ -67,3 +67,22 @@
   }
 
 }
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .details-indiv {
+    width: fit-content;
+  }
+
+  #details-location,
+  #details-time,
+  .needs-border {
+    padding: 10px;
+    margin: auto;
+  }
+
+  #details-location h4,
+  #details-time h4 {
+    margin-top: 0px;
+  }
+
+}

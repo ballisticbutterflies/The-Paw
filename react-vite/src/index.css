@@ -152,3 +152,44 @@
      }
 
  }
+
+ @media screen and (min-width: 481px) and (max-width: 768px) {
+
+     .loginSignupModals,
+     .loginSignupModals button {
+         width: 60vw;
+     }
+
+     .loginSignupModals input {
+         width: calc(60vw - 12px);
+     }
+ }
+
+ @media screen and (min-width: 769px) and (max-width: 1024px) {
+
+     .loginSignupModals,
+     .loginSignupModals button {
+         width: 70vw;
+     }
+
+     .loginSignupModals {
+         overflow: hidden;
+         overflow-y: scroll;
+     }
+
+     .loginSignupModals input {
+         width: calc(70vw - 12px);
+     }
+
+     .loginSignupModals select {
+         width: 70vw;
+     }
+ }
+
+ @media screen and (max-height: 600px) {
+     .loginSignupModals {
+         height: 70vh;
+         overflow: hidden;
+         overflow-y: auto;
+     }
+ }
