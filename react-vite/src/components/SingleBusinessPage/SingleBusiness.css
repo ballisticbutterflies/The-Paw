@@ -344,6 +344,10 @@
     width: 100%;
 }
 
+.bizContactMobile {
+    display: none;
+}
+
 @media screen and (max-width: 480px) {
     .businessPhotoHeader {
         position: relative;
@@ -391,9 +395,87 @@
         flex-direction: column;
     }
 
+
+    .bizContactMobile {
+        display: flex;
+        justify-content: center;
+    }
+
     .bizContactMobile div {
         padding-top: 10px;
         width: 90px;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .businessWebsiteContainer,
+    .businessPhoneContainer,
+    .businessAddressContainer {
+        flex-direction: column;
+        padding-bottom: 0;
+        text-decoration: none;
+    }
+
+    .businessWebsiteContainer a,
+    .businessPhoneContainer a,
+    .businessAddressContainer a {
+        color: #1f2f44;
+    }
+
+    .businessContactIcon {
+        padding-left: 0;
+    }
+
+    .businessContactIcon i {
+        font-size: x-large;
+    }
+
+    .locationHours {
+        width: auto;
+    }
+
+    .locationHoursContainer {
+        row-gap: 20px;
+        /* justify-content: center; */
+    }
+
+    .hours {
+        column-gap: 20px;
+    }
+
+    .businessContact {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+    .businessContainer {
+        padding: 5vw;
+        column-gap: 0;
+        width: auto;
+    }
+
+    .businessDetails button {
+        padding: 10px
+    }
+
+    .businessDetailsButtons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bizContactMobile {
+        display: flex;
+        justify-content: center;
+    }
+
+    .bizContactMobile div {
+        padding-top: 10px;
+        width: 90px;
+        display: flex;
+        justify-content: center;
     }
 
     .businessWebsiteContainer,
@@ -429,5 +511,9 @@
 
     .hours {
         column-gap: 20px;
+    }
+
+    .businessContact {
+        display: none;
     }
 }

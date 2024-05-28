@@ -121,3 +121,9 @@
         bottom: 55%;
     }
 }
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .categoryContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+}

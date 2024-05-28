@@ -16,5 +16,14 @@
     #map-canvas {
         width: 90vw;
     }
+}
 
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #map {
+        width: 50vw;
+    }
+
+    #map-canvas {
+        width: 50vw;
+    }
 }
