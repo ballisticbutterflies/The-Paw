@@ -19,7 +19,7 @@ export const clearBusinesses = () => ({
 // THUNKS
 export const fetchBusinesses = (filters, page = 1, perPage = 10) => async (dispatch) => {
 
-    let url ='/api/search/';
+    let url ='/api/search';
     const queryParams = [];
 
 

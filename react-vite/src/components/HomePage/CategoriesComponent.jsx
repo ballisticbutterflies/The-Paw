@@ -1,9 +1,9 @@
-import {  useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchBusinesses } from "../../redux/search";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchAllBusinesses } from "../../redux/businesses";
+// import { fetchAllBusinesses } from "../../redux/businesses";
 
 function CategoriesComponent () {
   const dispatch = useDispatch();
@@ -18,13 +18,13 @@ function CategoriesComponent () {
     const url = `/search?${queryString}`;
     console.log('Target URL:', url);
     dispatch(fetchBusinesses(url))
-      .then(() => navigate('/search'));
+      .then(() => navigate(url));
   };
 
 
-  useEffect(() => {
-      dispatch(fetchAllBusinesses())
-  }, [dispatch])
+  // useEffect(() => {
+  //     dispatch(fetchAllBusinesses())
+  // }, [dispatch])
 
   return (
     <>

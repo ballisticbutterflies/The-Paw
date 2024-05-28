@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
 import { useEffect, useState } from "react";
-import { fetchAllBusinesses } from "../../redux/businesses";
+
 
 
 function SearchFormPage() {
@@ -16,13 +16,15 @@ function SearchFormPage() {
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
 
-  console.log("CATEGORY IN SEARCH PAGE", category)
 
   const businesses = Object.values(useSelector((state) => state.search.businesses))
+
   const { total, pages, currentPage, perPage } = useSelector(state => state.search.pagination);
   const [page, setPage] = useState(currentPage);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
+
+  const [loading, setLoading] = useState(false)
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
@@ -78,22 +80,34 @@ function SearchFormPage() {
   }
 
   const handleFilterChange = (filters) => {
+
+    setLoading(true)
     dispatch(fetchBusinesses(filters, page, perPage))
   }
 
+  let filter = `category=${category}`
   useEffect(() => {
-    dispatch(fetchBusinesses(businesses, page, perPage))
-      .catch(error => {
-        return error
-      })
-  }, [dispatch, businesses, page, perPage])
+    window.scrollTo(0, 0); // Scroll to top
+    if (filter) {
+      setLoading(true)
+      dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1000))
+        .catch(error => {
+          return error
+        })
+    }
+  }, [dispatch, page, perPage, filter])
 
   const handleNextPage = (e) => {
     e.preventDefault();
     const nextPage = currentPage + 1;
     if (nextPage <= pages) {
       setPage(nextPage);
-      dispatch(fetchBusinesses(businesses, nextPage, perPage));
+      setLoading(true)
+      dispatch(fetchBusinesses(filter, nextPage, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1000));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
@@ -103,7 +117,10 @@ function SearchFormPage() {
     const prevPage = currentPage - 1;
     if (prevPage >= 1) {
       setPage(prevPage);
-      dispatch(fetchAllBusinesses(businesses, prevPage, perPage));
+      setLoading(true)
+      dispatch(fetchBusinesses(filter, prevPage, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1000));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
@@ -114,8 +131,10 @@ function SearchFormPage() {
       <div className="searchPage">
         <h1>Paw-Recommended Results:</h1>
         <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
-        <span>Total Businesses Found: {total}</span>
-        {businesses.length === 0 ? (
+        {loading ? (
+            <div className="loader"></div>
+          ) : (
+        businesses.length === 0 ? (
           <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
         ) : (
           businesses && businesses.map((business, index) => (
@@ -181,13 +200,15 @@ function SearchFormPage() {
                 </>
               </Link>
             </div>
+          )
           ))
         )}
         <div className="pagination">
           <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-          <span>Page {currentPage} of {pages}</span>
+          <span>&nbsp;&nbsp;Page {currentPage} of {pages}&nbsp;&nbsp;</span>
           <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
         </div>
+        <div className="pagination">Total Businesses Found: {total}</div>
       </div>
     </>
   );

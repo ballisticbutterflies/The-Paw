@@ -2,9 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import StarRatingInput from "./StarRatingInput";
 import { fetchBusinesses } from "../../redux/search";
+import { useLocation } from "react-router-dom";
 
 
 const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const category = searchParams.get('category');
 
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -19,7 +24,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     { name: "$$$", checked: false },
     { name: "$$$$", checked: false },
   ])
-  const [category_id, setCategory_id] = useState('')
+  const [category_id, setCategory_id] = useState(category)
 
   const handleFilterChange = (e) => {
     // Construct URL with filter parameters
