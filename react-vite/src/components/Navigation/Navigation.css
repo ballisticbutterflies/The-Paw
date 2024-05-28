@@ -1,12 +1,13 @@
 .nav {
   display: grid;
   /* grid-template-columns: 12% 45% 10% 10% 15%; */
-  grid-template-columns: 15% 45% 15% 16% 1%;
+  /* grid-template-columns: 15% 45% 15% 16% 1%; */
+  grid-template-columns: 1fr 3fr 1fr;
   gap: 20px;
   align-items: center;
   background-color: #ffbe6e;
   margin: 0px;
-  width: 100%;
+  /* width: 100vw; */
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -76,12 +77,9 @@
 }
 
 .rightNav {
-  display: grid;
-  justify-content: space-evenly;
-  justify-self: center !important;
-  align-items: center !important;
-  width: fit-content;
-  grid-column: 4 / 5;
+  display: flex;
+  justify-content: end;
+  margin-right: 25px;
 }
 
 .profileAvatar {
@@ -109,11 +107,11 @@
 .profile-dropdown {
   position: absolute;
   padding: 20px;
-  width: 125px;
+  width: 175px;
   background-color: #FFFBF6;
   right: 0;
   left: inherit;
-  margin-top: 1px;
+  margin-top: 50px;
   border-radius: 5px;
   z-index: 2;
 }
@@ -144,7 +142,6 @@
 }
 
 .forbiz-dropdown {
-
   position: absolute;
   padding: 20px;
   width: 175px;
@@ -163,4 +160,69 @@
   background-color: transparent;
   font-size: 14px;
   font-weight: 500;
+}
+
+.rightNavButtons {
+  display: flex;
+  gap: 5px;
+  text-wrap: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+  .nav {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "logo profile"
+      "search search";
+    padding: 5vw 2vw 8vw 2vw;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  /* .forBiz {
+    grid-area: biz;
+    display: flex;
+    justify-content: end;
+    padding-bottom: 20px;
+  } */
+
+  .searchForm {
+    grid-area: search;
+    width: 90vw;
+    margin: auto;
+  }
+
+  .rightNav {
+    grid-area: profile;
+  }
+
+  .rightNavButtons {
+    gap: 5px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .nav {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "logo profile"
+      "search search";
+    padding: 5vw 2vw;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .searchForm {
+    grid-area: search;
+    width: 90vw;
+    margin: auto;
+  }
+
+  .rightNav {
+    grid-area: profile;
+  }
 }

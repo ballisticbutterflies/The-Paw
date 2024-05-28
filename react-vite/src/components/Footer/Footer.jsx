@@ -10,44 +10,50 @@ function Footer() {
         <div className='footer-heading'>
           <div className="dev-heading" >Developers
             <div className='devs'>
-              <div>
-                <a href='https://www.linkedin.com/in/carmenshiu/' target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-linkedin fa-lg" />
-                  </span>
-                </a>&nbsp;&nbsp;
-                <a href="https://github.com/craftycarmen" target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-github fa-lg" />
-                  </span>
-                </a>
-                <span className="names">&nbsp;&nbsp;Carmen Shiu</span>
+              <div className="aDev">
+                <div className="devLogos">
+                  <a href='https://www.linkedin.com/in/carmenshiu/' target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-linkedin fa-lg" />
+                    </span>
+                  </a>
+                  <a href="https://github.com/craftycarmen" target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-github fa-lg" />
+                    </span>
+                  </a>
+                </div>
+                <span className="names">Carmen Shiu</span>
               </div>
-              <div>
-                <a href='https://www.linkedin.com/in/simon-sammel/' target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-linkedin fa-lg" />
-                  </span>
-                </a>&nbsp;&nbsp;
-                <a href="https://github.com/bssammel" target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-github fa-lg" />
-                  </span>
-                </a>
-                <span className="names">&nbsp;&nbsp;Simon Sammel</span>
+              <div className="aDev">
+                <div className="devLogos">
+                  <a href='https://www.linkedin.com/in/simon-sammel/' target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-linkedin fa-lg" />
+                    </span>
+                  </a>
+                  <a href="https://github.com/bssammel" target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-github fa-lg" />
+                    </span>
+                  </a>
+                </div>
+                <span className="names">Simon Sammel</span>
               </div>
-              <div>
-                <a href='https://www.linkedin.com/in/tracey-beard/' target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-linkedin fa-lg" />
-                  </span>
-                </a>&nbsp;&nbsp;
-                <a href="https://github.com/traceybee23" target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-github fa-lg" />
-                  </span>
-                </a>
-                <span className="names">&nbsp;&nbsp;Tracey Beard</span>
+              <div className="aDev">
+                <div className="devLogos">
+                  <a href='https://www.linkedin.com/in/tracey-beard/' target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-linkedin fa-lg" />
+                    </span>
+                  </a>
+                  <a href="https://github.com/traceybee23" target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-github fa-lg" />
+                    </span>
+                  </a>
+                </div>
+                <span className="names">Tracey Beard</span>
               </div>
             </div>
           </div>

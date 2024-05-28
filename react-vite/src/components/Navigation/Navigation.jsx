@@ -7,7 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import ProfileButton from './ProfileButton'
-import ForBusinessButton from "./ForBusinessButton";
+// import ForBusinessButton from "./ForBusinessButton";
 import { useNavigate } from "react-router-dom";
 
 
@@ -75,33 +75,28 @@ function Navigation() {
           <button id="search" type="submit"><i className="fa-solid fa-magnifying-glass" style={{ color: "#5f5ba8", fontSize: "large" }} /></button>
         </form>
       </div>
-      <div className="forBiz">
+      {/* <div className="forBiz">
         <ForBusinessButton />
-      </div>
+      </div> */}
       {/* <div className="writeReview">
         Write a Review
       </div> */}
       <div className="rightNav">
         {user ? (
           <>
-            <div>
-              <ProfileButton />
-            </div>
+            <ProfileButton />
           </>
         ) : (
           <>
-            <div className="rightNav">
-              <div>
-                <OpenModalButton
-                  buttonText="Log In"
-                  modalComponent={<LoginFormModal />}
-                />
-                &nbsp;&nbsp;&nbsp;
-                <OpenModalButton
-                  buttonText="Sign Up"
-                  modalComponent={<SignupFormModal />}
-                />
-              </div>
+            <div className="rightNavButtons">
+              <OpenModalButton
+                buttonText="Log In"
+                modalComponent={<LoginFormModal />}
+              />
+              <OpenModalButton
+                buttonText="Sign Up"
+                modalComponent={<SignupFormModal />}
+              />
             </div>
           </>
         )

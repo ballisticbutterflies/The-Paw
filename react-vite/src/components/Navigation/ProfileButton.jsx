@@ -53,7 +53,12 @@ function ProfileButton() {
           <ul className={"profile-dropdown"} ref={ulRef}>
             {user ? (
               <>
-                <div className="profiledropdownoptions" onClick={() => { navigate(`/users/${user.id}`), closeMenu() }}><FaUserCircle />&nbsp; About Me</div>
+                <div className="profiledropdownoptions"
+                  onClick={() => { navigate(`/users/${user.id}`), closeMenu() }}><FaUserCircle />&nbsp; About Me</div>
+                <hr />
+                <div className="profiledropdownoptions" onClick={() => { navigate('/businesses/new'), closeMenu() }}><i className="fa-solid fa-store" />&nbsp; Add Business</div>
+                <hr />
+                <div className="profiledropdownoptions" onClick={() => { navigate('/businesses/current'), closeMenu() }}><i className="fa-solid fa-pen-to-square" />&nbsp; Manage Business</div>
                 <hr />
                 <div className="profiledropdownoptions" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket" />&nbsp; Log Out </div>
               </>

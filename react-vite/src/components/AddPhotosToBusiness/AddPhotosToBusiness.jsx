@@ -42,10 +42,10 @@ function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
     }
 
     return (
-        <>
+        <div className="addPhoto">
             <h1>{business?.name || businessName}: Add Photos</h1>
             {sessionUser &&
-                <div className="addPhoto">
+                <div>
                     <br />
                     <form onSubmit={handleSubmit} encType="multipart/form-data" >
                         <input
@@ -89,7 +89,7 @@ function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
                     </div>
                 </div>
             }
-        </>
+        </div>
     )
 }
 

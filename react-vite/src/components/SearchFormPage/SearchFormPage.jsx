@@ -1,11 +1,11 @@
-import { useState } from "react";
+// import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link, useLocation } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchAllBusinesses } from "../../redux/businesses";
 
 
@@ -16,12 +16,23 @@ function SearchFormPage() {
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
 
-  console.log(category,  "||||||||||||||||||")
+  console.log("CATEGORY IN SEARCH PAGE", category)
 
   const businesses = Object.values(useSelector((state) => state.search.businesses))
   const { total, pages, currentPage, perPage } = useSelector(state => state.search.pagination);
   const [page, setPage] = useState(currentPage);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 480);
+    setIsTablet(window.innerWidth <= 768 && window.innerWidth >= 481);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
 
   const starReviews = (numStars) => {
 
@@ -66,14 +77,12 @@ function SearchFormPage() {
     }
   }
 
-
   const handleFilterChange = (filters) => {
-
     dispatch(fetchBusinesses(filters, page, perPage))
   }
 
   useEffect(() => {
-    dispatch(fetchAllBusinesses(businesses, page, perPage))
+    dispatch(fetchBusinesses(businesses, page, perPage))
       .catch(error => {
         return error
       })
@@ -84,7 +93,7 @@ function SearchFormPage() {
     const nextPage = currentPage + 1;
     if (nextPage <= pages) {
       setPage(nextPage);
-      dispatch(fetchAllBusinesses(businesses, nextPage, perPage));
+      dispatch(fetchBusinesses(businesses, nextPage, perPage));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
@@ -104,13 +113,13 @@ function SearchFormPage() {
     <>
       <div className="searchPage">
         <h1>Paw-Recommended Results:</h1>
-        <FilterComponent onFilterChange={handleFilterChange} />
-        <p>Total Businesses Found: {total}</p>
+        <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
+        <span>Total Businesses Found: {total}</span>
         {businesses.length === 0 ? (
           <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
         ) : (
           businesses && businesses.map((business, index) => (
-            <span key={business.id}>
+            <div className="card" key={business.id}>
               <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
 
                 <span className="businessesImageWrapper">
@@ -130,7 +139,7 @@ function SearchFormPage() {
                       business.avg_stars &&
 
                       business.num_reviews && reviewsExists(business.num_reviews) &&
-                      <span>{business?.avg_stars && starReviews(business.avg_stars)}
+                      <span className="searchStars">{business?.avg_stars && starReviews(business.avg_stars)}
                         &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
                         &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}</span>
 
@@ -171,7 +180,7 @@ function SearchFormPage() {
                   </span>
                 </>
               </Link>
-            </span>
+            </div>
           ))
         )}
         <div className="pagination">

@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import StarRatingInput from "./StarRatingInput";
 import { fetchBusinesses } from "../../redux/search";
 
 
-const FilterComponent = ({ onFilterChange }) => {
+const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [showMenu, setShowMenu] = useState(false);
+  const closeMenu = () => setShowMenu(false);
+  const ulRef = useRef();
 
   const [resetRating, setResetRating] = useState(false);
   const [stars, setStars] = useState("")
@@ -44,6 +47,7 @@ const FilterComponent = ({ onFilterChange }) => {
     const url = `${queryString}`;
 
     onFilterChange(url)
+    closeMenu();
   }
 
   const onChangeStars = (number) => {
@@ -77,55 +81,132 @@ const FilterComponent = ({ onFilterChange }) => {
     setCategory_id('')
     setResetRating(prevState => !prevState);
     dispatch(fetchBusinesses())
+    closeMenu();
+  }
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (ulRef.current && !ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const toggleMenu = (e) => {
+    e.stopPropagation();
+    setShowMenu(!showMenu);
   }
 
   return (
-    <>
-      <div className="filterComponent" >
-        <h3>Filters</h3>
-        <div className="pawRatingInputFilter">
-          <h4>Paw Rating</h4>
-          <StarRatingInput
-            onChange={onChangeStars}
-            stars={stars}
-            reset={resetRating}
-          />
+    (isMobile || isTablet) ? (
+      <>
+        <div className="filterButtonWrapper">
+          <button className="filterButton" onClick={toggleMenu}><i className="fa-solid fa-filter" />&nbsp; Filter</button>
+          <div className="outerFilterWrapper" ref={ulRef}>
+            {showMenu && (
+              <>
+                <div className="filterComponent" >
+                  <div className="pawRatingInputFilter">
+                    <h4>Paw Rating</h4>
+                    <StarRatingInput
+                      onChange={onChangeStars}
+                      stars={stars}
+                      reset={resetRating}
+                    />
+                  </div>
+                  <div className="priceInputFilter">
+                    <h4>Price</h4>
+                    {price.map((char, index) =>
+                      <label key={char.name}>
+                        <input
+                          key={index}
+                          type="checkbox"
+                          checked={char.checked}
+                          onChange={() => updatePrice(index, !char.checked)}
+                        />
+                        {char.name}&nbsp;&nbsp;
+                      </label>
+                    )}
+                  </div>
+                  <div className="categoryFilter">
+                    <h4>Category</h4>
+                    <select
+                      value={category_id}
+                      onChange={(e) => setCategory_id(e.target.value)}
+                      name="category"
+                    >
+                      <option value="">Select A New Category</option>
+                      {categories.map((category, index) => (
+                        <option key={category} value={parseInt(index + 1)}>
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="filter-buttons">
+                    <button className="apply-filter-button" onClick={handleFilterChange}>Apply Filters</button>
+                    <button className="clear-filter-button" onClick={handleClick}>Clear Filters</button>
+                  </div>
+                </div >
+              </>
+            )}
+          </div>
         </div>
-        <div className="priceInputFilter">
-          <h4>Price</h4>
-          {price.map((char, index) =>
-            <label key={char.name}>
-              <input
-                key={index}
-                type="checkbox"
-                checked={char.checked}
-                onChange={() => updatePrice(index, !char.checked)}
-              />
-              {char.name}&nbsp;&nbsp;
-            </label>
-          )}
-        </div>
-        <div className="categoryFilter">
-          <h4>Category</h4>
-          <select
-            value={category_id}
-            onChange={(e) => setCategory_id(e.target.value)}
-            name="category"
-          >
-            <option value="">Select A New Category</option>
-            {categories.map((category, index) => (
-              <option key={category} value={parseInt(index + 1)}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="filter-buttons">
-          <button className="apply-filter-button" onClick={handleFilterChange}>Apply Filters</button>
-          <button className="clear-filter-button" onClick={handleClick}>Clear Filters</button>
-        </div>
-      </div >
-    </>
+      </>
+    ) : (
+      <>
+        <div className="filterComponent" >
+          <h3>Filters</h3>
+          <div className="pawRatingInputFilter">
+            <h4>Paw Rating</h4>
+            <StarRatingInput
+              onChange={onChangeStars}
+              stars={stars}
+              reset={resetRating}
+            />
+          </div>
+          <div className="priceInputFilter">
+            <h4>Price</h4>
+            {price.map((char, index) =>
+              <label key={char.name}>
+                <input
+                  key={index}
+                  type="checkbox"
+                  checked={char.checked}
+                  onChange={() => updatePrice(index, !char.checked)}
+                />
+                {char.name}&nbsp;&nbsp;
+              </label>
+            )}
+          </div>
+          <div className="categoryFilter">
+            <h4>Category</h4>
+            <select
+              value={category_id}
+              onChange={(e) => setCategory_id(e.target.value)}
+              name="category"
+            >
+              <option value="">Select A New Category</option>
+              {categories.map((category, index) => (
+                <option key={category} value={parseInt(index + 1)}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="filter-buttons">
+            <button className="apply-filter-button" onClick={handleFilterChange}>Apply Filters</button>
+            <button className="clear-filter-button" onClick={handleClick}>Clear Filters</button>
+          </div>
+        </div >
+      </>
+    )
   )
 }
 
