@@ -401,6 +401,13 @@
     .businessAddressContainer {
         flex-direction: column;
         padding-bottom: 0;
+        text-decoration: none;
+    }
+
+    .businessWebsiteContainer a,
+    .businessPhoneContainer a,
+    .businessAddressContainer a {
+        color: #1f2f44;
     }
 
     .businessContactIcon {

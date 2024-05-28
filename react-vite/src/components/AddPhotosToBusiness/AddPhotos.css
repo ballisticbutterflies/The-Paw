@@ -42,19 +42,19 @@
 
 @media screen and (max-width: 480px) {
     .addPhoto {
-        width: 75vw;
+        width: 60vw;
         height: 65vh;
         overflow-x: hidden;
     }
 
     .addPhoto form,
     .addPhoto button {
-        width: 60vw;
+        width: 50vw;
         padding: 10px;
     }
 
     .addPhoto input {
-        width: 95%;
+        width: 90%;
     }
 
     .tipSection {
