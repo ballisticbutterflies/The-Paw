@@ -54,7 +54,7 @@ export const fetchBusinesses = (filters, page = 1, perPage = 10) => async (dispa
 }
 
 export const searchBarBusinesses = (searchQuery, location, page = 1, perPage = 10) => async (dispatch) => {
-    let url ='/api/search/';
+    let url ='/api/search';
     const queryParams = [];
 
     if (searchQuery) {

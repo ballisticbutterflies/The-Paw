@@ -1,12 +1,12 @@
 // import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBusinesses } from "../../redux/search";
+import { fetchBusinesses, searchBarBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link, useLocation } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
 import { useEffect, useState } from "react";
-
+import { fetchAllBusinesses } from "../../redux/businesses"
 
 
 function SearchFormPage() {
@@ -15,6 +15,8 @@ function SearchFormPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
+  console.log("{}{}{}{}{}{}{}{}{", searchParams.get('category'))
+  const search_query = searchParams.get('search_query')
 
 
   const businesses = Object.values(useSelector((state) => state.search.businesses))
@@ -86,6 +88,11 @@ function SearchFormPage() {
   let filter = `category=${category}`
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
+
+    if (!search_query && !filter){
+      dispatch(fetchBusinesses())
+    }
+
     if (filter) {
       setLoading(true)
       dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
@@ -95,7 +102,21 @@ function SearchFormPage() {
           return error
         })
     }
-  }, [dispatch, page, perPage, filter])
+    if (search_query) {
+      setLoading(true)
+      let searchLoc = ''
+      dispatch(searchBarBusinesses(search_query, searchLoc, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1000))
+        .catch(error => {
+          return error
+        })
+    }
+
+
+
+
+  }, [dispatch, page, perPage, filter, search_query])
 
   const handleNextPage = (e) => {
     e.preventDefault();

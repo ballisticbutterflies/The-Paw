@@ -1,37 +1,54 @@
 import { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { searchBarBusinesses } from '../../redux/search';
+import { useNavigate } from "react-router-dom";
+import { fetchBusinesses } from '../../redux/search';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
-  const businesses = Object.values(useSelector((state) => state.search))
-  const locations_list = []
-  businesses.map(business => {
-    let city = business.city
-    let state = business.state
-    let cityState = city.concat(', ', state)
+  // const businesses = Object.values(useSelector((state) => state.search))
+  // const locations_list = []
+  // businesses.map(business => {
+  //   let city = business.city
+  //   let state = business.state
+  //   let cityState = city.concat(', ', state)
 
-    locations_list.push(cityState)
+  //   locations_list.push(cityState)
 
-    return locations_list
-  })
+  //   return locations_list
+  // })
 
-  const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
+  // const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(searchQuery, location);
+
+    const queryParams = new URLSearchParams()
+    if (searchQuery) queryParams.append('search_query', searchQuery)
+    if (location) queryParams.append('location', location)
+    if (!searchQuery) dispatch(fetchBusinesses()).then(() => { navigate('/search')})
+    const queryString = queryParams.toString();
+    const url = `/search?${queryString}`;
+    console.log('Target URL SEARCH BAR :', url);
+    dispatch(searchBarBusinesses(searchQuery, location)).then(() => {
+      navigate(url)
+      setSearchQuery('')
+      setLocation('')
+    })
   };
 
   return (
     <div className="searchForm">
     <form className="formNav" onSubmit={handleSubmit}>
       <input
+        id="searchQuery"
         type="text"
         value={searchQuery}
-        placeholder="things to do, groomers, restaurants"
+        placeholder="things to do, parks, restaurants"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <input
@@ -41,15 +58,15 @@ const SearchBar = ({ onSearch }) => {
         onChange={(e) => setLocation(e.target.value)}
         placeholder="city, state"
       />
-      <datalist id="locations">
+      {/* <datalist id="locations">
         {uniqueLocations.map(op => (
           <option key={op} value={op}>{op}</option>
         ))
         }
-      </datalist>
-      <button type="submit"><FaSearch /></button>
+      </datalist> */}
+      <button id="search" type="submit"><i className="fa-solid fa-magnifying-glass" style={{ color: "#5f5ba8", fontSize: "large" }} /></button>
     </form>
-    </div>
+  </div>
   );
 };
 
