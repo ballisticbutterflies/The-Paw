@@ -165,6 +165,7 @@
 .rightNavButtons {
   display: flex;
   gap: 5px;
+  text-wrap: nowrap;
 }
 
 @media screen and (max-width: 480px) {
