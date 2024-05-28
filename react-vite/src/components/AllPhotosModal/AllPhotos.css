@@ -125,4 +125,32 @@
         max-height: 65vh;
         margin: auto;
     }
+
+    .page {
+        width: 80vw;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .allPhotosModal {
+        width: 70vw;
+        height: 75vh;
+    }
+
+    .allPhotosHeader {
+        display: grid;
+        gap: 0px;
+        padding-bottom: 20px;
+    }
+
+    .allPhotosContainerModal {
+        width: 70vw;
+        max-height: 75vh;
+        margin: auto;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page {
+        width: 90vw;
+    }
 }

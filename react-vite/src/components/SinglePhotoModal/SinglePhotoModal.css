@@ -10,3 +10,9 @@
         width: 65vw;
     }
 }
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .singlePhoto {
+        width: 65vw;
+    }
+}

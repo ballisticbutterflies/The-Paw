@@ -137,3 +137,15 @@
         max-inline-size: 85vw;
     }
 }
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+    .review-card,
+    .review-content {
+        width: 100%;
+    }
+
+    .review-text {
+        max-inline-size: 75vw;
+    }
+}

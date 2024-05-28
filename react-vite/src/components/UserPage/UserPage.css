@@ -135,8 +135,50 @@ img.pfp {
 @media screen and (max-width: 480px) {
     #full-user-page {
         display: grid;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    .user-summary-container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .sub-pages {
+        width: 75vw;
+    }
+
+    .user-navigation-container {
+        width: fit-content;
+        margin: auto;
+    }
+
+    .user-mobile {
+        display: flex;
+        align-self: center;
+        gap: 20px;
+        padding-top: 20px;
+        width: fit-content;
+    }
+
+    .user-mobile-item {
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+        width: 75px;
+        row-gap: 10px;
+    }
+
+    .user-mobile-item>div>i {
+        font-size: xx-large;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #full-user-page {
+        display: grid;
+        padding-left: 5vw;
+        padding-right: 5vw;
     }
 
     .user-summary-container {

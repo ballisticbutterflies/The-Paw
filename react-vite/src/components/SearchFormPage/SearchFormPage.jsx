@@ -15,9 +15,11 @@ function SearchFormPage() {
 
   const businesses = Object.values(useSelector((state) => state.search))
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  const [isTablet, setIsTablet] = useState(window.innerWidth <= 1024 && window.innerWidth >= 481);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
+    setIsTablet(window.innerWidth <= 1024 && window.innerWidth >= 481);
   }
 
   useEffect(() => {
@@ -84,7 +86,7 @@ function SearchFormPage() {
     <>
       <div className="searchPage">
         <h1>Paw-Recommended Results:</h1>
-        <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} />
+        <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
         {businesses.length === 0 ? (
           <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
         ) : (

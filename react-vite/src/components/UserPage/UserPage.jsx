@@ -18,9 +18,11 @@ function UserPage() {
 
     const [currentView, setCurrentView] = useState('overview');
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+    const [isTablet, setIsTablet] = useState(window.innerWidth <= 1024 && window.innerWidth >= 481);
 
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 480);
+        setIsTablet(window.innerWidth <= 1024 && window.innerWidth >= 481)
     }
 
     useEffect(() => {
@@ -68,7 +70,7 @@ function UserPage() {
                             </div>
                         </div>
                         <div className="user-navigation-container">
-                            {isMobile ? (
+                            {(isMobile || isTablet) ? (
                                 <div className="user-mobile">
                                     <div className="user-mobile-item">
                                         <div onClick={() => { setCurrentView('overview') }}>

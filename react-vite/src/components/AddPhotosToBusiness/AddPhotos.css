@@ -68,3 +68,27 @@
         width: 60vw;
     }
 }
+
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .addPhoto {
+        width: 70vw;
+        /* height: 75vh; */
+        overflow-x: hidden;
+    }
+
+    .addPhoto form,
+    .addPhoto button {
+        width: 60vw;
+        padding: 10px;
+    }
+
+    .addPhoto input {
+        width: 90%;
+    }
+
+    .tip {
+        display: grid;
+        width: fit-content;
+    }
+}

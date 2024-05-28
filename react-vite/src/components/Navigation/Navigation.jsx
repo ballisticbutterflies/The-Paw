@@ -88,12 +88,11 @@ function Navigation() {
           </>
         ) : (
           <>
-            <div>
+            <div className="rightNavButtons">
               <OpenModalButton
                 buttonText="Log In"
                 modalComponent={<LoginFormModal />}
               />
-              &nbsp;&nbsp;&nbsp;
               <OpenModalButton
                 buttonText="Sign Up"
                 modalComponent={<SignupFormModal />}

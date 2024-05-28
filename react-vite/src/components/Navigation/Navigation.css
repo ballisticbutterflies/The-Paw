@@ -142,7 +142,6 @@
 }
 
 .forbiz-dropdown {
-
   position: absolute;
   padding: 20px;
   width: 175px;
@@ -161,6 +160,11 @@
   background-color: transparent;
   font-size: 14px;
   font-weight: 500;
+}
+
+.rightNavButtons {
+  display: flex;
+  gap: 5px;
 }
 
 @media screen and (max-width: 480px) {
@@ -191,5 +195,16 @@
 
   .rightNav {
     grid-area: profile;
+  }
+
+  .rightNavButtons {
+    gap: 5px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .rightNavButtons {
+    display: grid;
+    gap: 5px;
   }
 }

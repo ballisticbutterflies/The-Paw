@@ -4,7 +4,7 @@ import StarRatingInput from "./StarRatingInput";
 import { fetchBusinesses } from "../../redux/search";
 
 
-const FilterComponent = ({ onFilterChange, isMobile }) => {
+const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -104,7 +104,7 @@ const FilterComponent = ({ onFilterChange, isMobile }) => {
   }
 
   return (
-    isMobile ? (
+    (isMobile || isTablet) ? (
       <>
         <div className="filterButtonWrapper">
           <button className="filterButton" onClick={toggleMenu}><i className="fa-solid fa-filter" />&nbsp; Filter</button>
