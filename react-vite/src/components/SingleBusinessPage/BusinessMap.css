@@ -7,3 +7,33 @@
     height: 100%;
     width: 100%;
 }
+
+@media screen and (max-width: 480px) {
+    #map {
+        width: 90vw;
+    }
+
+    #map-canvas {
+        width: 90vw;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #map {
+        width: 50vw;
+    }
+
+    #map-canvas {
+        width: 50vw;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #map {
+        width: 100%;
+    }
+
+    #map-canvas {
+        width: 100%;
+    }
+}

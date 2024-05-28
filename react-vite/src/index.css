@@ -1,138 +1,195 @@
-/* TODO: Add sitewide styles */
-body {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    color: #1f2f44;
-    font-size: 14px;
-    background-color: #fff2eb;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-}
+ /* * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     border: 1px solid red;
+ } */
 
-h1 {
-    font-family: "Prata", serif;
-    font-weight: 700;
-    font-style: normal;
-    color: #1f2f44;
-}
+ body {
+     font-family: "Poppins", sans-serif;
+     font-weight: 300;
+     font-style: normal;
+     color: #1f2f44;
+     font-size: 14px;
+     background-color: #fff2eb;
+     margin-top: 0px;
+     margin-left: 0px;
+     margin-right: 0px;
+     width: 100%;
+ }
 
-button {
-    background-color: #f78a63;
-    font-family: "Poppins", sans-serif;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px 10px 15px;
-    font-size: 16px;
-    color: #FFFFFF;
-}
+ h1 {
+     font-family: "Prata", serif;
+     font-weight: 700;
+     font-style: normal;
+     color: #1f2f44;
+ }
 
-button:disabled {
-    background-color: #c3cddf;
-    color: #768c9f;
-}
+ button {
+     background-color: #f78a63;
+     font-family: "Poppins", sans-serif;
+     border: none;
+     border-radius: 5px;
+     padding: 10px 15px 10px 15px;
+     font-size: 16px;
+     color: #FFFFFF;
+ }
 
-input,
-textarea {
-    background-color: #FFFBF6;
-    font-family: "Poppins", sans-serif;
-    color: #1f2f44;
-    border-radius: 3px;
-    border: #c3cddf solid 1px;
-    resize: none;
-}
+ button:disabled {
+     background-color: #c3cddf;
+     color: #768c9f;
+ }
 
-input,
-textarea,
-select {
-    padding: 5px;
-}
+ input,
+ textarea {
+     background-color: #FFFBF6;
+     font-family: "Poppins", sans-serif;
+     color: #1f2f44;
+     border-radius: 3px;
+     border: #c3cddf solid 1px;
+     resize: none;
+ }
 
-input button {
-    background-color: #FFFBF6;
-    font-family: "Poppins", sans-serif;
-    color: #1f2f44;
-    border-radius: 3px;
-    border: #c3cddf solid 1px;
-}
+ input,
+ textarea,
+ select {
+     padding: 5px;
+ }
 
-select {
-    background-color: #FFFBF6;
-    font-family: "Poppins", sans-serif;
-    color: #1f2f44;
-    border-radius: 3px;
-    border: #c3cddf solid 1px;
-}
+ input button {
+     background-color: #FFFBF6;
+     font-family: "Poppins", sans-serif;
+     color: #1f2f44;
+     border-radius: 3px;
+     border: #c3cddf solid 1px;
+ }
 
-.paws-filled {
-    color: #5f5ba8;
-}
+ select {
+     background-color: #FFFBF6;
+     font-family: "Poppins", sans-serif;
+     color: #1f2f44;
+     border-radius: 3px;
+     border: #c3cddf solid 1px;
+ }
 
-.paws-unfilled {
-    color: #c3cddf;
-}
+ .paws-filled {
+     color: #5f5ba8;
+ }
 
-a {
-    color: #5f5ba8;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-}
+ .paws-unfilled {
+     color: #c3cddf;
+ }
 
-.modalLink {
-    color: #5f5ba8;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-}
+ a {
+     color: #5f5ba8;
+     text-decoration: none;
+     font-weight: 600;
+     cursor: pointer;
+ }
 
-.modalLink:hover {
-    color: #5f5ba8;
-    text-decoration: underline;
-    font-weight: 600;
-    cursor: pointer;
-}
+ .modalLink {
+     color: #5f5ba8;
+     text-decoration: none;
+     font-weight: 600;
+     cursor: pointer;
+ }
 
-a:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
+ .modalLink:hover {
+     color: #5f5ba8;
+     text-decoration: underline;
+     font-weight: 600;
+     cursor: pointer;
+ }
 
-hr {
-    height: 1px;
-    border: none;
-    background-color: #c3cddf;
-}
+ a:hover {
+     text-decoration: underline;
+     cursor: pointer;
+ }
 
-
-button:hover {
-    cursor: pointer;
-}
-
-.loginSignupModals {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    width: 455px;
-}
-
-.loginSignupModals button {
-    width: 103%;
-}
+ hr {
+     height: 1px;
+     border: none;
+     background-color: #c3cddf;
+ }
 
 
-.loginSignupModals .errors {
-    color: #c24830;
-    font-weight: 500;
-    margin-top: -8px;
-    margin-left: -1px;
-}
+ button:hover {
+     cursor: pointer;
+ }
 
-.loginSignupModals input {
-    width: 100%;
-}
+ .loginSignupModals {
+     display: flex;
+     flex-direction: column;
+     padding: 10px;
+     width: 455px;
+ }
 
-.loginSignupModals select {
-    width: 103%;
-}
+ .loginSignupModals button {
+     width: 100%;
+ }
+
+
+ .loginSignupModals .errors {
+     color: #c24830;
+     font-weight: 500;
+     margin-top: -8px;
+     margin-left: -1px;
+ }
+
+ .loginSignupModals input {
+     width: 100%;
+ }
+
+ .loginSignupModals select {
+     width: 100%;
+ }
+
+ @media screen and (max-width: 480px) {
+
+     .loginSignupModals,
+     .loginSignupModals button {
+         width: 60vw;
+     }
+
+ }
+
+ @media screen and (min-width: 481px) and (max-width: 768px) {
+
+     .loginSignupModals,
+     .loginSignupModals button {
+         width: 60vw;
+     }
+
+     .loginSignupModals input {
+         width: calc(60vw - 12px);
+     }
+ }
+
+ @media screen and (min-width: 769px) and (max-width: 1024px) {
+
+     .loginSignupModals,
+     .loginSignupModals button {
+         width: 70vw;
+     }
+
+     .loginSignupModals {
+         overflow: hidden;
+         overflow-y: scroll;
+     }
+
+     .loginSignupModals input {
+         width: calc(70vw - 12px);
+     }
+
+     .loginSignupModals select {
+         width: 70vw;
+     }
+ }
+
+ @media screen and (max-height: 600px) {
+     .loginSignupModals {
+         height: 70vh;
+         overflow: hidden;
+         overflow-y: auto;
+     }
+ }

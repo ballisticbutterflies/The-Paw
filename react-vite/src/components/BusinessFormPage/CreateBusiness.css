@@ -46,3 +46,14 @@
   row-gap: 5px;
   margin-left: 3px;
 }
+
+@media screen and (max-width: 480px) {
+
+  .createBizForm {
+    width: 90vw;
+  }
+
+  .imageInput {
+    width: 87vw;
+  }
+}

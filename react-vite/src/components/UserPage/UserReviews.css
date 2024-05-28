@@ -125,3 +125,39 @@
     width: 100%;
     height: 100%;
 }
+
+@media screen and (max-width: 480px) {
+
+    .review-card,
+    .review-content {
+        width: 100%;
+    }
+
+    .review-text {
+        max-inline-size: auto;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+    .review-card,
+    .review-content {
+        width: 100%;
+    }
+
+    .review-text {
+        max-inline-size: auto;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+    .review-card,
+    .review-content {
+        width: 100%;
+    }
+
+    .review-text {
+        max-inline-size: auto;
+    }
+}
