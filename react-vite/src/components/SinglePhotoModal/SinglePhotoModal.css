@@ -1,0 +1,12 @@
+.singlePhoto {
+    max-width: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
+    margin-top: 30px;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 480px) {
+    .singlePhoto {
+        width: 65vw;
+    }
+}
