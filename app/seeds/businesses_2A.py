@@ -1,10 +1,10 @@
 from app.models import db, Business, environment, SCHEMA
 from sqlalchemy.sql import text
 
-def seed_businesses_4():
-    businesses_4 = [
+def seed_businesses_2A():
+    businesses_2A = [
       Business(
-        owner_id=12,
+        owner_id=50,
         category_id=1,
         address='6080 Falls Rd',
         city='Baltimore',
@@ -15,7 +15,7 @@ def seed_businesses_4():
         website='https://www.corner-pantry.com/',
         email='info@corner-pantry.com',
         phone='6673082331',
-        price='$$',
+        price='$',
         set_hours='yes',
         mon_open='0700',
         mon_close='1500',
@@ -31,7 +31,7 @@ def seed_businesses_4():
         sat_close='1500',
       ),
       Business(
-        owner_id=23,
+        owner_id=49,
         category_id=2,
         address='716 York Rd',
         city='Towson',
@@ -58,7 +58,7 @@ def seed_businesses_4():
         sat_close='1800',
       ),
       Business(
-        owner_id=17,
+        owner_id=50,
         category_id=3,
         address='240 Town Square Dr',
         city='Lusby',
@@ -85,7 +85,7 @@ def seed_businesses_4():
       ),
       Business(
         owner_id=5,
-        category_id=4,
+        category_id=49,
         address='3531 Chestnut Avenue',
         city='Baltimore',
         state='MD',
@@ -113,7 +113,7 @@ def seed_businesses_4():
         sun_close='1700',
       ),
       Business(
-        owner_id=28,
+        owner_id=48,
         category_id=5,
         address='1734 W Nursery Rd',
         city='Linthicum Heights',
@@ -127,7 +127,7 @@ def seed_businesses_4():
         set_hours='no',
       ),
       Business(
-        owner_id=3,
+        owner_id=47,
         category_id=6,
         address='1000 Lakeside Dr',
         city='Baltimore',
@@ -155,7 +155,7 @@ def seed_businesses_4():
         sun_close='2200',
       ),
       Business(
-        owner_id=8,
+        owner_id=48,
         category_id=7,
         address='3300 Falls Rd',
         city='Baltimore',
@@ -165,7 +165,7 @@ def seed_businesses_4():
         description='Maryland SPCA is dedicated to improving the lives of pets and people by providing adoption services, veterinary care, and community programs.',
         website='https://www.mdspca.org',
         phone='4102358826',
-        price='$$',
+        price='$',
         set_hours='yes',
         mon_open='1300',
         mon_close='1900',
@@ -181,7 +181,7 @@ def seed_businesses_4():
         sat_close='1700',
       ),
       Business(
-        owner_id=21,
+        owner_id=47,
         category_id=8,
         address='3500 Parkdale Ave Fl 2 Ste R',
         city='Baltimore',
@@ -210,16 +210,14 @@ def seed_businesses_4():
         sun_close='2200',
       ),
       Business(
-        owner_id=30,
+        owner_id=46,
         category_id=1,
         address='3307 N Davidson St',
         city='Charlotte',
         state='NC',
         zip_code='28205',
-        name='The Dog Bar',
-        description='The Dog Bar in Charlotte, NC is THE pet-friendly place to bring Fido in the Queen City. Located in the NoDa Arts District, the bar serves beer, wine, and liquor, and allows dogs of all shapes and sizes both indoors and out.',
-        website='https://www.dogbarcharlotte.net/',
-        email='office@dogbarcharlotte.net',
+        name='Dog Bar',
+        description='Dogs are allowed off-leash at this hangout with beer, wine & cocktails, plus a patio area & TVs.',
         phone='7043703595',
         price='$',
         set_hours="yes",
@@ -237,7 +235,7 @@ def seed_businesses_4():
         sun_close='2200',
       ),
       Business(
-        owner_id=24,
+        owner_id=45,
         category_id=2,
         address='9729 S Tryon St',
         city='Charlotte',
@@ -262,7 +260,7 @@ def seed_businesses_4():
         sat_close='1200',
       ),
       Business(
-        owner_id=15,
+        owner_id=45,
         category_id=3,
         address='5011 Weddington Rd NW Suite 60',
         city='Concord',
@@ -290,7 +288,7 @@ def seed_businesses_4():
         sun_close='1800',
       ),
       Business(
-        owner_id=29,
+        owner_id=46,
         category_id=4,
         address='4110 Charlotte Hwy',
         city='Lake Wylie',
@@ -316,7 +314,7 @@ def seed_businesses_4():
         sun_close='1700',
         ),
       Business(
-        owner_id=26,
+        owner_id=44,
         category_id=5,
         address='222 East 3rd St',
         city='Charlotte',
@@ -330,7 +328,7 @@ def seed_businesses_4():
         set_hours="no",
       ),
       Business(
-        owner_id=20,
+        owner_id=43,
         category_id=6,
         address='15222 York Rd',
         city='Charlotte',
@@ -358,7 +356,7 @@ def seed_businesses_4():
         sun_close='1700',
       ),
       Business(
-        owner_id=10,
+        owner_id=43,
         category_id=7,
         address='1348 Parker Dr',
         city='Charlotte',
@@ -385,7 +383,7 @@ def seed_businesses_4():
         sun_close='1700',
       ),
       Business(
-        owner_id=25,
+        owner_id=44,
         category_id=8,
         address='8431 Old Statesville Rd',
         city='Charlotte',
@@ -413,7 +411,7 @@ def seed_businesses_4():
         sun_close='1530',
       ),
       Business(
-        owner_id=23,
+        owner_id=42,
         category_id=1,
         address=' 6400 Time Square Ave',
         city='Orlando',
@@ -442,7 +440,7 @@ def seed_businesses_4():
         sun_close='2300',
     ),
       Business(
-        owner_id=11,
+        owner_id=41,
         category_id=2,
         address='1201 W Michigan St',
         city='Orlando',
@@ -468,7 +466,7 @@ def seed_businesses_4():
         sat_close='1200',
       ),
       Business(
-        owner_id=4,
+        owner_id=41,
         category_id=3,
         address='3815 Lake Center Dr',
         city='MT Dora',
@@ -496,7 +494,7 @@ def seed_businesses_4():
         sun_close='1600',
       ),
       Business(
-        owner_id=19,
+        owner_id=42,
         category_id=4,
         address='460 N Ronald Reagan Blvd',
         city='Longwood',
@@ -522,7 +520,7 @@ def seed_businesses_4():
         sat_close='1700',
       ),
       Business(
-        owner_id=13,
+        owner_id=40,
         category_id=5,
         address='8480 International Dr',
         city='Orlando',
@@ -536,7 +534,7 @@ def seed_businesses_4():
         set_hours="no",
       ),
       Business(
-        owner_id=7,
+        owner_id=39,
         category_id=6,
         address='512 East Washington St',
         city='Orlando',
@@ -563,7 +561,7 @@ def seed_businesses_4():
         sun_close='2359',
       ),
       Business(
-        owner_id=28,
+        owner_id=39,
         category_id=7,
         address='2769 Conroy Rd',
         city='Orlando',
@@ -590,7 +588,7 @@ def seed_businesses_4():
         sun_close='1800',
       ),
       Business(
-        owner_id=16,
+        owner_id=40,
         category_id=8,
         address='7284 Narcoossee Rd',
         city='Orlando',
@@ -2050,7 +2048,7 @@ def seed_businesses_4():
       )
     ]
 
-    db.session.add_all(businesses_4)
+    db.session.add_all(businesses_2A)
     db.session.commit()
 
 
@@ -2060,7 +2058,7 @@ def seed_businesses_4():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_businesses_4():
+def undo_businesses_2A():
     if environment == "production":
       db.session.execute(f"TRUNCATE table {SCHEMA}.businesses RESTART IDENTITY CASCADE;")
     else:

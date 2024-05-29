@@ -2,7 +2,7 @@ from flask.cli import AppGroup
 from .aa_users import seed_users, undo_users
 from .businesses import seed_businesses, undo_businesses
 from .businesses_2 import seed_businesses_2, undo_businesses_2
-from .businesses_4 import seed_businesses_4, undo_businesses_4
+from .businesses_2A import seed_businesses_2A, undo_businesses_2A
 from .reviews import seed_reviews, undo_reviews
 from .images import seed_images, undo_images
 from .categories import seed_categories, undo_categories
@@ -36,7 +36,7 @@ def seed():
     seed_businesses()
     seed_businesses_2()
     print('######### businesses TRACEY')
-    seed_businesses_4()
+    seed_businesses_2A()
     print('######### reviews 4')
     seed_reviews()
     print('######### images 5')
@@ -50,7 +50,7 @@ def seed():
 def undo():
     undo_images()
     undo_reviews()
-    undo_businesses_4()
+    undo_businesses_2A()
     undo_businesses_2()
     undo_businesses()
     undo_categories()
