@@ -4,6 +4,7 @@ from sqlalchemy.sql import text
 def seed_businesses_2A():
     businesses_2A = [
       Business(
+         #93
         owner_id=50,
         category_id=1,
         address='6080 Falls Rd',
@@ -31,6 +32,7 @@ def seed_businesses_2A():
         sat_close='1500',
       ),
       Business(
+         #94
         owner_id=49,
         category_id=2,
         address='716 York Rd',
@@ -58,6 +60,7 @@ def seed_businesses_2A():
         sat_close='1800',
       ),
       Business(
+         #95
         owner_id=50,
         category_id=3,
         address='240 Town Square Dr',
@@ -84,6 +87,7 @@ def seed_businesses_2A():
         sat_close='1200',
       ),
       Business(
+         #96
         owner_id=5,
         category_id=49,
         address='3531 Chestnut Avenue',
@@ -113,6 +117,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #97
         owner_id=48,
         category_id=5,
         address='1734 W Nursery Rd',
@@ -127,6 +132,7 @@ def seed_businesses_2A():
         set_hours='no',
       ),
       Business(
+         #98
         owner_id=47,
         category_id=6,
         address='1000 Lakeside Dr',
@@ -155,6 +161,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #99
         owner_id=48,
         category_id=7,
         address='3300 Falls Rd',
@@ -181,6 +188,7 @@ def seed_businesses_2A():
         sat_close='1700',
       ),
       Business(
+         #100
         owner_id=47,
         category_id=8,
         address='3500 Parkdale Ave Fl 2 Ste R',
@@ -210,6 +218,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #101
         owner_id=46,
         category_id=1,
         address='3307 N Davidson St',
@@ -235,6 +244,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #102
         owner_id=45,
         category_id=2,
         address='9729 S Tryon St',
@@ -260,6 +270,7 @@ def seed_businesses_2A():
         sat_close='1200',
       ),
       Business(
+         #103
         owner_id=45,
         category_id=3,
         address='5011 Weddington Rd NW Suite 60',
@@ -288,6 +299,7 @@ def seed_businesses_2A():
         sun_close='1800',
       ),
       Business(
+         #104
         owner_id=46,
         category_id=4,
         address='4110 Charlotte Hwy',
@@ -314,6 +326,7 @@ def seed_businesses_2A():
         sun_close='1700',
         ),
       Business(
+         #105
         owner_id=44,
         category_id=5,
         address='222 East 3rd St',
@@ -328,6 +341,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #106
         owner_id=43,
         category_id=6,
         address='15222 York Rd',
@@ -356,6 +370,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #107
         owner_id=43,
         category_id=7,
         address='1348 Parker Dr',
@@ -383,6 +398,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #108
         owner_id=44,
         category_id=8,
         address='8431 Old Statesville Rd',
@@ -411,6 +427,7 @@ def seed_businesses_2A():
         sun_close='1530',
       ),
       Business(
+         #109
         owner_id=42,
         category_id=1,
         address=' 6400 Time Square Ave',
@@ -438,8 +455,9 @@ def seed_businesses_2A():
         sat_close='2400',
         sun_open='1100',
         sun_close='2300',
-    ),
+      ),
       Business(
+         #110
         owner_id=41,
         category_id=2,
         address='1201 W Michigan St',
@@ -466,6 +484,7 @@ def seed_businesses_2A():
         sat_close='1200',
       ),
       Business(
+         #111
         owner_id=41,
         category_id=3,
         address='3815 Lake Center Dr',
@@ -494,6 +513,7 @@ def seed_businesses_2A():
         sun_close='1600',
       ),
       Business(
+         #112
         owner_id=42,
         category_id=4,
         address='460 N Ronald Reagan Blvd',
@@ -520,6 +540,7 @@ def seed_businesses_2A():
         sat_close='1700',
       ),
       Business(
+         #113
         owner_id=40,
         category_id=5,
         address='8480 International Dr',
@@ -534,6 +555,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #114
         owner_id=39,
         category_id=6,
         address='512 East Washington St',
@@ -561,6 +583,7 @@ def seed_businesses_2A():
         sun_close='2359',
       ),
       Business(
+         #115
         owner_id=39,
         category_id=7,
         address='2769 Conroy Rd',
@@ -588,6 +611,7 @@ def seed_businesses_2A():
         sun_close='1800',
       ),
       Business(
+         #116
         owner_id=40,
         category_id=8,
         address='7284 Narcoossee Rd',
@@ -611,6 +635,7 @@ def seed_businesses_2A():
         fri_close='1530',
       ),
       Business(
+         #117
         owner_id=5,
         category_id=1,
         address='245 E Commerce St Ste 100',
@@ -637,6 +662,7 @@ def seed_businesses_2A():
         sat_close='2300',
       ),
       Business(
+         #118
         owner_id=12,
         category_id=2,
         address='6820 Alamo Pkwy STE 118',
@@ -660,6 +686,7 @@ def seed_businesses_2A():
         fri_close='1730',
       ),
       Business(
+         #119
         owner_id=18,
         category_id=3,
         address='5010 N Loop 1604 W',
@@ -688,6 +715,7 @@ def seed_businesses_2A():
         sun_close='1600',
       ),
       Business(
+         #120
         owner_id=25,
         category_id=4,
         address='5120 Broadway St',
@@ -713,6 +741,7 @@ def seed_businesses_2A():
         sat_close='1800',
       ),
       Business(
+         #121
         owner_id=7,
         category_id=5,
         address='420 W Market St',
@@ -727,6 +756,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #122
         owner_id=20,
         category_id=6,
         address='13203 Blanco Rd',
@@ -740,6 +770,7 @@ def seed_businesses_2A():
         set_hours='no'
       ),
       Business(
+         #123
         owner_id=14,
         category_id=7,
         address='4804 Fredericksburg Rd',
@@ -768,6 +799,7 @@ def seed_businesses_2A():
         sun_close='1900',
       ),
       Business(
+         #124
         owner_id=27,
         category_id=8,
         address='5611 E. Houston St.',
@@ -793,6 +825,7 @@ def seed_businesses_2A():
         sat_close='1400',
       ),
       Business(
+         #125
         owner_id=48,
         category_id=3,
         address=' 7182 Oak Dr.',
@@ -819,6 +852,7 @@ def seed_businesses_2A():
         sat_close='1700',
       ),
       Business(
+         #126
         owner_id=7,
         category_id=1,
         address='915 SE Hawthorne Blvd',
@@ -847,6 +881,7 @@ def seed_businesses_2A():
         sun_close='2100',
       ),
       Business(
+         #127
         owner_id=12,
         category_id=1,
         address='1438 NE Alberta St',
@@ -873,6 +908,7 @@ def seed_businesses_2A():
         sun_close='1500',
       ),
       Business(
+         #128
         owner_id=3,
         category_id=2,
         address='315 NE Killingsworth St',
@@ -898,6 +934,7 @@ def seed_businesses_2A():
         sun_close='2000',
       ),
       Business(
+         #129
         owner_id=3,
         category_id=3,
         city='Vancouver',
@@ -910,6 +947,7 @@ def seed_businesses_2A():
         phone='3606011127',
       ),
       Business(
+         #130
         owner_id=16,
         category_id=4,
         address='3131 N Lombard Street',
@@ -938,6 +976,7 @@ def seed_businesses_2A():
         sun_close='1900',
       ),
       Business(
+         #131
         owner_id=13,
         category_id=5,
         address='813 SW Alder St',
@@ -951,6 +990,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #132
         owner_id=5,
         category_id=6,
         address='1099 NW Overton Street',
@@ -978,6 +1018,7 @@ def seed_businesses_2A():
         sun_close='2400',
       ),
       Business(
+         #133
         owner_id=27,
         category_id=7,
         address='1067 NE Columbia Blvd',
@@ -990,6 +1031,7 @@ def seed_businesses_2A():
         phone='5032857722',
       ),
       Business(
+         #134
         owner_id=9,
         category_id=8,
         city='Portland',
@@ -1003,6 +1045,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #135
         owner_id=12,
         category_id=4,
         address='2531 Fair Oaks Blvd.',
@@ -1031,6 +1074,7 @@ def seed_businesses_2A():
         sun_close='1900',
       ),
       Business(
+         #136
         owner_id=7,
         category_id=1,
         address='1800 15th St Ste B',
@@ -1059,6 +1103,7 @@ def seed_businesses_2A():
         sun_close='2030',
       ),
       Business(
+         #137
         owner_id=3,
         category_id=3,
         address='4060 Power Inn Rd',
@@ -1087,6 +1132,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #138
         owner_id=22,
         category_id=5,
         address='2618 Gateway Oaks Dr',
@@ -1101,6 +1147,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+        #139
         owner_id=14,
         category_id=2,
         address='2513 Walnut Ave',
@@ -1123,6 +1170,7 @@ def seed_businesses_2A():
         fri_close='1800',
       ),
       Business(
+         #140
         owner_id=25,
         category_id=7,
         address='6001 Folsom Blvd',
@@ -1145,6 +1193,7 @@ def seed_businesses_2A():
         sun_close='1500',
       ),
       Business(
+         #141
         owner_id=19,
         category_id=6,
         address='1818 Q St',
@@ -1171,6 +1220,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #142
         owner_id=27,
         category_id=1,
         address='2332 K St',
@@ -1198,6 +1248,7 @@ def seed_businesses_2A():
         sun_close='2145',
       ),
       Business(
+         #143
         owner_id=10,
         category_id=1,
         address='4501 Butler St',
@@ -1224,6 +1275,7 @@ def seed_businesses_2A():
         sun_close='0900',
       ),
       Business(
+         #144
         owner_id=7,
         category_id=6,
         address='Riverview Ave',
@@ -1234,6 +1286,7 @@ def seed_businesses_2A():
         description='A spacious dog park in Riverview Park with separate areas for small and large dogs.',
       ),
       Business(
+         #145
         owner_id=18,
         category_id=3,
         address='6201 Spirit St',
@@ -1260,6 +1313,7 @@ def seed_businesses_2A():
         sat_close='1700',
       ),
       Business(
+         #146
         owner_id=14,
         category_id=2,
         address='6742 Reynolds St',
@@ -1286,6 +1340,7 @@ def seed_businesses_2A():
         sat_close='1200',
       ),
       Business(
+         #147
         owner_id=22,
         category_id=3,
         address='5111 Doyle Road',
@@ -1310,6 +1365,7 @@ def seed_businesses_2A():
         fri_close='1800',
       ),
       Business(
+         #148
         owner_id=5,
         category_id=5,
         address='620 William Penn Pl',
@@ -1323,6 +1379,7 @@ def seed_businesses_2A():
         price='$$$',
       ),
       Business(
+         #149
         owner_id=30,
         category_id=8,
         city='Pittsburgh',
@@ -1350,6 +1407,7 @@ def seed_businesses_2A():
         sun_close='2300',
       ),
       Business(
+         #150
         owner_id=30,
         category_id=7,
         address='413 E 6th Ave',
@@ -1378,6 +1436,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #151
         owner_id=29,
         category_id=1,
         address='518 E Fremont St',
@@ -1404,6 +1463,7 @@ def seed_businesses_2A():
         sun_close='2400',
       ),
       Business(
+         #152
         owner_id=14,
         category_id=2,
         address='1117 N. Decatur Blvd.',
@@ -1429,6 +1489,7 @@ def seed_businesses_2A():
         sat_close='1400',
       ),
       Business(
+         #153
         owner_id=7,
         category_id=3,
         address='6050 West Lone Mountain Road',
@@ -1457,6 +1518,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #154
         owner_id=34,
         category_id=4,
         address='9890 S. Maryland Parkway',
@@ -1485,6 +1547,7 @@ def seed_businesses_2A():
         sun_close='1900',
       ),
       Business(
+         #155
         owner_id=37,
         category_id=5,
         address='145 E Harmon Ave',
@@ -1499,6 +1562,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #156
         owner_id=36,
         category_id=6,
         address='1600 Wigwam Pkwy',
@@ -1525,6 +1589,7 @@ def seed_businesses_2A():
         sun_close='2400',
       ),
       Business(
+         #157
         owner_id=42,
         category_id=7,
         address='1750 S Rainbow Blvd',
@@ -1553,6 +1618,7 @@ def seed_businesses_2A():
         sun_close='1600',
       ),
       Business(
+         #158
         owner_id=28,
         category_id=8,
         city='Las Vegas',
@@ -1565,6 +1631,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #159
         owner_id=35,
         category_id=1,
         address='3825 Edwards Road',
@@ -1591,6 +1658,7 @@ def seed_businesses_2A():
         sun_close='2100',
       ),
       Business(
+         #160
         owner_id=44,
         category_id=1,
         address='7022 Miami Ave',
@@ -1618,6 +1686,7 @@ def seed_businesses_2A():
         sun_close='2100',
       ),
       Business(
+         #161
         owner_id=33,
         category_id=2,
         address='7670 Montgomery Rd',
@@ -1642,6 +1711,7 @@ def seed_businesses_2A():
         sat_close='1400',
       ),
       Business(
+         #162
         owner_id=42,
         category_id=3,
         address='3797 Shady Ln',
@@ -1670,6 +1740,7 @@ def seed_businesses_2A():
         sun_close='1500',
       ),
       Business(
+         #163
         owner_id=32,
         category_id=3,
         address='5081 Madison Rd',
@@ -1698,6 +1769,7 @@ def seed_businesses_2A():
         sun_close='1600',
       ),
       Business(
+         #164
         owner_id=45,
         category_id=5,
         address='151 Goodman Dr',
@@ -1710,6 +1782,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #165
         owner_id=35,
         category_id=1,
         address='7605 Wooster Pike',
@@ -1737,6 +1810,7 @@ def seed_businesses_2A():
         sun_close='2100',
       ),
       Business(
+         #166
         owner_id=49,
         category_id=6,
         address='100 W Mehring Way',
@@ -1764,6 +1838,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #167
         owner_id=38,
         category_id=7,
         address='11900 Conrey Road',
@@ -1791,6 +1866,7 @@ def seed_businesses_2A():
         sun_close='1800',
       ),
       Business(
+         #168
         owner_id=48,
         category_id=8,
         address='2722 Erie Ave',
@@ -1803,6 +1879,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #169
         owner_id=46,
         category_id=1,
         address='440A W 2nd St',
@@ -1832,6 +1909,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #170
         owner_id=26,
         category_id=1,
         address='2027 S Lamar Blvd',
@@ -1861,6 +1939,7 @@ def seed_businesses_2A():
         sun_close='2400',
       ),
       Business(
+         #171
         owner_id=44,
         category_id=2,
         address='3407 Northland Dr',
@@ -1885,6 +1964,7 @@ def seed_businesses_2A():
         fri_close='1800',
       ),
       Business(
+         #172
         owner_id=33,
         category_id=3,
         address='509 Cypress Creek Rd',
@@ -1914,6 +1994,7 @@ def seed_businesses_2A():
         sun_close='1700',
       ),
       Business(
+         #173
         owner_id=31,
         category_id=4,
         address='916B 12th St',
@@ -1942,6 +2023,7 @@ def seed_businesses_2A():
         sun_close='1800',
       ),
       Business(
+         #174
         owner_id=46,
         category_id=5,
         address='600 Davis St',
@@ -1956,6 +2038,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #175
         owner_id=42,
         category_id=6,
         address='2100 Barton Springs Rd',
@@ -1982,6 +2065,7 @@ def seed_businesses_2A():
         sun_close='2200',
       ),
       Business(
+         #176
         owner_id=32,
         category_id=6,
         address='Abbate Cir',
@@ -1996,6 +2080,7 @@ def seed_businesses_2A():
         set_hours="no",
       ),
       Business(
+         #177
         owner_id=20,
         category_id=7,
         address='7201 Levander Loop Bldg A',
@@ -2021,6 +2106,7 @@ def seed_businesses_2A():
         sun_close='1900',
       ),
       Business(
+         #178
         owner_id=29,
         category_id=3,
         address='7739 Northcross Dr STE H',
