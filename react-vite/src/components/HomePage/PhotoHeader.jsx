@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { searchBarBusinesses } from "../../redux/search";
-
 
 function PhotoHeader() {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleClick = e => {
         e.preventDefault();
-        dispatch(searchBarBusinesses("groomer"))
-            .then(() => navigate('/search'));
+        const queryParams = new URLSearchParams()
+        queryParams.append('search_query', 'grooming')
+        const queryString = queryParams.toString();
+        const url = `/search?${queryString}`;
+        navigate(url);
     }
 
     return (
