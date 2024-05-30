@@ -15,7 +15,6 @@ function SearchFormPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
-  console.log("{}{}{}{}{}{}{}{}{", searchParams.get('category'))
   const search_query = searchParams.get('search_query')
 
 
@@ -89,8 +88,13 @@ function SearchFormPage() {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
 
-    if (!search_query && !filter){
-      dispatch(fetchBusinesses())
+    if (!search_query && filter === 'category=null'){
+      dispatch(fetchBusinesses({}, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1000))
+        .catch(error => {
+          return error
+        })
     }
 
     if (filter) {
