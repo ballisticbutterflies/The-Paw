@@ -28,6 +28,32 @@ const SearchBar = () => {
     e.preventDefault();
 
     const queryParams = new URLSearchParams()
+
+    if (searchQuery === 'restaurant' || searchQuery === 'restaurants') {
+      queryParams.append('category', 1)
+    }
+    if (searchQuery === 'veterinarians' || searchQuery === 'veterinarian' || searchQuery === 'vet' || searchQuery === 'doctor') {
+      queryParams.append('category', 2)
+    }
+    if (searchQuery === 'services' || searchQuery === 'groomer' || searchQuery === 'training' || searchQuery === 'walker') {
+      queryParams.append('category', 3)
+    }
+    if (searchQuery === 'shopping' || searchQuery === 'store' || searchQuery === 'supplies' || searchQuery === 'boutique') {
+      queryParams.append('category', 4)
+    }
+    if (searchQuery === 'travel' || searchQuery === 'supplies' || searchQuery === 'boutique') {
+      queryParams.append('category', 5)
+    }
+    if (searchQuery === 'activities' || searchQuery === 'park' || searchQuery === 'parks') {
+      queryParams.append('category', 6)
+    }
+    if (searchQuery === 'adoption' || searchQuery === 'adopt') {
+      queryParams.append('category', 7)
+    }
+    if (searchQuery === 'other' || searchQuery === 'photo' || searchQuery === 'photos' || searchQuery === 'burial') {
+      queryParams.append('category', 8)
+    }
+
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
     if (!searchQuery) dispatch(fetchBusinesses()).then(() => { navigate('/search')})
