@@ -126,7 +126,10 @@ function SearchFormPage() {
 
   }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
 
-
+  // Reset page state when search query or filters change
+  useEffect(() => {
+    setPage(1);
+  }, [search_query, filter, searchLoc, category]);
 
   const handleFilterChange = (filters) => {
 
@@ -204,7 +207,7 @@ function SearchFormPage() {
 
                     <>
                       <span className="businessDeets">
-                        <h2>{(page - 1) * perPage + index + 1}.&nbsp;{business.name}</h2>
+                        <h2>{(currentPage - 1) * perPage + index + 1}.&nbsp;{business.name}</h2>
                         {
                           business.avg_stars &&
 
@@ -216,7 +219,6 @@ function SearchFormPage() {
                         }
 
                         {!business.price ? (
-
                           <p className="priceSubcat">{business.category?.name}
                           </p>
                         ) : (
