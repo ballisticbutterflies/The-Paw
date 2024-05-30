@@ -2,11 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import StarRatingInput from "./StarRatingInput";
 import { fetchBusinesses } from "../../redux/search";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
+  const navigate = useNavigate()
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
@@ -87,7 +88,9 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     ])
     setCategory_id('')
     setResetRating(prevState => !prevState);
-    dispatch(fetchBusinesses({}, 1, 10))
+    dispatch(fetchBusinesses()).then(() => {
+      navigate('/search')
+    })
     closeMenu();
   }
 
