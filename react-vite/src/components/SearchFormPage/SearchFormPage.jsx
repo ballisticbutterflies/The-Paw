@@ -1,6 +1,6 @@
 // import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBusinesses, searchBarBusinesses } from "../../redux/search";
+import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
 import { Link, useLocation } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
@@ -15,6 +15,7 @@ function SearchFormPage() {
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
   const search_query = searchParams.get('search_query')
+  const searchLoc = searchParams.get('location')
 
   const businesses = Object.values(useSelector((state) => state.search.businesses))
 
@@ -87,8 +88,7 @@ function SearchFormPage() {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
     if (!search_query && !filter && !filterChange){
-      console.log( '{||||||| USE EFFECT |||}')
-      dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
       .catch(error => {
@@ -98,17 +98,18 @@ function SearchFormPage() {
 
     if (filter && !filterChange) {
       setLoading(true)
-      dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
-        .catch(error => {
-          return error
-        })
+      .catch(error => {
+        return error
+      })
     }
     if (search_query && !filterChange) {
+      console.log( '{||||||| USE EFFECT |||}')
       setLoading(true)
       let searchLoc = ''
-      dispatch(searchBarBusinesses(search_query, searchLoc, page, perPage)).then(() => setTimeout(() => {
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
       .catch(error => {
@@ -116,13 +117,13 @@ function SearchFormPage() {
       })
     }
 
-  }, [dispatch, page, perPage, filter, search_query, filterChange])
+  }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc])
 
   const handleFilterChange = (filters) => {
     console.log(filters, '{||||||| const |||}')
     setPage(1)
     setFilterChange(true)
-    dispatch(fetchBusinesses(filters, 1, perPage)).then(() => setTimeout(() => {
+    dispatch(fetchBusinesses(search_query, searchLoc, filters, 1, perPage)).then(() => setTimeout(() => {
       setLoading(false);
     }, 1200))
       .catch(error => {
@@ -136,7 +137,7 @@ function SearchFormPage() {
     if (nextPage <= pages) {
       setPage(nextPage);
       setLoading(true)
-      dispatch(fetchBusinesses(filter, nextPage, perPage)).then(() => setTimeout(() => {
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, nextPage, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200));
       window.scrollTo(0, 0); // Scroll to top
@@ -149,7 +150,7 @@ function SearchFormPage() {
     if (prevPage >= 1) {
       setPage(prevPage);
       setLoading(true)
-      dispatch(fetchBusinesses(filter, prevPage, perPage)).then(() => setTimeout(() => {
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, prevPage, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200));
       window.scrollTo(0, 0); // Scroll to top

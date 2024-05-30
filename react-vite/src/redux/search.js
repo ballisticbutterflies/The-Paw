@@ -17,11 +17,17 @@ export const clearBusinesses = () => ({
 });
 
 // THUNKS
-export const fetchBusinesses = (filters, page = 1, perPage = 10) => async (dispatch) => {
+export const fetchBusinesses = (searchQuery, location, filters, page = 1, perPage = 10) => async (dispatch) => {
 
     let url ='/api/search';
     const queryParams = [];
 
+    if (searchQuery) {
+        queryParams.push(`search_query=${searchQuery}`);
+    }
+    if (location) {
+        queryParams.push(`location=${location}`);
+    }
 
     if (filters) {
         console.log(filters, '{||||||| thunk |||}')
@@ -54,42 +60,42 @@ export const fetchBusinesses = (filters, page = 1, perPage = 10) => async (dispa
     }
 }
 
-export const searchBarBusinesses = (searchQuery, location, page = 1, perPage = 10) => async (dispatch) => {
-    let url ='/api/search';
-    const queryParams = [];
+// export const searchBarBusinesses = (searchQuery, location, page = 1, perPage = 10) => async (dispatch) => {
+//     let url ='/api/search';
+//     const queryParams = [];
 
-    if (searchQuery) {
-        queryParams.push(`search_query=${searchQuery}`);
-    }
-    if (location) {
-        queryParams.push(`location=${location}`);
-    }
+//     if (searchQuery) {
+//         queryParams.push(`search_query=${searchQuery}`);
+//     }
+//     if (location) {
+//         queryParams.push(`location=${location}`);
+//     }
 
-    queryParams.push(`page=${page}`);
-    queryParams.push(`per_page=${perPage}`);
+//     queryParams.push(`page=${page}`);
+//     queryParams.push(`per_page=${perPage}`);
 
-    if (queryParams.length > 0) {
-        url += `?${queryParams.join('&')}`;
-    }
+//     if (queryParams.length > 0) {
+//         url += `?${queryParams.join('&')}`;
+//     }
 
 
-    const response = await fetch(url)
+//     const response = await fetch(url)
 
-    if (response.ok) {
+//     if (response.ok) {
 
-        const data = await response.json();
-        dispatch(loadBusinesses(data.businesses));
-        dispatch(setPagination({
-            total: data.total,
-            pages: data.pages,
-            currentPage: data.current_page,
-            perPage: data.per_page
-        }));
-    } else {
-        const errors = await response.json();
-        return errors;
-    }
-}
+//         const data = await response.json();
+//         dispatch(loadBusinesses(data.businesses));
+//         dispatch(setPagination({
+//             total: data.total,
+//             pages: data.pages,
+//             currentPage: data.current_page,
+//             perPage: data.per_page
+//         }));
+//     } else {
+//         const errors = await response.json();
+//         return errors;
+//     }
+// }
 
 const initialState = {
     businesses: {},

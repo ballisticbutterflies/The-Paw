@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { searchBarBusinesses } from '../../redux/search';
 import { useNavigate } from "react-router-dom";
 import { fetchBusinesses } from '../../redux/search';
 
@@ -60,7 +59,7 @@ const SearchBar = () => {
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
-    dispatch(searchBarBusinesses(searchQuery, location)).then(() => {
+    dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
       navigate(url)
       setSearchQuery('')
       setLocation('')
