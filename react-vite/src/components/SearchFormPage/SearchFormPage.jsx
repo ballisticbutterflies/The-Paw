@@ -90,27 +90,27 @@ function SearchFormPage() {
       console.log( '{||||||| USE EFFECT |||}')
       dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1000))
+      }, 1200))
       .catch(error => {
         return error
       })
     }
 
-    if (filter) {
+    if (filter && !filterChange) {
       setLoading(true)
       dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1000))
+      }, 1200))
         .catch(error => {
           return error
         })
     }
-    if (search_query) {
+    if (search_query && !filterChange) {
       setLoading(true)
       let searchLoc = ''
       dispatch(searchBarBusinesses(search_query, searchLoc, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1000))
+      }, 1200))
       .catch(error => {
         return error
       })
@@ -124,7 +124,7 @@ function SearchFormPage() {
     setFilterChange(true)
     dispatch(fetchBusinesses(filters, 1, perPage)).then(() => setTimeout(() => {
       setLoading(false);
-    }, 1000))
+    }, 1200))
       .catch(error => {
         return error
       })
@@ -138,7 +138,7 @@ function SearchFormPage() {
       setLoading(true)
       dispatch(fetchBusinesses(filter, nextPage, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1000));
+      }, 1200));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
@@ -151,7 +151,7 @@ function SearchFormPage() {
       setLoading(true)
       dispatch(fetchBusinesses(filter, prevPage, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1000));
+      }, 1200));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
