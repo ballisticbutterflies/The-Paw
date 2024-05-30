@@ -10,7 +10,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
   const navigate = useNavigate()
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const category = searchParams.get('category');
+  const category = searchParams.get('category') || '';
   const prices = searchParams.get('price')?.split(',') || [];
   const ratings = searchParams.get('rating')
 
@@ -55,7 +55,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
       setPrice(price)
     }
 
-    if (category_id !== '') {
+    if (category_id !== null) {
       queryParams.append('category', category_id)
 
     }

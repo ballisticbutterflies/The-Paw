@@ -20,26 +20,20 @@ function SearchFormPage() {
   const price = searchParams.get('price')
   const rating = searchParams.get('rating')
 
-  const queryParams = new URLSearchParams()
-  if (category) {
-    queryParams.append('category', category)
-  }
-  if (price) {
-    queryParams.append('price', price)
-  }
-  if (rating) {
-    queryParams.append('rating', rating)
-  }
-  const filter = queryParams.toString()
+  const queryParams = new URLSearchParams();
+  if (category) queryParams.append('category', category);
+  if (price) queryParams.append('price', price);
+  if (rating) queryParams.append('rating', rating);
+  const filter = queryParams.toString();
 
   const businesses = Object.values(useSelector((state) => state.search.businesses))
-
   const { total, pages, currentPage, perPage } = useSelector(state => state.search.pagination);
+
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
   const [filterChange, setFilterChange] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
 
   const handleResize = () => {
@@ -96,8 +90,6 @@ function SearchFormPage() {
   }
 
 
-
-
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
     if (!search_query && !filter && !filterChange){
@@ -108,9 +100,6 @@ function SearchFormPage() {
         return error
       })
     }
-
-
-
 
 
     if (filter && !filterChange) {
@@ -143,6 +132,7 @@ function SearchFormPage() {
 
     setPage(1)
     setFilterChange(true)
+    setLoading(true);
     dispatch(fetchBusinesses(search_query, searchLoc, filters, 1, perPage)).then(() => setTimeout(() => {
       setLoading(false);
     }, 1200))
