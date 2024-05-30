@@ -11,21 +11,26 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
+  const prices = searchParams.get('price')?.split(',') || [];
+  const ratings = searchParams.get('rating')
+
 
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const closeMenu = () => setShowMenu(false);
   const ulRef = useRef();
 
-  const [resetRating, setResetRating] = useState(false);
-  const [stars, setStars] = useState("")
+  const [resetRating, setResetRating] = useState(false);  // useState(business?.address)
+  const [stars, setStars] = useState(ratings ? ratings : '')
   const [price, setPrice] = useState([
-    { name: "$", checked: false },
-    { name: "$$", checked: false },
-    { name: "$$$", checked: false },
-    { name: "$$$$", checked: false },
-  ])
+    { name: "$", checked: prices.includes("$") },
+    { name: "$$", checked: prices.includes("$$") },
+    { name: "$$$", checked: prices.includes("$$$") },
+    { name: "$$$$", checked: prices.includes("$$$$") }
+  ]);
   const [category_id, setCategory_id] = useState(category)
+
+
 
   const handleFilterChange = (e) => {
     // Construct URL with filter parameters
@@ -33,27 +38,33 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     const queryParams = new URLSearchParams();
     if (stars !== "") {
       queryParams.append("rating", stars);
+      setStars(stars)
     }
 
     if (price.checked !== false) {
+      console.log(prices, "KJDHSKJDFHLKFJDH")
       let priceObj = [...price]
       let searchingPrice = priceObj.filter((char) => char.checked === true);
       let result = searchingPrice.map(ele => ele.name)
 
       let string = result.toString()
-      queryParams.append("price", string);
+      if (string.length > 0 ) {
+
+        queryParams.append("price", string);
+      }
+      setPrice(price)
     }
 
-    if (category_id !== null) {
+    if (category_id !== '') {
       queryParams.append('category', category_id)
+
     }
 
     const queryString = queryParams.toString();
 
     const url = `${queryString}`;
 
-    console.log(url, "AYAYAYYAAY")
-    onFilterChange(url, 1, 10)
+    onFilterChange(url)
     closeMenu();
   }
 

@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
 import { useEffect, useState } from "react";
@@ -12,10 +12,25 @@ function SearchFormPage() {
 
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
   const search_query = searchParams.get('search_query')
   const searchLoc = searchParams.get('location')
+  const price = searchParams.get('price')
+  const rating = searchParams.get('rating')
+
+  const queryParams = new URLSearchParams()
+  if (category) {
+    queryParams.append('category', category)
+  }
+  if (price) {
+    queryParams.append('price', price)
+  }
+  if (rating) {
+    queryParams.append('rating', rating)
+  }
+  const filter = queryParams.toString()
 
   const businesses = Object.values(useSelector((state) => state.search.businesses))
 
@@ -25,6 +40,7 @@ function SearchFormPage() {
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
   const [filterChange, setFilterChange] = useState(false);
   const [loading, setLoading] = useState(false)
+
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
@@ -80,10 +96,7 @@ function SearchFormPage() {
   }
 
 
-  let filter;
-  if (category) {
-    filter = `category=${category}`
-  }
+
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
@@ -96,7 +109,13 @@ function SearchFormPage() {
       })
     }
 
+
+
+
+
     if (filter && !filterChange) {
+      console.log( '{||||||| USE EFFECT |||}')
+
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
@@ -106,7 +125,6 @@ function SearchFormPage() {
       })
     }
     if (search_query && !filterChange) {
-      console.log( '{||||||| USE EFFECT |||}')
       setLoading(true)
       let searchLoc = ''
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
@@ -117,10 +135,12 @@ function SearchFormPage() {
       })
     }
 
-  }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc])
+  }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
+
+
 
   const handleFilterChange = (filters) => {
-    console.log(filters, '{||||||| const |||}')
+
     setPage(1)
     setFilterChange(true)
     dispatch(fetchBusinesses(search_query, searchLoc, filters, 1, perPage)).then(() => setTimeout(() => {
@@ -129,7 +149,11 @@ function SearchFormPage() {
       .catch(error => {
         return error
       })
+    const url = `/search?${filters}`;
+    navigate(url)
   }
+
+  console.log(filter, "FILTERSSESRSERES")
 
   const handleNextPage = (e) => {
     e.preventDefault();

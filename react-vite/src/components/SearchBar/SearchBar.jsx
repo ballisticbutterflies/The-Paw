@@ -32,7 +32,7 @@ const SearchBar = () => {
       queryParams.append('category', 1)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -42,7 +42,7 @@ const SearchBar = () => {
       queryParams.append('category', 2)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -52,7 +52,7 @@ const SearchBar = () => {
       queryParams.append('category', 3)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -62,7 +62,7 @@ const SearchBar = () => {
       queryParams.append('category', 4)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -72,7 +72,7 @@ const SearchBar = () => {
       queryParams.append('category', 5)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -82,7 +82,7 @@ const SearchBar = () => {
       queryParams.append('category', 6)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -92,7 +92,7 @@ const SearchBar = () => {
       queryParams.append('category', 7)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -102,20 +102,20 @@ const SearchBar = () => {
       queryParams.append('category', 8)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
         navigate(url)
         setSearchQuery('')
         setLocation('')
       })
     }
 
-    if (!searchQuery) dispatch(fetchBusinesses()).then(() => { navigate('/search') })
+    if (!searchQuery) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
-    dispatch(fetchBusinesses(searchQuery, location, {})).then(() => {
+    dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
       navigate(url)
       setSearchQuery('')
       setLocation('')
