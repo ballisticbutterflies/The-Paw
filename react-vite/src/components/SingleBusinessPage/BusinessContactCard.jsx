@@ -1,4 +1,4 @@
-function BusinessContactCard({ business, isMobile, isTablet, isDesktop }) {
+function BusinessContactCard({ business, isDesktop }) {
     const phoneFormat = (phone) => {
         let areaCode = phone.slice(0, 3);
         let firstThree = phone.slice(3, 6);
