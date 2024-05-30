@@ -43,7 +43,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
       queryParams.append("price", string);
     }
 
-    if (category_id !== '') {
+    if (category_id !== null) {
       queryParams.append('category', category_id)
     }
 
@@ -51,7 +51,8 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
     const url = `${queryString}`;
 
-    onFilterChange(url)
+    console.log(url, "AYAYAYYAAY")
+    onFilterChange(url, 1, 10)
     closeMenu();
   }
 
@@ -62,6 +63,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
       setStars("")
     }
   }
+
 
   const updatePrice = (i, isChecked) => {
     const updatedPrice = [...price];
@@ -85,7 +87,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     ])
     setCategory_id('')
     setResetRating(prevState => !prevState);
-    dispatch(fetchBusinesses())
+    dispatch(fetchBusinesses({}, 1, 10))
     closeMenu();
   }
 

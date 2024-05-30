@@ -6,7 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { getTodaysHours } from "../../utils";
 import { useEffect, useState } from "react";
-import { fetchAllBusinesses } from "../../redux/businesses"
 
 
 function SearchFormPage() {
@@ -17,14 +16,13 @@ function SearchFormPage() {
   const category = searchParams.get('category');
   const search_query = searchParams.get('search_query')
 
-
   const businesses = Object.values(useSelector((state) => state.search.businesses))
 
   const { total, pages, currentPage, perPage } = useSelector(state => state.search.pagination);
-  const [page, setPage] = useState(currentPage);
+  const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
-
+  const [filterChange, setFilterChange] = useState(false);
   const [loading, setLoading] = useState(false)
 
   const handleResize = () => {
@@ -80,21 +78,22 @@ function SearchFormPage() {
     }
   }
 
-  const handleFilterChange = (filters) => {
-    dispatch(fetchBusinesses(filters, page, perPage))
+
+  let filter;
+  if (category) {
+    filter = `category=${category}`
   }
 
-  let filter = `category=${category}`
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
-
-    if (!search_query && filter === 'category=null'){
-      dispatch(fetchBusinesses({}, page, perPage)).then(() => setTimeout(() => {
+    if (!search_query && !filter && !filterChange){
+      console.log( '{||||||| USE EFFECT |||}')
+      dispatch(fetchBusinesses(filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1000))
-        .catch(error => {
-          return error
-        })
+      .catch(error => {
+        return error
+      })
     }
 
     if (filter) {
@@ -112,15 +111,24 @@ function SearchFormPage() {
       dispatch(searchBarBusinesses(search_query, searchLoc, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1000))
-        .catch(error => {
-          return error
-        })
+      .catch(error => {
+        return error
+      })
     }
 
+  }, [dispatch, page, perPage, filter, search_query, filterChange])
 
-
-
-  }, [dispatch, page, perPage, filter, search_query])
+  const handleFilterChange = (filters) => {
+    console.log(filters, '{||||||| const |||}')
+    setPage(1)
+    setFilterChange(true)
+    dispatch(fetchBusinesses(filters, 1, perPage)).then(() => setTimeout(() => {
+      setLoading(false);
+    }, 1000))
+      .catch(error => {
+        return error
+      })
+  }
 
   const handleNextPage = (e) => {
     e.preventDefault();

@@ -24,6 +24,7 @@ export const fetchBusinesses = (filters, page = 1, perPage = 10) => async (dispa
 
 
     if (filters) {
+        console.log(filters, '{||||||| thunk |||}')
         let filtered = Object.values(filters)
         queryParams.push(filtered.join(''))
     }
