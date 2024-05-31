@@ -1,90 +1,87 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
-const PlacesSearch = () => {
-  const [request, setRequest] = useState({
-    input: "",
-    includedPrimaryTypes: ["(cities)"],
-    language: "en-US",
-    region: "us",
-    includedRegionCodes: ["us"],
-  });
-  const titleRef = useRef(null);
-  const resultsRef = useRef(null);
-  const inputRef = useRef(null);
-  let token = useRef(null);
 
-  const init = async () => {
-    token.current = new google.maps.places.AutocompleteSessionToken();
-    const title = titleRef.current;
-    const results = resultsRef.current;
-    const input = inputRef.current;
+const PlacesSearch = ({ onLocationSelect }) => {
 
-    input.addEventListener("input", makeAcRequest);
-    refreshToken();
-  };
 
-  const makeAcRequest = async (event) => {
-    if (event.target.value === "") {
-      titleRef.current.innerText = "";
-      resultsRef.current.replaceChildren();
-      return;
-    }
+  const [input, setInput] = useState('');
+  const [predictions, setPredictions] = useState([]);
 
-    const updatedRequest = { ...request, input: event.target.value };
-    setRequest(updatedRequest);
-
-    const { suggestions } = await google.maps.places.AutocompleteSuggestion.fetchAutocompleteSuggestions(updatedRequest);
-
-    titleRef.current.innerText = 'Query predictions for "' + updatedRequest.input + '"';
-    resultsRef.current.replaceChildren();
-
-    for (const suggestion of suggestions) {
-      const placePrediction = suggestion.placePrediction;
-      const a = document.createElement("a");
-
-      a.addEventListener("click", () => {
-        onPlaceSelected(placePrediction.toPlace());
-      });
-      a.innerText = placePrediction.text.toString();
-
-      const li = document.createElement("li");
-      li.appendChild(a);
-      resultsRef.current.appendChild(li);
-    }
-  };
-
-  const onPlaceSelected = async (place) => {
-    await place.fetchFields({
-      fields: ["displayName", "formattedAddress"],
-    });
-
-    const placeText = document.createTextNode(
-      place.displayName + ": " + place.formattedAddress
-    );
-
-    resultsRef.current.replaceChildren(placeText);
-    titleRef.current.innerText = "Selected Place:";
-    inputRef.current.value = "";
-    refreshToken();
-  };
-
-  const refreshToken = () => {
-    token.current = new google.maps.places.AutocompleteSessionToken();
-    setRequest((prevRequest) => ({
-      ...prevRequest,
-      sessionToken: token.current,
-    }));
-  };
 
   useEffect(() => {
-    init();
-  }, []);
+    if (input.length > 0) {
+      fetchPredictions(input);
+    } else {
+      setPredictions([]);
+    }
+  }, [input]);
+
+  const fetchPredictions = async (input) => {
+    const apiKey = "AIzaSyBNoJsZRS-Nmk6eZ_p_xrYhk32Lw3oXaKs";
+    const url = `https://places.googleapis.com/v1/places:autocomplete?key=${apiKey}`;
+    const requestBody = {
+      input: input,
+      includedPrimaryTypes: ["(cities)"],
+      includedRegionCodes: ["us"]
+      // Add additional parameters as needed, such as locationBias and includedPrimaryTypes
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setPredictions(data.suggestions);
+      } else {
+        console.error('Error fetching predictions:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching predictions:', error);
+    }
+  };
+
+  const handleClick = (prediction) => {
+    const place = prediction.placePrediction.text.text;
+    // Remove 'USA' from the place prediction
+    const location = place.replace(', USA', '');
+    console.log('User clicked:', location);
+    // Set the input value to the clicked prediction without 'USA'
+    setInput(location);
+    // const queryParams = new URLSearchParams()
+    // queryParams.append('location', location)
+    // const queryString = queryParams.toString();
+    // const url = `/search?${queryString}`;
+    // dispatch(fetchBusinesses({}, location, {}, 1, 10)).then(() => {
+    //   navigate(url)
+    // })
+    // Clear the predictions
+    onLocationSelect(location);
+    setPredictions([]);
+  };
 
   return (
     <div>
-      <h1 id="title" ref={titleRef}></h1>
-      <input type="text" ref={inputRef} />
-      <ul id="results" ref={resultsRef}></ul>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Search for places..."
+      />
+      { predictions && predictions.length > 0 && (
+        <ul>
+          {predictions.map((prediction, index) => (
+            <li className="modalLink" key={index} onClick={() => handleClick(prediction)}>
+              {prediction.placePrediction.text.text}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

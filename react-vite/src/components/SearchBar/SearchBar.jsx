@@ -7,23 +7,22 @@ import PlacesSearch from './PlacesSearch';
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
-  // const businesses = Object.values(useSelector((state) => state.search))
-  // const locations_list = []
-  // businesses.map(business => {
-  //   let city = business.city
-  //   let state = business.state
-  //   let cityState = city.concat(', ', state)
-
-  //   locations_list.push(cityState)
-
-  //   return locations_list
-  // })
-
-  // const uniqueLocations = locations_list.filter((value, index, arr) => index === arr.indexOf(value)).sort()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const handleLocationSelect = (location) => {
+    setLocation(location);
+     const queryParams = new URLSearchParams()
+    queryParams.append('location', location)
+    const queryString = queryParams.toString();
+    const url = `/search?${queryString}`;
+    dispatch(fetchBusinesses({}, location, {}, 1, 10)).then(() => {
+      navigate(url)
+    })
+  };
+
+  console.log('Selected location:', location);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -136,14 +135,15 @@ const SearchBar = () => {
           placeholder="things to do, parks, restaurants"
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <input
+        {/* <input
           id="location"
           list="locations"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="city, state"
-        />
-        <PlacesSearch />
+        /> */}
+        <PlacesSearch onLocationSelect={handleLocationSelect} />
+
         {/* <datalist id="locations">
         {uniqueLocations.map(op => (
           <option key={op} value={op}>{op}</option>
