@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchBusinesses } from '../../redux/search';
+import PlacesSearch from './PlacesSearch';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -142,6 +143,7 @@ const SearchBar = () => {
           onChange={(e) => setLocation(e.target.value)}
           placeholder="city, state"
         />
+        <PlacesSearch />
         {/* <datalist id="locations">
         {uniqueLocations.map(op => (
           <option key={op} value={op}>{op}</option>
