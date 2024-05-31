@@ -544,20 +544,6 @@
         text-decoration: none;
     }
 
-    .businessWebsiteContainer a,
-    .businessPhoneContainer a,
-    .businessAddressContainer a {
-        color: #1f2f44;
-    }
-
-    .businessContactIcon {
-        padding-left: 0;
-    }
-
-    .businessContactIcon i {
-        font-size: x-large;
-    }
-
     .locationHours {
         width: auto;
     }
