@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 
-const PlacesSearch = ({ onLocationSelect }) => {
+const PlacesSearch = ({ onLocationSelect, location }) => {
 
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
 
-
+console.log(predictions, "PREDICTION IN PLACESSE")
   useEffect(() => {
     if (input.length > 0) {
       fetchPredictions(input);
@@ -63,6 +63,7 @@ const PlacesSearch = ({ onLocationSelect }) => {
     // Clear the predictions
     onLocationSelect(location);
     setPredictions([]);
+    setInput('')
   };
 
   return (

@@ -142,7 +142,7 @@ const SearchBar = () => {
           onChange={(e) => setLocation(e.target.value)}
           placeholder="city, state"
         /> */}
-        <PlacesSearch onLocationSelect={handleLocationSelect} />
+        <PlacesSearch onLocationSelect={handleLocationSelect} location={location}/>
 
         {/* <datalist id="locations">
         {uniqueLocations.map(op => (
