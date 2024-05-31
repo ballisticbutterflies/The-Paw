@@ -22,10 +22,10 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
   const [stars, setStars] = useState(searchParams.get('rating') || "");
   const [price, setPrice] = useState([
-    { name: "$", checked: searchParams.has('price') && searchParams.get('price') === "$" },
-    { name: "$$", checked: searchParams.has('price') && searchParams.get('price') === "$$" },
-    { name: "$$$", checked: searchParams.has('price') && searchParams.get('price') === "$$$" },
-    { name: "$$$$", checked: searchParams.has('price') && searchParams.get('price') === "$$$$" }
+    { name: "$", checked: searchParams.get('price')?.split(',').includes("$") || false },
+    { name: "$$", checked: searchParams.get('price')?.split(',').includes("$$") || false },
+    { name: "$$$", checked: searchParams.get('price')?.split(',').includes("$$$") || false },
+    { name: "$$$$", checked: searchParams.get('price')?.split(',').includes("$$$$") || false }
   ]);
   const [category_id, setCategory_id] = useState(searchParams.get('category') || "");
 
@@ -33,27 +33,31 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
   const categories = ['Restaurants', 'Veterinarians','Services', 'Shopping', 'Travel', 'Activities', 'Adoption', 'Other']
 
-  const queryParams = new URLSearchParams();
   const handleFilterChange = (e) => {
 
     e.preventDefault();
+    const queryParams = new URLSearchParams();
 
     if (stars !== "") {
       queryParams.append("rating", stars);
     }
 
-    if (price.checked !== false) {
+    // if (price.checked !== false) {
 
-      let priceObj = [...price]
-      let searchingPrice = priceObj.filter((char) => char.checked === true);
-      let result = searchingPrice.map(ele => ele.name)
+    //   let priceObj = [...price]
+    //   let searchingPrice = priceObj.filter((char) => char.checked === true);
+    //   let result = searchingPrice.map(ele => ele.name)
 
-      let string = result.toString()
+    //   let string = result.toString()
 
-      if (string.length > 0 ) {
-        queryParams.append("price", string);
-      }
-      setPrice(price)
+    //   if (string.length > 0 ) {
+    //     queryParams.append("price", string);
+    //   }
+    //   setPrice(price)
+    // }
+    const selectedPrices = price.filter(p => p.checked).map(p => p.name);
+    if (selectedPrices.length > 0) {
+      queryParams.append("price", selectedPrices.join(','));
     }
 
     if (category_id !== null) {
@@ -69,21 +73,16 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
   }
 
   const onChangeStars = (number) => {
-    if (number) {
-      setStars(parseInt(number))
-    } else {
-      setStars("")
-    }
-  }
+    setStars(number ? parseInt(number) : "");
+  };
 
 
   const updatePrice = (i, isChecked) => {
-    const updatedPrice = [...price];
-    updatedPrice[i].checked = isChecked
-    setPrice(updatedPrice)
-  }
-
-
+    const updatedPrice = price.map((p, index) => (
+      index === i ? { ...p, checked: isChecked } : p
+    ));
+    setPrice(updatedPrice);
+  };
 
   const handleClick = e => {
     e.preventDefault();
@@ -106,10 +105,10 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
 
     // Update price filter based on searchParams
     setPrice([
-      { name: "$", checked: searchParamss.has('price') && searchParamss.get('price') === "$" },
-      { name: "$$", checked: searchParamss.has('price') && searchParamss.get('price') === "$$" },
-      { name: "$$$", checked: searchParamss.has('price') && searchParamss.get('price') === "$$$" },
-      { name: "$$$$", checked: searchParamss.has('price') && searchParamss.get('price') === "$$$$" }
+      { name: "$", checked: searchParamss.get('price')?.split(',').includes("$") || false },
+      { name: "$$", checked: searchParamss.get('price')?.split(',').includes("$$") || false },
+      { name: "$$$", checked: searchParamss.get('price')?.split(',').includes("$$$") || false },
+      { name: "$$$$", checked: searchParamss.get('price')?.split(',').includes("$$$$") || false }
     ]);
   }, [location.search]);
 
