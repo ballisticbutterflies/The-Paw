@@ -1,10 +1,16 @@
 from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image, Category
-from sqlalchemy import func, desc, or_
+from sqlalchemy import func, desc, or_, and_
 from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
+def generate_substrings(search_term):
+    """Generate substrings for more flexible matching."""
+    substrings = {search_term}
+    for i in range(1, len(search_term)):
+        substrings.add(search_term[:i])
+    return substrings
 
 @search_route.route('/')
 def search():
@@ -45,12 +51,19 @@ def search():
       query = query.filter(Business.category_id == category)
 
   if search_query:
-    query = query.filter(or_(
-      Business.name.ilike(f'%{search_query}%'),
-      Business.category.has(Category.name.ilike(f'%{search_query}%')),
-      Business.reviews.any(Review.review.ilike(f'%{search_query}%')),
-      Business.description.ilike(f'%{search_query}%')
-    ))
+        search_terms = search_query.split()
+        all_filters = []
+        for term in search_terms:
+            substrings = generate_substrings(term)
+            term_filters = [
+                Business.name.ilike(f'%{substring}%') |
+                Business.category.has(Category.name.ilike(f'%{substring}%')) |
+                Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
+                Business.description.ilike(f'%{substring}%')
+                for substring in substrings
+            ]
+            all_filters.append(or_(*term_filters))
+        query = query.filter(and_(*all_filters))
 
   # Apply pagination to the query
   try:
