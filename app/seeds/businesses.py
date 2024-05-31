@@ -381,7 +381,7 @@ def seed_businesses():
         ),
         Business(
             owner_id=17,
-            category_id=8,
+            category_id=4,
             address='3311 N Halsted St',
             city='Chicago',
             state='IL',
@@ -408,7 +408,7 @@ def seed_businesses():
         ),
         Business(
             owner_id=42,
-            category_id=1,
+            category_id=5,
             address='1 Bennett St',
             city='Cambridge',
             state='MA',
