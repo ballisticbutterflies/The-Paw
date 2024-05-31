@@ -110,6 +110,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
       { name: "$$$", checked: searchParamss.get('price')?.split(',').includes("$$$") || false },
       { name: "$$$$", checked: searchParamss.get('price')?.split(',').includes("$$$$") || false }
     ]);
+
   }, [location.search]);
 
   useEffect(() => {

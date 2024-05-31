@@ -113,7 +113,7 @@ function SearchFormPage() {
         return error
       })
     }
-    if (search_query && !filterChange) {
+    if (search_query ) {
       setLoading(true)
       let searchLoc = ''
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
