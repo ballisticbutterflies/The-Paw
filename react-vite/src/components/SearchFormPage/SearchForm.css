@@ -17,6 +17,11 @@
 }
 
 
+.pagination button:disabled {
+  cursor: default;
+}
+
+
 /* HTML: <div class="loader"></div> */
 .loader {
   width: calc(6*30px);
@@ -29,19 +34,23 @@
   margin: auto;
   padding: 20px 0;
 }
+
 .loader:before {
   content: "";
   width: 30px;
   height: 25px;
-  --c:no-repeat radial-gradient(farthest-side,currentColor 92%,#0000);
+  --c: no-repeat radial-gradient(farthest-side, currentColor 92%, #0000);
   background:
     var(--c) left /70% 70%,
     var(--c) right/20% 20%,
-    var(--c) top    0 right 15%/20% 20%,
+    var(--c) top 0 right 15%/20% 20%,
     var(--c) bottom 0 right 15%/20% 20%;
 }
+
 @keyframes l12 {
-  100% {clip-path: inset(0 -30px 0 0)}
+  100% {
+    clip-path: inset(0 -30px 0 0)
+  }
 }
 
 .businessCards:hover {

@@ -71,7 +71,7 @@ const SearchBar = () => {
         setLocation('')
       })
     }
-    if (lowercase_query === 'travel' || lowercase_query === 'hotel' ) {
+    if (lowercase_query === 'travel' || lowercase_query === 'hotel') {
       queryParams.append('category', 5)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
@@ -81,7 +81,7 @@ const SearchBar = () => {
         setLocation('')
       })
     }
-    if (lowercase_query === 'activities'|| lowercase_query === 'things to do' || lowercase_query === 'park' || lowercase_query === 'parks') {
+    if (lowercase_query === 'activities' || lowercase_query === 'things to do' || lowercase_query === 'park' || lowercase_query === 'parks') {
       queryParams.append('category', 6)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
@@ -91,7 +91,7 @@ const SearchBar = () => {
         setLocation('')
       })
     }
-    if (lowercase_query === 'adoption' || lowercase_query === 'adopt') {
+    if (lowercase_query === 'adoption' || lowercase_query === 'adopt' || lowercase_query === 'shelter') {
       queryParams.append('category', 7)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
