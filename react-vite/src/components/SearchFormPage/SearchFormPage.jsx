@@ -92,7 +92,7 @@ function SearchFormPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
-    if (!search_query && !filter && !filterChange){
+    if (!search_query && !filter && !filterChange && searchLoc){
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
@@ -102,8 +102,8 @@ function SearchFormPage() {
     }
 
 
-    if (filter && !filterChange) {
-      console.log( '{||||||| USE EFFECT |||}')
+    if (filter && !filterChange && searchLoc) {
+      console.log(searchLoc, '{||||||| USE EFFECT |||}')
 
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
@@ -113,9 +113,8 @@ function SearchFormPage() {
         return error
       })
     }
-    if (search_query ) {
+    if (search_query && searchLoc) {
       setLoading(true)
-      let searchLoc = ''
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
@@ -132,6 +131,7 @@ function SearchFormPage() {
   }, [search_query, filter, searchLoc, category]);
 
   const handleFilterChange = (filters) => {
+    console.log(searchLoc, "FILTERSSESRSERES")
 
     setPage(1)
     setFilterChange(true)
@@ -146,7 +146,6 @@ function SearchFormPage() {
     navigate(url)
   }
 
-  console.log(filter, "FILTERSSESRSERES")
 
   const handleNextPage = (e) => {
     e.preventDefault();

@@ -30,10 +30,10 @@ export const fetchBusinesses = (searchQuery, location, filters, page = 1, perPag
     }
 
     if (filters) {
-        console.log(filters, '{||||||| thunk |||}')
         let filtered = Object.values(filters)
         queryParams.push(filtered.join(''))
     }
+    console.log(searchQuery, location, filters, '{||||||| thunk |||}')
 
     queryParams.push(`page=${page}`);
     queryParams.push(`per_page=${perPage}`);

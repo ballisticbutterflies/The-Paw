@@ -8,6 +8,7 @@ const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
 
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -15,14 +16,10 @@ const SearchBar = () => {
     setLocation(location);
      const queryParams = new URLSearchParams()
     queryParams.append('location', location)
-    const queryString = queryParams.toString();
-    const url = `/search?${queryString}`;
-    dispatch(fetchBusinesses({}, location, {}, 1, 10)).then(() => {
-      navigate(url)
-    })
+
+    console.log('Selected location:', location);
   };
 
-  console.log('Selected location:', location);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -112,7 +109,7 @@ const SearchBar = () => {
       })
     }
 
-    if (!searchQuery) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
+    if (!searchQuery && !location) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
     const queryString = queryParams.toString();
@@ -142,7 +139,9 @@ const SearchBar = () => {
           onChange={(e) => setLocation(e.target.value)}
           placeholder="city, state"
         /> */}
+
         <PlacesSearch onLocationSelect={handleLocationSelect} location={location}/>
+        
 
         {/* <datalist id="locations">
         {uniqueLocations.map(op => (

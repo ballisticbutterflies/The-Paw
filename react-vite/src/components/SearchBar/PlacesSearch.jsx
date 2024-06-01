@@ -4,17 +4,20 @@ import { useState, useEffect } from 'react';
 const PlacesSearch = ({ onLocationSelect, location }) => {
 
 
+  console.log(location, "location in places search")
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
+  const [fetching, setFetching] = useState(true);
+
 
 console.log(predictions, "PREDICTION IN PLACESSE")
   useEffect(() => {
-    if (input.length > 0) {
+    if (fetching && input.length > 0) {
       fetchPredictions(input);
     } else {
       setPredictions([]);
     }
-  }, [input]);
+  }, [input, fetching]);
 
   const fetchPredictions = async (input) => {
     const apiKey = "AIzaSyBNoJsZRS-Nmk6eZ_p_xrYhk32Lw3oXaKs";
@@ -23,7 +26,7 @@ console.log(predictions, "PREDICTION IN PLACESSE")
       input: input,
       includedPrimaryTypes: ["(cities)"],
       includedRegionCodes: ["us"]
-      // Add additional parameters as needed, such as locationBias and includedPrimaryTypes
+
     };
 
     try {
@@ -38,6 +41,7 @@ console.log(predictions, "PREDICTION IN PLACESSE")
       if (response.ok) {
         const data = await response.json();
         setPredictions(data.suggestions);
+
       } else {
         console.error('Error fetching predictions:', response.statusText);
       }
@@ -53,17 +57,15 @@ console.log(predictions, "PREDICTION IN PLACESSE")
     console.log('User clicked:', location);
     // Set the input value to the clicked prediction without 'USA'
     setInput(location);
-    // const queryParams = new URLSearchParams()
-    // queryParams.append('location', location)
-    // const queryString = queryParams.toString();
-    // const url = `/search?${queryString}`;
-    // dispatch(fetchBusinesses({}, location, {}, 1, 10)).then(() => {
-    //   navigate(url)
-    // })
-    // Clear the predictions
-    onLocationSelect(location);
+    setFetching(false)
     setPredictions([]);
-    setInput('')
+    onLocationSelect(location);
+  };
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    setFetching(true);
+
   };
 
   return (
@@ -71,7 +73,7 @@ console.log(predictions, "PREDICTION IN PLACESSE")
       <input
         type="text"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={handleChange}
         placeholder="Search for places..."
       />
       { predictions && predictions.length > 0 && (
