@@ -100,7 +100,15 @@ function SearchFormPage() {
         return error
       })
     }
-
+    if (filter && !filterChange && !searchLoc) {
+      setLoading(true)
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1200))
+      .catch(error => {
+        return error
+      })
+    }
 
     if (filter && !filterChange && searchLoc) {
       console.log(searchLoc, '{||||||| USE EFFECT |||}')

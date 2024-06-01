@@ -8,6 +8,7 @@ const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [category_id, setCategory_id] = useState(0)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -16,12 +17,20 @@ const SearchBar = () => {
   useEffect(() => {
     const params = new URLSearchParams(currentLocation.search);
     const locationFromParams = params.get('location');
+    const categoryFromParams = params.get('category');
+
+    if (categoryFromParams) {
+      setCategory_id(categoryFromParams)
+    }
+
     if (locationFromParams) {
       setLocation(locationFromParams);
     } else {
       setLocation('')
     }
   }, [currentLocation]);
+
+
 
   const handleLocationSelect = (selectedLocation) => {
     setLocation(selectedLocation);
@@ -127,6 +136,7 @@ const SearchBar = () => {
     if (!searchQuery && !location) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
+    if (category_id) queryParams.append('category', category_id)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
