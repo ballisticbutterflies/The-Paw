@@ -1,27 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { fetchBusinesses } from '../../redux/search';
 import PlacesSearch from './PlacesSearch';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
-
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const currentLocation = useLocation();
 
-  const handleLocationSelect = (location) => {
-    setLocation(location);
-     const queryParams = new URLSearchParams()
-    queryParams.append('location', location)
+  useEffect(() => {
+    const params = new URLSearchParams(currentLocation.search);
+    const locationFromParams = params.get('location');
+    if (locationFromParams) {
+      setLocation(locationFromParams);
+    } else {
+      setLocation('')
+    }
+  }, [currentLocation]);
 
-    console.log('Selected location:', location);
+  const handleLocationSelect = (selectedLocation) => {
+    setLocation(selectedLocation);
+    const queryParams = new URLSearchParams();
+    queryParams.append('location', selectedLocation);
+
+    console.log('Selected location:', selectedLocation);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setIsSubmitted(true);  // Signal that form has been submitted
+    setTimeout(() => setIsSubmitted(false), 0);  // Reset the signal immediately after
+
 
     const queryParams = new URLSearchParams()
 
@@ -140,8 +155,8 @@ const SearchBar = () => {
           placeholder="city, state"
         /> */}
 
-        <PlacesSearch onLocationSelect={handleLocationSelect} location={location}/>
-        
+        <PlacesSearch onLocationSelect={handleLocationSelect} location={location} isSubmitted={isSubmitted} />
+
 
         {/* <datalist id="locations">
         {uniqueLocations.map(op => (

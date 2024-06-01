@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
 
+const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
 
-const PlacesSearch = ({ onLocationSelect, location }) => {
-
-
-  console.log(location, "location in places search")
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
   const [fetching, setFetching] = useState(true);
 
 
-console.log(predictions, "PREDICTION IN PLACESSE")
   useEffect(() => {
     if (fetching && input.length > 0) {
       fetchPredictions(input);
@@ -18,6 +14,16 @@ console.log(predictions, "PREDICTION IN PLACESSE")
       setPredictions([]);
     }
   }, [input, fetching]);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setPredictions([]);
+    }
+  }, [isSubmitted]);
+
+  useEffect(() => {
+    setInput(location || '');
+  }, [location]);
 
   const fetchPredictions = async (input) => {
     const apiKey = "AIzaSyBNoJsZRS-Nmk6eZ_p_xrYhk32Lw3oXaKs";
@@ -53,19 +59,18 @@ console.log(predictions, "PREDICTION IN PLACESSE")
   const handleClick = (prediction) => {
     const place = prediction.placePrediction.text.text;
     // Remove 'USA' from the place prediction
-    const location = place.replace(', USA', '');
-    console.log('User clicked:', location);
+    const selectedLocation = place.replace(', USA', '');
+
     // Set the input value to the clicked prediction without 'USA'
-    setInput(location);
+    setInput(selectedLocation);
     setFetching(false)
     setPredictions([]);
-    onLocationSelect(location);
+    onLocationSelect(selectedLocation);
   };
 
   const handleChange = (e) => {
     setInput(e.target.value);
     setFetching(true);
-
   };
 
   return (
