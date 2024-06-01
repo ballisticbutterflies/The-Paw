@@ -20,6 +20,8 @@ function SearchFormPage() {
   const price = searchParams.get('price')
   const rating = searchParams.get('rating')
 
+
+
   const queryParams = new URLSearchParams();
   if (category) queryParams.append('category', category);
   if (price) queryParams.append('price', price);
@@ -89,6 +91,29 @@ function SearchFormPage() {
     }
   }
 
+  // useEffect(() => {
+  //   const fetchAndSetLoading = () => {
+  //     setLoading(true);
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
+  //       .then(() => setTimeout(() => setLoading(false), 1200))
+  //       .catch(error => {
+  //         console.error(error);
+  //       });
+  //   };
+
+  //   window.scrollTo(0, 0); // Scroll to top
+
+  //   if (
+  //     (!search_query && !filter && !filterChange && searchLoc) ||
+  //     (filter && !filterChange && !searchLoc) ||
+  //     (filter && !filterChange && searchLoc) ||
+  //     (search_query && searchLoc && filter) ||
+  //     (search_query && !searchLoc && !filter) ||
+  //     (!search_query && !searchLoc && !filter)
+  //   ) {
+  //     fetchAndSetLoading();
+  //   }
+  // }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category]);
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
@@ -130,6 +155,35 @@ function SearchFormPage() {
         return error
       })
     }
+    if (search_query && !searchLoc && !filter) {
+      setLoading(true)
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1200))
+      .catch(error => {
+        return error
+      })
+    }
+    if (!search_query && !searchLoc && !filter) {
+      setLoading(true)
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1200))
+      .catch(error => {
+        return error
+      })
+    }
+    if (search_query && searchLoc && !filter) {
+      setLoading(true)
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1200))
+      .catch(error => {
+        return error
+      })
+    }
+
+
 
   }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
 

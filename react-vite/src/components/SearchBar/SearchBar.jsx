@@ -102,7 +102,7 @@ const SearchBar = () => {
         setLocation('')
       })
     }
-    if (lowercase_query === 'activities' || lowercase_query === 'things to do' || lowercase_query === 'park' || lowercase_query === 'parks') {
+    if (lowercase_query === 'activities' || lowercase_query === 'parks' || lowercase_query === 'park' ) {
       queryParams.append('category', 6)
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;

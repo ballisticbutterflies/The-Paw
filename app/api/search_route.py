@@ -5,10 +5,10 @@ from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
-def generate_substrings(search_term):
-    """Generate substrings for more flexible matching."""
+def generate_substrings(search_term, min_length=4):
+    """Generate substrings with a minimum length for more flexible matching."""
     substrings = {search_term}
-    for i in range(1, len(search_term)):
+    for i in range(min_length, len(search_term)):
         substrings.add(search_term[:i])
     return substrings
 
@@ -50,20 +50,23 @@ def search():
   if category:
       query = query.filter(Business.category_id == category)
 
-  if search_query:
-        search_terms = search_query.split()
-        all_filters = []
-        for term in search_terms:
-            substrings = generate_substrings(term)
-            term_filters = [
-                Business.name.ilike(f'%{substring}%') |
-                Business.category.has(Category.name.ilike(f'%{substring}%')) |
-                Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
-                Business.description.ilike(f'%{substring}%')
-                for substring in substrings
-            ]
-            all_filters.append(or_(*term_filters))
-        query = query.filter(and_(*all_filters))
+  activities_category_id = 6  # Replace with the actual category ID for "activities"
+  if search_query and search_query.lower() == "things to do":
+    query = query.filter(Business.category_id == activities_category_id)
+  elif search_query:
+    search_terms = search_query.split()
+    all_filters = []
+    for term in search_terms:
+      substrings = generate_substrings(term)
+      term_filters = [
+        Business.name.ilike(f'%{substring}%') |
+        Business.category.has(Category.name.ilike(f'%{substring}%')) |
+        Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
+        Business.description.ilike(f'%{substring}%')
+        for substring in substrings
+      ]
+      all_filters.append(or_(*term_filters))
+    query = query.filter(and_(*all_filters))
 
   # Apply pagination to the query
   try:

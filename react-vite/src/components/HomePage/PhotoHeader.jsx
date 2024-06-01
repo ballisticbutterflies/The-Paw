@@ -8,6 +8,7 @@ function PhotoHeader() {
     const handleClick = e => {
         e.preventDefault();
         const queryParams = new URLSearchParams()
+        queryParams.append('category', 3)
         queryParams.append('search_query', 'grooming')
         const queryString = queryParams.toString();
         const url = `/search?${queryString}`;
