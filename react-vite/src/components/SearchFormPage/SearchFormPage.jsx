@@ -121,7 +121,7 @@ function SearchFormPage() {
         return error
       })
     }
-    if (search_query && searchLoc) {
+    if (search_query && searchLoc && filter) {
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);

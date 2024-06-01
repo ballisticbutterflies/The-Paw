@@ -136,11 +136,11 @@ const SearchBar = () => {
     if (!searchQuery && !location) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
-    if (category_id) queryParams.append('category', category_id)
+    if (category_id && !searchQuery) queryParams.append('category', category_id)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
-    dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+    dispatch(fetchBusinesses(searchQuery, location, `${category_id}`, 1, 10)).then(() => {
       navigate(url)
       setSearchQuery('')
       setLocation('')
