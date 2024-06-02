@@ -75,14 +75,14 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
   };
 
   return (
-    <div>
+    <div className='location-search-container'>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
           type="text"
           value={input}
           onChange={handleChange}
-          placeholder="Search for cities..."
-          style={{ flex: 1 }}
+          placeholder="Search a city"
+          style={{ flex: 1, border: 'none', marginLeft: 10 }}
         />
       </div>
       {predictions.length > 0 && (

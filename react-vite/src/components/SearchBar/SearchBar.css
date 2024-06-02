@@ -1,6 +1,7 @@
 .predictions-container {
   position: absolute;
-  top: calc(6% + 5px); /* Adjust the offset as needed */
+  top: calc(8% + 5px); /* Adjust the offset as needed */
+  
   padding: 20px;
   background: #fffbf6;
   border: 1px solid #ccc;
@@ -28,4 +29,8 @@
   background-color: #c3cddf;
   padding: 10px;
   border-radius: 5px;
+}
+
+.location-search-container {
+  display: flex;
 }
