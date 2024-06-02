@@ -81,21 +81,21 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
           type="text"
           value={input}
           onChange={handleChange}
-          placeholder="Search a city"
+          placeholder="city, state"
           style={{ flex: 1, border: 'none', marginLeft: 10 }}
         />
       </div>
-      {predictions.length > 0 && (
+      {predictions?.length > 0 && (
         <div className="predictions-container">
           <ul>
-            {predictions.map((prediction, index) => (
+            {predictions?.map((prediction, index) => (
               <li className="suggestions" key={index} onClick={() => handleClick(prediction)}>
                 {prediction.placePrediction.text.text}
               </li>
             ))}
           </ul>
           <div>
-            <div style={{ display: 'flex', fontSize: 12, padding: 10}}>Powered by:<img src='../../images/google_on_white.png' alt="Google Logo" style={{ height: 15, marginLeft: 3, paddingTop: 2}} /></div>
+            <div style={{ display: 'flex', fontSize: 12, padding: 10 }}>Powered by:<img src='../../images/google_on_white.png' alt="Google Logo" style={{ height: 15, marginLeft: 3, paddingTop: 2 }} /></div>
           </div>
         </div>
       )}
@@ -103,4 +103,4 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
   );
 };
 
-      export default PlacesSearch;
+export default PlacesSearch;
