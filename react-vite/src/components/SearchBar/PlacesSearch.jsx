@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './SearchBar.css'
 
 const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
 
@@ -75,23 +76,31 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={input}
-        onChange={handleChange}
-        placeholder="Search for places..."
-      />
-      { predictions && predictions.length > 0 && (
-        <ul>
-          {predictions.map((prediction, index) => (
-            <li className="modalLink" key={index} onClick={() => handleClick(prediction)}>
-              {prediction.placePrediction.text.text}
-            </li>
-          ))}
-        </ul>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <input
+          type="text"
+          value={input}
+          onChange={handleChange}
+          placeholder="Search for cities..."
+          style={{ flex: 1 }}
+        />
+      </div>
+      {predictions.length > 0 && (
+        <div className="predictions-container">
+          <ul>
+            {predictions.map((prediction, index) => (
+              <li className="suggestions" key={index} onClick={() => handleClick(prediction)}>
+                {prediction.placePrediction.text.text}
+              </li>
+            ))}
+          </ul>
+          <div>
+            <div style={{ display: 'flex', fontSize: 12, padding: 10}}>Powered by:<img src='../../images/google_on_white.png' alt="Google Logo" style={{ height: 15, marginLeft: 3, paddingTop: 2}} /></div>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
-export default PlacesSearch;
+      export default PlacesSearch;
