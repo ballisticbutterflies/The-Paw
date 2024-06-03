@@ -136,6 +136,15 @@ def seed_images():
         )
         db.session.add(new_image)
 
+    for i in range(93, 212):
+        new_image = Image(
+            imageable_id=i,
+            imageable_type='business',
+            url=f'https://thepawimages.s3.us-west-2.amazonaws.com/biz-images/{i}.jpg',
+            uploader_id=random.randint(1, 50)
+        )
+        db.session.add(new_image)
+
     db.session.add(petagogy_biz)
     db.session.add(petagogy_review1)
     db.session.add(petagogy_review2)
