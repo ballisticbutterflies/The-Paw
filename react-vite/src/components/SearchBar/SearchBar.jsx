@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [category_id, setCategory_id] = useState(0)
+  const [category_id, setCategory_id] = useState('')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -21,6 +21,8 @@ const SearchBar = () => {
 
     if (categoryFromParams) {
       setCategory_id(categoryFromParams)
+    } else {
+      setCategory_id('')
     }
 
     if (locationFromParams) {
