@@ -19,10 +19,10 @@ const SearchBar = () => {
     const locationFromParams = params.get('location');
     const categoryFromParams = params.get('category');
 
+    console.log(categoryFromParams, "CATEGORY IN SERCH BARRRRRRRRR")
+
     if (categoryFromParams) {
       setCategory_id(categoryFromParams)
-    } else {
-      setCategory_id('')
     }
 
     if (locationFromParams) {
@@ -50,6 +50,8 @@ const SearchBar = () => {
 
 
     const queryParams = new URLSearchParams()
+    const categoryFromParams = queryParams.get('category');
+    console.log(categoryFromParams, "category from params in search bar")
 
     const lowercase_query = searchQuery.toLowerCase()
 
@@ -136,19 +138,31 @@ const SearchBar = () => {
       // })
     }
 
-    if (!searchQuery && !location) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
-    if (category_id && !searchQuery) queryParams.append('category', category_id)
+    if (!searchQuery && !location && !category_id) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
+
+
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
-    dispatch(fetchBusinesses(searchQuery, location, `category=${category_id}`, 1, 10)).then(() => {
-      console.log('Dispatch after target URL CONSOLE LOG')
-      navigate(url)
-      setSearchQuery('')
-      setLocation('')
-    })
+    console.log(categoryFromParams, "CATEGORY ID EXISTS")
+    if (categoryFromParams) {
+      dispatch(fetchBusinesses(searchQuery, location, `category=${category_id}`, 1, 10)).then(() => {
+        console.log(searchQuery, location, category_id, 'Dispatch after target URL CONSOLE LOG')
+        navigate(url)
+        setSearchQuery('')
+        setLocation('')
+        setCategory_id('')
+      })
+    } else {
+      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+        console.log(searchQuery, location, category_id, 'Dispatch after target URL CONSOLE LOG v2')
+        navigate(url)
+        setSearchQuery('')
+        setLocation('')
+      })
+    }
   };
 
   return (

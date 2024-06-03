@@ -21,6 +21,7 @@ function SearchFormPage() {
   const rating = searchParams.get('rating')
 
 
+  console.log(category, "IN SERACH PAGE ")
 
   const queryParams = new URLSearchParams();
   if (category) queryParams.append('category', category);
@@ -34,8 +35,9 @@ function SearchFormPage() {
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
-  const [filterChange, setFilterChange] = useState(false);
+  // const [filterChange, setFilterChange] = useState(false);
   const [loading, setLoading] = useState(true)
+
 
   console.log(businesses.length, "search Form Page")
 
@@ -95,7 +97,7 @@ function SearchFormPage() {
   // useEffect(() => {
   //   const fetchAndSetLoading = () => {
   //     setLoading(true);
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
+  //     dispatch(fetchBusinesses(search_query, place, filter, page, perPage))
   //       .then(() => setTimeout(() => setLoading(false), 1200))
   //       .catch(error => {
   //         console.error(error);
@@ -104,17 +106,10 @@ function SearchFormPage() {
 
   //   window.scrollTo(0, 0); // Scroll to top
 
-  //   if (
-  //     (!search_query && !filter && !filterChange && searchLoc) ||
-  //     (filter && !filterChange && !searchLoc) ||
-  //     (filter && !filterChange && searchLoc) ||
-  //     (search_query && searchLoc && filter) ||
-  //     (search_query && !searchLoc && !filter) ||
-  //     (!search_query && !searchLoc && !filter)
-  //   ) {
+
   //     fetchAndSetLoading();
-  //   }
-  // }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category]);
+
+  // }, [dispatch, page, perPage, filter, search_query, filterChange, place, category]);
 
   // useEffect(() => {
   //   window.scrollTo(0, 0); // Scroll to top
@@ -208,9 +203,9 @@ function SearchFormPage() {
     console.log(searchLoc, "FILTERSSESRSERES")
 
     setPage(1)
-    setFilterChange(true)
+    // setFilterChange(true)
     setLoading(true);
-    dispatch(fetchBusinesses(search_query, searchLoc, filters, 1, perPage)).then(() => setTimeout(() => {
+    dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage)).then(() => setTimeout(() => {
       setLoading(false);
     }, 1200))
       .catch(error => {
