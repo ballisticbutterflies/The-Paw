@@ -1,9 +1,16 @@
 from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image, Category
-from sqlalchemy import func, desc, or_
+from sqlalchemy import func, desc, or_, and_
+from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
+def generate_substrings(search_term):
+    """Generate substrings for more flexible matching."""
+    substrings = {search_term}
+    for i in range(1, len(search_term)):
+        substrings.add(search_term[:i])
+    return substrings
 
 @search_route.route('/')
 def search():
@@ -18,6 +25,8 @@ def search():
   city_state = request.args.get('location')
   category = request.args.get('category')
   search_query = request.args.get('search_query')
+  page = request.args.get('page', 1, type=int)
+  per_page = request.args.get('per_page', 10, type=int)
 
 #base query to fetch businesses
   query = Business.query
@@ -42,15 +51,28 @@ def search():
       query = query.filter(Business.category_id == category)
 
   if search_query:
-    query = query.filter(or_(
-      Business.name.ilike(f'%{search_query}%'),
-      Business.category.has(Category.name.ilike(f'%{search_query}%')),
-      Business.reviews.any(Review.review.ilike(f'%{search_query}%')),
-      Business.description.ilike(f'%{search_query}%')
-    ))
+        search_terms = search_query.split()
+        all_filters = []
+        for term in search_terms:
+            substrings = generate_substrings(term)
+            term_filters = [
+                Business.name.ilike(f'%{substring}%') |
+                Business.category.has(Category.name.ilike(f'%{substring}%')) |
+                Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
+                Business.description.ilike(f'%{substring}%')
+                for substring in substrings
+            ]
+            all_filters.append(or_(*term_filters))
+        query = query.filter(and_(*all_filters))
 
+  # Apply pagination to the query
+  try:
+        # Apply pagination to the query
+        paginated_query = query.paginate(page=page, per_page=per_page, error_out=False)
+  except Exception as e:
+        return {'errors': {'message': str(e)}}, 500
 
-  businesses = query.all()
+  businesses = paginated_query.items
 
 
   business_data = []
@@ -94,4 +116,12 @@ def search():
     business_dict['category'] = category_data
 
     business_data.append(business_dict)
-  return { 'businesses': business_data }
+  return jsonify({
+        'businesses': business_data,
+        'total': paginated_query.total,
+        'pages': paginated_query.pages,
+        'current_page': paginated_query.page,
+        'next_page': paginated_query.next_num,
+        'prev_page': paginated_query.prev_num,
+        'per_page': paginated_query.per_page
+    })

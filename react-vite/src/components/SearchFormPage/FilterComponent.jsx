@@ -2,43 +2,65 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import StarRatingInput from "./StarRatingInput";
 import { fetchBusinesses } from "../../redux/search";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
+
+  const navigate = useNavigate()
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  // const category = searchParams.get('category') || '';
+  // const prices = searchParams.get('price')?.split(',') || [];
+  // const ratings = searchParams.get('rating') || '';
+
 
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const closeMenu = () => setShowMenu(false);
   const ulRef = useRef();
 
-  const [resetRating, setResetRating] = useState(false);
-  const [stars, setStars] = useState("")
+  const [stars, setStars] = useState(searchParams.get('rating') || "");
   const [price, setPrice] = useState([
-    { name: "$", checked: false },
-    { name: "$$", checked: false },
-    { name: "$$$", checked: false },
-    { name: "$$$$", checked: false },
-  ])
-  const [category_id, setCategory_id] = useState('')
+    { name: "$", checked: searchParams.get('price')?.split(',').includes("$") || false },
+    { name: "$$", checked: searchParams.get('price')?.split(',').includes("$$") || false },
+    { name: "$$$", checked: searchParams.get('price')?.split(',').includes("$$$") || false },
+    { name: "$$$$", checked: searchParams.get('price')?.split(',').includes("$$$$") || false }
+  ]);
+  const [category_id, setCategory_id] = useState(searchParams.get('category') || "");
+
+  const [resetRating, setResetRating] = useState(false);
+
+  const categories = ['Restaurants', 'Veterinarians','Services', 'Shopping', 'Travel', 'Activities', 'Adoption', 'Other']
 
   const handleFilterChange = (e) => {
-    // Construct URL with filter parameters
+
     e.preventDefault();
     const queryParams = new URLSearchParams();
+
     if (stars !== "") {
       queryParams.append("rating", stars);
     }
 
-    if (price.checked !== false) {
-      let priceObj = [...price]
-      let searchingPrice = priceObj.filter((char) => char.checked === true);
-      let result = searchingPrice.map(ele => ele.name)
+    // if (price.checked !== false) {
 
-      let string = result.toString()
-      queryParams.append("price", string);
+    //   let priceObj = [...price]
+    //   let searchingPrice = priceObj.filter((char) => char.checked === true);
+    //   let result = searchingPrice.map(ele => ele.name)
+
+    //   let string = result.toString()
+
+    //   if (string.length > 0 ) {
+    //     queryParams.append("price", string);
+    //   }
+    //   setPrice(price)
+    // }
+    const selectedPrices = price.filter(p => p.checked).map(p => p.name);
+    if (selectedPrices.length > 0) {
+      queryParams.append("price", selectedPrices.join(','));
     }
 
-    if (category_id !== '') {
+    if (category_id !== null) {
       queryParams.append('category', category_id)
     }
 
@@ -51,38 +73,45 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
   }
 
   const onChangeStars = (number) => {
-    if (number) {
-      setStars(parseInt(number))
-    } else {
-      setStars("")
-    }
-  }
+    setStars(number ? parseInt(number) : "");
+  };
+
 
   const updatePrice = (i, isChecked) => {
-    const updatedPrice = [...price];
-    updatedPrice[i].checked = isChecked
-    setPrice(updatedPrice)
-  }
-
-  const categories = ['Restaurants', 'Veterinarians',
-    'Services', 'Shopping',
-    'Travel', 'Activities',
-    'Adoption', 'Other']
+    const updatedPrice = price.map((p, index) => (
+      index === i ? { ...p, checked: isChecked } : p
+    ));
+    setPrice(updatedPrice);
+  };
 
   const handleClick = e => {
     e.preventDefault();
     setStars('')
-    setPrice([
-      { name: "$", checked: false },
-      { name: "$$", checked: false },
-      { name: "$$$", checked: false },
-      { name: "$$$$", checked: false },
-    ])
+    setPrice(price.map(p => ({ ...p, checked: false })));
     setCategory_id('')
     setResetRating(prevState => !prevState);
-    dispatch(fetchBusinesses())
+    onFilterChange('');
+    dispatch(fetchBusinesses()).then(() => {
+      navigate('/search')
+    })
     closeMenu();
   }
+
+  useEffect(() => {
+    const searchParamss = new URLSearchParams(location.search);
+    setStars(searchParamss.get('rating') || "");
+    setCategory_id(searchParamss.get('category') || "");
+    setResetRating(prevState => !prevState);
+
+    // Update price filter based on searchParams
+    setPrice([
+      { name: "$", checked: searchParamss.get('price')?.split(',').includes("$") || false },
+      { name: "$$", checked: searchParamss.get('price')?.split(',').includes("$$") || false },
+      { name: "$$$", checked: searchParamss.get('price')?.split(',').includes("$$$") || false },
+      { name: "$$$$", checked: searchParamss.get('price')?.split(',').includes("$$$$") || false }
+    ]);
+
+  }, [location.search]);
 
   useEffect(() => {
     if (!showMenu) return;
@@ -102,6 +131,8 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     e.stopPropagation();
     setShowMenu(!showMenu);
   }
+
+
 
   return (
     (isMobile || isTablet) ? (

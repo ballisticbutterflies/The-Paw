@@ -16,7 +16,7 @@ function SingleBusinessPage() {
     const dispatch = useDispatch();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
     const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth <= 1025);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1025);
 
     const business = useSelector(state => (
         state.businesses[businessId]
@@ -35,7 +35,7 @@ function SingleBusinessPage() {
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 480);
         setIsTablet(window.innerWidth <= 1024 && window.innerWidth >= 481);
-        setIsDesktop(window.innerWidth <= 1025);
+        setIsDesktop(window.innerWidth >= 1025);
     }
 
     useEffect(() => {

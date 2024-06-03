@@ -10,6 +10,51 @@
   border-radius: 5px;
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  margin-left: 300px;
+}
+
+
+.pagination button:disabled {
+  cursor: default;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: calc(6*30px);
+  height: 50px;
+  display: flex;
+  color: #5f5ba8;
+  filter: drop-shadow(30px 25px 0 currentColor) drop-shadow(60px 0 0 currentColor) drop-shadow(120px 0 0 currentColor);
+  clip-path: inset(0 100% 0 0);
+  animation: l12 2s infinite steps(7);
+  margin: auto;
+  padding: 20px 0;
+}
+
+.loader:before {
+  content: "";
+  width: 30px;
+  height: 25px;
+  --c: no-repeat radial-gradient(farthest-side, currentColor 92%, #0000);
+  background:
+    var(--c) left /70% 70%,
+    var(--c) right/20% 20%,
+    var(--c) top 0 right 15%/20% 20%,
+    var(--c) bottom 0 right 15%/20% 20%;
+}
+
+@keyframes l12 {
+  100% {
+    clip-path: inset(0 -30px 0 0)
+  }
+}
+
 .businessCards:hover {
   box-shadow: 2px 2px 5px .05px;
 }
@@ -190,6 +235,11 @@ select {
     flex-direction: column;
   }
 
+  .pagination {
+    margin: auto;
+    width: auto;
+  }
+
   .businessesImageWrapper {
     width: auto;
     height: 200px;
@@ -270,6 +320,11 @@ select {
     flex-direction: column;
   }
 
+  .pagination {
+    margin: auto;
+    width: auto;
+  }
+
   .businessesImageWrapper {
     width: 100%;
     height: 400px;
@@ -346,6 +401,12 @@ select {
   .businessCards {
     width: auto;
     flex-direction: column;
+  }
+
+  .pagination {
+    /* margin-left: auto; */
+    /* margin-right: 2vw; */
+    width: auto;
   }
 
   .businessesImageWrapper {
