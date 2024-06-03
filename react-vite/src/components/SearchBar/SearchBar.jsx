@@ -57,6 +57,7 @@ const SearchBar = () => {
       const queryString = queryParams.toString();
       const url = `/search?${queryString}`;
       dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+        console.log('Search Bar', lowercase_query, location)
         navigate(url)
         setSearchQuery('')
         setLocation('')

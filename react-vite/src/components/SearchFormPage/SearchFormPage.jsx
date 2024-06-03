@@ -149,6 +149,7 @@ function SearchFormPage() {
     if (search_query && searchLoc && filter) {
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+        console.log('Search Form Page', search_query, searchLoc, filter)
         setLoading(false);
       }, 1200))
       .catch(error => {
