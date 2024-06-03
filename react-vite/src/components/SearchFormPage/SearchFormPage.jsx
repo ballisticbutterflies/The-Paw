@@ -92,36 +92,36 @@ function SearchFormPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
-    if (!search_query && !filter && !filterChange){
+    if (!search_query && !filter && !filterChange) {
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
-      .catch(error => {
-        return error
-      })
+        .catch(error => {
+          return error
+        })
     }
 
 
     if (filter && !filterChange) {
-      console.log( '{||||||| USE EFFECT |||}')
+      console.log('{||||||| USE EFFECT |||}')
 
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
-      .catch(error => {
-        return error
-      })
+        .catch(error => {
+          return error
+        })
     }
-    if (search_query ) {
+    if (search_query) {
       setLoading(true)
       let searchLoc = ''
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
         setLoading(false);
       }, 1200))
-      .catch(error => {
-        return error
-      })
+        .catch(error => {
+          return error
+        })
     }
 
   }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
@@ -255,17 +255,17 @@ function SearchFormPage() {
                 </div>
               )
               )}
+              {
+                !loading &&
+                <div className="pagination">
+                  <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+                  <span>&nbsp;&nbsp;Page {currentPage} of {pages}&nbsp;&nbsp;</span>
+                  <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
+                </div>
+              }
             </>
           )
         )}
-        {
-          !loading &&
-          <div className="pagination">
-            <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-            <span>&nbsp;&nbsp;Page {currentPage} of {pages}&nbsp;&nbsp;</span>
-            <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
-          </div>
-        }
 
       </div>
     </>
