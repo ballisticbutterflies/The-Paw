@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './SearchBar.css'
 
+
 const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
 
   const [input, setInput] = useState(location);
@@ -27,7 +28,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
   }, [location]);
 
   const fetchPredictions = async (input) => {
-    const apiKey = "AIzaSyBNoJsZRS-Nmk6eZ_p_xrYhk32Lw3oXaKs";
+    const apiKey = import.meta.env.VITE_PLACES_KEY;
     const url = `https://places.googleapis.com/v1/places:autocomplete?key=${apiKey}`;
     const requestBody = {
       input: input,
