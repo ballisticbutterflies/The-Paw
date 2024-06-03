@@ -37,6 +37,7 @@ function SearchFormPage() {
   const [filterChange, setFilterChange] = useState(false);
   const [loading, setLoading] = useState(true)
 
+  console.log(businesses.length, "search Form Page")
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
@@ -115,79 +116,89 @@ function SearchFormPage() {
   //   }
   // }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category]);
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0); // Scroll to top
+  //   if (!search_query && !filter && !filterChange && searchLoc){
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  1')
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+  //   if (filter && !filterChange && !searchLoc && !search_query) {
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  2')
+  //     setLoading(true)
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+
+  //   if (search_query && filter && !filterChange && searchLoc) {
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  3')
+
+  //     setLoading(true)
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       setLoading(false);
+  //       return;
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+  //   if (search_query && searchLoc && filter && filterChange) {
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  4')
+  //     setLoading(true)
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       console.log('Search Form Page', search_query, searchLoc, filter)
+  //       setLoading(false);
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+  //   if (search_query && !searchLoc && !filter) {
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  5')
+  //     setLoading(true)
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+  //   if (!search_query && !searchLoc && !filter) {
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  6')
+  //     setLoading(true)
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+  //   if (search_query && searchLoc && !filter) {
+  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  7')
+  //     setLoading(true)
+  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1200))
+  //     .catch(error => {
+  //       return error
+  //     })
+  //   }
+
+
+  // }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
+
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top
-    if (!search_query && !filter && !filterChange && searchLoc){
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
-    if (filter && !filterChange && !searchLoc) {
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
+    if (businesses.length >= 0) setLoading(false)
 
-    if (filter && !filterChange && searchLoc) {
-      console.log(searchLoc, '{||||||| USE EFFECT |||}')
-
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
-    if (search_query && searchLoc && filter) {
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        console.log('Search Form Page', search_query, searchLoc, filter)
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
-    if (search_query && !searchLoc && !filter) {
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
-    if (!search_query && !searchLoc && !filter) {
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
-    if (search_query && searchLoc && !filter) {
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-      .catch(error => {
-        return error
-      })
-    }
-
-
-
-  }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
-
+  }, [businesses])
   // Reset page state when search query or filters change
   useEffect(() => {
     setPage(1);

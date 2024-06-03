@@ -54,94 +54,95 @@ const SearchBar = () => {
 
     if (lowercase_query === 'restaurant' || lowercase_query === 'restaurants') {
       queryParams.append('category', 1)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        console.log('Search Bar', lowercase_query, location)
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   console.log('Search Bar', lowercase_query, location)
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'veterinarians' || lowercase_query === 'veterinarian' || lowercase_query === 'vet' || lowercase_query === 'doctor') {
       queryParams.append('category', 2)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'services' || lowercase_query === 'groomer' || lowercase_query === 'groomers' || lowercase_query === 'training' || lowercase_query === 'walker') {
       queryParams.append('category', 3)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'shopping' || lowercase_query === 'store' || lowercase_query === 'supplies' || lowercase_query === 'boutique') {
       queryParams.append('category', 4)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'travel' || lowercase_query === 'hotel') {
       queryParams.append('category', 5)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'activities' || lowercase_query === 'parks' || lowercase_query === 'park' ) {
       queryParams.append('category', 6)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'adoption' || lowercase_query === 'adopt' || lowercase_query === 'shelter') {
       queryParams.append('category', 7)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
     if (lowercase_query === 'other') {
       queryParams.append('category', 8)
-      const queryString = queryParams.toString();
-      const url = `/search?${queryString}`;
-      dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        navigate(url)
-        setSearchQuery('')
-        setLocation('')
-      })
+      // const queryString = queryParams.toString();
+      // const url = `/search?${queryString}`;
+      // dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
+      //   navigate(url)
+      //   setSearchQuery('')
+      //   setLocation('')
+      // })
     }
 
     if (!searchQuery && !location) dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => { navigate('/search') })
+    if (category_id && !searchQuery) queryParams.append('category', category_id)
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location) queryParams.append('location', location)
-    if (category_id && !searchQuery) queryParams.append('category', category_id)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
-    dispatch(fetchBusinesses(searchQuery, location, `${category_id}`, 1, 10)).then(() => {
+    dispatch(fetchBusinesses(searchQuery, location, `category=${category_id}`, 1, 10)).then(() => {
+      console.log('Dispatch after target URL CONSOLE LOG')
       navigate(url)
       setSearchQuery('')
       setLocation('')

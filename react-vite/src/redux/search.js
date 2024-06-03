@@ -32,8 +32,8 @@ export const fetchBusinesses = (searchQuery, location, filters, page = 1, perPag
     if (filters) {
         let filtered = Object.values(filters)
         queryParams.push(filtered.join(''))
+        console.log(filtered.join(''), "THUNK")
     }
-    console.log(searchQuery, location, filters, '{||||||| thunk |||}')
 
     queryParams.push(`page=${page}`);
     queryParams.push(`per_page=${perPage}`);
@@ -41,6 +41,7 @@ export const fetchBusinesses = (searchQuery, location, filters, page = 1, perPag
     if (queryParams.length > 0) {
         url += `?${queryParams.join('&')}`;
     }
+    console.log(url, '{||||||| thunk |||}')
 
     const response = await fetch(url)
 
