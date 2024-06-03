@@ -258,9 +258,13 @@ function SearchFormPage() {
               {
                 !loading &&
                 <div className="pagination">
-                  <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+                  {currentPage !== 1 &&
+                    <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+                  }
                   <span>&nbsp;&nbsp;Page {currentPage} of {pages}&nbsp;&nbsp;</span>
-                  <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
+                  {currentPage !== pages &&
+                    <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
+                  }
                 </div>
               }
             </>
