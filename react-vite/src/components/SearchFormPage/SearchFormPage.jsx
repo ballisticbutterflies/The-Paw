@@ -265,7 +265,9 @@ function SearchFormPage() {
             </>
           ) : (
             <>
-              <h1>{total} Paw-Recommended Results {
+              {total === 1 ? (
+
+              <h1>{total} Paw-Recommended Result {
               search_query &&
                 <span>for &quot;{search_query}&quot;&nbsp;</span>
 
@@ -274,6 +276,17 @@ function SearchFormPage() {
               <span>in {searchLoc}</span>
 
               }</h1>
+              ):(
+                <h1>{total} Paw-Recommended Results {
+                  search_query &&
+                    <span>for &quot;{search_query}&quot;&nbsp;</span>
+
+                  }  {
+                  searchLoc &&
+                  <span>in {searchLoc}</span>
+
+                  }</h1>
+              )}
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
               {businesses && businesses.map((business, index) => (
                 <div className="card" key={business.id}>
