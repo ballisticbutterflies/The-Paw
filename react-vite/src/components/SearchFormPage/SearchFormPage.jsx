@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
@@ -97,101 +97,21 @@ function SearchFormPage() {
     }
   }
 
-  // useEffect(() => {
-  //   const fetchAndSetLoading = () => {
-  //     setLoading(true);
-  //     dispatch(fetchBusinesses(search_query, place, filter, page, perPage))
-  //       .then(() => setTimeout(() => setLoading(false), 1200))
-  //       .catch(error => {
-  //         console.error(error);
-  //       });
-  //   };
+  useEffect(() => {
+    const fetchAndSetLoading = () => {
+      setLoading(true);
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
+        .then(() => setTimeout(() => setLoading(false), 1200))
+        .catch(error => {
+          console.error(error);
+        });
+    };
 
-  //   window.scrollTo(0, 0); // Scroll to top
-
-
-  //     fetchAndSetLoading();
-
-  // }, [dispatch, page, perPage, filter, search_query, filterChange, place, category]);
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0); // Scroll to top
-  //   if (!search_query && !filter && !filterChange && searchLoc){
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  1')
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
-  //   if (filter && !filterChange && !searchLoc && !search_query) {
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  2')
-  //     setLoading(true)
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
-
-  //   if (search_query && filter && !filterChange && searchLoc) {
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  3')
-
-  //     setLoading(true)
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       setLoading(false);
-  //       return;
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
-  //   if (search_query && searchLoc && filter && filterChange) {
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  4')
-  //     setLoading(true)
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       console.log('Search Form Page', search_query, searchLoc, filter)
-  //       setLoading(false);
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
-  //   if (search_query && !searchLoc && !filter) {
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  5')
-  //     setLoading(true)
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
-  //   if (!search_query && !searchLoc && !filter) {
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  6')
-  //     setLoading(true)
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
-  //   if (search_query && searchLoc && !filter) {
-  //     console.log(searchLoc, filter, '{||||||| USE EFFECT |||}  7')
-  //     setLoading(true)
-  //     dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1200))
-  //     .catch(error => {
-  //       return error
-  //     })
-  //   }
+    window.scrollTo(0, 0); // Scroll to top
+    fetchAndSetLoading();
+  }, [dispatch, page, perPage, filter, search_query, searchLoc]);
 
 
-  // }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
 
   useEffect(() => {
     if (businesses.length >= 0) setLoading(false)
