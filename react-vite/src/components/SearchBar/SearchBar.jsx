@@ -10,6 +10,7 @@ const SearchBar = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [category_id, setCategory_id] = useState('')
   const [isPredictionSelected, setIsPredictionSelected] = useState(false);
+  const [isInputTyped, setIsInputTyped] = useState(false);  // State variable for tracking input typing
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -31,6 +32,8 @@ const SearchBar = () => {
 
     if (categoryFromParams) {
       setCategory_id(categoryFromParams)
+    } else {
+      setCategory_id('')
     }
 
     if (locationFromParams) {
@@ -53,7 +56,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!isPredictionSelected) {
+    if (isInputTyped && !isPredictionSelected) {
       alert("Please select a location from the dropdown.");
       return;
     }
@@ -201,6 +204,7 @@ const SearchBar = () => {
           location={location}
           isSubmitted={isSubmitted}
           setIsPredictionSelected={setIsPredictionSelected}
+          setIsInputTyped={setIsInputTyped}
         />
 
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './SearchBar.css'
 
 
-const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected }) => {
+const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
 
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
@@ -12,6 +12,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   useEffect(() => {
     if (fetching && input.length > 0) {
       fetchPredictions(input);
+      setIsInputTyped(true);  // Set input typed to true
     } else {
       setPredictions([]);
     }
@@ -75,6 +76,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
     setInput(e.target.value);
     setFetching(true);
     setIsPredictionSelected(false); // Reset prediction selected
+    setIsInputTyped(true);  // Set input typed to true
   };
 
   return (
