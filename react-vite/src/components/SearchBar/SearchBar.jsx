@@ -9,6 +9,7 @@ const SearchBar = () => {
   const [location, setLocation] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [category_id, setCategory_id] = useState('')
+  const [isPredictionSelected, setIsPredictionSelected] = useState(false);
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -51,6 +52,11 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!isPredictionSelected) {
+      alert("Please select a location from the dropdown.");
+      return;
+    }
 
     setIsSubmitted(true);  // Signal that form has been submitted
     setTimeout(() => setIsSubmitted(false), 0);  // Reset the signal immediately after
@@ -190,7 +196,12 @@ const SearchBar = () => {
           placeholder="city, state"
         /> */}
 
-        <PlacesSearch onLocationSelect={handleLocationSelect} location={location} isSubmitted={isSubmitted} />
+        <PlacesSearch
+          onLocationSelect={handleLocationSelect}
+          location={location}
+          isSubmitted={isSubmitted}
+          setIsPredictionSelected={setIsPredictionSelected}
+        />
 
 
         {/* <datalist id="locations">

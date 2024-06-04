@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './SearchBar.css'
 
 
-const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
+const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected }) => {
 
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
@@ -67,12 +67,14 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted }) => {
     setInput(selectedLocation);
     setFetching(false)
     setPredictions([]);
+    setIsPredictionSelected(true); // Set prediction selected to true
     onLocationSelect(selectedLocation);
   };
 
   const handleChange = (e) => {
     setInput(e.target.value);
     setFetching(true);
+    setIsPredictionSelected(false); // Reset prediction selected
   };
 
   return (
