@@ -60,12 +60,12 @@ function SearchFormPage() {
       emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
 
-    
+
     return [filledStars, emptyStars]
   }
 
   const starsToFixed = (stars) => {
-    let int = stars
+    let int = +(stars)
     if (int >= 1) {
       return int.toFixed(1)
     } else {

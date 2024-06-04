@@ -73,7 +73,7 @@ function SingleBusinessPage() {
     }
 
     const reviewAvg = (avg) => {
-        let int = (avg)
+        let int = +(avg)
         let five = 5.0
         if (int >= 4.75) {
             return five.toFixed(1)
