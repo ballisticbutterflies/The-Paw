@@ -138,9 +138,9 @@ function SingleBusinessPage() {
                         }
                         {business.reviews?.num_reviews > 1 &&
                             <p className="businessReviews">
-                                <span className="pawBlock">
+                                <div className="pawBlock">
                                     {business.reviews.avg_stars &&
-                                        reviewStars(business.reviews.avg_stars)}</span>
+                                        reviewStars(business.reviews.avg_stars)}</div>
                                 &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
                                 &nbsp;({business.reviews.num_reviews} reviews)
                             </p>
