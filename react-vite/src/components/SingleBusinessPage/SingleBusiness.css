@@ -4,7 +4,14 @@
 }
 
 
-.businessPhotoHeader img {
+/* .businessPhotoHeader img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+} */
+
+.businessPhotoHeaderImg {
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -106,6 +113,8 @@
     width: fit-content !important;
     padding: 10px 6px 3px 6px !important;
     border-radius: 5px !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .businessReviews span {
