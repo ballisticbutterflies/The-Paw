@@ -251,7 +251,15 @@ function SearchFormPage() {
         ) : (
           businesses.length === 0 ? (
             <>
-              <h1>{total} Paw-Recommended Results:</h1>
+              <h1>{total} Paw-Recommended Results {
+              search_query &&
+                <span>for &quot;{search_query}&quot;</span>
+
+              }  {
+              searchLoc &&
+              <span>in {searchLoc}</span>
+
+              }</h1>
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
               <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
             </>

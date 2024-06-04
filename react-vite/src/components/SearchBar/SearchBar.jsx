@@ -16,10 +16,17 @@ const SearchBar = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(currentLocation.search);
+    const queryFromParams = params.get('search_query');
     const locationFromParams = params.get('location');
     const categoryFromParams = params.get('category');
 
     console.log(categoryFromParams, "CATEGORY IN SERCH BARRRRRRRRR")
+
+    if (queryFromParams) {
+      setSearchQuery(queryFromParams)
+    } else {
+      setSearchQuery('')
+    }
 
     if (categoryFromParams) {
       setCategory_id(categoryFromParams)
