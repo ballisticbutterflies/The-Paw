@@ -73,10 +73,15 @@ function SingleBusinessPage() {
     }
 
     const reviewAvg = (avg) => {
-        if (avg !== null) {
-            return avg.toFixed(1);
+        let int = (avg)
+        let five = 5.0
+        if (int >= 4.75) {
+            return five.toFixed(1)
+        }
+        if (int !== null) {
+            return int.toFixed(1);
         } else {
-            return avg
+            return int
         }
     }
 
