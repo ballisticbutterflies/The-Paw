@@ -82,7 +82,9 @@
 
  .paws-half {
      width: 24px;
-     padding-right: 6px;
+     margin: 0px 3px;
+     display: flex;
+     margin-top: -2px;
  }
 
  a {

@@ -106,18 +106,25 @@
 .businessPhotoHeader .paws-filled,
 .businessPhotoHeader .paws-unfilled {
     font-size: x-large !important;
+    margin: 0px 3px;
 }
 
 
 .businessPhotoHeader .pawBlock {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto auto auto;
     background-color: #FFFFFF !important;
     width: fit-content !important;
     padding: 3px 6px 3px 6px !important;
     border-radius: 5px !important;
     align-items: center;
     justify-content: center;
+    /* column-gap: 5px; */
+}
+
+.businessReviews {
+    display: flex;
+    align-items: center;
 }
 
 .businessReviews span {
@@ -128,11 +135,6 @@
     font-size: 18px;
     margin-top: 14px;
     margin-bottom: 14px;
-}
-
-.paws-half {
-    display: flex;
-
 }
 
 .priceSubcat {
