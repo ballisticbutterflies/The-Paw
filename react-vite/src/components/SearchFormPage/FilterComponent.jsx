@@ -10,9 +10,6 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
   const navigate = useNavigate()
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  // const category = searchParams.get('category') || '';
-  // const prices = searchParams.get('price')?.split(',') || [];
-  // const ratings = searchParams.get('rating') || '';
 
 
   const dispatch = useDispatch();
@@ -28,6 +25,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     { name: "$$$$", checked: searchParams.get('price')?.split(',').includes("$$$$") || false }
   ]);
   const [category_id, setCategory_id] = useState(searchParams.get('category') || "");
+  const [ place, setPlace ] = useState(searchParams.get('location' || ''))
 
   const [resetRating, setResetRating] = useState(false);
 
@@ -42,31 +40,21 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
       queryParams.append("rating", stars);
     }
 
-    // if (price.checked !== false) {
-
-    //   let priceObj = [...price]
-    //   let searchingPrice = priceObj.filter((char) => char.checked === true);
-    //   let result = searchingPrice.map(ele => ele.name)
-
-    //   let string = result.toString()
-
-    //   if (string.length > 0 ) {
-    //     queryParams.append("price", string);
-    //   }
-    //   setPrice(price)
-    // }
     const selectedPrices = price.filter(p => p.checked).map(p => p.name);
     if (selectedPrices.length > 0) {
       queryParams.append("price", selectedPrices.join(','));
     }
 
-    if (category_id !== null) {
+    if (category_id !== '') {
       queryParams.append('category', category_id)
     }
+
+    if (place !== '') queryParams.append('location', place)
 
     const queryString = queryParams.toString();
 
     const url = `${queryString}`;
+    console.log(url)
 
     onFilterChange(url)
     closeMenu();
@@ -89,6 +77,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     setStars('')
     setPrice(price.map(p => ({ ...p, checked: false })));
     setCategory_id('')
+    setPlace('')
     setResetRating(prevState => !prevState);
     onFilterChange('');
     dispatch(fetchBusinesses()).then(() => {
@@ -101,6 +90,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     const searchParamss = new URLSearchParams(location.search);
     setStars(searchParamss.get('rating') || "");
     setCategory_id(searchParamss.get('category') || "");
+    setPlace(searchParamss.get('location') || "");
     setResetRating(prevState => !prevState);
 
     // Update price filter based on searchParams

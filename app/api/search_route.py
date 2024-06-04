@@ -5,10 +5,10 @@ from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
-def generate_substrings(search_term):
-    """Generate substrings for more flexible matching."""
+def generate_substrings(search_term, min_length=5):
+    """Generate substrings with a minimum length for more flexible matching."""
     substrings = {search_term}
-    for i in range(1, len(search_term)):
+    for i in range(min_length, len(search_term)):
         substrings.add(search_term[:i])
     return substrings
 
@@ -33,7 +33,9 @@ def search():
 
 #apply filters to the query
   if rating:
-    query = query.join(Review).group_by(Business.id).having(func.avg(Review.stars) >= float(rating))
+    #also include businesses with an average star rating greater than or equal to 4.95
+    rating_filter = func.coalesce(func.ceil(func.avg(Review.stars)), 0)
+    query = query.join(Review).group_by(Business.id).having(and_(rating_filter >= float(rating), func.avg(Review.stars) >= 4.75))
 
   if prices:
     query = query.filter(Business.price.in_(prices))
@@ -50,20 +52,23 @@ def search():
   if category:
       query = query.filter(Business.category_id == category)
 
-  if search_query:
-        search_terms = search_query.split()
-        all_filters = []
-        for term in search_terms:
-            substrings = generate_substrings(term)
-            term_filters = [
-                Business.name.ilike(f'%{substring}%') |
-                Business.category.has(Category.name.ilike(f'%{substring}%')) |
-                Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
-                Business.description.ilike(f'%{substring}%')
-                for substring in substrings
-            ]
-            all_filters.append(or_(*term_filters))
-        query = query.filter(and_(*all_filters))
+  activities_category_id = 6  # Replace with the actual category ID for "activities"
+  if search_query and search_query.lower() == "things to do":
+    query = query.filter(Business.category_id == activities_category_id)
+  elif search_query:
+    search_terms = search_query.split()
+    all_filters = []
+    for term in search_terms:
+      substrings = generate_substrings(term)
+      term_filters = [
+        Business.name.ilike(f'%{substring}%') |
+        Business.category.has(Category.name.ilike(f'%{substring}%')) |
+        Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
+        Business.description.ilike(f'%{substring}%')
+        for substring in substrings
+      ]
+      all_filters.append(or_(*term_filters))
+    query = query.filter(and_(*all_filters))
 
   # Apply pagination to the query
   try:
@@ -90,6 +95,10 @@ def search():
        avg_stars = None
     if num_reviews > 0:
         avg_stars = total_stars / num_reviews
+
+        # Round up avg_stars to 5 if it's 4.95 or higher
+        if avg_stars >= 4.75:
+            avg_stars = 5
 
     #and num reviews
     #and bring over review text too

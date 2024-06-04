@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBusinesses } from "../../redux/search";
 import "./SearchForm.css";
@@ -20,6 +20,9 @@ function SearchFormPage() {
   const price = searchParams.get('price')
   const rating = searchParams.get('rating')
 
+
+  console.log(category, "IN SERACH PAGE ")
+
   const queryParams = new URLSearchParams();
   if (category) queryParams.append('category', category);
   if (price) queryParams.append('price', price);
@@ -32,9 +35,11 @@ function SearchFormPage() {
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
-  const [filterChange, setFilterChange] = useState(false);
+  // const [filterChange, setFilterChange] = useState(false);
   const [loading, setLoading] = useState(true)
 
+
+  console.log(businesses.length, "search Form Page")
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
@@ -51,6 +56,7 @@ function SearchFormPage() {
     let filledStars = []
     let emptyStars = []
 
+
     for (let i = 0; i < parseInt(numStars); i++) {
       filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
@@ -58,11 +64,13 @@ function SearchFormPage() {
     for (let i = 0; i < empty; i++) {
       emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
+
+
     return [filledStars, emptyStars]
   }
 
   const starsToFixed = (stars) => {
-    let int = +stars
+    let int = +(stars)
     if (int >= 1) {
       return int.toFixed(1)
     } else {
@@ -89,54 +97,38 @@ function SearchFormPage() {
     }
   }
 
+  useEffect(() => {
+    const fetchAndSetLoading = () => {
+      setLoading(true);
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
+        .then(() => setTimeout(() => setLoading(false), 1200))
+        .catch(error => {
+          console.error(error);
+        });
+    };
+
+    window.scrollTo(0, 0); // Scroll to top
+    fetchAndSetLoading();
+  }, [dispatch, page, perPage, filter, search_query, searchLoc]);
+
+
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top
-    if (!search_query && !filter && !filterChange) {
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-        .catch(error => {
-          return error
-        })
-    }
+    if (businesses.length >= 0) setLoading(false)
 
-
-    if (filter && !filterChange) {
-      console.log('{||||||| USE EFFECT |||}')
-
-      setLoading(true)
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-        .catch(error => {
-          return error
-        })
-    }
-    if (search_query) {
-      setLoading(true)
-      let searchLoc = ''
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage)).then(() => setTimeout(() => {
-        setLoading(false);
-      }, 1200))
-        .catch(error => {
-          return error
-        })
-    }
-
-  }, [dispatch, page, perPage, filter, search_query, filterChange, searchLoc, category])
-
+  }, [businesses])
   // Reset page state when search query or filters change
   useEffect(() => {
     setPage(1);
   }, [search_query, filter, searchLoc, category]);
 
   const handleFilterChange = (filters) => {
+    console.log(searchLoc, "FILTERSSESRSERES")
 
     setPage(1)
-    setFilterChange(true)
+    // setFilterChange(true)
     setLoading(true);
-    dispatch(fetchBusinesses(search_query, searchLoc, filters, 1, perPage)).then(() => setTimeout(() => {
+    dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage)).then(() => setTimeout(() => {
       setLoading(false);
     }, 1200))
       .catch(error => {
@@ -146,7 +138,6 @@ function SearchFormPage() {
     navigate(url)
   }
 
-  console.log(filter, "FILTERSSESRSERES")
 
   const handleNextPage = (e) => {
     e.preventDefault();
@@ -183,13 +174,42 @@ function SearchFormPage() {
         ) : (
           businesses.length === 0 ? (
             <>
-              <h1>{total} Paw-Recommended Results:</h1>
+              <h1>{total} Paw-Recommended Results {
+              search_query &&
+                <span>for &quot;{search_query}&quot;&nbsp;</span>
+
+              }  {
+              searchLoc &&
+              <span>in {searchLoc}</span>
+
+              }</h1>
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
               <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
             </>
           ) : (
             <>
-              <h1>{total} Paw-Recommended Results:</h1>
+              {total === 1 ? (
+
+              <h1>{total} Paw-Recommended Result {
+              search_query &&
+                <span>for &quot;{search_query}&quot;&nbsp;</span>
+
+              }  {
+              searchLoc &&
+              <span>in {searchLoc}</span>
+
+              }</h1>
+              ):(
+                <h1>{total} Paw-Recommended Results {
+                  search_query &&
+                    <span>for &quot;{search_query}&quot;&nbsp;</span>
+
+                  }  {
+                  searchLoc &&
+                  <span>in {searchLoc}</span>
+
+                  }</h1>
+              )}
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
               {businesses && businesses.map((business, index) => (
                 <div className="card" key={business.id}>
