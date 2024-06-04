@@ -3,6 +3,7 @@ from .aa_users import seed_users, undo_users
 from .businesses import seed_businesses, undo_businesses
 from .businesses_2 import seed_businesses_2, undo_businesses_2
 from .businesses_2A import seed_businesses_2A, undo_businesses_2A
+from .businesses_2B import seed_businesses_2B, undo_businesses_2B
 from .reviews import seed_reviews, undo_reviews
 from .images import seed_images, undo_images
 from .categories import seed_categories, undo_categories
@@ -25,6 +26,9 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_images()
         undo_reviews()
+        undo_businesses_2B()
+        undo_businesses_2A()
+        undo_businesses_2()
         undo_businesses()
         undo_categories()
         undo_users()
@@ -37,6 +41,7 @@ def seed():
     seed_businesses_2()
     print('######### businesses TRACEY')
     seed_businesses_2A()
+    seed_businesses_2B()
     print('######### reviews 4')
     seed_reviews()
     print('######### images 5')
@@ -50,6 +55,7 @@ def seed():
 def undo():
     undo_images()
     undo_reviews()
+    undo_businesses_2B()
     undo_businesses_2A()
     undo_businesses_2()
     undo_businesses()
