@@ -1,5 +1,15 @@
 from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
+import random
+from lorem_text import lorem
+
+def generate_review(user_id, business_id, review, stars):
+    return Review(
+        user_id=user_id,
+        business_id=business_id,
+        review=review,
+        stars=stars
+    )
 
 def seed_reviews():
     demo_leo = Review(
@@ -65,6 +75,31 @@ def seed_reviews():
     db.session.add(marnie)
     db.session.add(bobbie)
     db.session.add(bakery_review)
+
+    for _ in range(6508):
+        user_id=random.randint(51, 150)
+        business_id=random.randint(1, 251)
+        review=lorem.sentence()[:200]
+        stars=random.randint(1, 5)
+        random_review=generate_review(user_id, business_id, review, stars)
+        db.session.add(random_review)
+
+    for _ in range(5781):
+        user_id=random.randint(51, 150)
+        business_id=random.randint(1, 251)
+        review=lorem.sentence()[:200]
+        stars=random.randint(4, 5)
+        random_review=generate_review(user_id, business_id, review, stars)
+        db.session.add(random_review)
+
+    for _ in range(1041):
+        user_id=random.randint(51, 150)
+        business_id=random.randint(151, 251)
+        review=lorem.sentence()[:200]
+        stars=random.randint(1, 2)
+        random_review=generate_review(user_id, business_id, review, stars)
+        db.session.add(random_review)
+
     db.session.commit()
 
 
