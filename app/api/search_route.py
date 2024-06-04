@@ -35,7 +35,7 @@ def search():
   if rating:
     #also include businesses with an average star rating greater than or equal to 4.95
     rating_filter = func.coalesce(func.ceil(func.avg(Review.stars)), 0)
-    query = query.join(Review).group_by(Business.id).having(and_(rating_filter >= float(rating), func.avg(Review.stars) >= 4.95))
+    query = query.join(Review).group_by(Business.id).having(and_(rating_filter >= float(rating), func.avg(Review.stars) >= 4.75))
 
   if prices:
     query = query.filter(Business.price.in_(prices))
@@ -94,7 +94,7 @@ def search():
         avg_stars = total_stars / num_reviews
 
         # Round up avg_stars to 5 if it's 4.95 or higher
-        if avg_stars >= 4.95:
+        if avg_stars >= 4.75:
             avg_stars = 5
 
     #and num reviews
