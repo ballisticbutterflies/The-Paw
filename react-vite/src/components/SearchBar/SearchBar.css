@@ -1,12 +1,13 @@
 .predictions-container {
   position: absolute;
-  top: calc(8% + 2vh);
+  bottom: inherit;
   padding: 20px;
   background: #fffbf6;
   border: 1px solid #ccc;
   border-radius: 4px;
   z-index: 1000;
   width: 17vw;
+
 }
 
 .predictions-container ul {
