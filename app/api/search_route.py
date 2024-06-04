@@ -5,7 +5,7 @@ from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
-def generate_substrings(search_term, min_length=4):
+def generate_substrings(search_term, min_length=5):
     """Generate substrings with a minimum length for more flexible matching."""
     substrings = {search_term}
     for i in range(min_length, len(search_term)):
