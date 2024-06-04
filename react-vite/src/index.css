@@ -87,6 +87,13 @@
      margin-top: -2px;
  }
 
+ .paws-half-biz {
+     width: 18px;
+     /* display: flex; */
+     margin-top: 2px;
+     margin-right: 4px;
+ }
+
  a {
      color: #5f5ba8;
      text-decoration: none;

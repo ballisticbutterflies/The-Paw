@@ -55,9 +55,22 @@ function SearchFormPage() {
     for (let i = 0; i < parseInt(numStars); i++) {
       filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
-    let empty = 5 - filledStars.length
-    for (let i = 0; i < empty; i++) {
-      emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
+
+    let empty = 5 - numStars
+    let remainder = numStars - parseInt(numStars)
+
+    if (remainder > 0.3 && remainder < 0.74) {
+      emptyStars.push(<span className="paws-half-span"><img className="paws-half-biz" src='../../images/half-paw.png' /></span>)
+    }
+
+    if (emptyStars.length === 0) {
+      for (let i = 0; i < empty; i++) {
+        emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
+      }
+    } else {
+      for (let i = 0; i < parseInt(empty); i++) {
+        emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
+      }
     }
 
 
