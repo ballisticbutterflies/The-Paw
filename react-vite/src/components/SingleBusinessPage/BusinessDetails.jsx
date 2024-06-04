@@ -7,6 +7,7 @@ import LoginFormModal from "../LoginFormModal";
 import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 import BusinessMap from "./BusinessMap";
 import BusinessContactCard from "./BusinessContactCard";
+import ShareModal from "../ShareModal";
 
 function BusinessDetails({ business, businessId, locationHoursSection, isMobile, isTablet }) {
     const sessionUser = useSelector(state => state.session.user)
@@ -51,7 +52,13 @@ function BusinessDetails({ business, businessId, locationHoursSection, isMobile,
                                 modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
                             />
                         }</span>
-                    <span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')}><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
+                    <span className="bizDeetsButton">
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-arrow-up-from-bracket" /> Share</>}
+                            modalComponent={<ShareModal business={business} />}
+                        />
+                    </span>
                 </div>
                 <div>
                     {isMobile && <BusinessContactCard business={business} isMobile={isMobile} />

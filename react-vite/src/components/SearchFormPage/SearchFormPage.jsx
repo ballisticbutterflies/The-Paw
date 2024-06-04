@@ -56,6 +56,7 @@ function SearchFormPage() {
     let filledStars = []
     let emptyStars = []
 
+
     for (let i = 0; i < parseInt(numStars); i++) {
       filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
@@ -63,11 +64,13 @@ function SearchFormPage() {
     for (let i = 0; i < empty; i++) {
       emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
+
+
     return [filledStars, emptyStars]
   }
 
   const starsToFixed = (stars) => {
-    let int = +stars
+    let int = +(stars)
     if (int >= 1) {
       return int.toFixed(1)
     } else {
@@ -352,17 +355,21 @@ function SearchFormPage() {
                 </div>
               )
               )}
+              {
+                !loading &&
+                <div className="pagination">
+                  {currentPage !== 1 &&
+                    <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+                  }
+                  <span>&nbsp;&nbsp;Page {currentPage} of {pages}&nbsp;&nbsp;</span>
+                  {currentPage !== pages &&
+                    <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
+                  }
+                </div>
+              }
             </>
           )
         )}
-        {
-          !loading &&
-          <div className="pagination">
-            <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-            <span>&nbsp;&nbsp;Page {currentPage} of {pages}&nbsp;&nbsp;</span>
-            <button onClick={handleNextPage} disabled={currentPage === pages}>Next</button>
-          </div>
-        }
 
       </div>
     </>
