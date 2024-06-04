@@ -58,7 +58,7 @@ function SingleBusinessPage() {
         console.log("REMAINING PAWS", parseInt(remaining_paws));
 
 
-        if (remainder > 0.5) {
+        if (remainder > 0.3 && remainder < 0.74) {
             unfilled_paws.push(<span className="paws-half-span"><img className="paws-half" src='../../images/half-paw.png' /></span>)
         }
 
