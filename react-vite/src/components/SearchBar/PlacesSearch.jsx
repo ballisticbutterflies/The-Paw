@@ -15,8 +15,11 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       setIsInputTyped(true);  // Set input typed to true
     } else {
       setPredictions([]);
+      if (input.length === 0) {
+        setIsInputTyped(false);  // Reset input typed when input is cleared
+      }
     }
-  }, [input, fetching]);
+  }, [input, fetching, setIsInputTyped]);
 
   useEffect(() => {
     if (isSubmitted) {

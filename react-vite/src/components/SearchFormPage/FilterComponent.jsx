@@ -45,7 +45,7 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
       queryParams.append("price", selectedPrices.join(','));
     }
 
-    if (category_id !== null) {
+    if (category_id !== '') {
       queryParams.append('category', category_id)
     }
 
