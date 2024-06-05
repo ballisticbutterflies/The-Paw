@@ -12,6 +12,47 @@ def generate_substrings(search_term, min_length=5):
         substrings.add(search_term[:i])
     return substrings
 
+def map_rating_condition(query, rating):
+    # if rating == 5:
+    #     query = query.having(func.avg(Review.stars) >= 4.75)
+    # elif rating == 4:
+    #     query = query.having(and_(func.avg(Review.stars) >= 3.6, func.avg(Review.stars) < 4.74))
+    # elif rating == 3:
+    #     query = query.having(and_(func.avg(Review.stars) >= 2.6, func.avg(Review.stars) < 3.5))
+    # elif rating == 2:
+    #     query = query.having(and_(func.avg(Review.stars) >= 1.6, func.avg(Review.stars) < 2.5))
+    # elif rating == 1:
+    #     query = query.having(func.avg(Review.stars) < 1.75)
+    # return query
+
+    if rating == 5:
+        query = query.having(func.avg(Review.stars) >= 4.5)
+    elif rating == 4:
+        query = query.having(func.avg(Review.stars) >= 4)
+    elif rating == 3:
+        query = query.having(func.avg(Review.stars) >= 3)
+    elif rating == 2:
+        query = query.having(func.avg(Review.stars) >= 2)
+    elif rating == 1:
+        query = query.having(func.avg(Review.stars) >= 1)
+    return query
+
+# def map_rating(avg_stars):
+    # if avg_stars is None:
+    #     return None
+    # if avg_stars >= 4.75:
+    #     return 5
+    # elif avg_stars >= 3.6 and avg_stars <= 4:
+    #     return 4
+    # elif avg_stars >= 2.6 and avg_stars <= 3:
+    #     return 3
+    # elif avg_stars >= 1.6 and avg_stars <= 2:
+    #     return 2
+    # elif avg_stars >= 1 and avg_stars <= 1.74:
+    #     return 1
+    # else:
+    #     return avg_stars
+
 @search_route.route('/')
 def search():
   """
@@ -33,9 +74,8 @@ def search():
 
 #apply filters to the query
   if rating:
-    #also include businesses with an average star rating greater than or equal to 4.95
-    rating_filter = func.coalesce(func.ceil(func.avg(Review.stars)), 0)
-    query = query.join(Review).group_by(Business.id).having(and_(rating_filter >= float(rating), func.avg(Review.stars) >= 4.75))
+    query = query.join(Review).group_by(Business.id)
+    query = map_rating_condition(query, int(rating))
 
   if prices:
     query = query.filter(Business.price.in_(prices))
@@ -84,23 +124,12 @@ def search():
   for business in businesses:
     #pull all reviews for biz
     reviews = Review.query.filter_by(business_id=business.id).all()
-    num_reviews = Review.query.filter_by(business_id=business.id).count()
-    #if reviews exists
-    total_stars = 0
+    num_reviews = len(reviews)
+    total_stars = sum(review.stars for review in reviews)
 
-    if reviews:
-      for review in reviews:
-        total_stars += review.stars
-    else:
-       avg_stars = None
-    if num_reviews > 0:
-        avg_stars = total_stars / num_reviews
-
-        # Round up avg_stars to 5 if it's 4.95 or higher
-        if avg_stars >= 4.75:
-            avg_stars = 5
-
-    #and num reviews
+    # Calculate average stars and map to the desired rating
+    avg_stars = total_stars / num_reviews if num_reviews > 0 else None
+    mapped_rating = avg_stars
     #and bring over review text too
     recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
     recent_review_text = recent_review.review if recent_review else None
@@ -118,7 +147,7 @@ def search():
 
 
     business_dict = business.to_dict()
-    business_dict['avg_stars'] = avg_stars
+    business_dict['avg_stars'] = mapped_rating
     business_dict['num_reviews'] = num_reviews
     business_dict['recent_review_text'] = recent_review_text
     business_dict['images'] = image_urls
