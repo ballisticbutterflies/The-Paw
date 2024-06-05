@@ -58,12 +58,15 @@ function SearchFormPage() {
     let empty = 5 - numStars
     let remainder = numStars - parseInt(numStars)
 
-    if (remainder > 0.3 && remainder < 0.74) {
+
+    if (remainder > 0.3 && remainder < 0.79) {
       emptyStars.push(<span className="paws-half-span"><img className="paws-half-biz" src='../../images/half-paw.png' /></span>)
+    } else {
+      filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
 
     if (emptyStars.length === 0) {
-      for (let i = 0; i < empty; i++) {
+      for (let i = 0; i < (5 - filledStars.length); i++) {
         emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
       }
     } else {
@@ -178,14 +181,14 @@ function SearchFormPage() {
           businesses.length === 0 ? (
             <>
               <h1>{total} Paw-Recommended Results {
-              search_query &&
+                search_query &&
                 <span>for &quot;{search_query}&quot;&nbsp;</span>
 
               }  {
-              searchLoc &&
-              <span>in {searchLoc}</span>
+                  searchLoc &&
+                  <span>in {searchLoc}</span>
 
-              }</h1>
+                }</h1>
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
               <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
             </>
@@ -193,23 +196,23 @@ function SearchFormPage() {
             <>
               {total === 1 ? (
 
-              <h1>{total} Paw-Recommended Result {
-              search_query &&
-                <span>for &quot;{search_query}&quot;&nbsp;</span>
+                <h1>{total} Paw-Recommended Result {
+                  search_query &&
+                  <span>for &quot;{search_query}&quot;&nbsp;</span>
 
-              }  {
-              searchLoc &&
-              <span>in {searchLoc}</span>
+                }  {
+                    searchLoc &&
+                    <span>in {searchLoc}</span>
 
-              }</h1>
-              ):(
+                  }</h1>
+              ) : (
                 <h1>{total} Paw-Recommended Results {
                   search_query &&
-                    <span>for &quot;{search_query}&quot;&nbsp;</span>
+                  <span>for &quot;{search_query}&quot;&nbsp;</span>
 
-                  }  {
-                  searchLoc &&
-                  <span>in {searchLoc}</span>
+                }  {
+                    searchLoc &&
+                    <span>in {searchLoc}</span>
 
                   }</h1>
               )}

@@ -54,12 +54,14 @@ function SingleBusinessPage() {
         let remaining_paws = 5 - numStars
         let remainder = numStars - parseInt(numStars)
 
-        if (remainder > 0.3 && remainder < 0.74) {
+        if (remainder > 0.3 && remainder < 0.79) {
             unfilled_paws.push(<span className="paws-half-span"><img className="paws-half" src='../../images/half-paw.png' /></span>)
+        } else {
+            filled_paws.push(<span className="paws-filled"><i className="fa-solid fa-paw"></i> </span>)
         }
 
         if (unfilled_paws.length === 0) {
-            for (let i = 0; i < remaining_paws; i++) {
+            for (let i = 0; i < (5 - filled_paws.length); i++) {
                 unfilled_paws.push(<span className="paws-unfilled"><i className="fa-solid fa-paw"></i> </span>)
             }
         } else {
