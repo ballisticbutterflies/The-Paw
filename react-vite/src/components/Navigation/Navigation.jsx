@@ -12,6 +12,7 @@ import SearchBar from "../SearchBar/SearchBar";
 function Navigation() {
 
   const user = useSelector((store) => store.session.user);
+  console.log(user)
 
   return (
     <div className="nav">
@@ -24,11 +25,7 @@ function Navigation() {
         Write a Review
       </div> */}
       <div className="rightNav">
-        {user ? (
-          <>
-            <ProfileButton />
-          </>
-        ) : (
+        {!user || user?.message === "user: null" ? (
           <>
             <div className="rightNavButtons">
               <OpenModalButton
@@ -40,6 +37,10 @@ function Navigation() {
                 modalComponent={<SignupFormModal />}
               />
             </div>
+          </>
+        ) : (
+          <>
+          <ProfileButton />
           </>
         )
         }

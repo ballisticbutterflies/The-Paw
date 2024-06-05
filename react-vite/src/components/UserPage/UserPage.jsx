@@ -92,9 +92,9 @@ function UserPage() {
                                 </div>
                             ) : (
                                 <>
-                                    <p className="single-user-navigation" onClick={() => { setCurrentView('overview') }}><h4 className="nav-description"><i className="fa-solid fa-circle-user" />&nbsp;&nbsp;Profile Overview</h4></p>
-                                    <p className="single-user-navigation" onClick={() => { setCurrentView('reviews') }}><h4 className="nav-description"><i className="fa-solid fa-paw" />&nbsp;&nbsp;Reviews Written</h4></p>
-                                    <p className="single-user-navigation" onClick={() => { setCurrentView('photos') }}><h4 className="nav-description"><i className="fa-solid fa-image" />&nbsp;&nbsp;Photos Added</h4></p>
+                                    <span className="single-user-navigation" onClick={() => { setCurrentView('overview') }}><h4 className="nav-description"><i className="fa-solid fa-circle-user" />&nbsp;&nbsp;Profile Overview</h4></span>
+                                    <span className="single-user-navigation" onClick={() => { setCurrentView('reviews') }}><h4 className="nav-description"><i className="fa-solid fa-paw" />&nbsp;&nbsp;Reviews Written</h4></span>
+                                    <span className="single-user-navigation" onClick={() => { setCurrentView('photos') }}><h4 className="nav-description"><i className="fa-solid fa-image" />&nbsp;&nbsp;Photos Added</h4></span>
                                 </>)}
                         </div>
                     </div>
