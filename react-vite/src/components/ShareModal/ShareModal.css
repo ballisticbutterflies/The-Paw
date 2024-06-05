@@ -12,7 +12,7 @@
 }
 
 .copyUrl input {
-    width: 20vw;
+    width: auto;
 }
 
 .copyUrl span {
