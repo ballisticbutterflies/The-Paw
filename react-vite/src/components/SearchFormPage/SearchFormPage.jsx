@@ -127,7 +127,7 @@ function SearchFormPage() {
 
 
   useEffect(() => {
-    if (businesses.length >= 0) setLoading(false)
+    if (businesses.length === 0) setLoading(false)
 
   }, [businesses])
   // Reset page state when search query or filters change
