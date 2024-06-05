@@ -96,7 +96,6 @@ function SingleBusinessPage() {
 
 
 
-
     return (business && business.business_images &&
         <>
             <div className="businessPhotoHeader">

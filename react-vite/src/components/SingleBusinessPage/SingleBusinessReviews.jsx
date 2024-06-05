@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getBusinessReviews } from "../../redux/reviews";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
         if (a.id < b.id) return 1;
         return 0;
     });
+    const [displayedCount, setDisplayedCount] = useState(5)
 
     useEffect(() => {
         const runDispatches = async () => {
@@ -59,11 +60,18 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
         });
         return enUSFormatter.format(newDate)
     }
-    console.log(reviews);
+
+    const displayedReviews = reviews.slice(0, displayedCount);
+
+    const handleShowMore = () => {
+        setDisplayedCount(prevCount => prevCount + 5)
+    }
+
+    console.log(reviews.length, displayedCount);
 
     return (reviews &&
         <>
-            {reviews.map((review) => (review.user &&
+            {displayedReviews.map((review) => (review.user &&
                 <div key={review.id}>
                     <div className="userInfo">
                         <div className="avatar" onClick={() => navigate(`/users/${review.user.id}`)}>
@@ -116,6 +124,10 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
                 </div>
             )
             )}
+            {reviews.length > displayedCount && (
+                <button onClick={handleShowMore}>Show More</button >
+            )
+            }
         </>
     )
 }
