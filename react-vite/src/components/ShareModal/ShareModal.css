@@ -1,0 +1,37 @@
+.shareOptions {
+    display: grid;
+    gap: 10px;
+    grid-template-rows: 1fr 1fr;
+}
+
+.copyUrl {
+    display: grid;
+    gap: 5px;
+    /* justify-self: center;
+    align-items: center; */
+}
+
+.copyUrl input {
+    width: 20vw;
+}
+
+.copyUrl span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.copyUrl span:hover {
+    cursor: pointer;
+}
+
+.copyUrl a {
+    width: fit-content;
+}
+
+.shareIcons {
+    display: flex;
+    gap: 10px;
+    /* justify-content: space-between; */
+}

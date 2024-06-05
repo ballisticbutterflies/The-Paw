@@ -1,10 +1,57 @@
 from flask import Blueprint, jsonify, request
 from app.models import Business, Review, Image, Category
-from sqlalchemy import func, desc, or_
-from urllib.parse import unquote
+from sqlalchemy import func, desc, or_, and_
+from flask_sqlalchemy import Pagination
 
 search_route = Blueprint('search', __name__)
 
+def generate_substrings(search_term, min_length=5):
+    """Generate substrings with a minimum length for more flexible matching."""
+    substrings = {search_term}
+    for i in range(min_length, len(search_term)):
+        substrings.add(search_term[:i])
+    return substrings
+
+def map_rating_condition(query, rating):
+    # if rating == 5:
+    #     query = query.having(func.avg(Review.stars) >= 4.75)
+    # elif rating == 4:
+    #     query = query.having(and_(func.avg(Review.stars) >= 3.6, func.avg(Review.stars) < 4.74))
+    # elif rating == 3:
+    #     query = query.having(and_(func.avg(Review.stars) >= 2.6, func.avg(Review.stars) < 3.5))
+    # elif rating == 2:
+    #     query = query.having(and_(func.avg(Review.stars) >= 1.6, func.avg(Review.stars) < 2.5))
+    # elif rating == 1:
+    #     query = query.having(func.avg(Review.stars) < 1.75)
+    # return query
+
+    if rating == 5:
+        query = query.having(func.avg(Review.stars) >= 4.5)
+    elif rating == 4:
+        query = query.having(func.avg(Review.stars) >= 4)
+    elif rating == 3:
+        query = query.having(func.avg(Review.stars) >= 3)
+    elif rating == 2:
+        query = query.having(func.avg(Review.stars) >= 2)
+    elif rating == 1:
+        query = query.having(func.avg(Review.stars) >= 1)
+    return query
+
+# def map_rating(avg_stars):
+    # if avg_stars is None:
+    #     return None
+    # if avg_stars >= 4.75:
+    #     return 5
+    # elif avg_stars >= 3.6 and avg_stars <= 4:
+    #     return 4
+    # elif avg_stars >= 2.6 and avg_stars <= 3:
+    #     return 3
+    # elif avg_stars >= 1.6 and avg_stars <= 2:
+    #     return 2
+    # elif avg_stars >= 1 and avg_stars <= 1.74:
+    #     return 1
+    # else:
+    #     return avg_stars
 
 @search_route.route('/')
 def search():
@@ -19,13 +66,16 @@ def search():
   city_state = request.args.get('location')
   category = request.args.get('category')
   search_query = request.args.get('search_query')
+  page = request.args.get('page', 1, type=int)
+  per_page = request.args.get('per_page', 10, type=int)
 
 #base query to fetch businesses
   query = Business.query
 
 #apply filters to the query
   if rating:
-    query = query.join(Review).group_by(Business.id).having(func.avg(Review.stars) >= float(rating))
+    query = query.join(Review).group_by(Business.id)
+    query = map_rating_condition(query, int(rating))
 
   if prices:
     query = query.filter(Business.price.in_(prices))
@@ -42,35 +92,61 @@ def search():
   if category:
       query = query.filter(Business.category_id == category)
 
-  if search_query:
-    query = query.filter(or_(
-      Business.name.ilike(f'%{search_query}%'),
-      Business.category.has(Category.name.ilike(f'%{search_query}%')),
-      Business.reviews.any(Review.review.ilike(f'%{search_query}%')),
-      Business.description.ilike(f'%{search_query}%')
-    ))
 
+  restaurants_category_id = 1
+  vets_category_id = 2
+  services_category_id = 3
+  shopping_category_id = 4
+  travel_category_id = 5
+  activities_category_id = 6
 
-  businesses = query.all()
+  if search_query and search_query.lower() == "things to do" or search_query and search_query.lower() == "parks" or search_query and search_query.lower() == "park":
+    query = query.filter(Business.category_id == activities_category_id)
+  elif search_query and search_query.lower() == "restaurant":
+    query = query.filter(Business.category_id == restaurants_category_id)
+  elif search_query and search_query.lower() == "vets" or search_query and search_query.lower() == "doctor":
+    query = query.filter(Business.category_id == vets_category_id)
+  elif search_query and search_query.lower() == "services":
+    query = query.filter(Business.category_id == services_category_id)
+  elif search_query and search_query.lower() == "shops" or search_query and search_query.lower() == "boutique":
+    query = query.filter(Business.category_id == shopping_category_id)
+  elif search_query and search_query.lower() == "inn" or search_query and search_query.lower() == "motel":
+    query = query.filter(Business.category_id == travel_category_id)
+  elif search_query:
+    search_terms = search_query.split()
+    all_filters = []
+    for term in search_terms:
+      substrings = generate_substrings(term)
+      term_filters = [
+        Business.name.ilike(f'%{substring}%') |
+        Business.category.has(Category.name.ilike(f'%{substring}%')) |
+        Business.reviews.any(Review.review.ilike(f'%{substring}%')) |
+        Business.description.ilike(f'%{substring}%')
+        for substring in substrings
+      ]
+      all_filters.append(or_(*term_filters))
+    query = query.filter(and_(*all_filters))
+
+  # Apply pagination to the query
+  try:
+        # Apply pagination to the query
+        paginated_query = query.paginate(page=page, per_page=per_page, error_out=False)
+  except Exception as e:
+        return {'errors': {'message': str(e)}}, 500
+
+  businesses = paginated_query.items
 
 
   business_data = []
   for business in businesses:
     #pull all reviews for biz
     reviews = Review.query.filter_by(business_id=business.id).all()
-    num_reviews = Review.query.filter_by(business_id=business.id).count()
-    #if reviews exists
-    total_stars = 0
+    num_reviews = len(reviews)
+    total_stars = sum(review.stars for review in reviews)
 
-    if reviews:
-      for review in reviews:
-        total_stars += review.stars
-    else:
-       avg_stars = None
-    if num_reviews > 0:
-        avg_stars = total_stars / num_reviews
-
-    #and num reviews
+    # Calculate average stars and map to the desired rating
+    avg_stars = total_stars / num_reviews if num_reviews > 0 else None
+    mapped_rating = avg_stars
     #and bring over review text too
     recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
     recent_review_text = recent_review.review if recent_review else None
@@ -88,11 +164,19 @@ def search():
 
 
     business_dict = business.to_dict()
-    business_dict['avg_stars'] = avg_stars
+    business_dict['avg_stars'] = mapped_rating
     business_dict['num_reviews'] = num_reviews
     business_dict['recent_review_text'] = recent_review_text
     business_dict['images'] = image_urls
     business_dict['category'] = category_data
 
     business_data.append(business_dict)
-  return { 'businesses': business_data }
+  return jsonify({
+        'businesses': business_data,
+        'total': paginated_query.total,
+        'pages': paginated_query.pages,
+        'current_page': paginated_query.page,
+        'next_page': paginated_query.next_num,
+        'prev_page': paginated_query.prev_num,
+        'per_page': paginated_query.per_page
+    })

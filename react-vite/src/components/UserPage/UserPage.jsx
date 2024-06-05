@@ -16,7 +16,19 @@ function UserPage() {
     const { userId } = useParams();
     // console.log("userId", userId)
 
-    const [currentView, setCurrentView] = useState('overview')
+    const [currentView, setCurrentView] = useState('overview');
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+    const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
+
+    const handleResize = () => {
+        setIsMobile(window.innerWidth <= 480);
+        setIsTablet(window.innerWidth <= 768 && window.innerWidth >= 481)
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize)
+    }, []);
 
     const dispatch = useDispatch();
 
@@ -58,9 +70,32 @@ function UserPage() {
                             </div>
                         </div>
                         <div className="user-navigation-container">
-                            <p className="single-user-navigation" onClick={() => { setCurrentView('overview') }}><h4 className="nav-description"><i className="fa-solid fa-circle-user" />&nbsp;&nbsp;Profile Overview</h4></p>
-                            <p className="single-user-navigation" onClick={() => { setCurrentView('reviews') }}><h4 className="nav-description"><i className="fa-solid fa-paw" />&nbsp;&nbsp;Reviews Written</h4></p>
-                            <p className="single-user-navigation" onClick={() => { setCurrentView('photos') }}><h4 className="nav-description"><i className="fa-solid fa-image" />&nbsp;&nbsp;Photos Added</h4></p>
+                            {(isMobile || isTablet) ? (
+                                <div className="user-mobile">
+                                    <div className="user-mobile-item">
+                                        <div onClick={() => { setCurrentView('overview') }}>
+                                            <i className="fa-solid fa-circle-user" />
+                                        </div>
+                                        <span>Overview</span>
+                                    </div>
+                                    <div className="user-mobile-item">
+                                        <div onClick={() => { setCurrentView('reviews') }}>
+                                            <i className="fa-solid fa-paw" />
+                                        </div>
+                                        <span>Reviews</span>
+                                    </div>
+                                    <div className="user-mobile-item">
+                                        <div onClick={() => { setCurrentView('photos') }}><i className="fa-solid fa-image" />
+                                        </div>
+                                        <span>Photos</span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <span className="single-user-navigation" onClick={() => { setCurrentView('overview') }}><h4 className="nav-description"><i className="fa-solid fa-circle-user" />&nbsp;&nbsp;Profile Overview</h4></span>
+                                    <span className="single-user-navigation" onClick={() => { setCurrentView('reviews') }}><h4 className="nav-description"><i className="fa-solid fa-paw" />&nbsp;&nbsp;Reviews Written</h4></span>
+                                    <span className="single-user-navigation" onClick={() => { setCurrentView('photos') }}><h4 className="nav-description"><i className="fa-solid fa-image" />&nbsp;&nbsp;Photos Added</h4></span>
+                                </>)}
                         </div>
                     </div>
                     <div className="sub-pages"></div>
@@ -73,7 +108,7 @@ function UserPage() {
                     {currentView == 'photos' && (<div className="sub-page-indiv" id="user-photo-container">
                         <UserPhotos />
                     </div>)}
-                </div>
+                </div >
             )
             }
         </>

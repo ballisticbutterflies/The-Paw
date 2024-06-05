@@ -113,7 +113,7 @@ function CreateReviewPage({ businessId: propBusinessId, modalLoad }) {
     // }
 
     return (
-        <div className={modalLoad ? "" : "page"}>
+        <div className={modalLoad ? "loginSignupModals" : "page"}>
             {errors.message != 'forbidden' && <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <h1>Tell us about it!</h1>
 

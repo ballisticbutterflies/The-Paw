@@ -1,5 +1,5 @@
 import { SiRedux } from "react-icons/si";
-import { SiPostgresql } from "react-icons/si";
+import { SiPostgresql, SiFlask } from "react-icons/si";
 import './Footer.css'
 
 function Footer() {
@@ -10,44 +10,50 @@ function Footer() {
         <div className='footer-heading'>
           <div className="dev-heading" >Developers
             <div className='devs'>
-              <div>
-                <a href='https://www.linkedin.com/in/carmenshiu/' target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-linkedin fa-lg" />
-                  </span>
-                </a>&nbsp;&nbsp;
-                <a href="https://github.com/craftycarmen" target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-github fa-lg" />
-                  </span>
-                </a>
-                <span className="names">&nbsp;&nbsp;Carmen Shiu</span>
+              <div className="aDev">
+                <div className="devLogos">
+                  <a href='https://www.linkedin.com/in/carmenshiu/' target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-linkedin fa-lg" />
+                    </span>
+                  </a>
+                  <a href="https://github.com/craftycarmen" target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-github fa-lg" />
+                    </span>
+                  </a>
+                </div>
+                <span className="names">Carmen Shiu</span>
               </div>
-              <div>
-                <a href='https://www.linkedin.com/in/simon-sammel/' target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-linkedin fa-lg" />
-                  </span>
-                </a>&nbsp;&nbsp;
-                <a href="https://github.com/bssammel" target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-github fa-lg" />
-                  </span>
-                </a>
-                <span className="names">&nbsp;&nbsp;Simon Sammel</span>
+              <div className="aDev">
+                <div className="devLogos">
+                  <a href='https://www.linkedin.com/in/simon-sammel/' target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-linkedin fa-lg" />
+                    </span>
+                  </a>
+                  <a href="https://github.com/bssammel" target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-github fa-lg" />
+                    </span>
+                  </a>
+                </div>
+                <span className="names">Simon Sammel</span>
               </div>
-              <div>
-                <a href='https://www.linkedin.com/in/tracey-beard/' target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-linkedin fa-lg" />
-                  </span>
-                </a>&nbsp;&nbsp;
-                <a href="https://github.com/traceybee23" target="_blank" rel="noopener noreferrer">
-                  <span className="icons">
-                    <i className="fa-brands fa-github fa-lg" />
-                  </span>
-                </a>
-                <span className="names">&nbsp;&nbsp;Tracey Beard</span>
+              <div className="aDev">
+                <div className="devLogos">
+                  <a href='https://www.linkedin.com/in/tracey-beard/' target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-linkedin fa-lg" />
+                    </span>
+                  </a>
+                  <a href="https://github.com/traceybee23" target="_blank" rel="noopener noreferrer">
+                    <span className="icons">
+                      <i className="fa-brands fa-github fa-lg" />
+                    </span>
+                  </a>
+                </div>
+                <span className="names">Tracey Beard</span>
               </div>
             </div>
           </div>
@@ -58,7 +64,7 @@ function Footer() {
                   <i className="fa-brands fa-python fa-lg" />
                 </a>
                 <a href='https://flask.palletsprojects.com/en/3.0.x/' target="_blank" rel="noopener noreferrer">
-                  <img className='flask' src="https://img.icons8.com/ios/50/5F5BA8/flask.png" alt="flask" />
+                  <SiFlask />
                 </a>
                 <a className="postgres" href='https://www.postgresql.org/docs/' target="_blank" rel="noopener noreferrer">
                   <SiPostgresql />
@@ -72,7 +78,7 @@ function Footer() {
                 <a href='https://redux.js.org/' target="_blank" rel="noopener noreferrer">
                   <SiRedux />
                 </a>
-                <a href='https://www.w3.org/Style/CSS/Overview.en.html' target="_blank" rel="noopener noreferrer">
+                <a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target="_blank" rel="noopener noreferrer">
                   <i className="fa-brands fa-html5 fa-lg" />
                 </a>
                 <a href='https://www.w3.org/Style/CSS/Overview.en.html' target="_blank" rel="noopener noreferrer">

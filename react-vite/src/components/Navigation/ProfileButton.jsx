@@ -6,6 +6,8 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import OpenModalButton from "../OpenModalButton";
+
 
 function ProfileButton() {
   const navigate = useNavigate();
@@ -43,7 +45,20 @@ function ProfileButton() {
 
   return (
     <>
-      <div onClick={toggleMenu} style={{ cursor: "pointer" }}>                            {user.user_image_url ? (
+      { !user ||
+        user?.message === "user: null" &&
+        <div className="rightNavButtons">
+          <OpenModalButton
+            buttonText="Log In"
+            modalComponent={<LoginFormModal />}
+          />
+          <OpenModalButton
+            buttonText="Sign Up"
+            modalComponent={<SignupFormModal />}
+          />
+        </div>
+      }
+      <div onClick={toggleMenu} style={{ cursor: "pointer" }}>                            {user?.user_image_url ? (
         <img className="profileAvatar" src={user.user_image_url} />
       ) : (
         <img className="profileAvatar" src='../../images/defaultAvatar.png' />
@@ -51,9 +66,14 @@ function ProfileButton() {
       {showMenu && (
         <div className="dropdown">
           <ul className={"profile-dropdown"} ref={ulRef}>
-            {user ? (
+            { user || user?.message !== "user: null" ? (
               <>
-                <div className="profiledropdownoptions" onClick={() => { navigate(`/users/${user.id}`), closeMenu() }}><FaUserCircle />&nbsp; About Me</div>
+                <div className="profiledropdownoptions"
+                  onClick={() => { navigate(`/users/${user.id}`), closeMenu() }}><FaUserCircle />&nbsp; About Me</div>
+                <hr />
+                <div className="profiledropdownoptions" onClick={() => { navigate('/businesses/new'), closeMenu() }}><i className="fa-solid fa-store" />&nbsp; Add Business</div>
+                <hr />
+                <div className="profiledropdownoptions" onClick={() => { navigate('/businesses/current'), closeMenu() }}><i className="fa-solid fa-pen-to-square" />&nbsp; Manage Business</div>
                 <hr />
                 <div className="profiledropdownoptions" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket" />&nbsp; Log Out </div>
               </>

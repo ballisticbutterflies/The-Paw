@@ -10,6 +10,51 @@
   border-radius: 5px;
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  margin-left: 300px;
+}
+
+
+.pagination button:disabled {
+  cursor: default;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: calc(6*30px);
+  height: 50px;
+  display: flex;
+  color: #5f5ba8;
+  filter: drop-shadow(30px 25px 0 currentColor) drop-shadow(60px 0 0 currentColor) drop-shadow(120px 0 0 currentColor);
+  clip-path: inset(0 100% 0 0);
+  animation: l12 2s infinite steps(7);
+  margin: auto;
+  padding: 20px 0;
+}
+
+.loader:before {
+  content: "";
+  width: 30px;
+  height: 25px;
+  --c: no-repeat radial-gradient(farthest-side, currentColor 92%, #0000);
+  background:
+    var(--c) left /70% 70%,
+    var(--c) right/20% 20%,
+    var(--c) top 0 right 15%/20% 20%,
+    var(--c) bottom 0 right 15%/20% 20%;
+}
+
+@keyframes l12 {
+  100% {
+    clip-path: inset(0 -30px 0 0)
+  }
+}
+
 .businessCards:hover {
   box-shadow: 2px 2px 5px .05px;
 }
@@ -90,6 +135,10 @@
   margin: auto;
 }
 
+.searchPage h1 {
+  width: fit-content;
+}
+
 .categoryFilter {
   padding-bottom: 15px;
   border-bottom: 1px solid #c3cddf;
@@ -165,13 +214,251 @@ select {
 
 .recent-review-text {
   inline-size: 340px;
-  word-wrap: break-word; /* Break long words when necessary */
-  overflow-wrap: break-word; /* Break words when necessary */
-  white-space: pre-wrap; /* Preserve white space */
+  word-wrap: break-word;
+  /* Break long words when necessary */
+  overflow-wrap: break-word;
+  /* Break words when necessary */
+  white-space: pre-wrap;
+  /* Preserve white space */
 
 }
 
 .review-text-wrapper {
   width: 100%;
+
+}
+
+@media screen and (max-width: 480px) {
+  .businessCards {
+    margin: auto;
+    width: 90vw;
+    flex-direction: column;
+  }
+
+  .pagination {
+    margin: auto;
+    width: auto;
+  }
+
+  .businessesImageWrapper {
+    width: auto;
+    height: 200px;
+    padding: 20px;
+  }
+
+  .businessesImage {
+    width: 100%;
+    height: 200px;
+  }
+
+  .businessDeets {
+    width: 90%;
+    margin-left: 5vw;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+
+  .businessDeets h2,
+  .priceSubcat,
+  .searchStars,
+  .todayHours {
+    width: fit-content;
+    margin-top: 0px;
+  }
+
+
+
+  .recent-review-text {
+    inline-size: auto;
+  }
+
+  .searchPage h1 {
+    margin-left: 5vw;
+    width: 90vw;
+  }
+
+  .filterButtonWrapper {
+    margin-left: 4vw;
+    padding-bottom: 20px;
+  }
+
+  .filterButton {
+    border-radius: 3px;
+    padding: 12px 16px 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: #c3cddf 1px solid;
+    background-color: transparent;
+    color: #1f2f44;
+  }
+
+  .outerFilterWrapper .filterComponent {
+    margin-top: 5px;
+    background-color: #FFFBF6;
+    padding: 15px;
+    width: 80vw;
+    border-radius: 5px;
+    z-index: 1;
+  }
+
+  .noBiz {
+    margin: auto;
+    width: 90vw;
+  }
+
+  .noBiz img {
+    width: 90vw;
+  }
+
+  .card {
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .businessCards {
+    margin: auto;
+    width: 90vw;
+    flex-direction: column;
+  }
+
+  .pagination {
+    margin: auto;
+    width: auto;
+  }
+
+  .businessesImageWrapper {
+    width: 100%;
+    height: 400px;
+    padding: 20px;
+  }
+
+  .businessesImage {
+    width: 100%;
+    height: 400px;
+  }
+
+  .businessDeets {
+    width: 90%;
+    margin-left: 5vw;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+
+  .businessDeets h2,
+  .priceSubcat,
+  .searchStars,
+  .todayHours {
+    width: fit-content;
+    margin-top: 0px;
+  }
+
+  .recent-review-text {
+    inline-size: auto;
+  }
+
+  .searchPage h1 {
+    margin-left: 5vw;
+  }
+
+  .filterButtonWrapper {
+    margin-left: 4vw;
+    padding-bottom: 20px;
+  }
+
+  .filterButton {
+    border-radius: 3px;
+    padding: 12px 16px 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: #c3cddf 1px solid;
+    background-color: transparent;
+    color: #1f2f44;
+  }
+
+  .outerFilterWrapper .filterComponent {
+    margin-top: 5px;
+    background-color: #FFFBF6;
+    padding: 15px;
+    width: 80vw;
+    border-radius: 5px;
+    z-index: 1;
+  }
+
+  .noBiz {
+    margin: auto;
+    width: 90vw;
+  }
+
+  .noBiz img {
+    width: 90vw;
+  }
+
+  .card {
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .businessCards {
+    width: auto;
+    flex-direction: column;
+  }
+
+  .pagination {
+    /* margin-left: auto; */
+    /* margin-right: 2vw; */
+    width: auto;
+  }
+
+  .businessesImageWrapper {
+    width: auto;
+    height: 300px;
+    padding: 20px;
+  }
+
+  .businessesImage {
+    width: 100%;
+    height: 300px;
+  }
+
+  .businessDeets {
+    width: 90%;
+    margin-left: 3vw;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+
+  /* .businessDeets h2,
+  .priceSubcat,
+  .searchStars,
+  .todayHours {
+    width: fit-content;
+    margin-top: 0px;
+  }
+
+  .recent-review-text {
+    inline-size: auto;
+  }
+
+  .noBiz {
+    margin: auto;
+    width: 90vw;
+  }
+
+  .noBiz img {
+    width: 90vw;
+  }
+  */
+
+  .searchPage {
+    padding-top: 20px;
+    width: 90vw;
+    margin: auto;
+  }
+
+  .noBiz {
+    margin-left: auto;
+  }
 
 }

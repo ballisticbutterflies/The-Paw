@@ -1,11 +1,13 @@
 .reviewForm {
-    width: 500px;
+    /* width: 500px; */
+    width: 100%;
 }
 
 .review-fields {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    /* width: fit-content; */
+    width: 94%;
     padding: 0 1em 1em 1em;
     border: solid #c3cddf 1px;
     background-color: #FFFBF6;
@@ -24,7 +26,8 @@
 
 #review-input {
     height: 10em;
-    width: 35em;
+    /* width: 35em; */
+    width: 100%;
     border: none;
 }
 
@@ -33,7 +36,8 @@ div.stars-container {
     display: flex;
     flex-direction: row;
     background-color: #FFFBF6;
-    width: fit-content;
+    /* width: fit-content; */
+    width: 100%;
     margin-top: 10px;
 
     /* padding: 3px 6px 3px 6px;
@@ -66,4 +70,41 @@ input[type="file"] {
 
 .custom-error-page {
     margin: 2em 10em;
+}
+
+@media screen and (max-width: 480px) {
+
+    .reviewForm,
+    .review-fields,
+    #review-input,
+    .descriptions-container {
+        width: 95%;
+    }
+
+    .descriptions-container {
+        align-content: start;
+    }
+
+    div.stars-container {
+        height: fit-content;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+    .reviewForm,
+    .review-fields,
+    #review-input,
+    .descriptions-container {
+        width: auto;
+    }
+
+
+    .descriptions-container {
+        align-content: start;
+    }
+
+    div.stars-container {
+        height: fit-content;
+    }
 }

@@ -22,7 +22,8 @@ states = [('-','-'),('AL','AL'),('AK','AK'),('AZ','AZ'),('AR','AR'),
 hours = [('','-'),('0000','0000'),('0100','0100'),('0200','0200'),('0300','0300'),('0400','0400'),('0500','0500'),('0600','0600'),('0700','0700'),('0800','0800'),('0900','0900'),('1000','1000'),('1100','1100'),('1200','1200'),('1300','1300'),('1400','1400'),('1500','1500'),('1600','1600'),('1700','1700'),('1800','1800'),('1900','1900'),('2000','2000'),('2100','2100'),('2200','2200'),('2300','2300'),('2400','2400')]
 
 class CreateBusinessForm(FlaskForm):
-  address = StringField('street address', validators=[DataRequired()])
+  # address = StringField('street address', validators=[DataRequired()])
+  address = StringField('street address')
   city = StringField('city', validators=[DataRequired()])
   state = SelectField('state', choices=states, validators=[DataRequired()])
   zip_code = StringField('zipcode', validators=[DataRequired()])

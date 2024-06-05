@@ -6,8 +6,10 @@ import { useSelector } from "react-redux"
 import LoginFormModal from "../LoginFormModal";
 import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 import BusinessMap from "./BusinessMap";
+import BusinessContactCard from "./BusinessContactCard";
+import ShareModal from "../ShareModal";
 
-function BusinessDetails({ business, businessId, locationHoursSection }) {
+function BusinessDetails({ business, businessId, locationHoursSection, isMobile, isTablet }) {
     const sessionUser = useSelector(state => state.session.user)
     const reviews = Object.values(useSelector(state => state.reviews))
     const reviewerIds = reviews.map(review => review.user_id)
@@ -20,41 +22,96 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
     return (
         <div className="businessDetails">
             <div className="businessDetailsButtons">
-                <span className="businessDetails_writeAReview">
-                    {!sessionUser &&
-                        <OpenModalButton
-                            buttonText={<>
-                                <i className="fa-solid fa-paw" /> Write a review</>}
-                            modalComponent={<LoginFormModal />}
-                        />
-                    }
-                    {sessionUser && sessionUser.id !== business.owner_id && !reviewerIds.includes(sessionUser.id) &&
-                        <OpenModalButton
-                            buttonText={<>
-                                <i className="fa-solid fa-paw" /> Write a review</>}
-                            modalComponent={<CreateReviewPage propsBusinessId={businessId} modalLoad={true} />}
-                        />
-                    }</span>
-
-                &nbsp;&nbsp;
-                <span className="bizDeetsButton">{!sessionUser &&
-                    <OpenModalButton
-                        buttonText={<>
-                            <i className="fa-solid fa-camera" /> Add photo</>}
-                        modalComponent={<LoginFormModal />}
-                    />
-                }
-                    {sessionUser &&
+                <div>
+                    <span className="businessDetails_writeAReview">
+                        {!sessionUser &&
+                            <OpenModalButton
+                                buttonText={<>
+                                    <i className="fa-solid fa-paw" /> Write a review</>}
+                                modalComponent={<LoginFormModal />}
+                            />
+                        }
+                        {sessionUser && sessionUser.id !== business.owner_id && !reviewerIds.includes(sessionUser.id) &&
+                            <OpenModalButton
+                                buttonText={<>
+                                    <i className="fa-solid fa-paw" /> Write a review</>}
+                                modalComponent={<CreateReviewPage propsBusinessId={businessId} modalLoad={true} />}
+                            />
+                        }</span>
+                    <span className="bizDeetsButton">{!sessionUser &&
                         <OpenModalButton
                             buttonText={<>
                                 <i className="fa-solid fa-camera" /> Add photo</>}
-                            modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                            modalComponent={<LoginFormModal />}
                         />
-                    }</span>
-
-                &nbsp;&nbsp;
-                <span className="bizDeetsButton"><button onClick={() => alert('Feature coming soon')}><i className="fa-solid fa-arrow-up-from-bracket" /> Share</button></span>
+                    }
+                        {sessionUser &&
+                            <OpenModalButton
+                                buttonText={<>
+                                    <i className="fa-solid fa-camera" /> Add photo</>}
+                                modalComponent={<AddPhotosToBusiness businessId={businessId} business={business} />}
+                            />
+                        }</span>
+                    <span className="bizDeetsButton">
+                        <OpenModalButton
+                            buttonText={<>
+                                <i className="fa-solid fa-arrow-up-from-bracket" /> Share</>}
+                            modalComponent={<ShareModal business={business} />}
+                        />
+                    </span>
+                </div>
+                <div>
+                    {isMobile && <BusinessContactCard business={business} isMobile={isMobile} />
+                    }
+                </div>
             </div>
+            {(isTablet || isMobile) && (<div className="bizContactMobile">
+                {business.website &&
+                    <div>
+                        <div className="businessWebsiteContainer">
+                            <a href={business.website} target="_blank" rel="noopener noreferrer">
+                                <div className="businessContactIcon"><i className="fa-solid fa-arrow-up-right-from-square"></i></div>
+                                <div>Website</div>
+                            </a>
+                        </div>
+                    </div>
+                }
+                {business.phone &&
+                    <div>
+                        <div className="businessPhoneContainer">
+                            <a href={`tel:{business.phone}`} target="_blank" rel="noopener noreferrer">
+                                <div className="businessContactIcon"><i className="fa-solid fa-phone-volume"></i></div>
+                                <div>Call</div>
+                            </a>
+                        </div>
+                    </div>
+                }
+                {
+                    business.city &&
+                    <div>
+                        {business.address && business.city ? (
+                            <div className="businessAddressContainer">
+                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">
+                                    <div className="businessContactIcon">
+                                        <i className="fa-solid fa-diamond-turn-right"></i>
+                                    </div>
+                                    <div>Directions</div>
+                                </a>
+                            </div>
+                        ) : (
+                            <div className="businessAddressContainer">
+                                <a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer">
+                                    <div className="businessContactIcon">
+                                        <i className="fa-solid fa-diamond-turn-right"></i>
+                                    </div>
+                                    <div>Directions</div>
+                                </a>
+                            </div>
+                        )}
+                    </div>
+                }
+            </div >
+            )}
             <hr />
             <div>
                 <h3>About this Business</h3>
@@ -71,7 +128,13 @@ function BusinessDetails({ business, businessId, locationHoursSection }) {
                                 <div>{business.address}</div>
                                 <div>{business.city}, {business.state} {business.zip_code}</div>
                             </div>
-                            <div><span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span></div>
+                            <div>
+                                {business.address && business.city ? (
+                                    <span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.address}+${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span>
+                                ) : (
+                                    <span className="bizDeetsButton"><button><a href={`https://www.google.com/maps/dir/?api=1&destination=${business.city}+${business.state}+${business.zip_code}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#1f2f44" }}>Get Directions</a></button></span>
+                                )}
+                            </div>
                         </div>
                     </div>
                     <div className="businessDetailsHours">{business.set_hours === "yes" &&

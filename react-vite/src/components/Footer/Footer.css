@@ -10,7 +10,9 @@
 
 .footer-image {
   padding-bottom: 15px;
-  height: 330px;
+  /* height: 330px; */
+  width: 90vw;
+  height: auto;
 }
 
 .footer-heading {
@@ -18,7 +20,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin: auto;
-  width: 100vw;
+  width: 90vw;
   /* Full viewport width */
   border-top: 1px solid #c3cddf;
   justify-items: center;
@@ -34,19 +36,26 @@
 }
 
 .devs {
-  display: flex;
+  /* display: flex;
   padding-top: 10px;
   flex-direction: column;
+  font-size: 14px; */
+  display: grid;
+  grid-template-columns: auto;
+  column-gap: 10px;
   font-size: 14px;
-
+  padding-top: 7px;
 }
 
 
 .backend {
+  padding-top: 7px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
   justify-items: center;
+  column-gap: 10px;
+  row-gap: 5px;
 }
 
 .names {
@@ -65,4 +74,23 @@
 
 .docs-links {
   font-weight: 300;
+  font-size: 14px;
+}
+
+.aDev {
+  display: flex;
+  column-gap: 10px;
+}
+
+.devLogos {
+  width: fit-content;
+  display: flex;
+  gap: 5px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .devs {
+    row-gap: 5px;
+  }
 }

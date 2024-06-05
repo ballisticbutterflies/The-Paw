@@ -28,6 +28,7 @@ importlib-metadata = "==6.9.0"
 zipp = "==3.17.0"
 wtforms = "*"
 boto3 = "*"
+lorem-text = "*"
 
 [dev-packages]
 
