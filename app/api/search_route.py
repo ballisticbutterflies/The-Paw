@@ -13,30 +13,57 @@ def generate_substrings(search_term):
     return substrings
 
 def map_rating_condition(query, rating):
+    # if rating == 5:
+    #     query = query.having(func.avg(Review.stars) >= 4.75)
+    # elif rating == 4:
+    #     query = query.having(and_(func.avg(Review.stars) >= 3.6, func.avg(Review.stars) < 4.74))
+    # elif rating == 3:
+    #     query = query.having(and_(func.avg(Review.stars) >= 2.6, func.avg(Review.stars) < 3.5))
+    # elif rating == 2:
+    #     query = query.having(and_(func.avg(Review.stars) >= 1.6, func.avg(Review.stars) < 2.5))
+    # elif rating == 1:
+    #     query = query.having(func.avg(Review.stars) < 1.75)
+    # return query
+
     if rating == 5:
-        query = query.having(func.avg(Review.stars) >= 4.75)
+        query = query.having(func.avg(Review.stars) >= 4.5)
     elif rating == 4:
-        query = query.having(and_(func.avg(Review.stars) >= 3.6, func.avg(Review.stars) < 4.74))
+        query = query.having(and_(func.avg(Review.stars) >= 3.5, func.avg(Review.stars) <= 4.4))
     elif rating == 3:
-        query = query.having(and_(func.avg(Review.stars) >= 2.6, func.avg(Review.stars) < 3.5))
+        query = query.having(and_(func.avg(Review.stars) >= 2.5, func.avg(Review.stars) <= 3.4))
     elif rating == 2:
-        query = query.having(and_(func.avg(Review.stars) >= 1.6, func.avg(Review.stars) < 2.5))
+        query = query.having(and_(func.avg(Review.stars) >= 1.5, func.avg(Review.stars) <= 2.4))
     elif rating == 1:
-        query = query.having(func.avg(Review.stars) < 1.75)
+        query = query.having(func.avg(Review.stars) <= 1.4)
     return query
 
 def map_rating(avg_stars):
+    # if avg_stars is None:
+    #     return None
+    # if avg_stars >= 4.75:
+    #     return 5
+    # elif avg_stars >= 3.6 and avg_stars <= 4:
+    #     return 4
+    # elif avg_stars >= 2.6 and avg_stars <= 3:
+    #     return 3
+    # elif avg_stars >= 1.6 and avg_stars <= 2:
+    #     return 2
+    # elif avg_stars >= 1 and avg_stars <= 1.74:
+    #     return 1
+    # else:
+    #     return avg_stars
+
     if avg_stars is None:
         return None
-    if avg_stars >= 4.75:
+    if avg_stars >= 4.5:
         return 5
-    elif avg_stars >= 3.6 and avg_stars <= 4:
+    elif avg_stars >= 3.5 and avg_stars <= 4.4:
         return 4
-    elif avg_stars >= 2.6 and avg_stars <= 3:
+    elif avg_stars >= 2.5 and avg_stars <= 3.4:
         return 3
-    elif avg_stars >= 1.6 and avg_stars <= 2:
+    elif avg_stars >= 1.5 and avg_stars <= 2.4:
         return 2
-    elif avg_stars >= 1 and avg_stars <= 1.74:
+    elif avg_stars >= 1 and avg_stars <= 1.4:
         return 1
     else:
         return avg_stars
