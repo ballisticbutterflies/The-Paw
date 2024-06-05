@@ -89,7 +89,7 @@ def seed_businesses_2A():
       Business(
          #96
         owner_id=5,
-        category_id=49,
+        category_id=4,
         address='3531 Chestnut Avenue',
         city='Baltimore',
         state='MD',
