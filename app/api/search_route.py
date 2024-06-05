@@ -37,7 +37,7 @@ def map_rating_condition(query, rating):
         query = query.having(func.avg(Review.stars) <= 1.49)
     return query
 
-def map_rating(avg_stars):
+# def map_rating(avg_stars):
     # if avg_stars is None:
     #     return None
     # if avg_stars >= 4.75:
@@ -53,20 +53,20 @@ def map_rating(avg_stars):
     # else:
     #     return avg_stars
 
-    if avg_stars is None:
-        return None
-    if avg_stars >= 4.5:
-        return 5
-    elif avg_stars >= 3.5 and avg_stars <= 4:
-        return 4
-    elif avg_stars >= 2.5 and avg_stars <= 3:
-        return 3
-    elif avg_stars >= 1.5 and avg_stars <= 2:
-        return 2
-    elif avg_stars >= 1.2 and avg_stars <= 1:
-        return 1
-    else:
-        return avg_stars
+    # if avg_stars is None:
+    #     return None
+    # if avg_stars >= 4.6:
+    #     return 5
+    # elif avg_stars >= 3.5 and avg_stars <= 4:
+    #     return 4
+    # elif avg_stars >= 2.5 and avg_stars <= 3:
+    #     return 3
+    # elif avg_stars >= 1.5 and avg_stars <= 2:
+    #     return 2
+    # elif avg_stars >= 1 and avg_stars <= 1:
+    #     return 1
+    # else:
+    #     return avg_stars
 
 @search_route.route('/')
 def search():
@@ -141,7 +141,7 @@ def search():
 
     # Calculate average stars and map to the desired rating
     avg_stars = total_stars / num_reviews if num_reviews > 0 else None
-    mapped_rating = map_rating(avg_stars)
+    mapped_rating = avg_stars
     #and bring over review text too
     recent_review = Review.query.filter_by(business_id=business.id).order_by(desc(Review.id)).first()
     recent_review_text = recent_review.review if recent_review else None
