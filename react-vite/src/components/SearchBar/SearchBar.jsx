@@ -22,12 +22,11 @@ const SearchBar = () => {
     const locationFromParams = params.get('location');
     const categoryFromParams = params.get('category');
 
-    console.log(categoryFromParams, "CATEGORY IN SERCH BARRRRRRRRR")
-
     if (queryFromParams) {
       setSearchQuery(queryFromParams)
     } else {
       setSearchQuery('')
+      
     }
 
     if (categoryFromParams) {
@@ -106,7 +105,7 @@ const SearchBar = () => {
 
 
     if (searchQuery) queryParams.append('search_query', searchQuery)
-    if (location) queryParams.append('location', location)
+    if (location && isInputTyped) queryParams.append('location', location)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL SEARCH BAR :', url);
