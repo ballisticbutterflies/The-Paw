@@ -590,3 +590,17 @@
     }
 
 }
+
+@media screen and (min-width: 1025px) {
+    .businessPhotoHeader {
+        position: relative;
+    }
+
+    .businessHeader {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+}
