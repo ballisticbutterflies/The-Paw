@@ -61,7 +61,7 @@ function SearchFormPage() {
 
     if (remainder > 0.3 && remainder < 0.79) {
       emptyStars.push(<span className="paws-half-span"><img className="paws-half-biz" src='../../images/half-paw.png' /></span>)
-    } else {
+    } else if (remainder > 0.79) {
       filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
 

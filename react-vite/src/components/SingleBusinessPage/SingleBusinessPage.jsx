@@ -56,7 +56,7 @@ function SingleBusinessPage() {
 
         if (remainder > 0.3 && remainder < 0.79) {
             unfilled_paws.push(<span className="paws-half-span"><img className="paws-half" src='../../images/half-paw.png' /></span>)
-        } else {
+        } else if (remainder > 0.79) {
             filled_paws.push(<span className="paws-filled"><i className="fa-solid fa-paw"></i> </span>)
         }
 
