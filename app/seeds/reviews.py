@@ -78,7 +78,7 @@ def seed_reviews():
 
     for _ in range(6508):
         user_id=random.randint(51, 150)
-        business_id=random.randint(1, 251)
+        business_id=random.randint(1, 259)
         review=lorem.sentence()[:200]
         stars=random.randint(1, 5)
         random_review=generate_review(user_id, business_id, review, stars)
@@ -92,9 +92,9 @@ def seed_reviews():
     #     random_review=generate_review(user_id, business_id, review, stars)
     #     db.session.add(random_review)
 
-    for _ in range(3781):
+    for _ in range(4781):
         user_id=random.randint(51, 150)
-        business_id=random.randint(1, 251)
+        business_id=random.randint(1, 259)
         review=lorem.sentence()[:200]
         stars=random.randint(4, 5)
         random_review=generate_review(user_id, business_id, review, stars)
@@ -102,7 +102,7 @@ def seed_reviews():
 
     for _ in range(1041):
         user_id=random.randint(51, 150)
-        business_id=random.randint(1, 251)
+        business_id=random.randint(1, 259)
         review=lorem.sentence()[:200]
         stars=random.randint(1, 5)
         random_review=generate_review(user_id, business_id, review, stars)
@@ -123,22 +123,14 @@ def seed_reviews():
         stars=random.randint(1, 2)
         random_review=generate_review(user_id, business_id, review, stars)
         db.session.add(random_review)
-    
-    # for _ in range(1041):
-    #     user_id=random.randint(51, 150)
-    #     business_id=random.randint(25, 74)
-    #     review=lorem.sentence()[:200]
-    #     stars=5
-    #     random_review=generate_review(user_id, business_id, review, stars)
-    #     db.session.add(random_review)
 
-    # for _ in range(1041):
-    #     user_id=random.randint(51, 150)
-    #     business_id=random.randint(25, 30)
-    #     review=lorem.sentence()[:200]
-    #     stars=5
-    #     random_review=generate_review(user_id, business_id, review, stars)
-    #     db.session.add(random_review)
+    for _ in range(4041):
+        user_id=random.randint(51, 150)
+        business_id=random.randint(25, 74)
+        review=lorem.sentence()[:200]
+        stars=5
+        random_review=generate_review(user_id, business_id, review, stars)
+        db.session.add(random_review)
 
     db.session.commit()
 
