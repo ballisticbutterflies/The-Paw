@@ -1751,7 +1751,7 @@ def seed_businesses_2A():
         description='Red Dog Pet Resort & Spa provides boarding, daycare, grooming, and training services. They offer a luxurious experience for your pet with plenty of playtime and attention.',
         website='https://www.reddogpetresort.com',
         email='cincinnati@reddogpetresort.com',
-        phone='513-733-3647',
+        phone='5137333647',
         set_hours="yes",
         mon_open='0700',
         mon_close='1900',
