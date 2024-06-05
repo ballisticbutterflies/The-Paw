@@ -2531,7 +2531,7 @@ def seed_businesses_2A():
         state='TX',
         zip_code='75207',
         name='Ferris Wheelers Backyard and BBQ',
-        description='Sitting in the shadow of a ferris wheel on the west side, this spot has brisket queso, sausage corn dogs, and pulled pork sandwiches — without the hassle of going to the fair grounds. It’s kid and dog friendly.',
+        description='Sitting in the shadow of a ferris wheel on the west side, this spot has brisket queso, sausage corn dogs, and pulled pork sandwiches — without the hassle of going to the fair grounds. It\'s kid and dog friendly.',
         website='https://hatcreekburgers.com',
         phone='2147414141',
         price='$$',
