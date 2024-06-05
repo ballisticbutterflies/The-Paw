@@ -81,10 +81,10 @@
  }
 
  .paws-wrapper {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-  }
+     display: flex;
+     align-items: center;
+     justify-items: center;
+ }
 
  .paws-half {
      width: 24px;
@@ -96,7 +96,7 @@
  .paws-half-biz {
      display: grid;
      width: 18px;
-     margin-top: 2px;
+     margin-top: -1px;
      margin-right: 4px;
      text-align: center;
      justify-items: center;
@@ -151,11 +151,11 @@
  }
 
  .searchStars {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-  }
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+
+ }
 
 
  .loginSignupModals .errors {
