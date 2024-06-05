@@ -54,7 +54,6 @@ const FilterComponent = ({ onFilterChange, isMobile, isTablet }) => {
     const queryString = queryParams.toString();
 
     const url = `${queryString}`;
-    console.log(url)
 
     onFilterChange(url)
     closeMenu();

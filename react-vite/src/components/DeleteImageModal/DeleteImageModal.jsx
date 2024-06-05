@@ -13,18 +13,10 @@ function DeleteImageModal({ imageId, onlyImage, businessId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
-    console.log(businessId)
-
     const user = useSelector(state => state.session.user)
 
     const handleDelete = (e) => {
         e.preventDefault();
-        // dispatch(deleteImage(imageId))
-        //     .then(dispatch(getUserImages(user.id)))
-        //     .then(dispatch(getImagesByBusiness(businessId)))
-        //     .then(dispatch(fetchSingleBusiness(businessId)))
-        //     .then(closeModal)
-
 
 
         const runDispatches = async () => {

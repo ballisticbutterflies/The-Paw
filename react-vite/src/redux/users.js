@@ -19,7 +19,7 @@ export const loadUserPhotos = (userImages) => (
 })
 
 export const loadUserReviews = (userReviews) => (
-    console.log("hitting action"),
+   
     {
     type: LOAD_USER_REVIEWS,
     userReviews

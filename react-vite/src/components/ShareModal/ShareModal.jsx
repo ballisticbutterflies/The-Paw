@@ -12,7 +12,6 @@ function ShareModal() {
         // setCopySuccess("Copied!");
     }
 
-    console.log(typeof url);
     return (
         <div className="shareModal">
             <h1>Share business</h1>

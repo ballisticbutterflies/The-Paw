@@ -26,7 +26,7 @@ const SearchBar = () => {
       setSearchQuery(queryFromParams)
     } else {
       setSearchQuery('')
-      
+
     }
 
     if (categoryFromParams) {
@@ -49,7 +49,7 @@ const SearchBar = () => {
     const queryParams = new URLSearchParams();
     queryParams.append('location', selectedLocation);
 
-    console.log('Selected location:', selectedLocation);
+
   };
 
   const handleSubmit = (e) => {
@@ -63,10 +63,8 @@ const SearchBar = () => {
     setIsSubmitted(true);  // Signal that form has been submitted
     setTimeout(() => setIsSubmitted(false), 0);  // Reset the signal immediately after
 
-
     const queryParams = new URLSearchParams()
     const categoryFromParams = queryParams.get('category');
-    console.log(categoryFromParams, "category from params in search bar")
 
     const lowercase_query = searchQuery.toLowerCase()
 
@@ -108,11 +106,9 @@ const SearchBar = () => {
     if (location && isInputTyped) queryParams.append('location', location)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
-    console.log('Target URL SEARCH BAR :', url);
-    console.log(categoryFromParams, "CATEGORY ID EXISTS")
+
     if (categoryFromParams) {
       dispatch(fetchBusinesses(searchQuery, location, `category=${category_id}`, 1, 10)).then(() => {
-        console.log(searchQuery, location, category_id, 'Dispatch after target URL CONSOLE LOG')
         navigate(url)
         setSearchQuery('')
         setLocation('')
@@ -120,7 +116,6 @@ const SearchBar = () => {
       })
     } else {
       dispatch(fetchBusinesses(searchQuery, location, {}, 1, 10)).then(() => {
-        console.log(searchQuery, location, category_id, 'Dispatch after target URL CONSOLE LOG v2')
         navigate(url)
         setSearchQuery('')
         setLocation('')

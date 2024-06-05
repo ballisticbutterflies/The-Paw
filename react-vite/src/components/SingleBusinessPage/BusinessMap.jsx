@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function BusinessMap({ business }) {
-    console.log("BUSINESS IN MAP", business);
+
     const dispatch = useDispatch();
     const mapRef = useRef(null)
 
@@ -30,7 +30,6 @@ function BusinessMap({ business }) {
         runDispatches()
     }, [dispatch, business.address, business.city, business.state])
 
-    console.log("LAT", typeof (lng), lng);
 
     const initMap = useCallback(async () => {
         const { Map } = await google.maps.importLibrary("maps");

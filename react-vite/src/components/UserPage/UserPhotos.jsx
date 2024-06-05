@@ -29,7 +29,6 @@ function UserPhotos() {
         state.users ? state.users.undefined : null
     ))
 
-    console.log("VIIII", viewedUserImages);
 
     // console.log("viewed user images", viewedUserImages)
 

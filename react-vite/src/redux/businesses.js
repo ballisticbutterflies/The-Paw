@@ -76,13 +76,12 @@ export const createImage = (post) => async (dispatch) => {
         body: post
     });
 
-
     if (response.ok) {
         const resPost = await response.json();
         dispatch(createBusinessImages(resPost));
-        console.log(resPost, "there was no error");
     } else {
-        console.log("There was an error making your post!")
+        const errors = await response.json();
+        return errors;
     }
 };
 
