@@ -36,12 +36,15 @@ function ManageBusinessPage() {
     let empty = 5 - numStars
     let remainder = numStars - parseInt(numStars)
 
-    if (remainder > 0.3 && remainder < 0.74) {
+
+    if (remainder > 0.3 && remainder < 0.79) {
       emptyStars.push(<span className="paws-half-span"><img className="paws-half-biz" src='../../images/half-paw.png' /></span>)
+    } else {
+      filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
 
     if (emptyStars.length === 0) {
-      for (let i = 0; i < empty; i++) {
+      for (let i = 0; i < (5 - filledStars.length); i++) {
         emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
       }
     } else {
@@ -49,6 +52,7 @@ function ManageBusinessPage() {
         emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
       }
     }
+
     return [filledStars, emptyStars]
   }
 
