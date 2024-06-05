@@ -266,10 +266,7 @@ select {
     margin-top: 0px;
   }
 
-  .searchStars {
-    display: grid;
-    align-items: center;
-  }
+
 
   .recent-review-text {
     inline-size: auto;
