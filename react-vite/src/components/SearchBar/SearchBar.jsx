@@ -72,10 +72,32 @@ const SearchBar = () => {
     const lowercase_query = searchQuery.toLowerCase()
 
 
-    if (lowercase_query === 'training') {
+    if (lowercase_query === 'restaurant' || lowercase_query === 'restaurants') {
+      queryParams.append('category', 1)
+
+    }
+    if (lowercase_query === 'veterinarians' || lowercase_query === 'veterinarian' || lowercase_query === 'vet' || lowercase_query === 'doctor') {
+      queryParams.append('category', 2)
+
+    }
+    if (lowercase_query === 'services' || lowercase_query === 'groomer' || lowercase_query === 'groomers' || lowercase_query === 'training' || lowercase_query === 'grooming' ) {
       queryParams.append('category', 3)
     }
+    if (lowercase_query === 'shopping' || lowercase_query === 'store' || lowercase_query === 'supplies' || lowercase_query === 'boutique' || lowercase_query === 'stores' || lowercase_query === 'shops') {
+      queryParams.append('category', 4)
+    }
+    if (lowercase_query === 'travel' || lowercase_query === 'hotel' || lowercase_query === 'inn' || lowercase_query === 'motel') {
+      queryParams.append('category', 5)
 
+    }
+    if (lowercase_query === 'activities' || lowercase_query === 'parks' || lowercase_query === 'park' || lowercase_query === 'things to do') {
+      queryParams.append('category', 6)
+
+    }
+    if (lowercase_query === 'adoption' || lowercase_query === 'adopt' || lowercase_query === 'shelter') {
+      queryParams.append('category', 7)
+
+    }
     if (lowercase_query === 'other') {
       queryParams.append('category', 8)
     }
