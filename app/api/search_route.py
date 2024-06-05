@@ -28,13 +28,13 @@ def map_rating_condition(query, rating):
     if rating == 5:
         query = query.having(func.avg(Review.stars) >= 4.5)
     elif rating == 4:
-        query = query.having(and_(func.avg(Review.stars) >= 3.5, func.avg(Review.stars) <= 4.4))
+        query = query.having(and_(func.avg(Review.stars) >= 3.5, func.avg(Review.stars) <= 4.49))
     elif rating == 3:
-        query = query.having(and_(func.avg(Review.stars) >= 2.5, func.avg(Review.stars) <= 3.4))
+        query = query.having(and_(func.avg(Review.stars) >= 2.5, func.avg(Review.stars) <= 3.49))
     elif rating == 2:
-        query = query.having(and_(func.avg(Review.stars) >= 1.5, func.avg(Review.stars) <= 2.4))
+        query = query.having(and_(func.avg(Review.stars) >= 1.5, func.avg(Review.stars) <= 2.49))
     elif rating == 1:
-        query = query.having(func.avg(Review.stars) <= 1.4)
+        query = query.having(func.avg(Review.stars) <= 1.49)
     return query
 
 def map_rating(avg_stars):
@@ -57,13 +57,13 @@ def map_rating(avg_stars):
         return None
     if avg_stars >= 4.5:
         return 5
-    elif avg_stars >= 3.5 and avg_stars <= 4.4:
+    elif avg_stars >= 3.5 and avg_stars <= 4:
         return 4
-    elif avg_stars >= 2.5 and avg_stars <= 3.4:
+    elif avg_stars >= 2.5 and avg_stars <= 3:
         return 3
-    elif avg_stars >= 1.5 and avg_stars <= 2.4:
+    elif avg_stars >= 1.5 and avg_stars <= 2:
         return 2
-    elif avg_stars >= 1 and avg_stars <= 1.4:
+    elif avg_stars >= 1.2 and avg_stars <= 1:
         return 1
     else:
         return avg_stars
