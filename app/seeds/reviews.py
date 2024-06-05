@@ -116,7 +116,7 @@ def seed_reviews():
     #     random_review=generate_review(user_id, business_id, review, stars)
     #     db.session.add(random_review)
 
-    for _ in range(2541):
+    for _ in range(3541):
         user_id=random.randint(51, 150)
         business_id=random.randint(51, 102)
         review=lorem.sentence()[:200]
@@ -124,7 +124,7 @@ def seed_reviews():
         random_review=generate_review(user_id, business_id, review, stars)
         db.session.add(random_review)
 
-    for _ in range(4041):
+    for _ in range(4441):
         user_id=random.randint(51, 150)
         business_id=random.randint(25, 74)
         review=lorem.sentence()[:200]
@@ -134,6 +134,13 @@ def seed_reviews():
 
     db.session.commit()
 
+    for _ in range(3541):
+        user_id=random.randint(51, 150)
+        business_id=random.randint(98, 115)
+        review=lorem.sentence()[:200]
+        stars=random.randint(1, 2)
+        random_review=generate_review(user_id, business_id, review, stars)
+        db.session.add(random_review)
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE
