@@ -92,9 +92,26 @@ def search():
   if category:
       query = query.filter(Business.category_id == category)
 
-  activities_category_id = 6  # Replace with the actual category ID for "activities"
-  if search_query and search_query.lower() == "things to do":
+
+  restaurants_category_id = 1
+  vets_category_id = 2
+  services_category_id = 3
+  shopping_category_id = 4
+  travel_category_id = 5
+  activities_category_id = 6
+
+  if search_query and search_query.lower() == "things to do" or search_query and search_query.lower() == "parks" or search_query and search_query.lower() == "park":
     query = query.filter(Business.category_id == activities_category_id)
+  elif search_query and search_query.lower() == "restaurant":
+    query = query.filter(Business.category_id == restaurants_category_id)
+  elif search_query and search_query.lower() == "vets" or search_query and search_query.lower() == "doctor":
+    query = query.filter(Business.category_id == vets_category_id)
+  elif search_query and search_query.lower() == "services":
+    query = query.filter(Business.category_id == services_category_id)
+  elif search_query and search_query.lower() == "shops" or search_query and search_query.lower() == "boutique":
+    query = query.filter(Business.category_id == shopping_category_id)
+  elif search_query and search_query.lower() == "inn" or search_query and search_query.lower() == "motel":
+    query = query.filter(Business.category_id == travel_category_id)
   elif search_query:
     search_terms = search_query.split()
     all_filters = []

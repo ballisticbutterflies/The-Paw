@@ -109,7 +109,7 @@ def seed_businesses():
     bakery = Business(
         # id 5
         owner_id=1,
-        category_id=1,
+        category_id=4,
         address= "2402 Rice Blvd",
         city= "Houston",
         state= "TX",
