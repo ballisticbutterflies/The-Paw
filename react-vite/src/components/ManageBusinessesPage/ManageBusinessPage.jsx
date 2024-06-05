@@ -26,15 +26,30 @@ function ManageBusinessPage() {
 
 
   const starReviews = (numStars) => {
+
     let filledStars = []
     let emptyStars = []
 
+
     for (let i = 0; i < parseInt(numStars); i++) {
-      filledStars.push(<span className='paws-filled'><i className="fa-solid fa-paw" />&nbsp;</span>)
+      filledStars.push(<span className='paws-filled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
     }
-    let empty = 5 - filledStars.length
-    for (let i = 0; i < empty; i++) {
-      emptyStars.push(<span className='paws-unfilled'><i className="fa-solid fa-paw" />&nbsp;</span>)
+
+    let empty = 5 - numStars
+    let remainder = numStars - parseInt(numStars)
+
+    if (remainder > 0.3 && remainder < 0.74) {
+      emptyStars.push(<span className="paws-half-span"><img className="paws-half-biz" src='../../images/half-paw.png' /></span>)
+    }
+
+    if (emptyStars.length === 0) {
+      for (let i = 0; i < empty; i++) {
+        emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
+      }
+    } else {
+      for (let i = 0; i < parseInt(empty); i++) {
+        emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
+      }
     }
     return [filledStars, emptyStars]
   }
@@ -95,7 +110,7 @@ function ManageBusinessPage() {
                 <span className="businessDeets">
                   <h2>{index + 1}.&nbsp;{business.name}</h2>
                   {business.avg_stars && business.num_reviews && reviewsExists(business.num_reviews) && (
-                    <span>
+                    <span className="searchStars">
                       {business?.avg_stars && starReviews(business.avg_stars)}
                       &nbsp;{business?.avg_stars && starsToFixed(business.avg_stars)}
                       &nbsp;{business.num_reviews >= 1 && reviewsExists(business.num_reviews)}

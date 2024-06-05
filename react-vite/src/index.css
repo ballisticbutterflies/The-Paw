@@ -80,6 +80,28 @@
      color: #c3cddf;
  }
 
+ .paws-wrapper {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+ .paws-half {
+     width: 24px;
+     margin: 0px 3px;
+     display: flex;
+     margin-top: -2px;
+ }
+
+ .paws-half-biz {
+     display: grid;
+     width: 18px;
+     margin-top: 2px;
+     margin-right: 4px;
+     text-align: center;
+     justify-items: center;
+ }
+
  a {
      color: #5f5ba8;
      text-decoration: none;
@@ -127,6 +149,13 @@
  .loginSignupModals button {
      width: 100%;
  }
+
+ .searchStars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+  }
 
 
  .loginSignupModals .errors {

@@ -47,15 +47,33 @@ function SingleBusinessPage() {
         let filled_paws = [];
         let unfilled_paws = []
 
-        for (let i = 0; i < +(numStars); i++) {
+        for (let i = 0; i < parseInt(numStars); i++) {
             filled_paws.push(<span className="paws-filled"><i className="fa-solid fa-paw"></i> </span>)
         }
 
-        let remaining_paws = 5 - filled_paws.length
+        let remaining_paws = 5 - numStars
+        let remainder = numStars - parseInt(numStars)
 
-        for (let i = 0; i < remaining_paws; i++) {
-            unfilled_paws.push(<span className="paws-unfilled"><i className="fa-solid fa-paw"></i> </span>)
+        console.log("REAL  PAWS", remainder);
+        console.log("REMAINING PAWS", parseInt(remaining_paws));
+
+
+        if (remainder > 0.3 && remainder < 0.74) {
+            unfilled_paws.push(<span className="paws-half-span"><img className="paws-half" src='../../images/half-paw.png' /></span>)
         }
+
+        console.log(unfilled_paws.length);
+
+        if (unfilled_paws.length === 0) {
+            for (let i = 0; i < remaining_paws; i++) {
+                unfilled_paws.push(<span className="paws-unfilled"><i className="fa-solid fa-paw"></i> </span>)
+            }
+        } else {
+            for (let i = 0; i < parseInt(remaining_paws); i++) {
+                unfilled_paws.push(<span className="paws-unfilled"><i className="fa-solid fa-paw"></i> </span>)
+            }
+        }
+
 
         return [filled_paws, unfilled_paws]
     }
@@ -101,9 +119,11 @@ function SingleBusinessPage() {
             <div className="businessPhotoHeader">
                 {business.business_images?.[0] ? (
                     <img src={business.business_images?.[0]?.image_url
-                    } />
+                    }
+                        className="businessPhotoHeaderImg" />
                 ) : (
-                    <img src='../../images/default_business.jpeg' />
+                    <img src='../../images/default_business.jpeg'
+                        className="businessPhotoHeaderImg" />
                 )}
 
                 <div className="businessHeader">
@@ -117,9 +137,9 @@ function SingleBusinessPage() {
                         }
                         {business.reviews?.num_reviews > 1 &&
                             <p className="businessReviews">
-                                <span className="pawBlock">
+                                <div className="pawBlock">
                                     {business.reviews.avg_stars &&
-                                        reviewStars(business.reviews.avg_stars)}</span>
+                                        reviewStars(business.reviews.avg_stars)}</div>
                                 &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
                                 &nbsp;({business.reviews.num_reviews} reviews)
                             </p>
