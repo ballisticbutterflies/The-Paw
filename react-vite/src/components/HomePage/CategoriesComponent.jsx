@@ -17,8 +17,11 @@ function CategoriesComponent () {
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
     console.log('Target URL:', url);
-    dispatch(fetchBusinesses(url))
-      .then(() => navigate(url));
+    dispatch(fetchBusinesses('', '', `category=${categoryId}`))
+      .then(() => {
+        navigate(url)
+        setCategory('')
+      });
   };
 
 
