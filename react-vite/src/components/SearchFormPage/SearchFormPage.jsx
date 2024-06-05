@@ -21,8 +21,6 @@ function SearchFormPage() {
   const rating = searchParams.get('rating')
 
 
-  console.log(category, "IN SERACH PAGE ")
-
   const queryParams = new URLSearchParams();
   if (category) queryParams.append('category', category);
   if (price) queryParams.append('price', price);
@@ -35,11 +33,7 @@ function SearchFormPage() {
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
-  // const [filterChange, setFilterChange] = useState(false);
   const [loading, setLoading] = useState(true)
-
-
-  console.log(businesses.length, "search Form Page")
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 480);
@@ -77,7 +71,6 @@ function SearchFormPage() {
         emptyStars.push(<span className='paws-unfilled' style={{ fontSize: "large" }}><i className="fa-solid fa-paw" />&nbsp;</span>)
       }
     }
-
 
     return [filledStars, emptyStars]
   }
@@ -125,7 +118,6 @@ function SearchFormPage() {
   }, [dispatch, page, perPage, filter, search_query, searchLoc]);
 
 
-
   useEffect(() => {
     if (businesses.length === 0) setLoading(false)
 
@@ -136,10 +128,8 @@ function SearchFormPage() {
   }, [search_query, filter, searchLoc, category]);
 
   const handleFilterChange = (filters) => {
-    console.log(searchLoc, "FILTERSSESRSERES")
 
     setPage(1)
-    // setFilterChange(true)
     setLoading(true);
     dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage)).then(() => setTimeout(() => {
       setLoading(false);

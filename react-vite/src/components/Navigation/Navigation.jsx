@@ -12,7 +12,6 @@ import SearchBar from "../SearchBar/SearchBar";
 function Navigation() {
 
   const user = useSelector((store) => store.session.user);
-  console.log(user)
 
   return (
     <div className="nav">

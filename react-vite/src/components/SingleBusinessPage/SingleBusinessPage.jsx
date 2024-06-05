@@ -58,8 +58,6 @@ function SingleBusinessPage() {
             unfilled_paws.push(<span className="paws-half-span"><img className="paws-half" src='../../images/half-paw.png' /></span>)
         }
 
-        console.log(unfilled_paws.length);
-
         if (unfilled_paws.length === 0) {
             for (let i = 0; i < remaining_paws; i++) {
                 unfilled_paws.push(<span className="paws-unfilled"><i className="fa-solid fa-paw"></i> </span>)

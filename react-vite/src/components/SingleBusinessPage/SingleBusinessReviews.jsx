@@ -67,7 +67,6 @@ function SingleBusinessReviews({ businessId, sessionUser }) {
         setDisplayedCount(prevCount => prevCount + 5)
     }
 
-    console.log(reviews.length, displayedCount);
 
     return (reviews &&
         <>

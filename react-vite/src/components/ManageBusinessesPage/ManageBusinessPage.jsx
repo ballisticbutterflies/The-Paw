@@ -16,8 +16,6 @@ function ManageBusinessPage() {
 
   const sessionUser = Object.values(useSelector(state => state.session.user ? state.session.user : []))
 
-  console.log(sessionUser)
-
 
   useEffect(() => {
     dispatch(loadCurrUserBusinesses())

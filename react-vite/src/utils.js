@@ -15,12 +15,9 @@ export const stdTimeFormat = (military) => {
 export const getTodaysHours = (business) => {
   const d = new Date();
   const today = d.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
-  // const currHour = d.getHours()
-  // const currMin = d.getMinutes()
-  // console.log(`${currHour}:${currMin}`);
 
   let todayHours = { open: 'Opened', close: 'Closed' };
-  // console.log(todayHours);
+
   const todayKey = getDayKey(today);
 
   const openKey = `${todayKey}_open`;
