@@ -414,6 +414,9 @@
         flex-direction: column;
     }
 
+    .businessContact {
+        display: none;
+    }
 
     .bizContactMobile {
         display: flex;
@@ -461,10 +464,6 @@
 
     .hours {
         column-gap: 20px;
-    }
-
-    .businessContact {
-        display: none;
     }
 }
 

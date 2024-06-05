@@ -15,8 +15,8 @@ function SingleBusinessPage() {
     const { businessId } = useParams();
     const dispatch = useDispatch();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-    const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1025);
+    const [isTablet, setIsTablet] = useState(window.innerWidth >= 481 && window.innerWidth <= 768);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 769);
 
     const business = useSelector(state => (
         state.businesses[businessId]
@@ -34,8 +34,8 @@ function SingleBusinessPage() {
 
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 480);
-        setIsTablet(window.innerWidth <= 1024 && window.innerWidth >= 481);
-        setIsDesktop(window.innerWidth >= 1025);
+        setIsTablet(window.innerWidth >= 481 && window.innerWidth <= 768);
+        setIsDesktop(window.innerWidth >= 769);
     }
 
     useEffect(() => {
@@ -197,7 +197,7 @@ function SingleBusinessPage() {
             </div >
             <div className="businessContainer">
                 <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} isMobile={isMobile} isTablet={isTablet} />
-                <BusinessContactCard business={business} isDesktop={isDesktop} />
+                {isDesktop && <BusinessContactCard business={business} isDesktop={isDesktop} />}
             </div>
         </>
     )

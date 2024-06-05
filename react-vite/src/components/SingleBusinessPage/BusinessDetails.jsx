@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import LoginFormModal from "../LoginFormModal";
 import CreateReviewPage from "../ReviewForms/CreateReviewPage";
 import BusinessMap from "./BusinessMap";
-import BusinessContactCard from "./BusinessContactCard";
+// import BusinessContactCard from "./BusinessContactCard";
 import ShareModal from "../ShareModal";
 
 function BusinessDetails({ business, businessId, locationHoursSection, isMobile, isTablet }) {
@@ -60,10 +60,10 @@ function BusinessDetails({ business, businessId, locationHoursSection, isMobile,
                         />
                     </span>
                 </div>
-                <div>
+                {/* <div>
                     {isMobile && <BusinessContactCard business={business} isMobile={isMobile} />
                     }
-                </div>
+                </div> */}
             </div>
             {(isTablet || isMobile) && (<div className="bizContactMobile">
                 {business.website &&
