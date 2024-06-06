@@ -12,7 +12,7 @@ function PhotoHeader() {
         e.preventDefault();
         const queryParams = new URLSearchParams()
         queryParams.append('category', 3)
-        queryParams.append('search_query', 'grooming')
+        queryParams.append('search_query', 'groomer')
         const categoryFromParams = queryParams.get('category');
         const queryFromParams = queryParams.get('search_query');
         const queryString = queryParams.toString();
