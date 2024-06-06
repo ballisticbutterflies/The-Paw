@@ -123,7 +123,7 @@ def seed_images():
     salondog_biz = Image(
         imageable_id=9,
         imageable_type="business",
-        url="https://s3.amazonaws.com/static.organiclead.com/Site-177309ee-02b0-4f65-a7c5-680a68bf3b33/shutterstock_1708371508.jpg",
+        url="https://thepawimages.s3.us-west-2.amazonaws.com/salon_dog.jpg",
         uploader_id=5
     )
 
