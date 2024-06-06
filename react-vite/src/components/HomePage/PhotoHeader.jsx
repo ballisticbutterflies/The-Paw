@@ -27,7 +27,7 @@ function PhotoHeader() {
     return (
         <>
             <div className="photoHeader">
-                <img src="https://s3.amazonaws.com/static.organiclead.com/Site-177309ee-02b0-4f65-a7c5-680a68bf3b33/shutterstock_1708371508.jpg" />
+                <img src="https://thepawimages.s3.us-west-2.amazonaws.com/salon_dog.jpg" />
                 <div className="photoHeaderText">
                     <h1>Keep your pet lookin&apos; fresh</h1>
                     <div>
