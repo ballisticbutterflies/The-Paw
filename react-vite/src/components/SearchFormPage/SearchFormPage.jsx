@@ -30,6 +30,8 @@ function SearchFormPage() {
   const businesses = Object.values(useSelector((state) => state.search.businesses))
   const { total, pages, currentPage, perPage } = useSelector(state => state.search.pagination);
 
+  console.log("Businesses SFP:", businesses)
+
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768 && window.innerWidth >= 481);
@@ -107,31 +109,34 @@ function SearchFormPage() {
   }
 
   useEffect(() => {
-    const fetchAndSetLoading = () => {
-      setLoading(true);
-      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
-        .then(() => setTimeout(() => setLoading(false), 1000))
-        .catch(error => {
-          console.error(error);
-        });
-    };
 
-    window.scrollTo(0, 0); // Scroll to top
-    fetchAndSetLoading();
-  }, [dispatch, page, perPage, filter, search_query, searchLoc]);
+    if (businesses.length === 0 ) {
+
+      const fetchAndSetLoading = () => {
+        setLoading(true);
+        dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
+          .then(() => setTimeout(() => setLoading(false), 1000))
+          .catch(error => {
+            console.error(error);
+          });
+      };
+
+      window.scrollTo(0, 0); // Scroll to top
+      fetchAndSetLoading();
+    }
+  }, [dispatch, page, perPage, filter, search_query, searchLoc, businesses.length]);
 
 
   useEffect(() => {
-    if (businesses.length === 0) setLoading(false)
+    if (businesses.length !== 0) setLoading(false)
 
-  }, [businesses])
+  }, [businesses.length])
   // Reset page state when search query or filters change
   useEffect(() => {
     setPage(1);
   }, [search_query, filter, searchLoc, category]);
 
   const handleFilterChange = (filters) => {
-
     setPage(1)
     setLoading(true);
     dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage)).then(() => setTimeout(() => {
@@ -217,7 +222,7 @@ function SearchFormPage() {
                   }</h1>
               )}
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
-              {businesses && businesses.map((business, index) => (
+              {businesses.length !== 0 && businesses.map((business, index) => (
                 <div className="card" key={business.id}>
                   <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
 

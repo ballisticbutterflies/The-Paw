@@ -17,8 +17,10 @@ function PhotoHeader() {
         const queryFromParams = queryParams.get('search_query');
         const queryString = queryParams.toString();
         const url = `/search?${queryString}`;
-        navigate(url)
-        dispatch(fetchBusinesses(queryFromParams, '', `category=${categoryFromParams}`, 1, 10))
+        dispatch(fetchBusinesses(queryFromParams, '', `category=${categoryFromParams}`, 1, 10)).then(() => {
+            navigate(url)
+
+        })
 
     }
 
