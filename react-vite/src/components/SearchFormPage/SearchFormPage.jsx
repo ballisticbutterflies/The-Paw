@@ -128,7 +128,7 @@ function SearchFormPage() {
 
 
   useEffect(() => {
-    if (businesses.length !== 0) setLoading(false)
+    businesses.length === 0 ? setLoading(true) : setLoading(false)
 
   }, [businesses.length])
   // Reset page state when search query or filters change
@@ -136,10 +136,11 @@ function SearchFormPage() {
     setPage(1);
   }, [search_query, filter, searchLoc, category]);
 
-  const handleFilterChange = (filters) => {
+  const handleFilterChange = async (filters) => {
     setPage(1)
     setLoading(true);
-    dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage)).then(() => setTimeout(() => {
+    await dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage))
+    .then(() => setTimeout(() => {
       setLoading(false);
     }, 1000))
       .catch(error => {
