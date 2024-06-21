@@ -77,7 +77,7 @@ const SearchBar = () => {
       queryParams.append('category', 2)
 
     }
-    if (lowercase_query === 'services' || lowercase_query === 'groomer' || lowercase_query === 'groomers' || lowercase_query === 'training' || lowercase_query === 'grooming' ) {
+    if (lowercase_query === 'services'  || lowercase_query === 'groomers' || lowercase_query === 'training' || lowercase_query === 'grooming' ) {
       queryParams.append('category', 3)
     }
     if (lowercase_query === 'shopping' || lowercase_query === 'store' || lowercase_query === 'supplies' || lowercase_query === 'boutique' || lowercase_query === 'stores' || lowercase_query === 'shops') {
