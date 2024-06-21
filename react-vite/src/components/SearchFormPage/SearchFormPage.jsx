@@ -110,8 +110,8 @@ function SearchFormPage() {
 
   useEffect(() => {
 
-    setLoading(true);
     const fetchAndSetLoading = () => {
+      setLoading(true);
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
         .then(() => setTimeout(() => setLoading(false), 1000))
         .catch(error => {

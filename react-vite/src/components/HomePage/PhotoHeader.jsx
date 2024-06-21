@@ -12,7 +12,6 @@ function PhotoHeader() {
         e.preventDefault();
         const queryParams = new URLSearchParams()
         queryParams.append('category', 3)
-        queryParams.append('search_query', 'groomer')
         const categoryFromParams = queryParams.get('category');
         const queryFromParams = queryParams.get('search_query');
         const queryString = queryParams.toString();
@@ -31,7 +30,7 @@ function PhotoHeader() {
                 <div className="photoHeaderText">
                     <h1>Keep your pet lookin&apos; fresh</h1>
                     <div>
-                        <button onClick={handleClick}><i className="fa-solid fa-magnifying-glass" />&nbsp;&nbsp;&nbsp;Groomers</button>
+                        <button onClick={handleClick}><i className="fa-solid fa-magnifying-glass" />&nbsp;&nbsp;&nbsp;Services</button>
                     </div>
                 </div>
                 <div className="photoHeaderCredit">
