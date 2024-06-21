@@ -110,7 +110,7 @@ function SearchFormPage() {
     const fetchAndSetLoading = () => {
       setLoading(true);
       dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
-        .then(() => setTimeout(() => setLoading(false), 1200))
+        .then(() => setTimeout(() => setLoading(false), 1000))
         .catch(error => {
           console.error(error);
         });
@@ -136,7 +136,7 @@ function SearchFormPage() {
     setLoading(true);
     dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage)).then(() => setTimeout(() => {
       setLoading(false);
-    }, 1200))
+    }, 1000))
       .catch(error => {
         return error
       })
@@ -153,7 +153,7 @@ function SearchFormPage() {
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, nextPage, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1200));
+      }, 1000));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
@@ -166,7 +166,7 @@ function SearchFormPage() {
       setLoading(true)
       dispatch(fetchBusinesses(search_query, searchLoc, filter, prevPage, perPage)).then(() => setTimeout(() => {
         setLoading(false);
-      }, 1200));
+      }, 1000));
       window.scrollTo(0, 0); // Scroll to top
     }
   };
