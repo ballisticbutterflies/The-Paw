@@ -110,39 +110,37 @@ function SearchFormPage() {
 
   useEffect(() => {
 
-    if (businesses.length === 0 ) {
+    setLoading(true);
+    const fetchAndSetLoading = () => {
+      dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
+        .then(() => setTimeout(() => setLoading(false), 1000))
+        .catch(error => {
+          console.error(error);
+        });
+    };
 
-      const fetchAndSetLoading = () => {
-        setLoading(true);
-        dispatch(fetchBusinesses(search_query, searchLoc, filter, page, perPage))
-          .then(() => setTimeout(() => setLoading(false), 1000))
-          .catch(error => {
-            console.error(error);
-          });
-      };
+    window.scrollTo(0, 0); // Scroll to top
+    fetchAndSetLoading();
 
-      window.scrollTo(0, 0); // Scroll to top
-      fetchAndSetLoading();
-    }
-  }, [dispatch, page, perPage, filter, search_query, searchLoc, businesses.length]);
+  }, [dispatch, page, perPage, filter, search_query, searchLoc]);
 
 
-  useEffect(() => {
-    businesses.length === 0 ? setLoading(true) : setLoading(false)
+  // useEffect(() => {
+  //   if (businesses.length === 0) setLoading(false)
 
-  }, [businesses.length])
+  // }, [businesses])
   // Reset page state when search query or filters change
   useEffect(() => {
     setPage(1);
   }, [search_query, filter, searchLoc, category]);
 
-  const handleFilterChange = async (filters) => {
+  const handleFilterChange = (filters) => {
     setPage(1)
     setLoading(true);
-    await dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage))
-    .then(() => setTimeout(() => {
-      setLoading(false);
-    }, 1000))
+    dispatch(fetchBusinesses(search_query, searchLoc, filters, page, perPage))
+      .then(() => setTimeout(() => {
+        setLoading(false);
+      }, 1000))
       .catch(error => {
         return error
       })
@@ -223,7 +221,7 @@ function SearchFormPage() {
                   }</h1>
               )}
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
-              {businesses.length !== 0 && businesses.map((business, index) => (
+              {businesses && businesses.map((business, index) => (
                 <div className="card" key={business.id}>
                   <Link className="businessCards" style={{ textDecoration: "none" }} to={`/businesses/${business.id}`}>
 
