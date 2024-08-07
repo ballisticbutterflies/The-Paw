@@ -30,7 +30,7 @@ function SearchFormPage() {
   const businesses = Object.values(useSelector((state) => state.search.businesses))
   const { total, pages, currentPage, perPage } = useSelector(state => state.search.pagination);
 
-  console.log("Businesses SFP:", businesses)
+  // console.log("Businesses SFP:", businesses)
 
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
