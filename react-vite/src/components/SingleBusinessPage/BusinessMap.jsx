@@ -74,7 +74,7 @@ function BusinessMap({ business }) {
                     style={{ border: 'none', width: '100%', height: '100%' }}
                     loading="lazy"
                     allowfullscreen
-                    referrerpolicy="no-referrer-when-downgrade"
+                    referrerPolicy="no-referrer-when-downgrade"
                     src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo
 &q=${business.address}+${business.city}+${business.state}+${business.zip_code}`}
                 />
@@ -83,7 +83,7 @@ function BusinessMap({ business }) {
                     style={{ border: 'none', width: '100%', height: '100%' }}
                     loading="lazy"
                     allowfullscreen
-                    referrerpolicy="no-referrer-when-downgrade"
+                    referrerPolicy="no-referrer-when-downgrade"
                     src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBbMCWbhZBpVfKkdp8hqP5X6tt3BQMAdpo
 &q=${business.city}+${business.state}+${business.zip_code}`}
                 />
