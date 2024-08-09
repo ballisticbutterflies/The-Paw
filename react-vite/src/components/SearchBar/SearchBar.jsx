@@ -133,13 +133,6 @@ const SearchBar = () => {
           placeholder="things to do, parks, restaurants"
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        {/* <input
-          id="location"
-          list="locations"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          placeholder="city, state"
-        /> */}
 
         <PlacesSearch
           onLocationSelect={handleLocationSelect}
@@ -150,12 +143,6 @@ const SearchBar = () => {
         />
 
 
-        {/* <datalist id="locations">
-        {uniqueLocations.map(op => (
-          <option key={op} value={op}>{op}</option>
-        ))
-        }
-      </datalist> */}
         <button id="search" type="submit"><i className="fa-solid fa-magnifying-glass" style={{ color: "#5f5ba8", fontSize: "large" }} /></button>
       </form>
     </div>
