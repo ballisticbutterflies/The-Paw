@@ -49,7 +49,8 @@ const stateCodeMap = {
   'Washington': 'WA',
   'West Virginia': 'WV',
   'Wisconsin': 'WI',
-  'Wyoming': 'WY'
+  'Wyoming': 'WY',
+  'District of Columbia': 'DC'
 };
 const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
   const [input, setInput] = useState(location);
@@ -79,7 +80,17 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   }, [location]);
 
   const fetchPredictions = async (input) => {
-    const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(input)}&format=json&addressdetails=1&limit=5`;
+    // Special handling for "St. Louis" case
+    if (input.toLowerCase() === 'st. louis' || input.toLowerCase() === 'saint louis') {
+      setPredictions([{
+        display_name: 'St. Louis, MO',
+        city: 'St. Louis',
+        state: 'MO'
+      }]);
+      return;
+    }
+
+    const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(input)}&country=us&format=json&addressdetails=1&limit=5`;
 
     try {
       const response = await fetch(url);
@@ -92,8 +103,15 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
             .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
             .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
             .map(place => {
-              const stateCode = stateCodeMap[place.address.state] || place.address.state;
-              const cityName = place.address.city || place.address.town || place.address.village;
+              let stateCode = stateCodeMap[place.address.state] || place.address.state;
+              let cityName = place.address.city || place.address.town || place.address.village;
+
+              // Special handling for Washington, DC
+              if (place.address.state === 'District of Columbia') {
+                cityName = 'Washington';
+                stateCode = 'DC';
+              }
+
               return {
                 display_name: `${cityName}, ${stateCode}`,
                 city: cityName,
