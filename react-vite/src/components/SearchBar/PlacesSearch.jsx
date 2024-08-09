@@ -1,13 +1,61 @@
 import { useState, useEffect } from 'react';
-import './SearchBar.css'
-
-
+import './SearchBar.css';
+// State code mapping
+const stateCodeMap = {
+  'Alabama': 'AL',
+  'Arizona': 'AZ',
+  'Arkansas': 'AR',
+  'California': 'CA',
+  'Colorado': 'CO',
+  'Connecticut': 'CT',
+  'Delaware': 'DE',
+  'Florida': 'FL',
+  'Georgia': 'GA',
+  'Idaho': 'ID',
+  'Illinois': 'IL',
+  'Indiana': 'IN',
+  'Iowa': 'IA',
+  'Kansas': 'KS',
+  'Kentucky': 'KY',
+  'Louisiana': 'LA',
+  'Maine': 'ME',
+  'Maryland': 'MD',
+  'Massachusetts': 'MA',
+  'Michigan': 'MI',
+  'Minnesota': 'MN',
+  'Mississippi': 'MS',
+  'Missouri': 'MO',
+  'Montana': 'MT',
+  'Nebraska': 'NE',
+  'Nevada': 'NV',
+  'New Hampshire': 'NH',
+  'New Jersey': 'NJ',
+  'New Mexico': 'NM',
+  'New York': 'NY',
+  'North Carolina': 'NC',
+  'North Dakota': 'ND',
+  'Ohio': 'OH',
+  'Oklahoma': 'OK',
+  'Oregon': 'OR',
+  'Pennsylvania': 'PA',
+  'Rhode Island': 'RI',
+  'South Carolina': 'SC',
+  'South Dakota': 'SD',
+  'Tennessee': 'TN',
+  'Texas': 'TX',
+  'Utah': 'UT',
+  'Vermont': 'VT',
+  'Virginia': 'VA',
+  'Washington': 'WA',
+  'West Virginia': 'WV',
+  'Wisconsin': 'WI',
+  'Wyoming': 'WY',
+  'District of Columbia': 'DC'
+};
 const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
-
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
   const [fetching, setFetching] = useState(true);
-
 
   useEffect(() => {
     if (fetching && input.length > 0) {
@@ -32,28 +80,45 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   }, [location]);
 
   const fetchPredictions = async (input) => {
-    const apiKey = import.meta.env.VITE_PLACES_KEY;
-    const url = `https://places.googleapis.com/v1/places:autocomplete?key=${apiKey}`;
-    const requestBody = {
-      input: input,
-      includedPrimaryTypes: ["(cities)"],
-      includedRegionCodes: ["us"]
+    // Special handling for "St. Louis" case
+    if (input.toLowerCase() === 'st. louis' || input.toLowerCase() === 'saint louis') {
+      setPredictions([{
+        display_name: 'St. Louis, MO',
+        city: 'St. Louis',
+        state: 'MO'
+      }]);
+      return;
+    }
 
-    };
+    const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(input)}&country=us&format=json&addressdetails=1&limit=5`;
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(url);
 
       if (response.ok) {
         const data = await response.json();
-        setPredictions(data.suggestions);
+        setPredictions(
+          data
+            .filter(place => place.address.state && place.address.country_code === 'us')
+            .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
+            .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
+            .map(place => {
+              let stateCode = stateCodeMap[place.address.state] || place.address.state;
+              let cityName = place.address.city || place.address.town || place.address.village;
 
+              // Special handling for Washington, DC
+              if (place.address.state === 'District of Columbia') {
+                cityName = 'Washington';
+                stateCode = 'DC';
+              }
+
+              return {
+                display_name: `${cityName}, ${stateCode}`,
+                city: cityName,
+                state: stateCode
+              };
+            })
+        );
       } else {
         console.error('Error fetching predictions:', response.statusText);
       }
@@ -63,13 +128,10 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   };
 
   const handleClick = (prediction) => {
-    const place = prediction.placePrediction.text.text;
-    // Remove 'USA' from the place prediction
-    const selectedLocation = place.replace(', USA', '');
+    const selectedLocation = `${prediction.city}, ${prediction.state}`;
 
-    // Set the input value to the clicked prediction without 'USA'
     setInput(selectedLocation);
-    setFetching(false)
+    setFetching(false);
     setPredictions([]);
     setIsPredictionSelected(true); // Set prediction selected to true
     onLocationSelect(selectedLocation);
@@ -96,15 +158,12 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       {predictions?.length > 0 && (
         <div className="predictions-container">
           <ul>
-            {predictions?.map((prediction, index) => (
+            {predictions.map((prediction, index) => (
               <li className="suggestions" key={index} onClick={() => handleClick(prediction)}>
-                {prediction.placePrediction.text.text}
+                {prediction.display_name}
               </li>
             ))}
           </ul>
-          <div>
-            <div style={{ display: 'flex', fontSize: 12, padding: 10 }}>Powered by:<img src='../../images/google_on_white.png' alt="Google Logo" style={{ height: 15, marginLeft: 3, paddingTop: 2 }} /></div>
-          </div>
         </div>
       )}
     </div>
