@@ -1,6 +1,56 @@
 import { useState, useEffect } from 'react';
 import './SearchBar.css';
-
+// State code mapping
+const stateCodeMap = {
+  'Alabama': 'AL',
+  'Arizona': 'AZ',
+  'Arkansas': 'AR',
+  'California': 'CA',
+  'Colorado': 'CO',
+  'Connecticut': 'CT',
+  'Delaware': 'DE',
+  'Florida': 'FL',
+  'Georgia': 'GA',
+  'Idaho': 'ID',
+  'Illinois': 'IL',
+  'Indiana': 'IN',
+  'Iowa': 'IA',
+  'Kansas': 'KS',
+  'Kentucky': 'KY',
+  'Louisiana': 'LA',
+  'Maine': 'ME',
+  'Maryland': 'MD',
+  'Massachusetts': 'MA',
+  'Michigan': 'MI',
+  'Minnesota': 'MN',
+  'Mississippi': 'MS',
+  'Missouri': 'MO',
+  'Montana': 'MT',
+  'Nebraska': 'NE',
+  'Nevada': 'NV',
+  'New Hampshire': 'NH',
+  'New Jersey': 'NJ',
+  'New Mexico': 'NM',
+  'New York': 'NY',
+  'North Carolina': 'NC',
+  'North Dakota': 'ND',
+  'Ohio': 'OH',
+  'Oklahoma': 'OK',
+  'Oregon': 'OR',
+  'Pennsylvania': 'PA',
+  'Rhode Island': 'RI',
+  'South Carolina': 'SC',
+  'South Dakota': 'SD',
+  'Tennessee': 'TN',
+  'Texas': 'TX',
+  'Utah': 'UT',
+  'Vermont': 'VT',
+  'Virginia': 'VA',
+  'Washington': 'WA',
+  'West Virginia': 'WV',
+  'Wisconsin': 'WI',
+  'Wyoming': 'WY'
+};
 const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
@@ -40,11 +90,16 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
           data
             .filter(place => place.address.state && place.address.country_code === 'us')
             .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
-            .map(place => ({
-              display_name: `${place.address.city || place.address.town || place.address.village}, ${place.address.state}`,
-              city: place.address.city || place.address.town || place.address.village,
-              state: place.address.state
-            }))
+            .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
+            .map(place => {
+              const stateCode = stateCodeMap[place.address.state] || place.address.state;
+              const cityName = place.address.city || place.address.town || place.address.village;
+              return {
+                display_name: `${cityName}, ${stateCode}`,
+                city: cityName,
+                state: stateCode
+              };
+            })
         );
       } else {
         console.error('Error fetching predictions:', response.statusText);
