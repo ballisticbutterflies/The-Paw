@@ -61,7 +61,7 @@ function AddPhotosToBusiness({ businessId: propBusinessId, businessName }) {
                         </div>
                     </form>
                     <br />
-                    <h2 style={{ textAlign: "center" }}>What Makes Paw-riffc Photos?
+                    <h2 style={{ textAlign: "center" }}>What Makes Paw-riffic Photos?
                     </h2>
                     <div className="tipSection">
                         <div className="tip">

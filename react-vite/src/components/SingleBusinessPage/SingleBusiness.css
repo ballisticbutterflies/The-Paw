@@ -40,6 +40,7 @@
     color: #FFFFFF;
     font-weight: 500;
     width: 80vw;
+    max-width: 1125px;
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 50px;
@@ -538,6 +539,23 @@
 
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .businessPhotoHeader::before {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+    
+
+    .businessHeader {
+        position: absolute;
+        bottom: 690px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90vw;
+        max-width: 1125px;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 50px;
+        padding: 10px 0;
+    }
 
     .businessContainer {
         width: 90vw;
