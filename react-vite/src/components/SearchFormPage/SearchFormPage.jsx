@@ -194,7 +194,11 @@ function SearchFormPage() {
 
                 }</h1>
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
-              <span className="noBiz" >No results found.<img src="/images/icons/404.png" /></span>
+              <div className="noBiz">
+                No results found with this term and/or location.
+                <p><Link to='/search'>View all businesses on The Paw.</Link></p>
+                <span><img src="/images/icons/404.png" /></span>
+              </div>
             </>
           ) : (
             <>

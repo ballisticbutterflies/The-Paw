@@ -100,6 +100,7 @@ function SingleBusinessPage() {
     }
 
     const locationHoursSection = useRef(null)
+    const reviewsSection = useRef(null)
 
     const scrollTo = (section) => {
         window.scrollTo({
@@ -137,7 +138,7 @@ function SingleBusinessPage() {
                                     {business.reviews.avg_stars &&
                                         reviewStars(business.reviews.avg_stars)}</div>
                                 &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
-                                &nbsp;({business.reviews.num_reviews} reviews)
+                                &nbsp;(<span className="reviewsLink" onClick={() => scrollTo(reviewsSection)}>{business.reviews.num_reviews} reviews</span>)
                             </p>
                         }
                         {business.reviews?.num_reviews === 1 &&
@@ -146,7 +147,7 @@ function SingleBusinessPage() {
                                     {business.reviews.avg_stars &&
                                         reviewStars(business.reviews.avg_stars)}</span>
                                 &nbsp;&nbsp; {business.reviews.avg_stars && reviewAvg(business.reviews.avg_stars)}
-                                &nbsp;({business.reviews.num_reviews} review)
+                                &nbsp;(<span className="reviewsLink" onClick={() => scrollTo(reviewsSection)}>{business.reviews.num_reviews} review</span>)
                             </p>
                         }
 
@@ -198,7 +199,7 @@ function SingleBusinessPage() {
                 </div>
             </div >
             <div className="businessContainer">
-                <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} isMobile={isMobile} isTablet={isTablet} />
+                <BusinessDetails business={business} businessId={businessId} locationHoursSection={locationHoursSection} reviewsSection={reviewsSection} isMobile={isMobile} isTablet={isTablet} />
                 {isDesktop && <BusinessContactCard business={business} isDesktop={isDesktop} />}
             </div>
         </>
