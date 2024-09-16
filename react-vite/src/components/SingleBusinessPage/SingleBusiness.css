@@ -253,6 +253,7 @@
 }
 
 .locationHoursContainer {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -523,11 +524,11 @@
     }
 
     .locationHours {
-        width: auto;
+        width: 100%;
     }
 
     .locationHoursContainer {
-        row-gap: 20px;
+        gap: 20px;
         /* justify-content: center; */
     }
 
@@ -646,7 +647,7 @@
     }
 
     .locationHours {
-        width: auto;
+        width: 100%;
     }
 
     .locationHoursContainer {
@@ -669,20 +670,6 @@
 
     .businessDetailsLocation {
         gap: 20px;
-    }
-
-}
-
-@media screen and (min-width: 1025px) {
-    .businessPhotoHeader {
-        position: relative;
-    }
-
-    .businessHeader {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
 }
