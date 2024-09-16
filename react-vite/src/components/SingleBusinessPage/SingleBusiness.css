@@ -347,6 +347,11 @@
     cursor: pointer;
 }
 
+.reviewsLink:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .avatarFormat {
     border-radius: 50%;
     object-fit: cover;
