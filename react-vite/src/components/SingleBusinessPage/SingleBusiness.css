@@ -1,7 +1,7 @@
-.businessPhotoHeader {
+/* .businessPhotoHeader {
     max-width: 100%;
     height: 425px;
-}
+} */
 
 
 /* .businessPhotoHeader img {
@@ -11,7 +11,7 @@
     height: 100%;
 } */
 
-.businessPhotoHeaderImg {
+/* .businessPhotoHeaderImg {
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -32,7 +32,6 @@
 
 .businessHeader {
     position: relative;
-    /* left: 10%; */
     margin: auto;
     bottom: 58%;
     z-index: 1;
@@ -40,17 +39,74 @@
     color: #FFFFFF;
     font-weight: 500;
     width: 80vw;
+    max-width: 1125px;
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 50px;
+} */
+
+/* .businessHeader h1 {
+    font-weight: bold;
+    margin-bottom: -8px;
+    font-size: 40px;
+    color: #FFFFFF;
+} */
+
+.businessPhotoHeader {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust based on your design */
+    overflow: hidden; /* Ensures the content stays within the container */
+}
+
+.businessPhotoHeaderImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the container without distortion */
+    z-index: -2;
+}
+
+.businessPhotoHeader::before {
+    content: '';
+    z-index: -1;
+    width: 100%;
+    height: 425px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    position: absolute;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.businessHeader {
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 1125px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 50px;
+    padding: 10px 0;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    font-weight: 500;
+    z-index: 1;
 }
 
 .businessHeader h1 {
+    margin: 0;
+    max-width: 100%;
     font-weight: bold;
     margin-bottom: -8px;
     font-size: 40px;
     color: #FFFFFF;
 }
+
 
 .currHours {
     display: flex;
@@ -197,6 +253,7 @@
 }
 
 .locationHoursContainer {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -290,6 +347,11 @@
     cursor: pointer;
 }
 
+.reviewsLink:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .avatarFormat {
     border-radius: 50%;
     object-fit: cover;
@@ -368,7 +430,7 @@
 }
 
 @media screen and (max-width: 480px) {
-    .businessPhotoHeader {
+    /* .businessPhotoHeader {
         position: relative;
     }
 
@@ -380,6 +442,19 @@
         bottom: 20px;
         position: absolute;
         width: 90vw;
+        max-width: 432px;
+    } */
+
+    .businessHeader {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        max-width: 432px;
+        gap: 20px;
+    }
+
+    .businessPhotoHeader::before {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
     .seeAllPhotosSection {
@@ -454,11 +529,11 @@
     }
 
     .locationHours {
-        width: auto;
+        width: 100%;
     }
 
     .locationHoursContainer {
-        row-gap: 20px;
+        gap: 20px;
         /* justify-content: center; */
     }
 
@@ -468,7 +543,22 @@
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
+    .businessHeader {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        max-width: 690px;
+        gap: 20px;
+    }
 
+    .businessPhotoHeader::before {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .seeAllPhotosSection {
+        justify-content: start;
+    }
+    
     .businessContainer {
         padding: 5vw;
         column-gap: 0;
@@ -538,6 +628,23 @@
 
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .businessPhotoHeader::before {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+    
+
+    .businessHeader {
+        position: absolute;
+        bottom: 690px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90vw;
+        max-width: 1125px;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 50px;
+        padding: 10px 0;
+    }
 
     .businessContainer {
         width: 90vw;
@@ -547,7 +654,6 @@
 
     .businessDetails {
         width: auto;
-
     }
 
     .businessDetails button {
@@ -563,7 +669,7 @@
     }
 
     .locationHours {
-        width: auto;
+        width: 100%;
     }
 
     .locationHoursContainer {
@@ -586,20 +692,6 @@
 
     .businessDetailsLocation {
         gap: 20px;
-    }
-
-}
-
-@media screen and (min-width: 1025px) {
-    .businessPhotoHeader {
-        position: relative;
-    }
-
-    .businessHeader {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
 }

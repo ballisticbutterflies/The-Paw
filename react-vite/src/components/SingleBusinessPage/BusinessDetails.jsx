@@ -9,7 +9,7 @@ import BusinessMap from "./BusinessMap";
 // import BusinessContactCard from "./BusinessContactCard";
 import ShareModal from "../ShareModal";
 
-function BusinessDetails({ business, businessId, locationHoursSection, isMobile, isTablet }) {
+function BusinessDetails({ business, businessId, locationHoursSection, isMobile, isTablet, reviewsSection }) {
     const sessionUser = useSelector(state => state.session.user)
     const reviews = Object.values(useSelector(state => state.reviews))
     const reviewerIds = reviews.map(review => review.user_id)
@@ -179,7 +179,7 @@ function BusinessDetails({ business, businessId, locationHoursSection, isMobile,
                     }
                     </div>
                 </div>
-                <hr />
+                <hr ref={reviewsSection} />
                 {/* <div>
                     <h3>Amenities and More [Services Offered if applicable]</h3>
                     <div>[Street Parking]</div>
