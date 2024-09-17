@@ -628,23 +628,6 @@
 
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-    .businessPhotoHeader::before {
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
-    }
-    
-
-    .businessHeader {
-        position: absolute;
-        bottom: 690px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90vw;
-        max-width: 1125px;
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap: 50px;
-        padding: 10px 0;
-    }
 
     .businessContainer {
         width: 90vw;
@@ -694,4 +677,18 @@
         gap: 20px;
     }
 
+}
+
+@media screen and (min-width: 1025px) {
+
+    .businessContainer {
+        width: 90vw;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .businessDetails {
+        width: auto;
+        /* padding-right: 35px; */
+    }
 }
