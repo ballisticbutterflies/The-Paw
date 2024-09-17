@@ -58,7 +58,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
-    if (fetching && input.length > 1) {
+    if (input.length >= 2) {
       fetchPredictions(input);
       setIsInputTyped(true);  // Set input typed to true
     } else {
@@ -81,12 +81,25 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
 
   const fetchPredictions = async (input) => {
     // Special handling for "St. Louis" case
-    if (input.toLowerCase() === 'st. louis' || input.toLowerCase() === 'saint louis') {
-      setPredictions([{
-        display_name: 'St. Louis, MO',
-        city: 'St. Louis',
-        state: 'MO'
-      }]);
+    console.log(input, "THIS IS THE INPUT")
+    if (input.toLowerCase() === 'st' || input.toLowerCase() === 'saint') {
+      setPredictions([
+        {
+          display_name: 'St. Louis Park, MN',
+          city: 'St. Louis Park',
+          state: 'MN'
+        },
+        {
+          display_name: 'St. Petersburg, FL',
+          city: 'St. Petersburg',
+          state: 'FL'
+        },
+        {
+          display_name: 'St. Louis, MO',
+          city: 'St. Louis',
+          state: 'MO'
+        }
+      ]);
       return;
     }
 

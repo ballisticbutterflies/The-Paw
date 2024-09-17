@@ -196,7 +196,8 @@ def location_search():
     locations = Business.query.filter(
         or_(
             Business.city.ilike(f'%{location_query}%'),
-            Business.state.ilike(f'%{location_query}%')
+            Business.state.ilike(f'%{location_query}%'),
+            Business.city.ilike(f'st%{location_query}%'),  # Matches "St." or "Saint" variations
         )
     ).with_entities(Business.city, Business.state).distinct().limit(5).all()
 
