@@ -52,7 +52,8 @@
   border: none;
   background-color: transparent;
   width: fit-content;
-  justify-self: center;
+  justify-self: end;
+  padding-right: 20px;
   color: #1f2f44;
 }
 
@@ -194,9 +195,8 @@
 
   .searchForm {
     grid-area: search;
-    width: 87vw;
-    margin: auto;
-    padding: 8px;
+    width: auto;
+    margin: 0;
   }
   .rightNav {
     grid-area: profile;
@@ -224,10 +224,16 @@
   .searchForm {
     grid-area: search;
     width: 90vw;
-    margin: auto;
   }
 
   .rightNav {
     grid-area: profile;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  .searchForm {
+    width: auto;
   }
 }
