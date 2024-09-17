@@ -21,8 +21,6 @@ const SearchBar = () => {
     const queryFromParams = params.get('search_query');
     const locationFromParams = params.get('location');
 
-    console.log(locationFromParams, "searchbar.jsx")
-
     const categoryFromParams = params.get('category');
 
     if (queryFromParams) {
