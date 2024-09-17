@@ -109,9 +109,13 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
 
       if (response.ok) {
         const data = await response.json();
-        // if (!data.locations.length && input.length > 5) {
-        //   setInput('')
-        // }
+        if (!data.locations.length && input.length > 5) {
+          if (isInputTyped && !isPredictionSelected) {
+            alert("We aren't there yet! Try another location.");
+            setInput('')
+            return;
+          }
+        }
         setPredictions(
           data.locations
             // .filter(place => place.address.state && place.address.country_code === 'us')
@@ -141,11 +145,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       console.error('Error fetching predictions:', error);
     }
 
-    if (isInputTyped && !isPredictionSelected && input.length > 5) {
-      alert("We aren't there yet! Try another location.");
-      setInput('')
-      return;
-    }
+
   };
 
   const handleClick = (prediction) => {
