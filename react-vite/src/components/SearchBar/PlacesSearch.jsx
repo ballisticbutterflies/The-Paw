@@ -58,7 +58,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
-    if (fetching && input.length > 0) {
+    if (fetching && input.length > 1) {
       fetchPredictions(input);
       setIsInputTyped(true);  // Set input typed to true
     } else {
@@ -90,27 +90,28 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       return;
     }
 
-    const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(input)}&country=us&format=json&addressdetails=1&limit=5`;
+    const url = `/api/search/location_search?query=${input}`;
 
     try {
       const response = await fetch(url);
 
       if (response.ok) {
         const data = await response.json();
-        setPredictions(
-          data
-            .filter(place => place.address.state && place.address.country_code === 'us')
-            .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
-            .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
-            .map(place => {
-              let stateCode = stateCodeMap[place.address.state] || place.address.state;
-              let cityName = place.address.city || place.address.town || place.address.village;
 
-              // Special handling for Washington, DC
-              if (place.address.state === 'District of Columbia') {
-                cityName = 'Washington';
-                stateCode = 'DC';
-              }
+        setPredictions(
+          data.locations
+            // .filter(place => place.address.state && place.address.country_code === 'us')
+            // .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
+            // .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
+            .map(place => {
+              let stateCode = stateCodeMap[place.state] || place.state;
+              let cityName = place.city;
+
+            //   // Special handling for Washington, DC
+            //   if (place.address.state === 'District of Columbia') {
+            //     cityName = 'Washington';
+            //     stateCode = 'DC';
+            //   }
 
               return {
                 display_name: `${cityName}, ${stateCode}`,

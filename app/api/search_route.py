@@ -180,3 +180,27 @@ def search():
         'prev_page': paginated_query.prev_num,
         'per_page': paginated_query.per_page
     })
+
+
+@search_route.route('/location_search')
+def location_search():
+    """
+    Query for matching cities and states based on partial input for dropdown.
+    """
+    location_query = request.args.get('query', '').lower()
+
+    if not location_query:
+        return jsonify({'locations': []})
+
+    # Query for cities/states matching the input
+    locations = Business.query.filter(
+        or_(
+            Business.city.ilike(f'%{location_query}%'),
+            Business.state.ilike(f'%{location_query}%')
+        )
+    ).with_entities(Business.city, Business.state).distinct().limit(5).all()
+
+    # Format the results for the dropdown
+    location_data = [{"city": city, "state": state} for city, state in locations]
+
+    return jsonify({'locations': location_data})
