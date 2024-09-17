@@ -174,7 +174,11 @@
     grid-template-areas:
       "logo profile"
       "search search";
-    padding: 5vw 2vw 8vw 2vw;
+    padding: 5vw 4vw 8vw 4vw;
+  }
+
+  .nav img {
+    margin-left: 0px;
   }
 
   .logo {
@@ -190,12 +194,13 @@
 
   .searchForm {
     grid-area: search;
-    width: 90vw;
+    width: 87vw;
     margin: auto;
+    padding: 8px;
   }
-
   .rightNav {
     grid-area: profile;
+    margin: 0;
   }
 
   .rightNavButtons {
@@ -209,7 +214,7 @@
     grid-template-areas:
       "logo profile"
       "search search";
-    padding: 5vw 2vw;
+    padding: 5vw 0vw;
   }
 
   .logo {

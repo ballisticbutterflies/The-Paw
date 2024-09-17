@@ -20,6 +20,9 @@ const SearchBar = () => {
     const params = new URLSearchParams(currentLocation.search);
     const queryFromParams = params.get('search_query');
     const locationFromParams = params.get('location');
+
+    console.log(locationFromParams, "searchbar.jsx")
+
     const categoryFromParams = params.get('category');
 
     if (queryFromParams) {
@@ -104,6 +107,7 @@ const SearchBar = () => {
 
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location && isInputTyped) queryParams.append('location', location)
+    if (location) queryParams.append('location', location)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
 
