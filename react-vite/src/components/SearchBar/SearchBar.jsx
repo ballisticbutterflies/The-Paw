@@ -57,7 +57,8 @@ const SearchBar = () => {
     e.preventDefault();
 
     if (isInputTyped && !isPredictionSelected) {
-      alert("Please select a location from the dropdown.");
+      alert("We aren't there yet! Try another location.");
+
       return;
     }
 
