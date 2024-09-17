@@ -56,11 +56,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isInputTyped && !isPredictionSelected) {
-      alert("We aren't there yet! Try another location.");
 
-      return;
-    }
 
     setIsSubmitted(true);  // Signal that form has been submitted
     setTimeout(() => setIsSubmitted(false), 0);  // Reset the signal immediately after
@@ -142,6 +138,8 @@ const SearchBar = () => {
           location={location}
           isSubmitted={isSubmitted}
           setIsPredictionSelected={setIsPredictionSelected}
+          isPredictionSelected={isPredictionSelected}
+          isInputTyped={isInputTyped}
           setIsInputTyped={setIsInputTyped}
         />
 

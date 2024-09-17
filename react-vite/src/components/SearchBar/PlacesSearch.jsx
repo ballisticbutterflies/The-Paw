@@ -52,7 +52,7 @@ const stateCodeMap = {
   'Wyoming': 'WY',
   'District of Columbia': 'DC'
 };
-const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
+const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, isPredictionSelected, setIsInputTyped, isInputTyped }) => {
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
   const [fetching, setFetching] = useState(true);
@@ -80,8 +80,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
   }, [location]);
 
   const fetchPredictions = async (input) => {
-    // Special handling for "St. Louis" case
-    console.log(input, "THIS IS THE INPUT")
+    // Special handling for "St." case
     if (input.toLowerCase() === 'st' || input.toLowerCase() === 'saint') {
       setPredictions([
         {
@@ -110,7 +109,9 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
 
       if (response.ok) {
         const data = await response.json();
-
+        // if (!data.locations.length && input.length > 5) {
+        //   setInput('')
+        // }
         setPredictions(
           data.locations
             // .filter(place => place.address.state && place.address.country_code === 'us')
@@ -138,6 +139,12 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       }
     } catch (error) {
       console.error('Error fetching predictions:', error);
+    }
+
+    if (isInputTyped && !isPredictionSelected && input.length > 5) {
+      alert("We aren't there yet! Try another location.");
+      setInput('')
+      return;
     }
   };
 
