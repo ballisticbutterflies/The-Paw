@@ -90,7 +90,24 @@
 
 
 @media screen and (max-width: 480px) {
-  .devs {
-    row-gap: 5px;
+  .footer-heading {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+    "dev dev"
+    "tech docs";
+    justify-items: center;
+    row-gap: 20px;
+  }
+  
+  .developers {
+    grid-area: dev;
+  }
+
+  .technologies {
+    grid-area: tech;
+  }
+
+  .documents {
+    grid-area: docs;
   }
 }

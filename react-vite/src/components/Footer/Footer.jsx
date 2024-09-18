@@ -8,7 +8,7 @@ function Footer() {
       <div className='footer'>
         <img className='footer-image' src='../../images/footer.png' />
         <div className='footer-heading'>
-          <div className="dev-heading" >Developers
+          <div className="dev-heading developers" >Developers
             <div className='devs'>
               <div className="aDev">
                 <div className="devLogos">
@@ -57,7 +57,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className='dev-heading'>Technologies
+          <div className='dev-heading technologies'>Technologies
             <div className='techs'>
               <div className='backend'>
                 <a href='https://docs.python.org/3/' target="_blank" rel="noopener noreferrer">
@@ -87,7 +87,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className='dev-heading'>Docs
+          <div className='dev-heading documents'>Docs
             <div className='docs'>
               <a className="docs-links" href='https://github.com/ballisticbutterflies/The-Paw' target="_blank" rel="noopener noreferrer">
                 Repository
