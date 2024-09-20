@@ -85,8 +85,7 @@ def search():
         city, state = city_state.split(', ')
         query = query.filter(Business.city == city, Business.state == state)
     except ValueError:
-        query = None
-        return {'errors': {'message': "Invalid format for city_state. Please provide a string in the format 'city, state'."}}, 403
+        query = query.filter(Business.city.ilike(f'%{city_state}%'), Business.state.ilike(f'%{city_state}%'),)
 
 
   if category:

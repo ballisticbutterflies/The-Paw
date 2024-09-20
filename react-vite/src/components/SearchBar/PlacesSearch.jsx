@@ -52,22 +52,27 @@ const stateCodeMap = {
   'Wyoming': 'WY',
   'District of Columbia': 'DC'
 };
-const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, isPredictionSelected, setIsInputTyped, isInputTyped }) => {
+const PlacesSearch = ({ onLocationSelect, location, setLocation, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
   const [fetching, setFetching] = useState(true);
 
+  // setLocation(input)
   useEffect(() => {
-    if (input.length >= 2) {
-      fetchPredictions(input);
-      setIsInputTyped(true);  // Set input typed to true
-    } else {
-      setPredictions([]);
-      if (input.length === 0) {
-        setIsInputTyped(false);  // Reset input typed when input is cleared
+    const runFetch = () => {
+      if (input.length >= 2) {
+        fetchPredictions(input);
+        setIsInputTyped(true);
+        setLocation(input)  // Set input typed to true
+      } else {
+        setPredictions([]);
+        if (input.length === 0) {
+          setIsInputTyped(false);  // Reset input typed when input is cleared
+        }
       }
     }
-  }, [input, fetching, setIsInputTyped]);
+    runFetch()
+  }, [input, fetching, setLocation, setIsInputTyped ]);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -77,10 +82,12 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
 
   useEffect(() => {
     setInput(location || '');
+
   }, [location]);
 
   const fetchPredictions = async (input) => {
     // Special handling for "St." case
+    setInput(input)
     if (input.toLowerCase() === 'st' || input.toLowerCase() === 'saint') {
       setPredictions([
         {
@@ -101,21 +108,23 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       ]);
       return;
     }
-
+    //setLocation(input)
     const url = `/api/search/location_search?query=${input}`;
 
     try {
+
       const response = await fetch(url);
 
       if (response.ok) {
         const data = await response.json();
-        if (!data.locations.length && input.length > 5) {
-          if (isInputTyped && !isPredictionSelected) {
-            alert("We aren't there yet! Try another location.");
-            setInput('')
-            return;
-          }
-        }
+        // if (!location && input.length > 5) {
+        //   if (isInputTyped && !isPredictionSelected) {
+        //     alert("We aren't there yet! Try another location.");
+        //     setInput('')
+        //     return;
+        //   }
+        // }
+
         setPredictions(
           data.locations
             // .filter(place => place.address.state && place.address.country_code === 'us')
@@ -143,6 +152,7 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       }
     } catch (error) {
       console.error('Error fetching predictions:', error);
+
     }
 
 
@@ -163,7 +173,10 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
     setFetching(true);
     setIsPredictionSelected(false); // Reset prediction selected
     setIsInputTyped(true);  // Set input typed to true
+    const queryParams = new URLSearchParams();
+    queryParams.append('location', input)
   };
+
 
   return (
     <div className='location-search-container'>
