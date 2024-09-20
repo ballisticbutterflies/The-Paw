@@ -196,6 +196,11 @@ function SearchFormPage() {
               <FilterComponent onFilterChange={handleFilterChange} isMobile={isMobile} isTablet={isTablet} />
               <div className="noBiz">
                 No results found with this term and/or location.
+                <ul style={{fontSize: 'small'}}>
+                  <li>Try a different location (we&apos;re in most major cities!)</li>
+                  <li>Check the spelling or try alternate spellings</li>
+                  <li>Try a more general search, e.g. &quot;pizza&quot; instead of &quot;pepperoni&quot;</li>
+                </ul>
                 <p><Link to='/search'>View all businesses on The Paw.</Link></p>
                 <span><img src="/images/icons/404.png" /></span>
               </div>

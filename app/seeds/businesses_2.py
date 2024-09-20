@@ -682,7 +682,7 @@ def seed_businesses_2():
             city='St. Louis',
             state='MO',
             zip_code='63102',
-            name='The Pennywell St Louis Downtown',
+            name='The Pennywell St. Louis Downtown',
             description='A pet-friendly hotel with a weight limit of 75 pounds, offering treats at the front desk and nearby potty spots.',
             website='https://www.thepennywellhotel.com',
             phone='3144360002',
@@ -822,7 +822,7 @@ def seed_businesses_2():
             owner_id=5,
             category_id=3,
             address='5210 Chippewa St',
-            city='St Louis',
+            city='St. Louis',
             state='MO',
             zip_code='63109',
             name='A Walk in the Park',
@@ -847,7 +847,7 @@ def seed_businesses_2():
         )
     ]
 
-    
+
     db.session.add_all(businesses_3)
     db.session.commit()
 

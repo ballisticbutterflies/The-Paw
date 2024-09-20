@@ -124,7 +124,17 @@
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .categoryContainer {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+    }
+
+    .photoHeaderText {
+        width: 80vw;
+        left: 5%;
+    }
+
+    .photoHeaderCredit {
+        bottom: 55%;
+        left: 5%;
     }
 }
 

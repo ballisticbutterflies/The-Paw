@@ -21,10 +21,8 @@ const SearchBar = () => {
     const queryFromParams = params.get('search_query');
     const locationFromParams = params.get('location');
 
-    console.log(locationFromParams, "searchbar.jsx")
-
     const categoryFromParams = params.get('category');
-
+    console.log(locationFromParams, "QUERY PARAMS")
     if (queryFromParams) {
       setSearchQuery(queryFromParams)
     } else {
@@ -46,22 +44,17 @@ const SearchBar = () => {
   }, [currentLocation]);
 
 
-
   const handleLocationSelect = (selectedLocation) => {
-    setLocation(selectedLocation);
-    const queryParams = new URLSearchParams();
-    queryParams.append('location', selectedLocation);
 
+    setLocation(selectedLocation);
+    // const queryParams = new URLSearchParams();
+    // queryParams.append('location', selectedLocation);
 
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (isInputTyped && !isPredictionSelected) {
-      alert("Please select a location from the dropdown.");
-      return;
-    }
 
     setIsSubmitted(true);  // Signal that form has been submitted
     setTimeout(() => setIsSubmitted(false), 0);  // Reset the signal immediately after
@@ -107,7 +100,7 @@ const SearchBar = () => {
 
     if (searchQuery) queryParams.append('search_query', searchQuery)
     if (location && isInputTyped) queryParams.append('location', location)
-    if (location) queryParams.append('location', location)
+    //if (location) queryParams.append('location', location)
     const queryString = queryParams.toString();
     const url = `/search?${queryString}`;
 
@@ -141,8 +134,11 @@ const SearchBar = () => {
         <PlacesSearch
           onLocationSelect={handleLocationSelect}
           location={location}
+          setLocation={setLocation}
           isSubmitted={isSubmitted}
           setIsPredictionSelected={setIsPredictionSelected}
+          isPredictionSelected={isPredictionSelected}
+          isInputTyped={isInputTyped}
           setIsInputTyped={setIsInputTyped}
         />
 
