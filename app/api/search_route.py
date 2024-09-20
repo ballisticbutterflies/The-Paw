@@ -83,9 +83,10 @@ def search():
   if city_state:
     try:
         city, state = city_state.split(', ')
-        query = query.filter(Business.city == city, Business.state == state)
+        query = query.filter(Business.city.ilike(f'%{city}%'), Business.state.ilike(f'%{state}%'))
     except ValueError:
-        query = query.filter(Business.city.ilike(f'%{city_state}%'), Business.state.ilike(f'%{city_state}%'),)
+        
+        query = query.filter(Business.city.ilike(f'%{city_state}%')) or query.filter(Business.state.ilike(f'%{city_state}%'))
 
 
   if category:
