@@ -22,7 +22,7 @@ const SearchBar = () => {
     const locationFromParams = params.get('location');
 
     const categoryFromParams = params.get('category');
-    console.log(locationFromParams, "QUERY PARAMS")
+
     if (queryFromParams) {
       setSearchQuery(queryFromParams)
     } else {
