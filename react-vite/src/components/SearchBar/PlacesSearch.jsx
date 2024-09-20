@@ -52,22 +52,27 @@ const stateCodeMap = {
   'Wyoming': 'WY',
   'District of Columbia': 'DC'
 };
-const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
+const PlacesSearch = ({ onLocationSelect, location, setLocation, isSubmitted, setIsPredictionSelected, setIsInputTyped }) => {
   const [input, setInput] = useState(location);
   const [predictions, setPredictions] = useState([]);
   const [fetching, setFetching] = useState(true);
 
+  // setLocation(input)
   useEffect(() => {
-    if (fetching && input.length > 0) {
-      fetchPredictions(input);
-      setIsInputTyped(true);  // Set input typed to true
-    } else {
-      setPredictions([]);
-      if (input.length === 0) {
-        setIsInputTyped(false);  // Reset input typed when input is cleared
+    const runFetch = () => {
+      if (input.length >= 2) {
+        fetchPredictions(input);
+        setIsInputTyped(true);
+        setLocation(input)  // Set input typed to true
+      } else {
+        setPredictions([]);
+        if (input.length === 0) {
+          setIsInputTyped(false);  // Reset input typed when input is cleared
+        }
       }
     }
-  }, [input, fetching, setIsInputTyped]);
+    runFetch()
+  }, [input, fetching, setLocation, setIsInputTyped ]);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -77,40 +82,63 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
 
   useEffect(() => {
     setInput(location || '');
+
   }, [location]);
 
   const fetchPredictions = async (input) => {
-    // Special handling for "St. Louis" case
-    if (input.toLowerCase() === 'st. louis' || input.toLowerCase() === 'saint louis') {
-      setPredictions([{
-        display_name: 'St. Louis, MO',
-        city: 'St. Louis',
-        state: 'MO'
-      }]);
+    // Special handling for "St." case
+    setInput(input)
+    if (input.toLowerCase() === 'st' || input.toLowerCase() === 'saint') {
+      setPredictions([
+        {
+          display_name: 'St. Louis Park, MN',
+          city: 'St. Louis Park',
+          state: 'MN'
+        },
+        {
+          display_name: 'St. Petersburg, FL',
+          city: 'St. Petersburg',
+          state: 'FL'
+        },
+        {
+          display_name: 'St. Louis, MO',
+          city: 'St. Louis',
+          state: 'MO'
+        }
+      ]);
       return;
     }
-
-    const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(input)}&country=us&format=json&addressdetails=1&limit=5`;
+    //setLocation(input)
+    const url = `/api/search/location_search?query=${input}`;
 
     try {
+
       const response = await fetch(url);
 
       if (response.ok) {
         const data = await response.json();
-        setPredictions(
-          data
-            .filter(place => place.address.state && place.address.country_code === 'us')
-            .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
-            .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
-            .map(place => {
-              let stateCode = stateCodeMap[place.address.state] || place.address.state;
-              let cityName = place.address.city || place.address.town || place.address.village;
+        // if (!location && input.length > 5) {
+        //   if (isInputTyped && !isPredictionSelected) {
+        //     alert("We aren't there yet! Try another location.");
+        //     setInput('')
+        //     return;
+        //   }
+        // }
 
-              // Special handling for Washington, DC
-              if (place.address.state === 'District of Columbia') {
-                cityName = 'Washington';
-                stateCode = 'DC';
-              }
+        setPredictions(
+          data.locations
+            // .filter(place => place.address.state && place.address.country_code === 'us')
+            // .filter(place => !['Alaska', 'Hawaii'].includes(place.address.state))
+            // .filter(place => place.address.city || place.address.town || place.address.village) // Ensure there's a city/town/village
+            .map(place => {
+              let stateCode = stateCodeMap[place.state] || place.state;
+              let cityName = place.city;
+
+            //   // Special handling for Washington, DC
+            //   if (place.address.state === 'District of Columbia') {
+            //     cityName = 'Washington';
+            //     stateCode = 'DC';
+            //   }
 
               return {
                 display_name: `${cityName}, ${stateCode}`,
@@ -124,7 +152,10 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
       }
     } catch (error) {
       console.error('Error fetching predictions:', error);
+
     }
+
+
   };
 
   const handleClick = (prediction) => {
@@ -142,7 +173,10 @@ const PlacesSearch = ({ onLocationSelect, location, isSubmitted, setIsPrediction
     setFetching(true);
     setIsPredictionSelected(false); // Reset prediction selected
     setIsInputTyped(true);  // Set input typed to true
+    const queryParams = new URLSearchParams();
+    queryParams.append('location', input)
   };
+
 
   return (
     <div className='location-search-container'>

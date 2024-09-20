@@ -1166,7 +1166,7 @@ def seed_businesses():
             owner_id=9,
             category_id=3,
             address='7020 Walker St',
-            city='St Louis Park',
+            city='St. Louis Park',
             state='MN',
             zip_code='55418',
             name='Pampered Pooch Playground',
@@ -1452,7 +1452,7 @@ def seed_businesses():
             name='Mount Rubidoux Park',
             description='A scenic park with hiking trails where dogs are welcome on leash.',
         )]
-    
+
     db.session.add(petagogy)
     db.session.add(mishka)
     db.session.add(leo_j_ryan)
